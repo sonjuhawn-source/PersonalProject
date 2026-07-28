@@ -27,9 +27,9 @@
 - **유료 에셋 확정 및 임포트** (GDD 미결정 #1)
   최소: 캐릭터 1 + 적 3 + 무기 이펙트 3 + 타일셋 1 + 타격음
 - `Assets/Imported/` 에 **Git LFS 먼저 설정**한 뒤 커밋
-- **Unity Localization 패키지 설치** (`com.unity.localization` — 현재 미설치)
-  → 로케일 2개 생성: 한국어 / 영어
-- 폴더 구조 / 어셈블리 정의 잡기
+- ~~폴더 구조 / 어셈블리 정의 잡기~~ **완료** — `Assets/_Project/`, asmdef 3개 (Core ← Gameplay ← UI)
+- ~~Unity Localization 설치 + 로케일(ko/en) + `UI` String Table~~ **완료**
+- `Content` String Table 은 SO 정의를 쓸 때 만든다 (GDD 11.2)
 
 > 에셋 탐색을 W1 이후로 넘기면 일정이 반드시 무너진다. 여기서 끝낸다.
 
