@@ -105,4 +105,8 @@ InitTestScene*.unity*
 # Auto-generated cache in Assets folder
 /[Aa]ssets/[Ss]ceneDependencyCache*
 
+# Paid assets live in a nested repo (PersonalProject-AssetImport).
+# The folder meta is ignored too: on a fresh clone the folder is absent,
+# and Unity deletes the orphan meta, which would show up as a spurious deletion.
 /Assets/Imported/
+/Assets/Imported.meta
