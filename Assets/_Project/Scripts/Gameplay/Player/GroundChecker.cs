@@ -11,13 +11,17 @@ namespace Game.Gameplay
         [SerializeField] 
         LayerMask groundMask;  // 인스펙터에서 Ground 선택
 
-        public bool IsGrounded { get; private set; }
+        [SerializeField]
+        Collider2D bodyCollider;   // 접지 기준이 될 몸통 콜라이더. 비우면 GetComponent 로 폴백
 
-        private Collider2D bodyCollider;
+        public bool IsGrounded { get; private set; }
 
         private void Awake()
         {
-            bodyCollider = GetComponent<Collider2D>();
+            if (bodyCollider == null)
+                Debug.LogWarning($"{name}: bodyCollider 미지정 — GetComponent 폴백. 콜라이더가 둘 이상이면 접지 판정과 기즈모가 함께 어긋난다.", this);
+
+            ResolveCollider();
         }
 
         void FixedUpdate()
