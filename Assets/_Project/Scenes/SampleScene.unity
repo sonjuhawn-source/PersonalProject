@@ -528,6 +528,10 @@ MonoBehaviour:
   groundAccel: 60
   groundDecel: 60
   airAccel: 30
+  jumpHeight: 3.5
+  fallGravityMult: 2.5
+  lowJumpGravityMult: 4
+  maxFallSpeed: 20
 --- !u!114 &1483818004
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -545,6 +549,7 @@ MonoBehaviour:
   groundMask:
     serializedVersion: 2
     m_Bits: 8
+  bodyCollider: {fileID: 1483817999}
 --- !u!1 &1587612992
 GameObject:
   m_ObjectHideFlags: 0
