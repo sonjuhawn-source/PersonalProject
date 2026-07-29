@@ -4,17 +4,30 @@ namespace Game.Gameplay
 {
     public class PlayerMovement : MonoBehaviour
     {
-        [SerializeField] float maxSpeed = 8f;
-        [SerializeField] float groundAccel = 60f;
-        [SerializeField] float groundDecel = 60f;
-        [SerializeField] float airAccel = 30f;
+        [SerializeField] 
+        float maxSpeed = 8f;
+        [SerializeField] 
+        float groundAccel = 60f;
+        [SerializeField] 
+        float groundDecel = 60f;
+        [SerializeField] 
+        float airAccel = 30f;
 
-        [SerializeField] float jumpHeight = 3.5f;
-        [SerializeField] float fallGravityMult = 2.5f;   // 하강 중
-        [SerializeField] float lowJumpGravityMult = 4f;  // 상승 중 버튼 뗌
-        [SerializeField] float maxFallSpeed = 20f;
+        [SerializeField] 
+        float jumpHeight = 3.5f;
+        [SerializeField] 
+        float fallGravityMult = 2.5f;   // 하강 중
+        [SerializeField] 
+        float lowJumpGravityMult = 4f;  // 상승 중 버튼 뗌
+        [SerializeField] 
+        float maxFallSpeed = 20f;
+        [SerializeField]
+        private float jumpBufferTime = 0.15f;
+        [SerializeField]
+        private float coyoteTime = 0.1f;
 
-        private bool jumpRequested;
+        private float jumpPressedTime = float.NegativeInfinity;
+        private float leaveGroundTime = float.NegativeInfinity;
         private Rigidbody2D body;
         private PlayerInputReader input;
         private GroundChecker ground;
@@ -28,17 +41,21 @@ namespace Game.Gameplay
 
         private void Update()
         {
-            if(input.JumpPressed)
-                jumpRequested = true;
+            if (input.JumpPressed)
+                jumpPressedTime = Time.time;
         }
 
         private void FixedUpdate()
         {
+            if (ground.IsGrounded && body.linearVelocityY <= 0f)
+                leaveGroundTime = Time.time;
+
             HandleHorizontal();
-            if(jumpRequested)
+            float window = Mathf.Max(jumpBufferTime, Time.fixedDeltaTime);  //Update와 FixedUpdate의 간격을 메꾸기 위한 장치
+            if (Time.time - jumpPressedTime <= window)
             {
-                HandleJump();
-                jumpRequested = false;
+                if (TryJump())
+                    jumpPressedTime = float.NegativeInfinity;  
             }
             ApplyGravity();
             ClampFallSpeed();
@@ -69,14 +86,15 @@ namespace Game.Gameplay
             body.linearVelocityX = accelate;
         }
 
-        private void HandleJump()
+        private bool TryJump()
         {
-            if (ground.IsGrounded)
-            {
-                float g = Mathf.Abs(Physics2D.gravity.y);
-                float v0 = Mathf.Sqrt(2 * g * jumpHeight);
-                body.linearVelocityY = v0;
-            }
+            if (!ground.IsGrounded && (Time.time - leaveGroundTime) > coyoteTime) 
+                return false;
+
+            float g = Mathf.Abs(Physics2D.gravity.y);
+            body.linearVelocityY = Mathf.Sqrt(2 * g * jumpHeight);
+            leaveGroundTime = float.NegativeInfinity;
+            return true;
         }
 
         private void ApplyGravity()
