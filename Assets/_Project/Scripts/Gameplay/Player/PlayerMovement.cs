@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Game.Core;
+using UnityEngine;
 
 namespace Game.Gameplay
 {
@@ -32,11 +33,38 @@ namespace Game.Gameplay
         private PlayerInputReader input;
         private GroundChecker ground;
 
+        private StateMachine<PlayerMovement> machine;
+
+        internal bool HasMoveInput => Mathf.Abs(input.MoveInput) > 0.01f;
+
+        internal IdleState Idle { get; private set; }
+        internal MoveState Move { get; private set; }
+        internal JumpState Jump { get; private set; }
+        internal FallState Fall { get; private set; }
+
+        internal bool IsGrounded => ground.IsGrounded;
+        internal float MoveInput => input.MoveInput;
+        internal bool IsRising => body.linearVelocityY > 0f;
+        internal bool IsFalling => body.linearVelocityY < 0f;
+
+        //#10 AttackState에서 실제로 사용 예정
+        internal PlayerState CurrentState => (PlayerState)machine.Current;
+
+
         private void Awake()
         {
             body = GetComponent<Rigidbody2D>();
             input = GetComponent<PlayerInputReader>();
             ground = GetComponent<GroundChecker>();
+
+            machine = new StateMachine<PlayerMovement>(this);
+
+            Idle = new IdleState(machine);
+            Move = new MoveState(machine);
+            Jump = new JumpState(machine);
+            Fall = new FallState(machine);
+
+            machine.Change(Idle);
         }
 
         private void Update()
@@ -50,12 +78,18 @@ namespace Game.Gameplay
             if (ground.IsGrounded && body.linearVelocityY <= 0f)
                 leaveGroundTime = Time.time;
 
+            machine.FixedTick();
+
             HandleHorizontal();
+
             float window = Mathf.Max(jumpBufferTime, Time.fixedDeltaTime);  //Update와 FixedUpdate의 간격을 메꾸기 위한 장치
             if (Time.time - jumpPressedTime <= window)
             {
                 if (TryJump())
+                {
                     jumpPressedTime = float.NegativeInfinity;
+                    machine.Change(Jump);
+                }
             }
             ApplyGravity();
             ClampFallSpeed();
@@ -67,7 +101,7 @@ namespace Game.Gameplay
             var targetSpeed = input.MoveInput * maxSpeed;
             if (ground.IsGrounded)
             {
-                if (Mathf.Abs(input.MoveInput) > 0.01f)
+                if (HasMoveInput)
                 {
                     accelate = groundAccel;
                 }
