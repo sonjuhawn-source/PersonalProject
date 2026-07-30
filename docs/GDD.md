@@ -450,3 +450,4 @@ Input System 의 Control Scheme 으로 처리한다. 액션 맵 하나에 키보
 ## 관련 문서
 
 - [개발 로드맵](roadmap.md)
+- [학습 로그](learning-log.md) — 작업 중 막혔던 지점과 그때 이해한 것들
