@@ -4,23 +4,23 @@ namespace Game.Gameplay
 {
     public class PlayerMovement : MonoBehaviour
     {
-        [SerializeField] 
-        float maxSpeed = 8f;
-        [SerializeField] 
-        float groundAccel = 60f;
-        [SerializeField] 
-        float groundDecel = 60f;
-        [SerializeField] 
-        float airAccel = 30f;
+        [SerializeField]
+        private float maxSpeed = 8f;
+        [SerializeField]
+        private float groundAccel = 60f;
+        [SerializeField]
+        private float groundDecel = 60f;
+        [SerializeField]
+        private float airAccel = 30f;
 
-        [SerializeField] 
-        float jumpHeight = 3.5f;
-        [SerializeField] 
-        float fallGravityMult = 2.5f;   // 하강 중
-        [SerializeField] 
-        float lowJumpGravityMult = 4f;  // 상승 중 버튼 뗌
-        [SerializeField] 
-        float maxFallSpeed = 20f;
+        [SerializeField]
+        private float jumpHeight = 3.5f;
+        [SerializeField]
+        private float fallGravityMult = 2.5f;   // 하강 중
+        [SerializeField]
+        private float lowJumpGravityMult = 4f;  // 상승 중 버튼 뗌
+        [SerializeField]
+        private float maxFallSpeed = 20f;
         [SerializeField]
         private float jumpBufferTime = 0.15f;
         [SerializeField]
@@ -55,7 +55,7 @@ namespace Game.Gameplay
             if (Time.time - jumpPressedTime <= window)
             {
                 if (TryJump())
-                    jumpPressedTime = float.NegativeInfinity;  
+                    jumpPressedTime = float.NegativeInfinity;
             }
             ApplyGravity();
             ClampFallSpeed();
@@ -88,7 +88,10 @@ namespace Game.Gameplay
 
         private bool TryJump()
         {
-            if (!ground.IsGrounded && (Time.time - leaveGroundTime) > coyoteTime) 
+            if (body.linearVelocityY > 0f)
+                return false;
+
+            if (!ground.IsGrounded && (Time.time - leaveGroundTime) > coyoteTime)
                 return false;
 
             float g = Mathf.Abs(Physics2D.gravity.y);
