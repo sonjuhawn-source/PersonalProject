@@ -8,7 +8,6 @@ namespace Game.Gameplay
         public float MoveInput => actions.Player.Move.ReadValue<Vector2>().x;
         public bool JumpPressed => actions.Player.Jump.WasPressedThisFrame();
         public bool JumpHeld => actions.Player.Jump.IsPressed();
-        public bool JumpReleased => actions.Player.Jump.WasReleasedThisFrame();
         public bool AttackPressed => actions.Player.Attack.WasPressedThisFrame();
 
         private void Awake()

@@ -4,11 +4,11 @@ namespace Game.Gameplay
 {
     public class GroundChecker : MonoBehaviour
     {
-        [SerializeField] 
+        [SerializeField]
         Vector2 boxSize = new Vector2(0.8f, 0.1f);     // 발밑 박스 크기 (가로는 콜라이더보다 살짝 좁게)
-        [SerializeField] 
+        [SerializeField]
         float offsetY = 0.02f;     // 콜라이더 발밑까지의 거리
-        [SerializeField] 
+        [SerializeField]
         LayerMask groundMask;  // 인스펙터에서 Ground 선택
 
         [SerializeField]
@@ -20,13 +20,15 @@ namespace Game.Gameplay
         {
             if (bodyCollider == null)
                 Debug.LogWarning($"{name}: bodyCollider 미지정 — GetComponent 폴백. 콜라이더가 둘 이상이면 접지 판정과 기즈모가 함께 어긋난다.", this);
+            
+            if(groundMask.value == 0)
+                Debug.LogWarning($"{name}: groundMask 미지정 - IsGround가 항상 false",this);
 
-            ResolveCollider();
         }
 
         void FixedUpdate()
         {
-            IsGrounded = Physics2D.OverlapBox(FootCenter, boxSize , 0f, groundMask);
+            IsGrounded = Physics2D.OverlapBox(FootCenter, boxSize, 0f, groundMask);
         }
 
         void OnDrawGizmosSelected()
@@ -48,9 +50,7 @@ namespace Game.Gameplay
 
         Collider2D ResolveCollider()
         {
-            if (bodyCollider == null)
-                bodyCollider = GetComponent<Collider2D>();
-            return bodyCollider;
+            return bodyCollider != null ? bodyCollider : GetComponent<Collider2D>();
         }
     }
 }

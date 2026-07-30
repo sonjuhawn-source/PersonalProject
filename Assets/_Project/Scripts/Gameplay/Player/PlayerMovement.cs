@@ -44,7 +44,6 @@ namespace Game.Gameplay
 
         internal bool IsGrounded => ground.IsGrounded;
         internal float MoveInput => input.MoveInput;
-        internal bool IsRising => body.linearVelocityY > 0f;
         internal bool IsFalling => body.linearVelocityY < 0f;
 
         //#10 AttackState에서 실제로 사용 예정
@@ -71,6 +70,8 @@ namespace Game.Gameplay
         {
             if (input.JumpPressed)
                 jumpPressedTime = Time.time;
+
+            machine.Tick();
         }
 
         private void FixedUpdate()
