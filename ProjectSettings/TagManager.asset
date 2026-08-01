@@ -11,10 +11,10 @@ TagManager:
   - Ground
   - Water
   - UI
-  - 
-  - 
-  - 
-  - 
+  - PlayerHitbox
+  - PlayerHurtbox
+  - EnemyHitbox
+  - EnemyHurtbox
   - 
   - 
   - 
