@@ -886,19 +886,20 @@ W2 의 무기 SO 와 층이 다르다. 무기 SO 는 "대검의 기본 데미지
 
 ## 6. 반복한 실수 패턴
 
-### 에디터·IDE 저장 누락 (7회)
+### 에디터·IDE 저장 누락
 
-`.inputactions`, 씬, 컴포넌트 배선, **검증 후 원상복구**, `.cs` 파일, 프로젝트 설정(2회)
+`.inputactions`, 씬, 컴포넌트 배선, **검증 후 원상복구**, `.cs` 파일, 프로젝트 설정
 — "다 했어"라고 했는데 디스크에 안 써져 있었다.
 
-4회째는 성격이 달랐다. #28 검증을 위해 `bodyCollider` 를 비웠다가 다시 지정했는데
+#28 에서는 성격이 달랐다. 검증을 위해 `bodyCollider` 를 비웠다가 다시 지정했는데
 저장하지 않아서, **디스크에는 비운 상태가 남아 있었다.** 그대로 커밋하면 #21 의 배선이
 되돌려진다. 검증을 위해 값을 임시로 망가뜨렸을 때가 특히 위험하다 — 복구를 잊으면
 "고쳤는데 오히려 후퇴"가 된다.
 
-5~7회째는 저장 **대상**이 달랐다. `.cs` 는 Unity 가 아니라 IDE 에서 저장해야 하고,
+#9 에서는 저장 **대상**이 달랐다. `.cs` 는 Unity 가 아니라 IDE 에서 저장해야 하고,
 레이어와 충돌 매트릭스는 `ProjectSettings/` 아래라 **`Ctrl+S` 로는 기록되지 않는다.**
-같은 실수를 연달아 두 번 했다.
+프로젝트 설정 쪽은 레이어를 만들 때와 매트릭스를 끌 때 연달아 놓쳤다 — 저장 경로가
+따로라는 걸 몰랐기 때문이지 부주의가 아니었다.
 
 - **Input Actions 창** — `Save Asset` 버튼. `Auto-Save` 체크박스를 켜면 해결
 - **씬** — `Ctrl+S`. Auto-Save 옵션이 없어서 매번 직접. 제목 표시줄의 `*` 로 확인
@@ -906,11 +907,11 @@ W2 의 무기 SO 와 층이 다르다. 무기 SO 는 "대검의 기본 데미지
 - **`.cs` 파일** — Unity 가 아니라 IDE 에서 `Ctrl+S`. 탭 제목의 `*` 로 확인
 - 파일 수정 시각(`ls -la`)이나 `git status` 로 확인 가능
 
-### 조건 부호 뒤집힘 (5회)
+### 조건 부호 뒤집힘
 
 `>= 0f` vs `> 0f`, `<= 0f` vs `> 0f`, `&&` 로 덧붙이기 vs 별도 줄로 분리.
 
-5회째는 종류가 조금 달랐다. `IdleState` 에서 이동 입력을 `MoveInput > 0` 으로 검사해
+#7 에서는 종류가 조금 달랐다. `IdleState` 에서 이동 입력을 `MoveInput > 0` 으로 검사해
 **왼쪽 이동(`-1`)을 놓쳤다.** 오른쪽으로 걸으면 `Move` 로 가고 왼쪽으로 걸으면 `Idle` 에
 머문다. 방향이 있는 값을 "있는가"로 물을 때는 `Mathf.Abs` 가 필요하다.
 
@@ -949,17 +950,17 @@ Unity는 견디지만 git diff가 지저분해지고 다른 에디터에서 열 
 것은 **상태**이고 별도 필드다. 이름이 비슷하면(`jumpBufferTime` / `jumpPressedTime`)
 더 헷갈린다 — 설정은 "얼마나", 상태는 "언제"를 담는다.
 
-### `MonoBehaviour` 가 아닌 것에 `GetComponent` (5회)
+### `MonoBehaviour` 가 아닌 것에 `GetComponent`
 
 | 대상 | 실제 정체 |
 |---|---|
 | `InputSystem_Actions` | `IInputActionCollection2, IDisposable` — 일반 C# 객체 |
 | `StateMachine<TOwner>` | 일반 C# 객체 |
 | `PingState` / `PongState` | `IState` 구현체 — 일반 C# 객체 |
-| `GameObject` (2회) | 컴포넌트가 아니라 **컴포넌트를 담는 그릇** |
+| `GameObject` | 컴포넌트가 아니라 **컴포넌트를 담는 그릇** |
 
-4·5회째는 `HurtBox` 의 소유자를 채우려고 `GetComponentInParent<GameObject>()` 와
-`GetComponent<GameObject>()` 를 쓴 것이다. 개념적으로도 성립하지 않는다 — 모든 오브젝트가
+`GameObject` 는 #9 에서 나왔다. `HurtBox` 의 소유자를 채우려고 `GetComponentInParent<GameObject>()` 와
+`GetComponent<GameObject>()` 를 썼다. 개념적으로도 성립하지 않는다 — 모든 오브젝트가
 GameObject 이므로 "부모에서 GameObject 를 찾는다"는 무엇을 찾겠다는 것인지가 정해지지
 않는다. 어느 GameObject 인지는 **다른 기준**으로 골라야 한다.
 
@@ -1052,7 +1053,7 @@ if (Mathf.Abs(x) <  0.01f) { ... }   // 위가 거짓이면 무조건 참
 두 번째는 `else` 다. 조건을 다시 쓰면 나중에 한쪽 임계값만 고쳤을 때 **양쪽 다 거짓이
 되는 구멍**이 생긴다.
 
-### IDE 가 넣은 엉뚱한 `using` (5회)
+### IDE 가 넣은 엉뚱한 `using`
 
 | 파일 | 자동 추가된 것 | 결과 |
 |---|---|---|
@@ -1069,15 +1070,15 @@ if (Mathf.Abs(x) <  0.01f) { ... }   // 위가 거짓이면 무조건 참
 `Unity.VisualScripting` 을 참조하지 않고 `autoReferenced: false` 이므로 그 네임스페이스가
 보이지 않는다. asmdef 없이 `Assembly-CSharp` 하나였다면 조용히 통과했을 것이다.
 
-**3~5회째는 그 방어가 통하지 않았다.** `Codice` 와 `PlasticGui` 는 Unity Version Control
+**#9 에서는 그 방어가 통하지 않았다.** `Codice` 와 `PlasticGui` 는 Unity Version Control
 패키지 것인데 auto-referenced 라 `Game.Gameplay` 에서도 보인다. 그래서 컴파일러가 잡아주지
 않고 조용히 통과했다 — 위에 적어둔 "asmdef 없이 하나였다면 조용히 통과했을 것"이 실제로
 일어난 셈이다. asmdef 는 방어선이지 울타리가 아니다.
 
-세 번 모두 #9 한 이슈 안에서 나왔다. **저장 전에 파일 맨 윗줄을 훑는 것**말고는 막을
-방법이 없다.
+한 이슈 안에서 파일마다 되풀이됐다. 컴파일러가 안 잡아주는 종류라
+**저장 전에 파일 맨 윗줄을 훑는 것**말고는 막을 방법이 없다.
 
-### 고칠 때 기존 줄을 지우지 않고 새 줄만 추가했다 (4회)
+### 고칠 때 기존 줄을 지우지 않고 새 줄만 추가했다
 
 ```
 if (bodyCollider == null)
@@ -1098,7 +1099,7 @@ return bodyCollider != null ? bodyCollider : GetComponent<Collider2D>();   // �
 그 필드를 쓰던 `JumpBufferTimer()` 를 남겨 **컴파일이 깨졌다.** 여기서는 컴파일러가
 잡아줬지만, 위 사례처럼 문법이 성립하면 조용히 통과한다.
 
-#9 의 `HitBox` 가 4회째다. `OnTriggerEnter2D` 에서 해야 할 일은 `hurtbox.TakeHit(...)`
+#9 의 `HitBox` 에서도 같았다. `OnTriggerEnter2D` 에서 해야 할 일은 `hurtbox.TakeHit(...)`
 호출인데, 그것을 추가하면서 그 자리에 있던 `HitBoxActivate` / `HitBoxDeactivate` 호출을
 지우지 않았다. 컴파일도 되고 로그도 찍혀서 **동작하는 것처럼 보였다.** 실제로는
 `HitBoxActivate` 안의 `Clear()` 가 매번 캐시를 비워 중복 방지가 무력화됐고,
