@@ -12,6 +12,14 @@ namespace Game.Gameplay
             Debug.Log("플레이어: Idle");
         }
 
+        public override void Tick()
+        {
+            if (Owner.AttackPressed)
+            {
+                Machine.Change(Owner.Attack);
+            }
+        }
+
         public override void FixedTick()
         {
             if (!Owner.IsGrounded)

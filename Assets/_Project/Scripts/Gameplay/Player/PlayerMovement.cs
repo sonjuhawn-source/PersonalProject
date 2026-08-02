@@ -26,9 +26,25 @@ namespace Game.Gameplay
         private float jumpBufferTime = 0.15f;
         [SerializeField]
         private float coyoteTime = 0.1f;
+        [SerializeField]
+        private float attackStartup = 0.12f;
+        [SerializeField]
+        private float attackActive = 0.08f;
+        [SerializeField]
+        private float attackRecovery = 0.2f;
+        [SerializeField]
+        private HitBox hitBox;
+
+        [SerializeField]    //무기SO 제작 전까지 임시    
+        int damage = 10;
+        [SerializeField]
+        float knockbackForce = 5;
+        [SerializeField]
+        float hitStopTime = 0.08f;
 
         private float jumpPressedTime = float.NegativeInfinity;
         private float leaveGroundTime = float.NegativeInfinity;
+        private float facing = 1;
         private Rigidbody2D body;
         private PlayerInputReader input;
         private GroundChecker ground;
@@ -41,12 +57,17 @@ namespace Game.Gameplay
         internal MoveState Move { get; private set; }
         internal JumpState Jump { get; private set; }
         internal FallState Fall { get; private set; }
+        internal AttackState Attack { get; private set; }
+        internal HitBox HitBox => hitBox;
 
         internal bool IsGrounded => ground.IsGrounded;
         internal float MoveInput => input.MoveInput;
         internal bool IsFalling => body.linearVelocityY < 0f;
+        internal bool AttackPressed => input.AttackPressed;
 
-        //#10 AttackState에서 실제로 사용 예정
+        internal float AttackStartup => attackStartup;
+        internal float AttackActive => attackActive;
+        internal float AttackRecovery => attackRecovery;
         internal PlayerState CurrentState => (PlayerState)machine.Current;
 
 
@@ -62,6 +83,7 @@ namespace Game.Gameplay
             Move = new MoveState(machine);
             Jump = new JumpState(machine);
             Fall = new FallState(machine);
+            Attack = new AttackState(machine);
 
             machine.Change(Idle);
         }
@@ -72,6 +94,12 @@ namespace Game.Gameplay
                 jumpPressedTime = Time.time;
 
             machine.Tick();
+
+            if (CurrentState.AllowsHorizontalControl && HasMoveInput)
+            {
+                facing = MoveInput > 0 ? 1 : -1;
+                transform.localScale = new Vector3(facing, 1f, 1f);
+            }
         }
 
         private void FixedUpdate()
@@ -86,7 +114,7 @@ namespace Game.Gameplay
             float window = Mathf.Max(jumpBufferTime, Time.fixedDeltaTime);  //Update와 FixedUpdate의 간격을 메꾸기 위한 장치
             if (Time.time - jumpPressedTime <= window)
             {
-                if (TryJump())
+                if (CurrentState.AcceptsJumpInput && TryJump())
                 {
                     jumpPressedTime = float.NegativeInfinity;
                     machine.Change(Jump);
@@ -98,27 +126,32 @@ namespace Game.Gameplay
 
         private void HandleHorizontal()
         {
-            float accelate;
+            float accelerate;
             var targetSpeed = input.MoveInput * maxSpeed;
             if (ground.IsGrounded)
             {
                 if (HasMoveInput)
                 {
-                    accelate = groundAccel;
+                    accelerate = groundAccel;
                 }
                 else
                 {
-                    accelate = groundDecel;
+                    accelerate = groundDecel;
                 }
             }
             else
             {
-                accelate = airAccel;
+                accelerate = airAccel;
             }
 
-            accelate = Mathf.MoveTowards(body.linearVelocityX, targetSpeed, accelate * Time.fixedDeltaTime);
+            if (!CurrentState.AllowsHorizontalControl)
+            {
+                targetSpeed = 0f;
+            }
 
-            body.linearVelocityX = accelate;
+            accelerate = Mathf.MoveTowards(body.linearVelocityX, targetSpeed, accelerate * Time.fixedDeltaTime);
+
+            body.linearVelocityX = accelerate;
         }
 
         private bool TryJump()
@@ -134,6 +167,15 @@ namespace Game.Gameplay
             leaveGroundTime = float.NegativeInfinity;
             return true;
         }
+
+        internal DamageInfo BuildDamageInfo()
+        {
+            return new DamageInfo(damage,
+                      Vector2.right * facing * knockbackForce,
+                      hitStopTime,
+                      gameObject);
+        }
+
 
         private void ApplyGravity()
         {

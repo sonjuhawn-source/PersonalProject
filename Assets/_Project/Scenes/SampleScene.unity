@@ -447,7 +447,6 @@ GameObject:
   - component: {fileID: 1483817998}
   - component: {fileID: 1483818004}
   - component: {fileID: 1483818003}
-  - component: {fileID: 1483818006}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -592,6 +591,13 @@ MonoBehaviour:
   maxFallSpeed: 20
   jumpBufferTime: 0.15
   coyoteTime: 0.1
+  attackStartup: 0.12
+  attackActive: 0.08
+  attackRecovery: 0.2
+  hitBox: {fileID: 683188934}
+  damage: 10
+  knockbackForce: 5
+  hitStopTime: 0.08
 --- !u!114 &1483818004
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -647,19 +653,6 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: 0}
   m_Size: {x: 1, y: 2}
   m_Direction: 0
---- !u!114 &1483818006
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1483817997}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6602e982af887c145b429886663448b6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Game.Gameplay::Game.Gameplay.HitBoxTestDriver
-  hitbox: {fileID: 683188934}
 --- !u!1 &1587612992
 GameObject:
   m_ObjectHideFlags: 0
