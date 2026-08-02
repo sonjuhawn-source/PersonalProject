@@ -1,7 +1,7 @@
 # 학습 로그
 
 > W1 작업 중 막혔던 지점과 그때 이해한 것들. 복습용.
-> 최종 수정 2026-07-31 (#28 까지 반영 · #6 보강)
+> 최종 수정 2026-08-02 (#9 까지 반영)
 
 관련: [GDD](GDD.md) · [개발 로드맵](roadmap.md)
 
@@ -595,6 +595,36 @@ y 속도가 양수인데도 `GroundChecker` 의 박스가 발밑 `0.02` 아래�
 실행 순서를 명시(Script Execution Order)하는 방법도 있으나, 다른 스크립트에 영향을
 주지 않는 쪽을 택했다.
 
+### 트리거가 겹치면 양쪽 모두 콜백을 받는다
+
+두 트리거가 겹치면 Unity 는 `OnTriggerEnter2D` 를 **양쪽 컴포넌트 모두에게** 보낸다.
+`HitBox` 와 `HurtBox` 에 각각 두면 한 번의 접촉이 두 번 처리된다.
+
+감지 주체를 한쪽으로 정해야 한다. 중복 방지 캐시를 들고 있는 쪽이 `HitBox` 이므로 판단도
+그쪽에 모았다. 그 결과 `HurtBox` 는 Unity 콜백을 하나도 쓰지 않는다 — 컴포넌트인 이유는
+`HitBox` 가 콜라이더를 통해 찾아낼 수 있어야 해서지 콜백을 받기 위해서가 아니다.
+
+### 레이어는 GameObject 단위다
+
+히트박스와 허트박스를 자식 GameObject 로 나눈 실제 이유가 이것이다. 레이어는 콜라이더가
+아니라 GameObject 에 붙으므로, 한 오브젝트에 콜라이더 둘을 달면 매트릭스로 구분할 수 없다.
+
+태그 비교로도 거를 수 있지만 그 방식은 물리 엔진이 접촉을 만들고 콜백까지 보낸 뒤
+코드에서 버리는 셈이다. 레이어로 막으면 접촉 자체가 생기지 않는다.
+
+`Ground` 와 `Default` 까지 전부 해제하는 것이 중요하다. 루트 `Player` 가 `Default` 라
+켜두면 자기 허트박스와 자기 콜라이더가 서로 감지한다. `Ground` 를 켜두면 히트박스가
+지면에 닿을 때마다 콜백이 온다 — `HurtBox` 가 없어 첫 줄에서 걸러지지만 부를 이유가 없다.
+
+### GameObject 를 끄면 `Awake` 가 돌지 않는다
+
+히트박스를 처음부터 꺼두려고 GameObject 를 비활성화했더니 `Awake` 가 실행되지 않아
+콜라이더 폴백도 초기 비활성화도 걸리지 않았다. 그 상태에서는 `enabled = true` 를 해도
+물리에 참여하지 않는다.
+
+**활성 구간 제어는 GameObject 가 아니라 콜라이더의 `enabled` 로 한다.** GameObject 를
+껐다 켜면 그때마다 `Awake`/`OnEnable` 이 다시 도는 것도 예측을 어렵게 만든다.
+
 ---
 
 ## 5. 설계 판단
@@ -817,22 +847,63 @@ PlayerMovement.FixedUpdate:
 
 지금 지키는 확장 지점 4개는 [GDD 9장](GDD.md)에 정리돼 있다.
 
+### 키는 "같은 콜라이더인가"가 아니라 "같은 적인가"
+
+중복 방지 캐시의 키를 `Collider2D` 로 잡으면, 적이 허트박스를 둘 이상 가지는 순간
+(몸통·머리) 서로 다른 콜라이더라 한 번의 공격에 두 번 맞는다.
+
+물어야 하는 질문이 "같은 적인가"이므로 키도 그 단위여야 한다. `HurtBox.Owner` 를 공개한
+이유가 이것이고, `DamageInfo.Source` 도 같은 기준(루트 GameObject)으로 맞췄다. 그래야
+자기 타격 방지가 단순 비교 한 줄로 끝난다.
+
+히트박스가 자식에 있으므로 여기서 `gameObject` 를 그대로 쓰면 자식이 출처가 된다.
+자식끼리 비교하면 `Player/HitBox` 와 `Player/HurtBox` 가 서로 다른 오브젝트라 자기 타격
+방지가 통과해버린다.
+
+### `DamageInfo` 는 데이터가 아니라 사건이다
+
+처음에 `ScriptableObject` 로 만들었다가 걷어냈다. SO 는 디스크에 저장되는 에셋이고
+`CreateInstance` 를 거쳐야 하는데, 출처와 넉백 방향은 **때리는 순간** 정해지므로 미리
+작성해둘 수 있는 값이 아니다.
+
+W2 의 무기 SO 와 층이 다르다. 무기 SO 는 "대검의 기본 데미지 15" 같은 작성된 데이터고,
+`DamageInfo` 는 그것을 재료로 매 타격마다 만들어지는 런타임 값이다. 여기서 SO 를 쓰면
+두 층이 뒤엉킨다.
+
+생성자에서만 채우고 이후 읽기만 하게 한 것도 같은 이유다. 한 번의 공격이 여러 대상을
+때릴 때 중간에 값이 바뀌면 뒤에 맞는 대상만 다른 값을 받는다.
+
+### 검증 수단이 없으면 완료 조건도 없다
+
+#9 를 끝냈을 때 `HitBoxActivate` 를 부르는 곳이 아무데도 없었다. 활성 구간 제어는 #10 의
+일이지만, 그대로 두면 "같은 적이 두 번 맞지 않는다"를 확인할 방법이 없다.
+
+임시 드라이버를 **토글**로 만든 것이 판단이었다. 코루틴으로 자동 종료시키면 켜기와 끄기가
+한 동작에 묶여 "켠 채로 두면 추가 히트가 없다"와 "껐다 켜면 다시 맞는다"를 각각 확인할 수
+없다. **검증 도구는 검증하려는 것을 분해할 수 있어야 한다.**
+
 ---
 
 ## 6. 반복한 실수 패턴
 
-### Unity 에디터 저장 누락 (4회)
+### 에디터·IDE 저장 누락 (7회)
 
-`.inputactions`, 씬, 컴포넌트 배선, **검증 후 원상복구** — "다 했어"라고 했는데 디스크에
-안 써져 있었다.
+`.inputactions`, 씬, 컴포넌트 배선, **검증 후 원상복구**, `.cs` 파일, 프로젝트 설정(2회)
+— "다 했어"라고 했는데 디스크에 안 써져 있었다.
 
 4회째는 성격이 달랐다. #28 검증을 위해 `bodyCollider` 를 비웠다가 다시 지정했는데
 저장하지 않아서, **디스크에는 비운 상태가 남아 있었다.** 그대로 커밋하면 #21 의 배선이
 되돌려진다. 검증을 위해 값을 임시로 망가뜨렸을 때가 특히 위험하다 — 복구를 잊으면
 "고쳤는데 오히려 후퇴"가 된다.
 
+5~7회째는 저장 **대상**이 달랐다. `.cs` 는 Unity 가 아니라 IDE 에서 저장해야 하고,
+레이어와 충돌 매트릭스는 `ProjectSettings/` 아래라 **`Ctrl+S` 로는 기록되지 않는다.**
+같은 실수를 연달아 두 번 했다.
+
 - **Input Actions 창** — `Save Asset` 버튼. `Auto-Save` 체크박스를 켜면 해결
 - **씬** — `Ctrl+S`. Auto-Save 옵션이 없어서 매번 직접. 제목 표시줄의 `*` 로 확인
+- **프로젝트 설정**(레이어·매트릭스·태그) — `File → Save Project`. `Ctrl+S` 로는 안 된다
+- **`.cs` 파일** — Unity 가 아니라 IDE 에서 `Ctrl+S`. 탭 제목의 `*` 로 확인
 - 파일 수정 시각(`ls -la`)이나 `git status` 로 확인 가능
 
 ### 조건 부호 뒤집힘 (5회)
@@ -878,13 +949,24 @@ Unity는 견디지만 git diff가 지저분해지고 다른 에디터에서 열 
 것은 **상태**이고 별도 필드다. 이름이 비슷하면(`jumpBufferTime` / `jumpPressedTime`)
 더 헷갈린다 — 설정은 "얼마나", 상태는 "언제"를 담는다.
 
-### `MonoBehaviour` 가 아닌 것에 `GetComponent` (3회)
+### `MonoBehaviour` 가 아닌 것에 `GetComponent` (5회)
 
 | 대상 | 실제 정체 |
 |---|---|
 | `InputSystem_Actions` | `IInputActionCollection2, IDisposable` — 일반 C# 객체 |
 | `StateMachine<TOwner>` | 일반 C# 객체 |
 | `PingState` / `PongState` | `IState` 구현체 — 일반 C# 객체 |
+| `GameObject` (2회) | 컴포넌트가 아니라 **컴포넌트를 담는 그릇** |
+
+4·5회째는 `HurtBox` 의 소유자를 채우려고 `GetComponentInParent<GameObject>()` 와
+`GetComponent<GameObject>()` 를 쓴 것이다. 개념적으로도 성립하지 않는다 — 모든 오브젝트가
+GameObject 이므로 "부모에서 GameObject 를 찾는다"는 무엇을 찾겠다는 것인지가 정해지지
+않는다. 어느 GameObject 인지는 **다른 기준**으로 골라야 한다.
+
+**GameObject 는 컴포넌트를 통해 얻는다.** 모든 컴포넌트가 `.gameObject` 로 자기 그릇을
+알려주므로, 계층을 타고 올라갈 때는 `Transform` 을 징검다리로 쓴다
+(`transform.parent.gameObject`). `parent`, `root`, `GetChild()` 가 전부 `Transform` 에
+있는 것도 같은 이유다.
 
 `GetComponent<T>` 는 `null` 을 반환하고, 그걸 쓰는 다음 줄에서
 `NullReferenceException` 이 난다. **`new` 로 만들어야 한다.**
@@ -970,12 +1052,15 @@ if (Mathf.Abs(x) <  0.01f) { ... }   // 위가 거짓이면 무조건 참
 두 번째는 `else` 다. 조건을 다시 쓰면 나중에 한쪽 임계값만 고쳤을 때 **양쪽 다 거짓이
 되는 구멍**이 생긴다.
 
-### IDE 가 넣은 엉뚱한 `using` (2회)
+### IDE 가 넣은 엉뚱한 `using` (5회)
 
 | 파일 | 자동 추가된 것 | 결과 |
 |---|---|---|
 | `IdleState.cs` | `using System.Diagnostics;` | `Debug` 가 모호해져 `UnityEngine.Debug` 로 풀네임을 써야 했다 |
 | `GroundChecker.cs` | `using Unity.VisualScripting.YamlDotNet.Core.Tokens;` | **컴파일 에러** |
+| `HurtBox.cs` | `using Codice.Client.BaseCommands;` | 조용히 통과 |
+| `HitBox.cs` | `using static Codice.Client.Common.EventTracking...;` | 조용히 통과 |
+| `HitBoxTestDriver.cs` | `using PlasticGui.Help.Conditions;` | 조용히 통과 |
 
 자동완성이 같은 이름을 가진 엉뚱한 네임스페이스를 골라서 생긴다. 첫 번째는 조용히
 불편해지고, 두 번째는 컴파일이 아예 안 된다.
@@ -984,7 +1069,15 @@ if (Mathf.Abs(x) <  0.01f) { ... }   // 위가 거짓이면 무조건 참
 `Unity.VisualScripting` 을 참조하지 않고 `autoReferenced: false` 이므로 그 네임스페이스가
 보이지 않는다. asmdef 없이 `Assembly-CSharp` 하나였다면 조용히 통과했을 것이다.
 
-### 고칠 때 기존 줄을 지우지 않고 새 줄만 추가했다 (2회)
+**3~5회째는 그 방어가 통하지 않았다.** `Codice` 와 `PlasticGui` 는 Unity Version Control
+패키지 것인데 auto-referenced 라 `Game.Gameplay` 에서도 보인다. 그래서 컴파일러가 잡아주지
+않고 조용히 통과했다 — 위에 적어둔 "asmdef 없이 하나였다면 조용히 통과했을 것"이 실제로
+일어난 셈이다. asmdef 는 방어선이지 울타리가 아니다.
+
+세 번 모두 #9 한 이슈 안에서 나왔다. **저장 전에 파일 맨 윗줄을 훑는 것**말고는 막을
+방법이 없다.
+
+### 고칠 때 기존 줄을 지우지 않고 새 줄만 추가했다 (4회)
 
 ```
 if (bodyCollider == null)
@@ -1005,6 +1098,15 @@ return bodyCollider != null ? bodyCollider : GetComponent<Collider2D>();   // �
 그 필드를 쓰던 `JumpBufferTimer()` 를 남겨 **컴파일이 깨졌다.** 여기서는 컴파일러가
 잡아줬지만, 위 사례처럼 문법이 성립하면 조용히 통과한다.
 
+#9 의 `HitBox` 가 4회째다. `OnTriggerEnter2D` 에서 해야 할 일은 `hurtbox.TakeHit(...)`
+호출인데, 그것을 추가하면서 그 자리에 있던 `HitBoxActivate` / `HitBoxDeactivate` 호출을
+지우지 않았다. 컴파일도 되고 로그도 찍혀서 **동작하는 것처럼 보였다.** 실제로는
+`HitBoxActivate` 안의 `Clear()` 가 매번 캐시를 비워 중복 방지가 무력화됐고,
+`Deactivate` 는 첫 적을 맞추는 순간 콜라이더를 꺼버렸다.
+
+그다음 라운드에서는 `Clear()` 를 지우는 대신 `OnTriggerEnter2D` 안으로 **옮겨서** 같은
+문제가 형태만 바꿔 남았다. 옮기기도 교체의 일종이라 "어디서 지울지"를 같이 정해야 한다.
+
 ### 참고 — Unity의 암묵적 변환
 
 `IsGrounded = Physics2D.OverlapBox(...)` 는 `Collider2D` 를 `bool` 에 대입하는 것처럼
@@ -1020,7 +1122,6 @@ W1 남은 이슈에서 마주칠 것들. 미리 알아두면 원인 파악이 �
 
 | 이슈 | 예상되는 지점 |
 |---|---|
-| [#9](../../issues/9) 히트박스 | 히트박스·허트박스를 **자식 GameObject** 에 두는 것이 2D 액션 표준. 공격마다 판정 범위가 달라 어차피 분리하게 된다. `GroundChecker` 가 `Collider2D` 를 명시 지정하게 바꾼 이유가 여기서 드러난다 ([#21](../../issues/21)) |
 | [#10](../../issues/10) 평타 | 히트박스 활성 구간을 **애니메이션 이벤트가 아니라 코루틴 타임라인**으로. W2에서 무기별 타이밍을 데이터로 뺄 때 걸림돌이 된다. `PlayerState` 의 허용 플래그 3개가 여기서 첫 사용자를 만난다. 선입력은 `Tick`(=`Update` 주기)에서 받아야 씹히지 않는다 |
 | [#11](../../issues/11) 콤보 | 선입력 버퍼는 #6의 점프 버퍼와 같은 형태 (시각 기록 + 창 검사) |
 | [#12](../../issues/12) 히트스탑 | `Time.timeScale` 전역 조작의 부작용 (UI·파티클) 확인 필요 |
