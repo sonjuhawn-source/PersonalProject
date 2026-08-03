@@ -591,13 +591,25 @@ MonoBehaviour:
   maxFallSpeed: 20
   jumpBufferTime: 0.15
   coyoteTime: 0.1
-  attackStartup: 0.12
-  attackActive: 0.08
-  attackRecovery: 0.2
   hitBox: {fileID: 683188934}
-  damage: 10
-  knockbackForce: 5
   hitStopTime: 0.08
+  combo:
+  - startup: 0.12
+    activeTime: 0.08
+    recovery: 0.2
+    damage: 10
+    knockbackForce: 5
+  - startup: 0.1
+    activeTime: 0.08
+    recovery: 0.18
+    damage: 10
+    knockbackForce: 5
+  - startup: 0.15
+    activeTime: 0.1
+    recovery: 0.3
+    damage: 15
+    knockbackForce: 12
+  comboResetTime: 0.5
 --- !u!114 &1483818004
 MonoBehaviour:
   m_ObjectHideFlags: 0

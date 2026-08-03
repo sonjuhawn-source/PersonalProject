@@ -1,4 +1,5 @@
 ﻿using Game.Core;
+using System;
 using UnityEngine;
 
 namespace Game.Gameplay
@@ -27,20 +28,15 @@ namespace Game.Gameplay
         [SerializeField]
         private float coyoteTime = 0.1f;
         [SerializeField]
-        private float attackStartup = 0.12f;
-        [SerializeField]
-        private float attackActive = 0.08f;
-        [SerializeField]
-        private float attackRecovery = 0.2f;
-        [SerializeField]
         private HitBox hitBox;
 
-        [SerializeField]    //무기SO 제작 전까지 임시    
-        int damage = 10;
+        [SerializeField]    //무기SO 제작 전까지 임시
+        private float hitStopTime = 0.08f;
+
         [SerializeField]
-        float knockbackForce = 5;
+        private AttackData[] combo;
         [SerializeField]
-        float hitStopTime = 0.08f;
+        private float comboResetTime = 0.5f;
 
         private float jumpPressedTime = float.NegativeInfinity;
         private float leaveGroundTime = float.NegativeInfinity;
@@ -60,14 +56,15 @@ namespace Game.Gameplay
         internal AttackState Attack { get; private set; }
         internal HitBox HitBox => hitBox;
 
+        internal int ComboCount => combo.Length;
+        internal float ComboResetTime => comboResetTime;
+        internal AttackData GetAttack(int index) => combo[index];
+
         internal bool IsGrounded => ground.IsGrounded;
         internal float MoveInput => input.MoveInput;
         internal bool IsFalling => body.linearVelocityY < 0f;
         internal bool AttackPressed => input.AttackPressed;
 
-        internal float AttackStartup => attackStartup;
-        internal float AttackActive => attackActive;
-        internal float AttackRecovery => attackRecovery;
         internal PlayerState CurrentState => (PlayerState)machine.Current;
 
 
@@ -168,12 +165,12 @@ namespace Game.Gameplay
             return true;
         }
 
-        internal DamageInfo BuildDamageInfo()
+        internal DamageInfo BuildDamageInfo(AttackData data)
         {
-            return new DamageInfo(damage,
-                      Vector2.right * facing * knockbackForce,
-                      hitStopTime,
-                      gameObject);
+            return new DamageInfo(data.damage,
+                                  Vector2.right * facing * data.knockbackForce,
+                                  hitStopTime,
+                                  gameObject);
         }
 
 
