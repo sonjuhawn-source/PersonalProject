@@ -30,9 +30,6 @@ namespace Game.Gameplay
         [SerializeField]
         private HitBox hitBox;
 
-        [SerializeField]    //무기SO 제작 전까지 임시
-        private float hitStopTime = 0.08f;
-
         [SerializeField]
         private AttackData[] combo;
         [SerializeField]
@@ -169,7 +166,7 @@ namespace Game.Gameplay
         {
             return new DamageInfo(data.damage,
                                   Vector2.right * facing * data.knockbackForce,
-                                  hitStopTime,
+                                  data.hitStopTime,
                                   gameObject);
         }
 

@@ -592,23 +592,25 @@ MonoBehaviour:
   jumpBufferTime: 0.15
   coyoteTime: 0.1
   hitBox: {fileID: 683188934}
-  hitStopTime: 0.08
   combo:
   - startup: 0.12
     activeTime: 0.08
     recovery: 0.2
     damage: 10
     knockbackForce: 5
+    hitStopTime: 0.05
   - startup: 0.1
     activeTime: 0.08
     recovery: 0.18
     damage: 10
     knockbackForce: 5
+    hitStopTime: 0.05
   - startup: 0.15
     activeTime: 0.1
     recovery: 0.3
     damage: 15
     knockbackForce: 12
+    hitStopTime: 0.09
   comboResetTime: 0.5
 --- !u!114 &1483818004
 MonoBehaviour:
