@@ -92,7 +92,7 @@ namespace Game.Gameplay
 
             machine.Tick();
 
-            if (CurrentState.AllowsHorizontalControl && HasMoveInput)
+            if (CurrentState.AllowsFacingChange && HasMoveInput)
             {
                 facing = MoveInput > 0 ? 1 : -1;
                 transform.localScale = new Vector3(facing, 1f, 1f);

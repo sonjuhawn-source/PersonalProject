@@ -9,5 +9,6 @@ namespace Game.Gameplay
         public virtual bool AllowsHorizontalControl => true;
         public virtual bool UsesGravity => true;
         public virtual bool AcceptsJumpInput => true;
+        public virtual bool AllowsFacingChange => AllowsHorizontalControl;
     }
 }

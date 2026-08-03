@@ -11,7 +11,8 @@ namespace Game.Gameplay
         public AttackState(StateMachine<PlayerMovement> machine) : base(machine) { }
 
         public override bool AcceptsJumpInput => false;
-        public override bool AllowsHorizontalControl => false;
+        public override bool AllowsHorizontalControl => !startedGrounded;
+        public override bool AllowsFacingChange => !hitboxActive;
 
         private CancellationTokenSource cts;
 
@@ -19,9 +20,13 @@ namespace Game.Gameplay
         private float lastAttackEndTime = float.NegativeInfinity;
         private bool comboQueued;
         private bool acceptingInput;
+        private bool hitboxActive;
+        private bool startedGrounded;
 
         public override void Enter()
         {
+            startedGrounded = Owner.IsGrounded;
+
             if (Time.time - lastAttackEndTime > Owner.ComboResetTime)
                 comboIndex = 0;
 
@@ -49,8 +54,10 @@ namespace Game.Gameplay
                     await UniTask.Delay(TimeSpan.FromSeconds(data.startup), cancellationToken: cts.Token);
                     Owner.HitBox.HitBoxActivate(Owner.BuildDamageInfo(data));
                     acceptingInput = true;
+                    hitboxActive = true;
                     await UniTask.Delay(TimeSpan.FromSeconds(data.activeTime), cancellationToken: cts.Token);
                     Owner.HitBox.HitBoxDeactivate();
+                    hitboxActive = false;
                     await UniTask.Delay(TimeSpan.FromSeconds(data.recovery), cancellationToken: cts.Token);
                     if (comboIndex >= Owner.ComboCount - 1)
                     {
@@ -77,6 +84,7 @@ namespace Game.Gameplay
             {
                 Owner.HitBox.HitBoxDeactivate();
                 acceptingInput = false;
+                hitboxActive = false;
             }
 
 
