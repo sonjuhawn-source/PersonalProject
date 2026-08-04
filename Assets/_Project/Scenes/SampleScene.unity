@@ -554,6 +554,7 @@ MonoBehaviour:
     hitStopTime: 0.09
   comboResetTime: 0.5
   animator: {fileID: 1711130538}
+  clipWindup: 0.1167
 --- !u!114 &1483818004
 MonoBehaviour:
   m_ObjectHideFlags: 0

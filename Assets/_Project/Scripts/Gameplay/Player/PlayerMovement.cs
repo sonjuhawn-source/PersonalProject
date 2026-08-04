@@ -37,6 +37,10 @@ namespace Game.Gameplay
         [SerializeField]
         private Animator animator;
 
+        [SerializeField]
+        float clipWindup = 0.1167f; // AttackSlash_Modified.anim 의 두 번째 키프레임 시각 (치켜드는 프레임의 길이)
+                                    // 클립을 바꾸면 이 값도 확인해야 한다
+
         private float jumpPressedTime = float.NegativeInfinity;
         private float leaveGroundTime = float.NegativeInfinity;
         private float facing = 1;
@@ -63,6 +67,7 @@ namespace Game.Gameplay
         internal float MoveInput => input.MoveInput;
         internal bool IsFalling => body.linearVelocityY < 0f;
         internal bool AttackPressed => input.AttackPressed;
+        internal float ClipWindup => clipWindup;
 
         internal PlayerState CurrentState => (PlayerState)machine.Current;
 
@@ -177,9 +182,10 @@ namespace Game.Gameplay
                                   gameObject);
         }
 
-        internal void PlayClip(string stateName)
+        internal void PlayClip(string stateName, float normalizedTime = 0f, float speed = 1f)
         {
-            animator.Play(stateName);
+            animator.speed = speed;
+            animator.Play(stateName, -1, normalizedTime);
         }
 
         private void ApplyGravity()
