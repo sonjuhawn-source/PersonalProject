@@ -4,7 +4,11 @@ namespace Game.Gameplay
 {
     public class HurtBox : MonoBehaviour
     {
-        [SerializeField] GameObject owner;
+        [SerializeField] 
+        GameObject owner;
+        [SerializeField]
+        Knockback knockback;
+
 
         public GameObject Owner => owner;
 
@@ -20,6 +24,7 @@ namespace Game.Gameplay
         public void TakeHit(DamageInfo info)
         {
             Debug.Log($"{Owner.name} 이(가) {info.Damage}맞음, 출처 {info.Source.name}");
+            knockback?.Apply(info.Knockback);
         }
     }
 }
