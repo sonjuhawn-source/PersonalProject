@@ -550,7 +550,7 @@ MonoBehaviour:
     activeTime: 0.1
     recovery: 0.3
     damage: 15
-    knockbackForce: 12
+    knockbackForce: 8
     hitStopTime: 0.09
   comboResetTime: 0.5
   animator: {fileID: 1711130538}
@@ -743,7 +743,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: -1.5, z: 0}
-  m_LocalScale: {x: 10, y: 1, z: 1}
+  m_LocalScale: {x: 20, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -759,7 +759,9 @@ GameObject:
   - component: {fileID: 1638083523}
   - component: {fileID: 1638083522}
   - component: {fileID: 1638083521}
+  - component: {fileID: 1638083525}
   - component: {fileID: 1638083520}
+  - component: {fileID: 1638083524}
   m_Layer: 9
   m_Name: EnemyDumy
   m_TagString: Untagged
@@ -780,6 +782,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Game.Gameplay::Game.Gameplay.HurtBox
   owner: {fileID: 1638083519}
+  knockback: {fileID: 1638083524}
 --- !u!61 &1638083521
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -900,6 +903,47 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1638083524
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1638083519}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 98fc582078bea5f4ea37fc9d4284e696, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Game.Gameplay::Game.Gameplay.Knockback
+  body: {fileID: 1638083525}
+  knockbackTime: 0.2
+--- !u!50 &1638083525
+Rigidbody2D:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1638083519}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!1 &1709002346
 GameObject:
   m_ObjectHideFlags: 0
@@ -992,6 +1036,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Game.Gameplay::Game.Gameplay.HurtBox
   owner: {fileID: 1483817997}
+  knockback: {fileID: 0}
 --- !u!1001 &1711130536
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1074,7 +1119,9 @@ GameObject:
   - component: {fileID: 2082753446}
   - component: {fileID: 2082753445}
   - component: {fileID: 2082753444}
+  - component: {fileID: 2082753448}
   - component: {fileID: 2082753443}
+  - component: {fileID: 2082753447}
   m_Layer: 9
   m_Name: EnemyDumy (1)
   m_TagString: Untagged
@@ -1095,6 +1142,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Game.Gameplay::Game.Gameplay.HurtBox
   owner: {fileID: 2082753442}
+  knockback: {fileID: 2082753447}
 --- !u!61 &2082753444
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1215,6 +1263,47 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2082753447
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2082753442}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 98fc582078bea5f4ea37fc9d4284e696, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Game.Gameplay::Game.Gameplay.Knockback
+  body: {fileID: 2082753448}
+  knockbackTime: 0.2
+--- !u!50 &2082753448
+Rigidbody2D:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2082753442}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
