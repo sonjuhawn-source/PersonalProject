@@ -30,7 +30,7 @@ namespace Game.Gameplay
             if (Time.time - lastAttackEndTime > Owner.ComboResetTime)
                 comboIndex = 0;
 
-            Debug.Log($"플레이어: Attack {comboIndex + 1}타");
+            Owner.PlayClip(clipAttack);
 
             cts = new CancellationTokenSource();
             RunTimeline().Forget();
