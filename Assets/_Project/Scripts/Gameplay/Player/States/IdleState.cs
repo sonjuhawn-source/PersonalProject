@@ -1,5 +1,4 @@
 using Game.Core;
-using UnityEngine;
 
 namespace Game.Gameplay
 {
@@ -9,7 +8,7 @@ namespace Game.Gameplay
 
         public override void Enter()
         {
-            Debug.Log("플레이어: Idle");
+            Owner.PlayClip(clipIdle);
         }
 
         public override void Tick()

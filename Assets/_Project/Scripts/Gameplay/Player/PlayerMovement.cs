@@ -1,5 +1,4 @@
 ﻿using Game.Core;
-using System;
 using UnityEngine;
 
 namespace Game.Gameplay
@@ -35,6 +34,9 @@ namespace Game.Gameplay
         [SerializeField]
         private float comboResetTime = 0.5f;
 
+        [SerializeField]
+        private Animator animator;
+
         private float jumpPressedTime = float.NegativeInfinity;
         private float leaveGroundTime = float.NegativeInfinity;
         private float facing = 1;
@@ -64,7 +66,6 @@ namespace Game.Gameplay
 
         internal PlayerState CurrentState => (PlayerState)machine.Current;
 
-
         private void Awake()
         {
             body = GetComponent<Rigidbody2D>();
@@ -78,6 +79,12 @@ namespace Game.Gameplay
             Jump = new JumpState(machine);
             Fall = new FallState(machine);
             Attack = new AttackState(machine);
+
+            if (animator == null)
+            {
+                animator = GetComponentInChildren<Animator>();
+                Debug.LogWarning($"{gameObject.name}: Animator가 배선되지 않았습니다", this);
+            }
 
             machine.Change(Idle);
         }
@@ -170,6 +177,10 @@ namespace Game.Gameplay
                                   gameObject);
         }
 
+        internal void PlayClip(string stateName)
+        {
+            animator.Play(stateName);
+        }
 
         private void ApplyGravity()
         {
