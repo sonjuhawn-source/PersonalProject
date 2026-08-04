@@ -12,5 +12,6 @@ namespace Game.Gameplay
         public int damage;
         public float knockbackForce;
         public float hitStopTime;
+        public float shakeStrength;
     }
 }

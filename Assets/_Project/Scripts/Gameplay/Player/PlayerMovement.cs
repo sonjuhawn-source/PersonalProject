@@ -179,7 +179,8 @@ namespace Game.Gameplay
             return new DamageInfo(data.damage,
                                   Vector2.right * facing * data.knockbackForce,
                                   data.hitStopTime,
-                                  gameObject);
+                                  gameObject,
+                                  data.shakeStrength);
         }
 
         internal void PlayClip(string stateName, float normalizedTime = 0f, float speed = 1f)
