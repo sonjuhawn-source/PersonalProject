@@ -8,7 +8,7 @@ namespace Game.Gameplay
 
         public override void Enter() 
         {
-            Owner.PlayClip(clipJump);
+            Owner.PlayClip(clipJump, 1);
         }
 
         public override void Tick()

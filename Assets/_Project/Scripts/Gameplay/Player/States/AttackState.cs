@@ -30,8 +30,6 @@ namespace Game.Gameplay
             if (Time.time - lastAttackEndTime > Owner.ComboResetTime)
                 comboIndex = 0;
 
-            Owner.PlayClip(clipAttack);
-
             cts = new CancellationTokenSource();
             RunTimeline().Forget();
         }
@@ -48,6 +46,7 @@ namespace Game.Gameplay
                 while (true)
                 {
                     AttackData data = Owner.GetAttack(comboIndex);
+                    Owner.PlayClip(clipAttack, speed: (Owner.ClipWindup / data.startup));
 
                     comboQueued = false;
                     acceptingInput = false;
