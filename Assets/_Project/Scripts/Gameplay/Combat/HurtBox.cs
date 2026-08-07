@@ -8,8 +8,9 @@ namespace Game.Gameplay
         GameObject owner;
         [SerializeField]
         Knockback knockback;
-
-
+        [SerializeField]
+        Health health;
+        
         public GameObject Owner => owner;
 
         private void Awake()
@@ -25,6 +26,7 @@ namespace Game.Gameplay
         {
             Debug.Log($"{Owner.name} 이(가) {info.Damage}맞음, 출처 {info.Source.name}");
             knockback?.Apply(info.Knockback);
+            health?.TakeDamage(info.Damage);
         }
     }
 }
