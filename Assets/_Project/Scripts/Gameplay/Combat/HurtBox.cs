@@ -10,6 +10,8 @@ namespace Game.Gameplay
         Knockback knockback;
         [SerializeField]
         Health health;
+        [SerializeField] Collider2D hurtBoxCollider;
+
         
         public GameObject Owner => owner;
 
@@ -28,5 +30,7 @@ namespace Game.Gameplay
             knockback?.Apply(info.Knockback);
             health?.TakeDamage(info.Damage);
         }
+
+        public void SetEnable(bool value)  =>  hurtBoxCollider.enabled = value;
     }
 }

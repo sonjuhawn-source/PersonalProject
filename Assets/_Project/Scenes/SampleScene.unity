@@ -471,6 +471,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Game.Gameplay::Game.Gameplay.Health
   maxHealth: 30
+  animator: {fileID: 648511422}
+  hitClip: Hit
+  deathClip: Death
+  deathDelay: 0.35
+  hurtBox: {fileID: 836626308}
 --- !u!50 &648511420
 Rigidbody2D:
   serializedVersion: 5
@@ -535,6 +540,11 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: 0}
   m_Size: {x: 0.5, y: 1}
   m_Direction: 0
+--- !u!95 &648511422 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 2915413859015207724, guid: 669eeb41965b5df4ea94ecec9b059a41, type: 3}
+  m_PrefabInstance: {fileID: 648511415}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &683188931
 GameObject:
   m_ObjectHideFlags: 0
@@ -675,6 +685,7 @@ MonoBehaviour:
   owner: {fileID: 648511416}
   knockback: {fileID: 648511418}
   health: {fileID: 648511419}
+  hurtBoxCollider: {fileID: 836626309}
 --- !u!61 &836626309
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1149,6 +1160,7 @@ MonoBehaviour:
   owner: {fileID: 1483817997}
   knockback: {fileID: 1483818006}
   health: {fileID: 0}
+  hurtBoxCollider: {fileID: 0}
 --- !u!1001 &1711130536
 PrefabInstance:
   m_ObjectHideFlags: 0
