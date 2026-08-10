@@ -1,0 +1,48 @@
+using UnityEngine;
+
+namespace Game.Gameplay
+{
+    public class Invincibility : MonoBehaviour
+    {
+        [SerializeField]
+        private float duration = 0.6f;
+        [SerializeField]
+        private float blinkInterval = 0.08f;
+        [SerializeField]
+        private SpriteRenderer sprite;
+
+        private float remaining;
+
+        internal bool IsActive => remaining > 0;
+
+        private void Awake()
+        {
+            if (sprite == null)
+            {
+                Debug.LogWarning($"{gameObject.name} Sprite가 배선되지 않았습니다", this);
+            }
+        }
+
+        private void Update()
+        {
+            if (remaining <= 0)
+                return;
+
+            remaining -= Time.deltaTime;
+
+            if(remaining <= 0)
+            {
+                remaining = 0;
+                sprite.enabled = true;
+                return;
+            }
+
+            sprite.enabled = ((int)(remaining / blinkInterval)) % 2 == 0;
+        }
+
+        internal void Begin()
+        {
+            remaining = Mathf.Max(remaining, duration);
+        }
+    }
+}
