@@ -41,7 +41,8 @@ namespace Game.Gameplay
                 return;
 
             target.Add(hurtbox.Owner);
-            hurtbox.TakeHit(damageInfo);
+            if(hurtbox.TakeHit(damageInfo) == false)
+                return;
             HitStop.Play(damageInfo.HitStopTime);
             Shake.Play(damageInfo.ShakeStrength);
         }
