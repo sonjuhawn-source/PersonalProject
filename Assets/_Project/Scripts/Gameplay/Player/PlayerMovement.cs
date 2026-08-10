@@ -47,6 +47,7 @@ namespace Game.Gameplay
         private Rigidbody2D body;
         private PlayerInputReader input;
         private GroundChecker ground;
+        private Knockback knockback;
 
         private StateMachine<PlayerMovement> machine;
 
@@ -76,6 +77,7 @@ namespace Game.Gameplay
             body = GetComponent<Rigidbody2D>();
             input = GetComponent<PlayerInputReader>();
             ground = GetComponent<GroundChecker>();
+            knockback = GetComponent<Knockback>();
 
             machine = new StateMachine<PlayerMovement>(this);
 
@@ -132,6 +134,9 @@ namespace Game.Gameplay
 
         private void HandleHorizontal()
         {
+            if (knockback.IsActive)
+                return;
+
             float accelerate;
             var targetSpeed = input.MoveInput * maxSpeed;
             if (ground.IsGrounded)
