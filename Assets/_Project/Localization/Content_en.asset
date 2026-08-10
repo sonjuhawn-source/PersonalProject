@@ -22,6 +22,10 @@ MonoBehaviour:
     m_Localized: Sword
     m_Metadata:
       m_Items: []
+  - m_Id: 11386334494720
+    m_Localized: Spear
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []
