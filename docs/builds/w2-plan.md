@@ -29,6 +29,15 @@ W1 처럼 주차 끝에 한 번만 누르면 늦다.
 
 ### 1. `Content` String Table 이 빌드에 안 들어갈 수 있다 — 가장 큼
 
+> **[#45](../../issues/45) 에서 확인 완료 — 통과.** 에디터와 빌드 양쪽에서 무기 이름이
+> `검` 으로 읽혔다. Localization 이 `Content_ko` · `Content_en` 을 기존 그룹
+> (`Localization-String-Tables-...`)에 자동으로 넣는다. 새 그룹이 생기지는 않는다.
+>
+> 임시 로그는 `Awake` 가 아니라 `Start` 에 뒀다. `Awake` 는 Localization 초기화 전이라
+> **패키징 문제가 아닌데도 비어 나올 수 있고**, 그러면 원인을 잘못 짚는다.
+>
+> W2 종료 빌드에서 한 번 더 본다 — 키가 늘면 다시 확인할 값어치가 있다.
+
 Localization 은 테이블을 **Addressables 로 로딩**한다 ([GDD 9장](../GDD.md)).
 
 에디터 Play 모드에서는 에셋 데이터베이스에서 바로 읽히지만, **빌드에서는 Addressables
