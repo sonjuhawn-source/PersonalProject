@@ -14,9 +14,7 @@ namespace Game.Gameplay
         private void Awake()
         {
             if (hitBoxCollider == null)
-            {
                 hitBoxCollider = GetComponent<Collider2D>();
-            }
             hitBoxCollider.enabled = false;
         }
         public void HitBoxActivate(DamageInfo info)

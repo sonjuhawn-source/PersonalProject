@@ -85,8 +85,6 @@ namespace Game.Gameplay
                 acceptingInput = false;
                 hitboxActive = false;
             }
-
-
         }
         public override void Exit()
         {
