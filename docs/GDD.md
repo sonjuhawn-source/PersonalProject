@@ -464,6 +464,27 @@ AttackSlash 3장 · AttackPrick 4장 · AttackShoot 4장 · AttackMagic 3장
 **굽고 나면 루프 플래그를 끈다** — 굽기 절차의 일부다 (10.2). 다시 구우면 초기화된다.
 `Idle` 과 `Run` 은 루프가 맞으므로 그대로 둔다.
 
+#### 빌드하려면 `using UnityEditor;` 를 감싸야 한다
+
+Pixem 스크립트 세 개가 **`using UnityEditor;` 를 `#if UNITY_EDITOR` 밖에 두고 있다.**
+클래스 본문은 가드 안인데 `using` 만 나와 있다.
+
+| 파일 | `using` | 가드 블록 |
+|---|---|---|
+| `Pixem/Scripts/PixemCharacter.cs` | 4행 | 15–146 |
+| `Pixem/Scripts/PixemManager.cs` | 6행 | 119–976 |
+| `Pixem/Scripts/PixemUIManager.cs` | 3행 | 73–136 |
+
+**에디터에서는 아무 문제가 없고 빌드에서만 `CS0246` 이 난다.** 플레이어 빌드에는
+`UnityEditor` 어셈블리가 없기 때문이다. 이 스크립트들은 asmdef 가 없어 `Assembly-CSharp`
+로 들어가므로 플레이어 빌드의 컴파일 대상이다.
+
+각 `using` 을 `#if UNITY_EDITOR` / `#endif` 로 감싸면 끝난다. **에셋을 다시 임포트하면
+되돌아가므로** 굽기 절차와 같은 성격의 반복 작업이다.
+
+`using UnityEngine;` 은 런타임에도 필요하다. 헤더를 통째로 바꾸다 이 줄을 날린 적이
+있으니, 고친 뒤 `git -C Assets/Imported diff` 로 의도한 줄만 바뀌었는지 본다.
+
 ### 10.2 무기 교체는 파츠가 아니라 프리팹 단위로 한다
 
 `PixemCharacter` 의 조립 코드는 **전체가 `#if UNITY_EDITOR`** 로 감싸져 있다.
