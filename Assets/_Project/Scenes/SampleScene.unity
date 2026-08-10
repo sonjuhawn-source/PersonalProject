@@ -1080,6 +1080,7 @@ GameObject:
   - component: {fileID: 1483818003}
   - component: {fileID: 1483818006}
   - component: {fileID: 1483818007}
+  - component: {fileID: 1483818008}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -1167,31 +1168,8 @@ MonoBehaviour:
   jumpBufferTime: 0.15
   coyoteTime: 0.1
   hitBox: {fileID: 683188934}
-  combo:
-  - startup: 0.12
-    activeTime: 0.08
-    recovery: 0.2
-    damage: 10
-    knockbackForce: 3
-    hitStopTime: 0.05
-    shakeStrength: 0
-  - startup: 0.1
-    activeTime: 0.08
-    recovery: 0.18
-    damage: 10
-    knockbackForce: 3
-    hitStopTime: 0.05
-    shakeStrength: 0
-  - startup: 0.15
-    activeTime: 0.1
-    recovery: 0.3
-    damage: 15
-    knockbackForce: 8
-    hitStopTime: 0.09
-    shakeStrength: 0
   comboResetTime: 0.5
   animator: {fileID: 1711130538}
-  clipWindup: 0.1167
 --- !u!114 &1483818004
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1276,6 +1254,20 @@ MonoBehaviour:
   duration: 0.6
   blinkInterval: 0.08
   sprite: {fileID: 797814137}
+--- !u!114 &1483818008
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1483817997}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5b877f5c684ad14397068fb1425fcc4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Game.Gameplay::Game.Gameplay.WeaponHolder
+  startingWeapon: {fileID: 11400000, guid: c9969b4e51e9cb64e8072a86e49ecf70, type: 2}
+  animator: {fileID: 1711130538}
 --- !u!1 &1587612992
 GameObject:
   m_ObjectHideFlags: 0
