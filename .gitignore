@@ -94,6 +94,9 @@ InitTestScene*.unity*
 # files in platform-specific subfolders, for example:
 # /Assets/AddressableAssetsData/OSX/addressables_content_state.bin
 /[Aa]ssets/AddressableAssetsData/*/*.bin*
+# 플랫폼 폴더는 빌드 산출물만 담는다. 폴더와 그 .meta 를 함께 제외한다
+/[Aa]ssets/AddressableAssetsData/Windows/
+/[Aa]ssets/AddressableAssetsData/Windows.meta
 
 # Visual Scripting auto-generated files
 /[Aa]ssets/Unity.VisualScripting.Generated/VisualScripting.Flow/UnitOptions.db
