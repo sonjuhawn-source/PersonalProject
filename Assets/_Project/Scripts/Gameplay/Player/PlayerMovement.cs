@@ -30,16 +30,9 @@ namespace Game.Gameplay
         private HitBox hitBox;
 
         [SerializeField]
-        private AttackData[] combo;
-        [SerializeField]
         private float comboResetTime = 0.5f;
-
         [SerializeField]
         private Animator animator;
-
-        [SerializeField]
-        float clipWindup = 0.1167f; // AttackSlash_Modified.anim 의 두 번째 키프레임 시각 (치켜드는 프레임의 길이)
-                                    // 클립을 바꾸면 이 값도 확인해야 한다
 
         private float jumpPressedTime = float.NegativeInfinity;
         private float leaveGroundTime = float.NegativeInfinity;
@@ -50,6 +43,7 @@ namespace Game.Gameplay
         private Knockback knockback;
 
         private StateMachine<PlayerMovement> machine;
+        private WeaponHolder weapons;
 
         internal bool HasMoveInput => Mathf.Abs(input.MoveInput) > 0.01f;
 
@@ -60,15 +54,15 @@ namespace Game.Gameplay
         internal AttackState Attack { get; private set; }
         internal HitBox HitBox => hitBox;
 
-        internal int ComboCount => combo.Length;
+        internal int ComboCount => weapons.Current.Data.ComboCount;
         internal float ComboResetTime => comboResetTime;
-        internal AttackData GetAttack(int index) => combo[index];
+        internal AttackData GetAttack(int index) => weapons.Current.Data.GetAttack(index);
 
         internal bool IsGrounded => ground.IsGrounded;
         internal float MoveInput => input.MoveInput;
         internal bool IsFalling => body.linearVelocityY < 0f;
         internal bool AttackPressed => input.AttackPressed;
-        internal float ClipWindup => clipWindup;
+        internal float ClipWindup => weapons.Current.Data.ClipWindup;
 
         internal PlayerState CurrentState => (PlayerState)machine.Current;
 
@@ -78,6 +72,7 @@ namespace Game.Gameplay
             input = GetComponent<PlayerInputReader>();
             ground = GetComponent<GroundChecker>();
             knockback = GetComponent<Knockback>();
+            weapons = GetComponent<WeaponHolder>();
 
             machine = new StateMachine<PlayerMovement>(this);
 
