@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -10,6 +11,8 @@ namespace Game.Gameplay
 
         private HashSet<GameObject> target = new HashSet<GameObject>();
         private DamageInfo damageInfo;
+
+        public event Action<HurtBox> Hit;
 
         private void Awake()
         {
@@ -45,6 +48,7 @@ namespace Game.Gameplay
                 return;
             HitStop.Play(damageInfo.HitStopTime);
             Shake.Play(damageInfo.ShakeStrength);
+            Hit?.Invoke(hurtbox);
         }
     }
 }
