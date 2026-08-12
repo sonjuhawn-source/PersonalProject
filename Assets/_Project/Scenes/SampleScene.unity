@@ -804,7 +804,7 @@ MonoBehaviour:
   impulse: {fileID: 1967998867}
   health: {fileID: 1967998868}
   hurtBoxCollider: {fileID: 710211509}
-  invincibility: {fileID: 1483818007}
+  invincibility: {fileID: 0}
 --- !u!61 &710211509
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -920,7 +920,7 @@ MonoBehaviour:
   impulse: {fileID: 456440984}
   health: {fileID: 456440985}
   hurtBoxCollider: {fileID: 836626309}
-  invincibility: {fileID: 1483818007}
+  invincibility: {fileID: 0}
 --- !u!61 &836626309
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1722,7 +1722,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1967998866
 MonoBehaviour:
   m_ObjectHideFlags: 0
