@@ -1651,6 +1651,28 @@ W2 에서 값의 출처가 무기 SO 로 바뀌어도 고칠 곳은 그 메서�
 같은 성격으로 들어온다. `Game.Core` 에 두는 방법도 있었으나 Core 에 UniTask 참조를 새로
 걸어야 하고 UI 가 쓸 일이 없다 — **어셈블리를 미리 넓히지 않는다.** 필요해지면 그때 옮긴다.
 
+#### 대가 — 도메인 리로드를 끄면 `static` 이 플레이 세션을 넘어 남는다
+
+프로젝트 설정을 보니 `m_EnterPlayModeOptionsEnabled: 1` · `m_EnterPlayModeOptions: 0` 이다.
+**도메인 리로드와 씬 리로드를 둘 다 끈** 상태고, 플레이 진입이 빨라지는 대신 `static`
+필드가 초기화되지 않는다.
+
+`HitStop` 의 `remaining` · `running` 이 그 대상이다. `Play` 가 도는 도중에 플레이를 멈추면
+`RunAsync` 의 `finally` 가 안 돌 수 있고, 그러면 **`running` 이 `true` 로 남는다.** 다음
+플레이에서 `Play()` 가 `if (running) return;` 으로 즉시 빠져나가 **히트스탑이 영영 안
+걸린다.**
+
+`Time.timeScale` 은 Unity 가 플레이 종료 시 복구하므로 게임이 멈추지는 않는다.
+**조용히 기능 하나만 죽는다** — 에러도 로그도 없다.
+
+`Shake` 와 `Invincibility` 는 `MonoBehaviour` 라 씬과 함께 새로 만들어진다. **`static` 인
+`HitStop` 만 해당한다.** 위 문단이 "소유자가 없어도 된다"를 장점으로 적었는데, 소유자가
+없다는 건 **생명주기를 관리해줄 주체도 없다**는 뜻이다.
+
+표준 처리는 `[RuntimeInitializeOnLoadMethod]` 로 두 필드를 리셋하는 것이다. 아직 겪지
+않았으므로(히트스탑이 0.05~0.09초라 창이 좁다) 지금 넣지 않고, `Feel/` 근처를 건드리는
+#50 에서 같이 본다.
+
 ### 감쇠를 누가 소유하는가
 
 넉백을 `linearVelocityX` 에 넣기만 하면 `HandleHorizontal` 의 `groundDecel` 이 처리한다.
