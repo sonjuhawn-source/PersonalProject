@@ -67,6 +67,12 @@ namespace Game.Gameplay
         private void Equip(int index)
         {
             animator.runtimeAnimatorController = slots[index].Data.OverrideController;
+
+            var stateName = slots[index].Data.AttackStateName;
+            if(!animator.HasState(0, Animator.StringToHash(stateName)))
+            {
+                Debug.LogWarning($"{slots[index].Data.name}: 공격 상태 '{stateName}' 이 컨트롤러에 없다", this);
+            }
         }
     }
 }

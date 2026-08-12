@@ -26,6 +26,10 @@ MonoBehaviour:
     m_Localized: "\uCC3D"
     m_Metadata:
       m_Items: []
+  - m_Id: 719308484001792
+    m_Localized: "\uD65C"
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

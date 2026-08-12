@@ -10,14 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 50c3078e71a88124a8e73496991458a1, type: 3}
-  m_Name: Weapon_Sword
+  m_Name: Weapon_Bow
   m_EditorClassIdentifier: Game.Gameplay::Game.Gameplay.WeaponData
-  attackStateName: AttackSlash
+  kind: 1
+  projectilePrefab: {fileID: 4856955148303852691, guid: 6fafc62747c954540b9a4a1f61820123, type: 3}
+  attackStateName: AttackShoot
   displayName:
     m_TableReference:
       m_TableCollectionName: GUID:82b7a4ce9596e2948b592b6532ad6738
     m_TableEntryReference:
-      m_KeyId: 152574902272
+      m_KeyId: 719308484001792
       m_Key: 
     m_FallbackState: 0
     m_WaitForCompletion: 0
@@ -31,31 +33,17 @@ MonoBehaviour:
     m_FallbackState: 0
     m_WaitForCompletion: 0
     m_LocalVariables: []
-  overrideController: {fileID: 22100000, guid: 8c9de5dc8a0d71f4e80ef9d842254398, type: 2}
+  overrideController: {fileID: 22100000, guid: 1e6070ed662eac5419ca47d93ce20114, type: 2}
   combo:
-  - startup: 0.12
+  - startup: 0.06
     activeTime: 0.08
     recovery: 0.2
-    damage: 10
-    knockbackForce: 3
+    damage: 8
+    knockbackForce: 2
     hitStopTime: 0.05
-    shakeStrength: 0
-  - startup: 0.1
-    activeTime: 0.08
-    recovery: 0.18
-    damage: 10
-    knockbackForce: 3
-    hitStopTime: 0.05
-    shakeStrength: 0
-  - startup: 0.15
-    activeTime: 0.1
-    recovery: 0.3
-    damage: 15
-    knockbackForce: 8
-    hitStopTime: 0.09
     shakeStrength: 0
   clipWindup: 0.1167
-  forwardSpeed: 3
+  forwardSpeed: 0
   swapCooldown: 3.3
   rarity: 0
   references:

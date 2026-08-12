@@ -1,6 +1,5 @@
 ﻿using Game.Core;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 namespace Game.Gameplay
 {
@@ -44,8 +43,6 @@ namespace Game.Gameplay
 
         [SerializeField]
         private Transform muzzle;
-        [SerializeField]
-        private Projectile projectilePrefab;    //임시
 
         private float jumpPressedTime = float.NegativeInfinity;
         private float leaveGroundTime = float.NegativeInfinity;
@@ -74,12 +71,14 @@ namespace Game.Gameplay
         internal AttackData GetAttack(int index) => weapons.Current.Data.GetAttack(index);
         internal float DashTime => dashTime;
         internal float ForwardSpeed => weapons.Current.Data.ForwardSpeed;
+        internal AttackKind Kind => weapons.Current.Data.Kind;
 
         internal bool IsGrounded => ground.IsGrounded;
         internal float MoveInput => input.MoveInput;
         internal bool IsFalling => body.linearVelocityY < 0f;
         internal bool AttackPressed => input.AttackPressed;
         internal float ClipWindup => weapons.Current.Data.ClipWindup;
+        internal string AttackStateName => weapons.Current.Data.AttackStateName;
 
         internal PlayerState CurrentState => (PlayerState)machine.Current;
 
@@ -127,9 +126,6 @@ namespace Game.Gameplay
             {
                 machine.Change(Swap);
             }
-
-            if (Keyboard.current.fKey.wasPressedThisFrame)  //임시
-                FireProjectile(GetAttack(0));
         }
 
         private void FixedUpdate()
@@ -228,13 +224,15 @@ namespace Game.Gameplay
 
         internal void ApplyForward(float duration)
         {
+            if (ForwardSpeed <= 0)
+                return;
             impulse.Apply(Vector2.right * facing * ForwardSpeed, duration);
         }
 
         internal void FireProjectile(AttackData data)
         {
-            var prefab = Instantiate(projectilePrefab, muzzle.position, Quaternion.identity);
-            prefab.Init(BuildDamageInfo(data), facing);
+            var arrow = Instantiate(weapons.Current.Data.ProjectilePrefab, muzzle.position, Quaternion.identity);
+            arrow.Init(BuildDamageInfo(data), facing);
         }
 
         private void ApplyGravity()

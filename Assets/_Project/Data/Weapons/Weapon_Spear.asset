@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50c3078e71a88124a8e73496991458a1, type: 3}
   m_Name: Weapon_Spear
   m_EditorClassIdentifier: Game.Gameplay::Game.Gameplay.WeaponData
+  attackStateName: AttackPrick
   displayName:
     m_TableReference:
       m_TableCollectionName: GUID:82b7a4ce9596e2948b592b6532ad6738
