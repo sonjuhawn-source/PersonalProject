@@ -47,7 +47,8 @@ namespace Game.Gameplay
                 {
                     AttackData data = Owner.GetAttack(comboIndex);
                     Owner.PlayClip(Owner.AttackStateName, speed: (Owner.ClipWindup / data.startup));
-                    Owner.ApplyForward(data.startup);
+                    if(startedGrounded)
+                        Owner.ApplyForward(data.startup);
 
                     comboQueued = false;
                     acceptingInput = false;

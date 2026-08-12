@@ -23,6 +23,10 @@ MonoBehaviour:
     m_Key: weapon.spear.name
     m_Metadata:
       m_Items: []
+  - m_Id: 719308484001792
+    m_Key: weapon.bow.name
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

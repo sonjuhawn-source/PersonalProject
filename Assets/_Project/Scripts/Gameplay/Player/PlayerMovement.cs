@@ -224,6 +224,8 @@ namespace Game.Gameplay
 
         internal void ApplyForward(float duration)
         {
+            if (ForwardSpeed <= 0)
+                return;
             impulse.Apply(Vector2.right * facing * ForwardSpeed, duration);
         }
 
