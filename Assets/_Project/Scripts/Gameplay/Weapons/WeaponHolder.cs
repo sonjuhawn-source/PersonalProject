@@ -8,6 +8,8 @@ namespace Game.Gameplay
         private WeaponData[] startingWeapons;
         [SerializeField]
         Animator animator;
+        [SerializeField]
+        private HitBox hitBox;
 
         private WeaponInstance[] slots;
         private int activeIndex;
@@ -21,6 +23,7 @@ namespace Game.Gameplay
                 Debug.LogWarning($"{gameObject.name}: Slots must be 2 slots", this);
                 return;
             }
+
             for(int i = 0; i< startingWeapons.Length; i++)
             {
                 if (startingWeapons[i] == null)
@@ -29,6 +32,13 @@ namespace Game.Gameplay
                     return;
                 }
             }
+
+            if(hitBox == null)
+            {
+                hitBox = GetComponentInChildren<HitBox>();
+                Debug.LogWarning($"{gameObject.name}: hitBox 미지정 — 자식에서 찾았다. 배선을 확인해라");
+            }
+
             slots = new WeaponInstance[startingWeapons.Length];
             for(int i = 0;i< startingWeapons.Length; i++)
             {
@@ -73,6 +83,7 @@ namespace Game.Gameplay
             {
                 Debug.LogWarning($"{slots[index].Data.name}: 공격 상태 '{stateName}' 이 컨트롤러에 없다", this);
             }
+            hitBox.SetShape(slots[index].Data.HitboxOffset, slots[index].Data.HitboxSize);
         }
     }
 }

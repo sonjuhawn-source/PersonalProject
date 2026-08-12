@@ -12,6 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50c3078e71a88124a8e73496991458a1, type: 3}
   m_Name: Weapon_Sword
   m_EditorClassIdentifier: Game.Gameplay::Game.Gameplay.WeaponData
+  kind: 0
+  projectilePrefab: {fileID: 0}
   attackStateName: AttackSlash
   displayName:
     m_TableReference:
@@ -57,6 +59,8 @@ MonoBehaviour:
   clipWindup: 0.1167
   forwardSpeed: 3
   swapCooldown: 3.3
+  hitboxOffset: {x: 0.4, y: 0}
+  hitboxSize: {x: 0.7, y: 0.5}
   rarity: 0
   references:
     version: 2

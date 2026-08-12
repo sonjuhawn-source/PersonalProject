@@ -37,6 +37,11 @@ namespace Game.Gameplay
         private float swapCooldown;
 
         [SerializeField]
+        private Vector2 hitboxOffset;
+        [SerializeField]
+        private Vector2 hitboxSize;
+
+        [SerializeField]
         private int rarity;
 
         internal int ComboCount => combo.Length;
@@ -49,5 +54,7 @@ namespace Game.Gameplay
         internal LocalizedString DisplayName  => displayName;
         internal AttackKind Kind => kind;
         internal Projectile ProjectilePrefab => projectilePrefab;
+        internal Vector2 HitboxOffset => hitboxOffset;
+        internal Vector2 HitboxSize => hitboxSize;
     }
 }

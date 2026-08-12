@@ -45,6 +45,8 @@ MonoBehaviour:
   clipWindup: 0.1167
   forwardSpeed: 0
   swapCooldown: 3.3
+  hitboxOffset: {x: 0.4, y: 0}
+  hitboxSize: {x: 0.7, y: 0.5}
   rarity: 0
   references:
     version: 2

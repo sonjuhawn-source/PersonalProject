@@ -1273,8 +1273,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Game.Gameplay::Game.Gameplay.WeaponHolder
   startingWeapons:
   - {fileID: 11400000, guid: c9969b4e51e9cb64e8072a86e49ecf70, type: 2}
-  - {fileID: 11400000, guid: c5555737decc2654dafe34c997bc9f74, type: 2}
+  - {fileID: 11400000, guid: acc55c8d0a1b1784ca65a3377b643a31, type: 2}
   animator: {fileID: 1711130538}
+  hitBox: {fileID: 683188934}
 --- !u!1 &1587612992
 GameObject:
   m_ObjectHideFlags: 0
