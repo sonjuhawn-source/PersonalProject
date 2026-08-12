@@ -1,5 +1,6 @@
 ﻿using Game.Core;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace Game.Gameplay
 {
@@ -40,6 +41,11 @@ namespace Game.Gameplay
         private float dashTime = 0.2f;
         [SerializeField]
         private float iframeTime = 0.3f;
+
+        [SerializeField]
+        private Transform muzzle;
+        [SerializeField]
+        private Projectile projectilePrefab;    //임시
 
         private float jumpPressedTime = float.NegativeInfinity;
         private float leaveGroundTime = float.NegativeInfinity;
@@ -121,6 +127,9 @@ namespace Game.Gameplay
             {
                 machine.Change(Swap);
             }
+
+            if (Keyboard.current.fKey.wasPressedThisFrame)  //임시
+                FireProjectile(GetAttack(0));
         }
 
         private void FixedUpdate()
@@ -220,6 +229,12 @@ namespace Game.Gameplay
         internal void ApplyForward(float duration)
         {
             impulse.Apply(Vector2.right * facing * ForwardSpeed, duration);
+        }
+
+        internal void FireProjectile(AttackData data)
+        {
+            var prefab = Instantiate(projectilePrefab, muzzle.position, Quaternion.identity);
+            prefab.Init(BuildDamageInfo(data), facing);
         }
 
         private void ApplyGravity()
