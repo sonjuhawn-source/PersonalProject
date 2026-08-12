@@ -55,7 +55,7 @@ MonoBehaviour:
     shakeStrength: 0
   clipWindup: 0.1167
   forwardSpeed: 0
-  swapCooldown: 0
+  swapCooldown: 3.3
   rarity: 0
   references:
     version: 2

@@ -34,6 +34,13 @@ namespace Game.Gameplay
         [SerializeField]
         private Animator animator;
 
+        [SerializeField]
+        private float dashSpeed = 12;
+        [SerializeField]
+        private float dashTime = 0.2f;
+        [SerializeField]
+        private float iframeTime = 0.3f;
+
         private float jumpPressedTime = float.NegativeInfinity;
         private float leaveGroundTime = float.NegativeInfinity;
         private float facing = 1;
@@ -41,6 +48,7 @@ namespace Game.Gameplay
         private PlayerInputReader input;
         private GroundChecker ground;
         private Knockback knockback;
+        private Invincibility invincibility;
 
         private StateMachine<PlayerMovement> machine;
         private WeaponHolder weapons;
@@ -52,11 +60,13 @@ namespace Game.Gameplay
         internal JumpState Jump { get; private set; }
         internal FallState Fall { get; private set; }
         internal AttackState Attack { get; private set; }
+        internal SwapState Swap { get; private set; }
         internal HitBox HitBox => hitBox;
 
         internal int ComboCount => weapons.Current.Data.ComboCount;
         internal float ComboResetTime => comboResetTime;
         internal AttackData GetAttack(int index) => weapons.Current.Data.GetAttack(index);
+        internal float DashTime => dashTime;
 
         internal bool IsGrounded => ground.IsGrounded;
         internal float MoveInput => input.MoveInput;
@@ -73,6 +83,7 @@ namespace Game.Gameplay
             ground = GetComponent<GroundChecker>();
             knockback = GetComponent<Knockback>();
             weapons = GetComponent<WeaponHolder>();
+            invincibility = GetComponent<Invincibility>();
 
             machine = new StateMachine<PlayerMovement>(this);
 
@@ -81,6 +92,7 @@ namespace Game.Gameplay
             Jump = new JumpState(machine);
             Fall = new FallState(machine);
             Attack = new AttackState(machine);
+            Swap = new SwapState(machine);
 
             if (animator == null)
             {
@@ -102,6 +114,11 @@ namespace Game.Gameplay
             {
                 facing = MoveInput > 0 ? 1 : -1;
                 transform.localScale = new Vector3(facing, 1f, 1f);
+            }
+
+            if (CurrentState.AcceptsSwapInput && input.SwapPressed && weapons.TrySwap())
+            {
+                machine.Change(Swap);
             }
         }
 
@@ -189,8 +206,25 @@ namespace Game.Gameplay
             animator.Play(stateName, -1, normalizedTime);
         }
 
+        internal void ApplyDash()
+        {
+            knockback.Apply(Vector2.right * facing * dashSpeed);
+        }
+
+        internal void BeginIFrame()
+        {
+            invincibility.Begin(iframeTime,false);
+        }
+
         private void ApplyGravity()
         {
+            if (!CurrentState.UsesGravity)
+            {
+                body.gravityScale = 0;
+                body.linearVelocityY = 0;
+                return;
+            }
+
             if (body.linearVelocityY > 0)             // 상승 중
                 body.gravityScale = input.JumpHeld ? 1 : lowJumpGravityMult;
             else if (body.linearVelocityY < 0)        // 하강 중
