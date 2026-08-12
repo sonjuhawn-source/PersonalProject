@@ -54,7 +54,7 @@ MonoBehaviour:
     hitStopTime: 0.09
     shakeStrength: 0
   clipWindup: 0.1167
-  forwardSpeed: 0
+  forwardSpeed: 3
   swapCooldown: 3.3
   rarity: 0
   references:
