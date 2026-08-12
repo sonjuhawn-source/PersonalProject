@@ -7,7 +7,7 @@ namespace Game.Gameplay
         [SerializeField]
         GameObject owner;
         [SerializeField]
-        Knockback knockback;
+        VelocityImpulse impulse;
         [SerializeField]
         Health health;
         [SerializeField]
@@ -33,7 +33,7 @@ namespace Game.Gameplay
                 return false;
 
             Debug.Log($"{Owner.name} 이(가) {info.Damage}맞음, 출처 {info.Source.name}");
-            knockback?.Apply(info.Knockback);
+            impulse?.Apply(info.Knockback);
             health?.TakeDamage(info.Damage);
             invincibility?.Begin();
             return true;

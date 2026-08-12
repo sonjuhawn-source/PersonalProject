@@ -232,7 +232,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Game.Gameplay::Game.Gameplay.Knockback
   body: {fileID: 456440986}
-  knockbackTime: 0.2
+  defaultDuration: 0.2
 --- !u!114 &456440985
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -801,10 +801,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Game.Gameplay::Game.Gameplay.HurtBox
   owner: {fileID: 1967998865}
-  knockback: {fileID: 1967998867}
+  impulse: {fileID: 1967998867}
   health: {fileID: 1967998868}
   hurtBoxCollider: {fileID: 710211509}
-  invincibility: {fileID: 0}
+  invincibility: {fileID: 1483818007}
 --- !u!61 &710211509
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -917,10 +917,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Game.Gameplay::Game.Gameplay.HurtBox
   owner: {fileID: 456440982}
-  knockback: {fileID: 456440984}
+  impulse: {fileID: 456440984}
   health: {fileID: 456440985}
   hurtBoxCollider: {fileID: 836626309}
-  invincibility: {fileID: 0}
+  invincibility: {fileID: 1483818007}
 --- !u!61 &836626309
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1170,6 +1170,9 @@ MonoBehaviour:
   hitBox: {fileID: 683188934}
   comboResetTime: 0.5
   animator: {fileID: 1711130538}
+  dashSpeed: 12
+  dashTime: 0.2
+  iframeTime: 0.3
 --- !u!114 &1483818004
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1238,7 +1241,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Game.Gameplay::Game.Gameplay.Knockback
   body: {fileID: 1483818000}
-  knockbackTime: 0.2
+  defaultDuration: 0.2
 --- !u!114 &1483818007
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1500,7 +1503,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Game.Gameplay::Game.Gameplay.HurtBox
   owner: {fileID: 1483817997}
-  knockback: {fileID: 1483818006}
+  impulse: {fileID: 1483818006}
   health: {fileID: 0}
   hurtBoxCollider: {fileID: 1709002348}
   invincibility: {fileID: 1483818007}
@@ -1719,7 +1722,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1967998866
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1759,7 +1762,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Game.Gameplay::Game.Gameplay.Knockback
   body: {fileID: 1967998869}
-  knockbackTime: 0.2
+  defaultDuration: 0.2
 --- !u!114 &1967998868
 MonoBehaviour:
   m_ObjectHideFlags: 0

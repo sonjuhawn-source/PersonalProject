@@ -47,7 +47,7 @@ namespace Game.Gameplay
         private Rigidbody2D body;
         private PlayerInputReader input;
         private GroundChecker ground;
-        private Knockback knockback;
+        private VelocityImpulse impulse;
         private Invincibility invincibility;
 
         private StateMachine<PlayerMovement> machine;
@@ -67,6 +67,7 @@ namespace Game.Gameplay
         internal float ComboResetTime => comboResetTime;
         internal AttackData GetAttack(int index) => weapons.Current.Data.GetAttack(index);
         internal float DashTime => dashTime;
+        internal float ForwardSpeed => weapons.Current.Data.ForwardSpeed;
 
         internal bool IsGrounded => ground.IsGrounded;
         internal float MoveInput => input.MoveInput;
@@ -81,7 +82,7 @@ namespace Game.Gameplay
             body = GetComponent<Rigidbody2D>();
             input = GetComponent<PlayerInputReader>();
             ground = GetComponent<GroundChecker>();
-            knockback = GetComponent<Knockback>();
+            impulse = GetComponent<VelocityImpulse>();
             weapons = GetComponent<WeaponHolder>();
             invincibility = GetComponent<Invincibility>();
 
@@ -146,7 +147,7 @@ namespace Game.Gameplay
 
         private void HandleHorizontal()
         {
-            if (knockback.IsActive)
+            if (impulse.IsActive)
                 return;
 
             float accelerate;
@@ -208,12 +209,17 @@ namespace Game.Gameplay
 
         internal void ApplyDash()
         {
-            knockback.Apply(Vector2.right * facing * dashSpeed);
+            impulse.Apply(Vector2.right * facing * dashSpeed, dashTime);
         }
 
         internal void BeginIFrame()
         {
             invincibility.Begin(iframeTime,false);
+        }
+
+        internal void ApplyForward(float duration)
+        {
+            impulse.Apply(Vector2.right * facing * ForwardSpeed, duration);
         }
 
         private void ApplyGravity()

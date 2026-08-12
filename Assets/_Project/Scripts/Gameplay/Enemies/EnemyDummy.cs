@@ -22,7 +22,7 @@ namespace Game.Gameplay
         Color telegraphColor;
 
         private Rigidbody2D body;
-        private Knockback knockback;
+        private VelocityImpulse impulse;
         private Color baseColor;
 
         private bool busy;
@@ -31,14 +31,14 @@ namespace Game.Gameplay
         private void Awake()
         {
             body = GetComponent<Rigidbody2D>();
-            knockback = GetComponent<Knockback>();
+            impulse = GetComponent<VelocityImpulse>();
             baseColor = sprite.color;
             Run().Forget(); 
         }
 
         private void FixedUpdate()
         {
-            if (knockback.IsActive)
+            if (impulse.IsActive)
                 return;
             if (busy)
             {
