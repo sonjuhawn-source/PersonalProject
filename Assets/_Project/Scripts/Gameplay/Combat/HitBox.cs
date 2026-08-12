@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -7,7 +7,7 @@ namespace Game.Gameplay
     public class HitBox : MonoBehaviour
     {
         [SerializeField]
-        private Collider2D hitBoxCollider;
+        private BoxCollider2D hitBoxCollider;
 
         private HashSet<GameObject> target = new HashSet<GameObject>();
         private DamageInfo damageInfo;
@@ -17,7 +17,7 @@ namespace Game.Gameplay
         private void Awake()
         {
             if (hitBoxCollider == null)
-                hitBoxCollider = GetComponent<Collider2D>();
+                hitBoxCollider = GetComponent<BoxCollider2D>();
             hitBoxCollider.enabled = false;
         }
         public void HitBoxActivate(DamageInfo info)
@@ -44,11 +44,17 @@ namespace Game.Gameplay
                 return;
 
             target.Add(hurtbox.Owner);
-            if(hurtbox.TakeHit(damageInfo) == false)
+            if (hurtbox.TakeHit(damageInfo) == false)
                 return;
             HitStop.Play(damageInfo.HitStopTime);
             Shake.Play(damageInfo.ShakeStrength);
             Hit?.Invoke(hurtbox);
+        }
+
+        internal void SetShape(Vector2 offset, Vector2 size)
+        {
+            hitBoxCollider.offset = offset;
+            hitBoxCollider.size = size;
         }
     }
 }
