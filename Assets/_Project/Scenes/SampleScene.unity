@@ -1266,7 +1266,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f5b877f5c684ad14397068fb1425fcc4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Game.Gameplay::Game.Gameplay.WeaponHolder
-  startingWeapon: {fileID: 11400000, guid: c9969b4e51e9cb64e8072a86e49ecf70, type: 2}
+  startingWeapons:
+  - {fileID: 11400000, guid: c9969b4e51e9cb64e8072a86e49ecf70, type: 2}
+  - {fileID: 11400000, guid: acc55c8d0a1b1784ca65a3377b643a31, type: 2}
   animator: {fileID: 1711130538}
 --- !u!1 &1587612992
 GameObject:

@@ -40,9 +40,10 @@ namespace Game.Gameplay
             sprite.enabled = ((int)(remaining / blinkInterval)) % 2 == 0;
         }
 
-        internal void Begin()
+        internal void Begin() => Begin(duration);
+        internal void Begin(float time)
         {
-            remaining = Mathf.Max(remaining, duration);
+            remaining = Mathf.Max(remaining, time);
         }
     }
 }

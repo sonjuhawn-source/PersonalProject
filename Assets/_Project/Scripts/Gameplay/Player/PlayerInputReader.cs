@@ -9,6 +9,7 @@ namespace Game.Gameplay
         public bool JumpPressed => actions.Player.Jump.WasPressedThisFrame();
         public bool JumpHeld => actions.Player.Jump.IsPressed();
         public bool AttackPressed => actions.Player.Attack.WasPressedThisFrame();
+        public bool SwapPressed => actions.Player.Swap.WasPressedThisFrame();
 
         private void Awake()
         {
