@@ -1175,7 +1175,6 @@ MonoBehaviour:
   dashTime: 0.2
   iframeTime: 0.3
   muzzle: {fileID: 2104605014}
-  projectilePrefab: {fileID: 4856955148303852691, guid: 6fafc62747c954540b9a4a1f61820123, type: 3}
 --- !u!114 &1483818004
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -12,7 +12,7 @@ namespace Game.Gameplay
 
         public override bool AcceptsJumpInput => false;
         public override bool AllowsHorizontalControl => !startedGrounded;
-        public override bool AllowsFacingChange => !hitboxActive;
+        public override bool AllowsFacingChange => !facingLocked;
 
         private CancellationTokenSource cts;
 
@@ -20,7 +20,7 @@ namespace Game.Gameplay
         private float lastAttackEndTime = float.NegativeInfinity;
         private bool comboQueued;
         private bool acceptingInput;
-        private bool hitboxActive;
+        private bool facingLocked;
         private bool startedGrounded;
 
         public override void Enter()
@@ -46,18 +46,21 @@ namespace Game.Gameplay
                 while (true)
                 {
                     AttackData data = Owner.GetAttack(comboIndex);
-                    Owner.PlayClip(clipAttack, speed: (Owner.ClipWindup / data.startup));
+                    Owner.PlayClip(Owner.AttackStateName, speed: (Owner.ClipWindup / data.startup));
                     Owner.ApplyForward(data.startup);
 
                     comboQueued = false;
                     acceptingInput = false;
                     await UniTask.Delay(TimeSpan.FromSeconds(data.startup), cancellationToken: cts.Token);
-                    Owner.HitBox.HitBoxActivate(Owner.BuildDamageInfo(data));
+                    if (Owner.Kind == AttackKind.Melee)
+                        Owner.HitBox.HitBoxActivate(Owner.BuildDamageInfo(data));
+                    else
+                        Owner.FireProjectile(data);
                     acceptingInput = true;
-                    hitboxActive = true;
+                    facingLocked = true;
                     await UniTask.Delay(TimeSpan.FromSeconds(data.activeTime), cancellationToken: cts.Token);
                     Owner.HitBox.HitBoxDeactivate();
-                    hitboxActive = false;
+                    facingLocked = false;
                     await UniTask.Delay(TimeSpan.FromSeconds(data.recovery), cancellationToken: cts.Token);
                     if (comboIndex >= Owner.ComboCount - 1)
                     {
@@ -84,7 +87,7 @@ namespace Game.Gameplay
             {
                 Owner.HitBox.HitBoxDeactivate();
                 acceptingInput = false;
-                hitboxActive = false;
+                facingLocked = false;
             }
         }
         public override void Exit()

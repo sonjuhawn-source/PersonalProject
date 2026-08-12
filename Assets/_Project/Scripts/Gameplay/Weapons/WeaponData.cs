@@ -3,9 +3,22 @@ using UnityEngine.Localization;
 
 namespace Game.Gameplay
 {
+    internal enum AttackKind 
+    {
+        Melee,
+        Projectile
+    }
     [CreateAssetMenu(menuName = "Weapon/Weapon Data")]
     public class WeaponData : ScriptableObject
     {
+        [SerializeField]
+        private AttackKind kind;
+        [SerializeField]
+        private Projectile projectilePrefab;
+
+        [SerializeField]
+        private string attackStateName;
+
         [SerializeField]
         private LocalizedString displayName;
         [SerializeField]
@@ -31,7 +44,10 @@ namespace Game.Gameplay
         internal float ClipWindup => clipWindup;
         internal float ForwardSpeed => forwardSpeed;
         internal float SwapCooldown => swapCooldown;
+        internal string AttackStateName => attackStateName;
         internal AnimatorOverrideController OverrideController => overrideController;
         internal LocalizedString DisplayName  => displayName;
+        internal AttackKind Kind => kind;
+        internal Projectile ProjectilePrefab => projectilePrefab;
     }
 }
