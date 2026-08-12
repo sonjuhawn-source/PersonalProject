@@ -213,7 +213,7 @@ namespace Game.Gameplay
 
         internal void BeginIFrame()
         {
-            invincibility.Begin(iframeTime);
+            invincibility.Begin(iframeTime,false);
         }
 
         private void ApplyGravity()
