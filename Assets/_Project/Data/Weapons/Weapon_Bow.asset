@@ -39,7 +39,7 @@ MonoBehaviour:
     activeTime: 0.08
     recovery: 0.2
     damage: 8
-    knockbackForce: 2
+    knockbackForce: 0.5
     hitStopTime: 0.05
     shakeStrength: 0
   clipWindup: 0.1167

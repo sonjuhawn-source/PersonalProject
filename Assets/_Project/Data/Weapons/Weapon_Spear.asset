@@ -35,26 +35,26 @@ MonoBehaviour:
     m_LocalVariables: []
   overrideController: {fileID: 22100000, guid: a91bb5633fbd0164e901379e05da7ada, type: 2}
   combo:
-  - startup: 0.12
+  - startup: 0.16
     activeTime: 0.08
-    recovery: 0.2
-    damage: 10
-    knockbackForce: 3
-    hitStopTime: 0.05
+    recovery: 0.26
+    damage: 14
+    knockbackForce: 4
+    hitStopTime: 0.07
     shakeStrength: 0
-  - startup: 0.1
+  - startup: 0.14
     activeTime: 0.08
-    recovery: 0.18
-    damage: 10
-    knockbackForce: 3
-    hitStopTime: 0.05
+    recovery: 0.24
+    damage: 14
+    knockbackForce: 4
+    hitStopTime: 0.07
     shakeStrength: 0
-  - startup: 0.15
+  - startup: 0.2
     activeTime: 0.1
-    recovery: 0.3
-    damage: 15
-    knockbackForce: 8
-    hitStopTime: 0.09
+    recovery: 0.38
+    damage: 20
+    knockbackForce: 11
+    hitStopTime: 0.12
     shakeStrength: 0
   clipWindup: 0.1167
   forwardSpeed: 3
