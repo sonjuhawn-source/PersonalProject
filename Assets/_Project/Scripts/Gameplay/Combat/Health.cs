@@ -30,7 +30,11 @@ namespace Game.Gameplay
 
             if(hurtBox == null)
             {
-                Debug.LogWarning($"{name}: Hurbox Null", this);
+                Debug.LogWarning($"{name}: hurtBox 미지정 — 죽어도 허트박스가 안 꺼진다. 시체가 계속 맞는다", this);
+            }
+            if (animator == null)
+            {
+                Debug.LogWarning($"{name}: animator 미지정 — 피격·사망 모션이 안 나온다. 데미지 처리는 정상이다", this);
             }
         }
 
@@ -44,14 +48,14 @@ namespace Game.Gameplay
             if (currentHealth <= 0)
                 Die().Forget();
             else
-                animator.Play(hitClip);
+                animator?.Play(hitClip);
         }
 
         private async UniTaskVoid Die()
         {
             Debug.Log($"{name} 사망", this);
-            hurtBox.SetEnable(false);
-            animator.Play(deathClip);
+            hurtBox?.SetEnable(false);
+            animator?.Play(deathClip);
             await UniTask.Delay(TimeSpan.FromSeconds(deathDelay));
             Destroy(gameObject);
         }

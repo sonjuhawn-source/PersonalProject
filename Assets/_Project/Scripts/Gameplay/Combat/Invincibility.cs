@@ -20,7 +20,7 @@ namespace Game.Gameplay
         {
             if (sprite == null)
             {
-                Debug.LogWarning($"{gameObject.name} Sprite가 배선되지 않았습니다", this);
+                Debug.LogWarning($"{gameObject.name}: sprite 미지정 — 무적은 걸리지만 깜빡임이 안 보인다", this);
             }
         }
 
@@ -34,8 +34,11 @@ namespace Game.Gameplay
             if(remaining <= 0)
             {
                 remaining = 0;
-                blinking = false;
-                sprite.enabled = true;
+                if (blinking)
+                {
+                    blinking = false;
+                    sprite.enabled = true;
+                }
                 return;
             }
 
@@ -47,7 +50,7 @@ namespace Game.Gameplay
         internal void Begin(float time, bool blink = true)
         {
             remaining = Mathf.Max(remaining, time);
-            blinking = blinking || blink;
+            blinking = blinking || (blink && sprite != null);
         }
     }
 }
