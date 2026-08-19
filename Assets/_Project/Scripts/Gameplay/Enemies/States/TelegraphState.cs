@@ -16,6 +16,7 @@ namespace Game.Gameplay.Enemies
         {
             Owner.SetFacing(Owner.DirectionToTarget);
             Owner.PlayClip(Owner.Current.TelegraphStateName);
+            Owner.SetTint(true);
             elapsed = 0;
         }
 
@@ -24,6 +25,11 @@ namespace Game.Gameplay.Enemies
             elapsed += Time.fixedDeltaTime;
             if (elapsed >= Owner.Current.TelegraphTime)
                 Machine.Change(Owner.Attack);
+        }
+
+        public override void Exit()
+        {
+            Owner.SetTint(false);
         }
     }
 }

@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2bf21ab1c918d9249819442400df5571, type: 3}
+  m_Name: Pattern_Bite
+  m_EditorClassIdentifier: Game.Gameplay::Game.Gameplay.AttackPattern
+  attack:
+    startup: 0.06
+    activeTime: 0.08
+    recovery: 0.5
+    damage: 5
+    knockbackForce: 2
+    hitStopTime: 0.05
+    shakeStrength: 0.2
+  kind: 0
+  projectilePrefab: {fileID: 0}
+  telegraphTime: 0.4
+  telegraphStateName: Idle
+  attackStateName: AttackPrick
+  hitboxOffset: {x: 0.4, y: 0}
+  hitboxSize: {x: 0.7, y: 0.5}
+  forwardSpeed: 0
+  minRange: 0
+  maxRange: 0.95
+  weight: 3
+  cooldown: 0.5

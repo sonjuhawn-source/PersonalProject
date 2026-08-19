@@ -17,6 +17,10 @@ namespace Game.Gameplay.Enemies
         private float moveSpeed;
         [SerializeField]
         private float detectRange;
+        [SerializeField] 
+        private SpriteRenderer sprite;
+        [SerializeField] 
+        private Color telegraphColor = new Color(1f, 0.78f, 0.78f, 1f);
 
         [SerializeField]
         Transform muzzle;
@@ -25,6 +29,7 @@ namespace Game.Gameplay.Enemies
         private VelocityImpulse impulse;
         private Health health;
         private StateMachine<EnemyBrain> machine;
+        private Color baseColor;
 
         private float facing = 1;
 
@@ -102,6 +107,11 @@ namespace Game.Gameplay.Enemies
                         Debug.LogWarning($"{pattern.name}: 원거리인데 투사체 프리팹이 없다. 공격해도 아무것도 안 나간다", this);
                 }
             }
+
+            if (sprite != null)
+                baseColor = sprite.color;
+            else
+                Debug.LogWarning($"{gameObject.name}: sprite 미지정 — 예고가 눈에 안 보인다", this);
 
 
             Idle = new IdleState(machine);
@@ -208,6 +218,13 @@ namespace Game.Gameplay.Enemies
                 return true;
             }
             return false;
+        }
+
+        internal void SetTint(bool on)
+        {
+            if (sprite == null)
+                return;
+            sprite.color = on ? telegraphColor : baseColor;
         }
 
         private void OnDied()

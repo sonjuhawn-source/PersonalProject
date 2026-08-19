@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Game.Gameplay
+namespace Game.Gameplay.Enemies
 {
     [CreateAssetMenu(menuName = "Enemy/Attack Pattern")]
     public class AttackPattern : ScriptableObject
