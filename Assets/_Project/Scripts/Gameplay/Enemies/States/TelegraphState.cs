@@ -1,24 +1,29 @@
 using Game.Core;
-using Game.Gameplay.Enemies;
+using UnityEngine;
 
 namespace Game.Gameplay.Enemies
 {
     public class TelegraphState : EnemyState
     {
-        public TelegraphState(StateMachine<EnemyBrain> machine) : base(machine)
+        public TelegraphState(StateMachine<EnemyBrain> machine) : base(machine) { }
+
+        public override bool AllowsMovement => false;
+        public override bool AllowsFacing => false;
+
+        private float elapsed;
+
+        public override void Enter()
         {
+            Owner.SetFacing(Owner.DirectionToTarget);
+            Owner.PlayClip(Owner.Current.TelegraphStateName);
+            elapsed = 0;
         }
 
-        // Start is called once before the first execution of Update after the MonoBehaviour is created
-        void Start()
+        public override void FixedTick()
         {
-        
-        }
-
-        // Update is called once per frame
-        void Update()
-        {
-        
+            elapsed += Time.fixedDeltaTime;
+            if (elapsed >= Owner.Current.TelegraphTime)
+                Machine.Change(Owner.Attack);
         }
     }
 }

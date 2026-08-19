@@ -1,25 +1,26 @@
 using Game.Core;
-using Game.Gameplay.Enemies;
 using UnityEngine;
 
 namespace Game.Gameplay.Enemies
 {
     public class RecoverState : EnemyState
     {
-        public RecoverState(StateMachine<EnemyBrain> machine) : base(machine)
+        public RecoverState(StateMachine<EnemyBrain> machine) : base(machine) { }
+
+        public override bool AllowsMovement => false;
+
+        private float elapsed;
+
+        public override void Enter()
         {
+            elapsed = 0;
         }
 
-        // Start is called once before the first execution of Update after the MonoBehaviour is created
-        void Start()
+        public override void FixedTick()
         {
-        
-        }
-
-        // Update is called once per frame
-        void Update()
-        {
-        
+            elapsed += Time.fixedDeltaTime;
+            if (elapsed >= Owner.Current.Attack.recovery)
+                Machine.Change(Owner.Chase);
         }
     }
 }

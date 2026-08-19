@@ -50,9 +50,27 @@ namespace Game.Gameplay.Enemies
 
             machine = new StateMachine<EnemyBrain>(this);
 
+            bool fatal = false;
+
             if (target == null)
             {
-                Debug.LogWarning($"{gameObject.name}: target 미지정 — 움직일 대상이 없어 비활성화했다", this);
+                Debug.LogWarning($"{gameObject.name}: target 미지정 — 추적할 대상이 없다", this);
+                fatal = true;
+            }
+            if (body == null)
+            {
+                Debug.LogWarning($"{gameObject.name}: Rigidbody2D 가 없다 — 이동을 적용할 수 없다", this);
+                fatal = true;
+            }
+            if (impulse == null)
+            {
+                Debug.LogWarning($"{gameObject.name}: VelocityImpulse 가 없다 — 전진과 넉백을 처리할 수 없다", this);
+                fatal = true;
+            }
+
+            if (fatal)
+            {
+                Debug.LogWarning($"{gameObject.name}: 위 문제로 EnemyBrain 을 껐다", this);
                 enabled = false;
                 return;
             }

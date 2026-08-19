@@ -1,25 +1,20 @@
 using Game.Core;
-using Game.Gameplay.Enemies;
-using UnityEngine;
 
 namespace Game.Gameplay.Enemies
 {
     public class ChaseState : EnemyState
     {
-        public ChaseState(StateMachine<EnemyBrain> machine) : base(machine)
+        public ChaseState(StateMachine<EnemyBrain> machine) : base(machine) { }
+
+        public override void Enter()
         {
+            Owner.PlayClip(clipMove);
         }
 
-        // Start is called once before the first execution of Update after the MonoBehaviour is created
-        void Start()
+        public override void FixedTick()
         {
-        
-        }
-
-        // Update is called once per frame
-        void Update()
-        {
-        
+            if (Owner.TrySelectPattern())
+                Machine.Change(Owner.Telegraph);
         }
     }
 }
