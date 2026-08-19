@@ -76,14 +76,17 @@ namespace Game.Gameplay
 
         private void Equip(int index)
         {
-            animator.runtimeAnimatorController = slots[index].Data.OverrideController;
+            var data = slots[index].Data;
 
-            var stateName = slots[index].Data.AttackStateName;
-            if(!animator.HasState(0, Animator.StringToHash(stateName)))
-            {
-                Debug.LogWarning($"{slots[index].Data.name}: 공격 상태 '{stateName}' 이 컨트롤러에 없다", this);
-            }
-            hitBox.SetShape(slots[index].Data.HitboxOffset, slots[index].Data.HitboxSize);
+            animator.runtimeAnimatorController = data.OverrideController;
+
+            if(!animator.HasState(0, Animator.StringToHash(data.AttackStateName)))
+                Debug.LogWarning($"{data.name}: 공격 상태 '{data.AttackStateName}' 이 컨트롤러에 없다", this);
+
+            if (data.Kind == AttackKind.Projectile && data.ProjectilePrefab == null)
+                Debug.LogWarning($"{data.name}: 원거리 무기인데 투사체 프리팹이 없다. 공격하면 AttackState 에 갇힌다",this);
+
+            hitBox.SetShape(data.HitboxOffset, data.HitboxSize);
         }
     }
 }
