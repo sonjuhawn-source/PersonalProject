@@ -22,6 +22,8 @@ namespace Game.Gameplay
 
         private int currentHealth;
 
+        public event Action Died;
+
         public int CurrentHealth => currentHealth;
 
         private void Awake()
@@ -55,6 +57,7 @@ namespace Game.Gameplay
         {
             Debug.Log($"{name} 사망", this);
             hurtBox?.SetEnable(false);
+            Died?.Invoke();
             animator?.Play(deathClip);
             await UniTask.Delay(TimeSpan.FromSeconds(deathDelay));
             Destroy(gameObject);
