@@ -6,6 +6,8 @@ namespace Game.Gameplay
     {
         public JumpState(StateMachine<PlayerMovement> machine) : base(machine) { }
 
+        public override bool AcceptsJumpInput => false;
+
         public override void Enter() 
         {
             Owner.PlayClip(clipJump);

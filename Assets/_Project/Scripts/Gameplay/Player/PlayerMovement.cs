@@ -185,9 +185,6 @@ namespace Game.Gameplay
 
         private bool TryJump()
         {
-            if (body.linearVelocityY > 0f)
-                return false;
-
             if (!ground.IsGrounded && (Time.time - leaveGroundTime) > coyoteTime)
                 return false;
 
