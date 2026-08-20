@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Pattern_Lunge
   m_EditorClassIdentifier: Game.Gameplay::Game.Gameplay.AttackPattern
   attack:
-    startup: 0.06
+    startup: 0.2
     activeTime: 0.08
     recovery: 0.6
     damage: 8
@@ -23,12 +23,12 @@ MonoBehaviour:
   kind: 0
   projectilePrefab: {fileID: 0}
   telegraphTime: 0.5
-  telegraphStateName: 'Idle          '
+  telegraphStateName: Idle
   attackStateName: AttackPrick
   hitboxOffset: {x: 0.4, y: 0}
   hitboxSize: {x: 0.7, y: 0.5}
   forwardSpeed: 7
-  minRange: 1
-  maxRange: 2.5
+  minRange: 0.8
+  maxRange: 1.6
   weight: 1
-  cooldown: 2
+  cooldown: 3

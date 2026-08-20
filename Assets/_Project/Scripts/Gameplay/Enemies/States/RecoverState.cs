@@ -8,6 +8,7 @@ namespace Game.Gameplay.Enemies
         public RecoverState(StateMachine<EnemyBrain> machine) : base(machine) { }
 
         public override bool AllowsMovement => false;
+        public override bool AllowsFacing => false;
 
         private float elapsed;
 

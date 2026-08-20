@@ -1,4 +1,5 @@
 using Game.Core;
+using System;
 using UnityEngine;
 
 namespace Game.Gameplay.Enemies
@@ -29,6 +30,7 @@ namespace Game.Gameplay.Enemies
         private VelocityImpulse impulse;
         private Health health;
         private StateMachine<EnemyBrain> machine;
+        private IPatternSelector selector;
         private Color baseColor;
 
         private float facing = 1;
@@ -108,6 +110,8 @@ namespace Game.Gameplay.Enemies
                 }
             }
 
+            selector = new WeightedPatternSelector(patterns ?? Array.Empty<AttackPattern>());
+
             if (sprite != null)
                 baseColor = sprite.color;
             else
@@ -137,6 +141,7 @@ namespace Game.Gameplay.Enemies
 
         private void FixedUpdate()
         {
+            selector.Tick(Time.fixedDeltaTime);
             machine.FixedTick();
             HandleMovement();
         }
@@ -205,19 +210,12 @@ namespace Game.Gameplay.Enemies
 
         internal bool TrySelectPattern()
         {
-            var distance = DistanceToTarget;
-            foreach (var pattern in patterns)
-            {
-                if (pattern == null)
-                    continue;
-                if (distance < pattern.MinRange)
-                    continue;
-                if (distance > pattern.MaxRange)
-                    continue;
-                Current = pattern;
-                return true;
-            }
-            return false;
+            var picked = selector.Select(DistanceToTarget);
+
+            if (picked == null) return false;
+            Current = picked;
+
+            return true;
         }
 
         internal void SetTint(bool on)
