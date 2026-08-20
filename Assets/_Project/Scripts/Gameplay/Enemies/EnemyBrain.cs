@@ -9,8 +9,6 @@ namespace Game.Gameplay.Enemies
         [SerializeField]
         private AttackPattern[] patterns;
         [SerializeField]
-        private Transform target;
-        [SerializeField]
         private HitBox hitBox;
         [SerializeField]
         private Animator animator;
@@ -32,6 +30,7 @@ namespace Game.Gameplay.Enemies
         private VelocityImpulse impulse;
         private Health health;
         private StateMachine<EnemyBrain> machine;
+        private Transform target;
         private IPatternSelector selector;
         private Color baseColor;
 
@@ -58,14 +57,14 @@ namespace Game.Gameplay.Enemies
             body = GetComponent<Rigidbody2D>();
             impulse = GetComponent<VelocityImpulse>();
             health = GetComponent<Health>();
-
+            target = GameObject.FindWithTag("Player")?.transform;
             machine = new StateMachine<EnemyBrain>(this);
 
             bool fatal = false;
 
             if (target == null)
             {
-                Debug.LogWarning($"{gameObject.name}: target 미지정 — 추적할 대상이 없다", this);
+                Debug.LogWarning($"{gameObject.name}: 씬에 Player 태그를 가진 오브젝트가 없다 — 추적할 대상이 없다", this);
                 fatal = true;
             }
             if (body == null)
