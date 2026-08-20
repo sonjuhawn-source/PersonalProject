@@ -18,9 +18,11 @@ namespace Game.Gameplay.Enemies
         private float moveSpeed;
         [SerializeField]
         private float detectRange;
-        [SerializeField] 
+        [SerializeField]
+        private float staggerTime = 0.15f;
+        [SerializeField]
         private SpriteRenderer sprite;
-        [SerializeField] 
+        [SerializeField]
         private Color telegraphColor = new Color(1f, 0.78f, 0.78f, 1f);
 
         [SerializeField]
@@ -40,14 +42,16 @@ namespace Game.Gameplay.Enemies
         internal TelegraphState Telegraph { get; private set; }
         internal AttackState Attack { get; private set; }
         internal RecoverState Recover { get; private set; }
+        internal StaggerState Stagger { get; private set; }
         internal DeadState Dead { get; private set; }
 
         internal AttackPattern Current { get; private set; }
         internal float DistanceToTarget => Mathf.Abs(target.position.x - transform.position.x);
         internal float DirectionToTarget => Mathf.Sign(target.position.x - transform.position.x);
         internal float DetectRange => detectRange;
+        internal float StaggerTime => staggerTime;
         internal EnemyState CurrentState => (EnemyState)machine.Current;
-        internal HitBox HitBox => hitBox;   
+        internal HitBox HitBox => hitBox;
 
         private void Awake()
         {
@@ -123,10 +127,14 @@ namespace Game.Gameplay.Enemies
             Telegraph = new TelegraphState(machine);
             Attack = new AttackState(machine);
             Recover = new RecoverState(machine);
+            Stagger = new StaggerState(machine);
             Dead = new DeadState(machine);
 
             if (health != null)
+            {
                 health.Died += OnDied;
+                health.Damaged += OnDamaged;
+            }
             else
                 Debug.LogWarning($"{gameObject.name}: Health 가 없다 — 죽어도 Dead 로 못 간다", this);
 
@@ -225,6 +233,12 @@ namespace Game.Gameplay.Enemies
             sprite.color = on ? telegraphColor : baseColor;
         }
 
+        private void OnDamaged()
+        {
+            if (CurrentState.CanBeInterrupted)
+                machine.Change(Stagger);
+        }
+
         private void OnDied()
         {
             machine.Change(Dead);
@@ -233,7 +247,10 @@ namespace Game.Gameplay.Enemies
         private void OnDestroy()
         {
             if (health != null)
+            {
                 health.Died -= OnDied;
+                health.Damaged -= OnDamaged;
+            }
         }
     }
 }
