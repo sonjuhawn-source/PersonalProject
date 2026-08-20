@@ -8,12 +8,9 @@ namespace Game.Gameplay
     {
         [SerializeField]
         private int maxHealth =30;
-
         [SerializeField]
         private Animator animator;
         [SerializeField] 
-        private string hitClip = "Hit";
-        [SerializeField]
         private string deathClip = "Death";
         [SerializeField] 
         private float deathDelay = 0.35f;   //사망 클립 길이
@@ -23,6 +20,7 @@ namespace Game.Gameplay
         private int currentHealth;
 
         public event Action Died;
+        public event Action Damaged;
 
         public int CurrentHealth => currentHealth;
 
@@ -50,7 +48,7 @@ namespace Game.Gameplay
             if (currentHealth <= 0)
                 Die().Forget();
             else
-                animator?.Play(hitClip);
+                Damaged?.Invoke();
         }
 
         private async UniTaskVoid Die()
