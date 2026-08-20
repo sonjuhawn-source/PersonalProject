@@ -11,6 +11,7 @@ namespace Game.Gameplay
 
         private HashSet<GameObject> target = new HashSet<GameObject>();
         private DamageInfo damageInfo;
+        private bool active;
 
         public event Action<HurtBox> Hit;
 
@@ -22,6 +23,7 @@ namespace Game.Gameplay
         }
         public void HitBoxActivate(DamageInfo info)
         {
+            active = true;
             damageInfo = info;
             target.Clear();
             hitBoxCollider.enabled = true;
@@ -29,11 +31,15 @@ namespace Game.Gameplay
 
         public void HitBoxDeactivate()
         {
+            active = false;
             hitBoxCollider.enabled = false;
         }
 
         private void OnTriggerEnter2D(Collider2D collision)
         {
+            if (active == false)
+                return;
+
             if (collision.TryGetComponent(out HurtBox hurtbox) == false)
                 return;
 
