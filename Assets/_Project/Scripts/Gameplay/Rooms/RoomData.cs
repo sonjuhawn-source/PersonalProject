@@ -20,7 +20,8 @@ namespace Game.Gameplay.Rooms
         internal RoomType Type => type;
         internal int Difficulty => difficulty;
         internal Room RoomPrefab => roomPrefab;
-        internal EnemyBrain[] EnemyPool => enemyPool;
+        internal int EnemyPoolCount => enemyPool == null ? 0 : enemyPool.Length;
+        internal EnemyBrain GetEnemy(int i) => enemyPool[i];
         internal int SpawnCount => spawnCount;
     }
 }

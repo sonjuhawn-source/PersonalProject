@@ -35,10 +35,11 @@ namespace Game.Gameplay.Rooms
 
         private void LateUpdate()
         {
-            if (currentRoom == null) 
+            if (currentRoom == null)
+                return;
+            if (!currentRoom.TryGetCameraBounds(out Bounds b))
                 return;
 
-            Bounds b = currentRoom.CameraBounds;
             float halfH = cam.orthographicSize;
             float halfW = halfH * cam.aspect;
 

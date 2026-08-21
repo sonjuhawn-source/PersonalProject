@@ -1,3 +1,4 @@
+using Codice.Client.BaseCommands;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
@@ -18,19 +19,8 @@ namespace Game.Gameplay.Rooms
 
         internal Transform Entry => entry;
         internal Transform Exit => exit;
-        internal Transform[] SpawnPoints => spawnPoints;
-        internal Bounds CameraBounds
-        {
-            get
-            {
-                Vector3 min = boundsSource.transform.TransformPoint(localBounds.min);
-                Vector3 max = boundsSource.transform.TransformPoint(localBounds.max);
-
-                Bounds b = new Bounds();
-                b.SetMinMax(min, max);
-                return b;
-            }
-        }
+        internal int SpawnPointCount => spawnPoints == null ? 0 : spawnPoints.Length;
+        internal Transform GetSpawnPoint(int i) => spawnPoints[i];
 
 
         private void Awake()
@@ -47,6 +37,22 @@ namespace Game.Gameplay.Rooms
                 boundsSource.CompressBounds();
                 localBounds = boundsSource.localBounds;
             }
+        }
+
+        internal bool TryGetCameraBounds(out Bounds bounds)
+        {
+            if (boundsSource == null)
+            {
+                bounds = default;
+                return false;
+            }
+
+            Vector3 min = boundsSource.transform.TransformPoint(localBounds.min);
+            Vector3 max = boundsSource.transform.TransformPoint(localBounds.max);
+
+            bounds = new Bounds();
+            bounds.SetMinMax(min, max);
+            return true;
         }
     }
 }
