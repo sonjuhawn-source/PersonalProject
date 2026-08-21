@@ -1,0 +1,18 @@
+using System;
+using UnityEngine;
+
+namespace Game.Gameplay.Rooms
+{
+    internal class RewardRoomHandler : IRoomHandler
+    {
+        public event Action Cleared;
+
+        public void Enter(Room room, RoomData data)
+        {
+            Debug.Log($"{room.name}: 보상방 — 구현은 W4. 즉시 통과한다", room);
+            Cleared?.Invoke();
+        }
+
+        public void Exit() { }
+    }
+}
