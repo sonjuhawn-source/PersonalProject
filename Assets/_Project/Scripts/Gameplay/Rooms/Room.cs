@@ -14,6 +14,8 @@ namespace Game.Gameplay.Rooms
         private Transform[] spawnPoints;
         [SerializeField]
         private Tilemap boundsSource;
+        [SerializeField] 
+        private RoomExit exitTrigger;
 
         private Bounds localBounds;
 
@@ -21,6 +23,7 @@ namespace Game.Gameplay.Rooms
         internal Transform Exit => exit;
         internal int SpawnPointCount => spawnPoints == null ? 0 : spawnPoints.Length;
         internal Transform GetSpawnPoint(int i) => spawnPoints[i];
+        internal RoomExit ExitTrigger => exitTrigger;
 
 
         private void Awake()
@@ -29,6 +32,10 @@ namespace Game.Gameplay.Rooms
                 Debug.LogWarning($"{gameObject.name}: entry 미지정 — 방을 이을 위치를 못 찾는다", this);
             if (exit == null)
                 Debug.LogWarning($"{gameObject.name}: exit 미지정 — 다음 방으로 넘어갈 수 없다", this);
+            if (exitTrigger == null)
+            {
+                Debug.LogWarning($"{gameObject.name}: {gameObject.name}: trigger 미지정 — 클리어해도 출구가 안 열린다", this);
+            }
 
             if (boundsSource == null)
                 Debug.LogWarning($"{gameObject.name}: boundsSource 미지정 — 카메라가 방 경계를 몰라 추적이 안 된다", this);

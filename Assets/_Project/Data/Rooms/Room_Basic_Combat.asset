@@ -17,4 +17,4 @@ MonoBehaviour:
   roomPrefab: {fileID: 445189001662545427, guid: 8143c5f0ed2b5ce4cb9992094ebdb846, type: 3}
   enemyPool:
   - {fileID: 2707969194611069236, guid: 68480ca6c6c6e4d418212708ed6c1296, type: 3}
-  spawnCount: 1
+  spawnCount: 2
