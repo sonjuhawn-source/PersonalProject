@@ -31,6 +31,8 @@ namespace Game.Gameplay.Enemies
         [SerializeField]
         private float maxRange = 100;
         [SerializeField]
+        private float maxHeightDiff = 100;
+        [SerializeField]
         private float weight = 1;
         [SerializeField]
         private float cooldown;
@@ -46,6 +48,7 @@ namespace Game.Gameplay.Enemies
         internal float ForwardSpeed => forwardSpeed;
         internal float MaxRange => maxRange;
         internal float MinRange => minRange;
+        internal float MaxHeightDiff => maxHeightDiff;
         internal float Weight => weight;
         internal float Cooldown => cooldown;
 
