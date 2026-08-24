@@ -7,13 +7,14 @@ namespace Game.Gameplay.Enemies
         [SerializeField]
         private LayerMask groundMask;
         [SerializeField]
-        private float aheadDistance = 0.6f;
+        private float aheadDistance = 0.1f;
         [SerializeField]
         private float probeDown = 0.5f;
         [SerializeField]
-        private float wallDistance = 0.4f;
+        private float wallDistance = 0.05f;
 
         private Collider2D bodyCollider;
+
 
         private void Awake()
         {
@@ -28,20 +29,30 @@ namespace Game.Gameplay.Enemies
             }
         }
 
-        private Vector2 GroundProbeOrigin(Bounds bounds, float dir)
+        private Vector2 GroundProbeOrigin(Bounds bounds, float dir, float distance)
         {
-            return new Vector2(bounds.center.x + dir * (bounds.extents.x + aheadDistance),
+            return new Vector2(bounds.center.x + dir * (bounds.extents.x + distance),
                                bounds.min.y + 0.05f);
         }
 
-        internal bool HasGroundAhead(float dir)
+        private Vector2 GroundProbeOrigin(Bounds bounds, float dir) => GroundProbeOrigin(bounds, dir, aheadDistance);
+
+        internal bool HasGroundAt(float dir, float distance)
         {
-            var startPos = GroundProbeOrigin(bodyCollider.bounds, dir);
+            if (bodyCollider == null) 
+                return true;
+
+            var startPos = GroundProbeOrigin(bodyCollider.bounds, dir , distance);
             return Physics2D.Raycast(startPos, Vector2.down, probeDown, groundMask);
         }
 
+        internal bool HasGroundAhead(float dir) => HasGroundAt(dir, aheadDistance);
+
         internal bool HasWallAhead(float dir)
         {
+            if (bodyCollider == null) 
+                return false;
+
             var halfWidth = bodyCollider.bounds.extents.x;
             var startPos = bodyCollider.bounds.center;
             var distance = halfWidth + wallDistance;
