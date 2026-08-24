@@ -30,5 +30,6 @@ MonoBehaviour:
   forwardSpeed: 7
   minRange: 0.8
   maxRange: 1.6
+  maxHeightDiff: 0.5
   weight: 1
   cooldown: 3

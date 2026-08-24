@@ -33,6 +33,7 @@ namespace Game.Gameplay.Enemies
         private Transform target;
         private IPatternSelector selector;
         private Color baseColor;
+        private TerrainProbe probe;
 
         private float facing = 1;
 
@@ -45,6 +46,7 @@ namespace Game.Gameplay.Enemies
         internal DeadState Dead { get; private set; }
 
         internal AttackPattern Current { get; private set; }
+        internal bool IsAdvancing { get; private set; }
         internal float DistanceToTarget => Mathf.Abs(target.position.x - transform.position.x);
         internal float DirectionToTarget => Mathf.Sign(target.position.x - transform.position.x);
         internal float DetectRange => detectRange;
@@ -59,6 +61,7 @@ namespace Game.Gameplay.Enemies
             health = GetComponent<Health>();
             target = GameObject.FindWithTag("Player")?.transform;
             machine = new StateMachine<EnemyBrain>(this);
+            probe = GetComponent<TerrainProbe>();
 
             bool fatal = false;
 
@@ -76,6 +79,10 @@ namespace Game.Gameplay.Enemies
             {
                 Debug.LogWarning($"{gameObject.name}: VelocityImpulse 가 없다 — 전진과 넉백을 처리할 수 없다", this);
                 fatal = true;
+            }
+            if (probe == null)
+            {
+                Debug.LogWarning($"{gameObject.name}: TerrainProbe 가 없다 — 지형을 무시하고 발판에서 걸어 나간다", this);
             }
 
             if (fatal)
@@ -162,9 +169,21 @@ namespace Game.Gameplay.Enemies
             if (!CurrentState.AllowsMovement)
             {
                 body.linearVelocityX = 0;
+                IsAdvancing = false;
                 return;
             }
-            body.linearVelocityX = DirectionToTarget * moveSpeed;
+
+            var dir = DirectionToTarget;
+
+            if (probe != null && !probe.CanAdvance(dir))
+            {
+                IsAdvancing = false;
+                body.linearVelocityX = 0;
+                return;
+            }
+
+            body.linearVelocityX = dir * moveSpeed;
+            IsAdvancing = true;
         }
 
         internal void SetFacing(float dir)
@@ -219,9 +238,21 @@ namespace Game.Gameplay.Enemies
         {
             var picked = selector.Select(DistanceToTarget);
 
-            if (picked == null) return false;
-            Current = picked;
+            if (picked == null) 
+                return false;
 
+            float yDistance = Mathf.Abs(target.position.y - transform.position.y);
+            if (yDistance > picked.MaxHeightDiff)
+                return false;
+
+            if(picked.ForwardSpeed > 0)
+            {
+                float dashDistance = picked.ForwardSpeed * picked.Attack.startup / 2;
+                if (probe != null && !probe.HasGroundAt(DirectionToTarget, dashDistance))
+                    return false;
+            }
+
+            Current = picked;
             return true;
         }
 

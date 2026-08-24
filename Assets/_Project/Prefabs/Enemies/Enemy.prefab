@@ -106,6 +106,7 @@ GameObject:
   - component: {fileID: 6568416106829634190}
   - component: {fileID: 8097071262524283621}
   - component: {fileID: 2707969194611069236}
+  - component: {fileID: 6957406804630168095}
   m_Layer: 10
   m_Name: Enemy
   m_TagString: Untagged
@@ -249,6 +250,24 @@ MonoBehaviour:
   sprite: {fileID: 1673677383554036109}
   telegraphColor: {r: 1, g: 0.78, b: 0.78, a: 1}
   muzzle: {fileID: 0}
+--- !u!114 &6957406804630168095
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3958999888611275547}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d30fc09fcc9dc734892e01f83615ae0a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Game.Gameplay::Game.Gameplay.Enemies.TerrainProbe
+  groundMask:
+    serializedVersion: 2
+    m_Bits: 8
+  aheadDistance: 0.1
+  probeDown: 0.5
+  wallDistance: 0.05
 --- !u!1 &6759343926841387131
 GameObject:
   m_ObjectHideFlags: 0
