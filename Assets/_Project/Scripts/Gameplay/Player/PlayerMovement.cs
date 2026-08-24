@@ -130,7 +130,7 @@ namespace Game.Gameplay
 
         private void FixedUpdate()
         {
-            if (ground.IsGrounded && body.linearVelocityY <= 0f)
+            if (ground.IsGrounded)
                 leaveGroundTime = Time.time;
 
             machine.FixedTick();

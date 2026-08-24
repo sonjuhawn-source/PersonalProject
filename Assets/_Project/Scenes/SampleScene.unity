@@ -481,9 +481,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Game.Gameplay::Game.Gameplay.Rooms.StageRunner
   roomPool:
-  - {fileID: 11400000, guid: 682c8f111f1d7d84bb39f98ea345ae83, type: 2}
+  - {fileID: 11400000, guid: 534455a3ede22b148862ec0257981337, type: 2}
+  - {fileID: 11400000, guid: bec18b6ed4f25e941a8750e11fc98c5f, type: 2}
+  - {fileID: 11400000, guid: 14179a36c39fe384e8090123c96d35e6, type: 2}
+  - {fileID: 11400000, guid: fa193dfa738d397469d055bb541acf53, type: 2}
+  - {fileID: 11400000, guid: f32efe2d3c89e3e4d938a2b9c34e2bf1, type: 2}
   bossRoom: {fileID: 0}
-  roomCount: 3
+  roomCount: 5
   seed: -1
   cameraFollow: {fileID: 1957209188}
 --- !u!4 &1349538043
@@ -640,7 +644,7 @@ CapsuleCollider2D:
   m_Enabled: 1
   serializedVersion: 3
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 7c0ee86d6a2d0f74d8f1e53e2e3201bb, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0

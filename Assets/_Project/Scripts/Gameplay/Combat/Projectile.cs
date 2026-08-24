@@ -10,6 +10,8 @@ namespace Game.Gameplay
         private float lifetime = 2;
         [SerializeField]
         private int pierce = 3;
+        [SerializeField] 
+        private LayerMask groundMask;
 
         private HitBox hitBox;
         private Rigidbody2D body;
@@ -18,6 +20,24 @@ namespace Game.Gameplay
         {
             hitBox = GetComponent<HitBox>();
             body = GetComponent<Rigidbody2D>();
+            if(groundMask.value == 0)
+            {
+                Debug.LogWarning($"{gameObject.name}: groundMask 미지정 — 화살이 지형을 통과한다", this);
+            }
+        }
+
+        private void FixedUpdate()
+        {
+            Vector2 v = body.linearVelocity;
+            if (v.sqrMagnitude <= 0f) 
+                return;
+
+            float dist = v.magnitude * Time.fixedDeltaTime;
+            if (Physics2D.Raycast(transform.position, v.normalized, dist, groundMask))
+            {
+                hitBox.HitBoxDeactivate();
+                Destroy(gameObject);
+            }
         }
 
         internal void Init(DamageInfo info, float facing)
