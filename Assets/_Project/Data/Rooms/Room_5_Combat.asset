@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 83ae587216eb7d5418e7a4e116ed6df4, type: 3}
-  m_Name: Room_Basic_Combat
+  m_Name: Room_5_Combat
   m_EditorClassIdentifier: Game.Gameplay::Game.Gameplay.Rooms.RoomData
   type: 0
-  difficulty: 1
-  roomPrefab: {fileID: 445189001662545427, guid: 8143c5f0ed2b5ce4cb9992094ebdb846, type: 3}
+  difficulty: 3
+  roomPrefab: {fileID: 5274577697385237377, guid: ffac67207dc30ae428efbdd99adecb02, type: 3}
   enemyPool:
   - {fileID: 2707969194611069236, guid: 68480ca6c6c6e4d418212708ed6c1296, type: 3}
-  spawnCount: 2
+  spawnCount: 10
