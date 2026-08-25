@@ -16,6 +16,7 @@ namespace Game.Gameplay
 
         private CancellationTokenSource cts;
 
+        private WeaponData lastWeapon;
         private int comboIndex;
         private float lastAttackEndTime = float.NegativeInfinity;
         private bool comboQueued;
@@ -25,9 +26,14 @@ namespace Game.Gameplay
 
         public override void Enter()
         {
+            if (lastWeapon != Owner.CurrentWeapon)
+                comboIndex = 0;
+            lastWeapon = Owner.CurrentWeapon;
+
             startedGrounded = Owner.IsGrounded;
 
-            if (Time.time - lastAttackEndTime > Owner.ComboResetTime)
+            if (Time.time - lastAttackEndTime > Owner.ComboResetTime
+           || comboIndex >= Owner.ComboCount)
                 comboIndex = 0;
 
             cts = new CancellationTokenSource();

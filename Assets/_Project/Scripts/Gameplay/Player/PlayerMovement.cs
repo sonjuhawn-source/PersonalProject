@@ -69,9 +69,10 @@ namespace Game.Gameplay
         internal int ComboCount => weapons.Current.Data.ComboCount;
         internal float ComboResetTime => comboResetTime;
         internal AttackData GetAttack(int index) => weapons.Current.Data.GetAttack(index);
+        internal AttackKind Kind => weapons.Current.Data.Kind;
+        internal WeaponData CurrentWeapon => weapons.Current.Data;
         internal float DashTime => dashTime;
         internal float ForwardSpeed => weapons.Current.Data.ForwardSpeed;
-        internal AttackKind Kind => weapons.Current.Data.Kind;
 
         internal bool IsGrounded => ground.IsGrounded;
         internal float MoveInput => input.MoveInput;
