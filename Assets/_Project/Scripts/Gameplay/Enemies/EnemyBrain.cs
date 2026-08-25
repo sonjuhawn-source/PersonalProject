@@ -19,6 +19,8 @@ namespace Game.Gameplay.Enemies
         [SerializeField]
         private float staggerTime = 0.15f;
         [SerializeField]
+        private float facingDeadzone = 0.1f;
+        [SerializeField]
         private SpriteRenderer sprite;
         [SerializeField]
         private Color telegraphColor = new Color(1f, 0.78f, 0.78f, 1f);
@@ -164,16 +166,18 @@ namespace Game.Gameplay.Enemies
         {
             if (impulse.IsActive)
                 return;
+
+            float dx = target.position.x - transform.position.x;
+            float dir = Mathf.Abs(dx) < facingDeadzone ? 0f : Mathf.Sign(dx);
+
             if (CurrentState.AllowsFacing)
-                SetFacing(DirectionToTarget);
+                SetFacing(dir);
             if (!CurrentState.AllowsMovement)
             {
                 body.linearVelocityX = 0;
                 IsAdvancing = false;
                 return;
             }
-
-            var dir = DirectionToTarget;
 
             if (probe != null && !probe.CanAdvance(dir))
             {
@@ -183,7 +187,7 @@ namespace Game.Gameplay.Enemies
             }
 
             body.linearVelocityX = dir * moveSpeed;
-            IsAdvancing = true;
+            IsAdvancing = dir != 0f;
         }
 
         internal void SetFacing(float dir)
@@ -238,14 +242,14 @@ namespace Game.Gameplay.Enemies
         {
             var picked = selector.Select(DistanceToTarget);
 
-            if (picked == null) 
+            if (picked == null)
                 return false;
 
             float yDistance = Mathf.Abs(target.position.y - transform.position.y);
             if (yDistance > picked.MaxHeightDiff)
                 return false;
 
-            if(picked.ForwardSpeed > 0)
+            if (picked.ForwardSpeed > 0)
             {
                 float dashDistance = picked.ForwardSpeed * picked.Attack.startup / 2;
                 if (probe != null && !probe.HasGroundAt(DirectionToTarget, dashDistance))
