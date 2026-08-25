@@ -16,5 +16,6 @@ MonoBehaviour:
   difficulty: 1
   roomPrefab: {fileID: 5274577697385237377, guid: 60ff26f9120b79b41bb7d16ddf0b71a3, type: 3}
   enemyPool:
-  - {fileID: 2707969194611069236, guid: 68480ca6c6c6e4d418212708ed6c1296, type: 3}
+  - {fileID: 4689506569261366689, guid: ba1cafaa1cf499e42a03114a54162f52, type: 3}
+  - {fileID: 274970527716688132, guid: 4df9ab28e909ad649a93163b762e31e6, type: 3}
   spawnCount: 4
