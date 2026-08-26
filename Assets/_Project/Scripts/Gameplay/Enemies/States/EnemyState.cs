@@ -9,6 +9,7 @@ namespace Game.Gameplay.Enemies
         protected const string clipIdle = "Idle";
         protected const string clipMove = "Run";
         protected const string clipHit = "Hit";
+        protected const string clipDeath = "Death";
 
         public virtual bool AllowsMovement => true;
         public virtual bool AllowsFacing => true;

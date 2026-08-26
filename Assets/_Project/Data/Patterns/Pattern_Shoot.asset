@@ -28,8 +28,8 @@ MonoBehaviour:
   hitboxOffset: {x: 0.4, y: 0}
   hitboxSize: {x: 0.7, y: 0.5}
   forwardSpeed: 0
-  minRange: 3
-  maxRange: 8
+  minRange: 0
+  maxRange: 4
   maxHeightDiff: 100
   weight: 1
   cooldown: 2

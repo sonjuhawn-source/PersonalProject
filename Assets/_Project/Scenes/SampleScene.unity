@@ -522,6 +522,7 @@ GameObject:
   - component: {fileID: 1483818006}
   - component: {fileID: 1483818007}
   - component: {fileID: 1483818008}
+  - component: {fileID: 1483818009}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -717,6 +718,20 @@ MonoBehaviour:
   - {fileID: 11400000, guid: c5555737decc2654dafe34c997bc9f74, type: 2}
   animator: {fileID: 1711130538}
   hitBox: {fileID: 683188934}
+--- !u!114 &1483818009
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1483817997}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b87cf3b561bb87744a649380e0951356, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Game.Gameplay::Game.Gameplay.Health
+  maxHealth: 30
+  hurtBox: {fileID: 1709002349}
 --- !u!1 &1709002346
 GameObject:
   m_ObjectHideFlags: 0
@@ -810,7 +825,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Game.Gameplay::Game.Gameplay.HurtBox
   owner: {fileID: 1483817997}
   impulse: {fileID: 1483818006}
-  health: {fileID: 0}
+  health: {fileID: 1483818009}
   hurtBoxCollider: {fileID: 1709002348}
   invincibility: {fileID: 1483818007}
 --- !u!1001 &1711130536
