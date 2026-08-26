@@ -1,11 +1,14 @@
 using UnityEngine;
+using Game.Gameplay.Rooms;
 
-namespace Game.Gameplay.Rooms
+namespace Game.Gameplay.Run
 {
     internal class RunState
     {
         private readonly System.Random rng;
         private readonly RoomData[] rooms;
+
+        private WeaponData[] weapons = System.Array.Empty<WeaponData>();
 
         internal int Seed { get; }
         internal int CurrentIndex { get; private set; }
@@ -15,6 +18,20 @@ namespace Game.Gameplay.Rooms
         internal int RoomCount => rooms.Length;
         internal bool HasNext => CurrentIndex + 1 < rooms.Length;
         internal void Advance() => CurrentIndex += 1;
+
+        internal int CurrentHealth { get; private set; }
+        internal int KillCount { get; private set; }
+
+        internal int WeaponCount => weapons.Length;
+        internal WeaponData GetWeapon(int i) => weapons[i];
+
+        internal void RecordHealth(int value) => CurrentHealth = value;
+        internal void AddKills(int count) => KillCount += count;
+
+        internal void RecordWeapons(WeaponData[] value)
+        {
+            weapons = value ?? System.Array.Empty<WeaponData>();
+        }
 
         public RunState(int seed, RoomData[] pool, RoomData bossRoom, int roomCount)
         {

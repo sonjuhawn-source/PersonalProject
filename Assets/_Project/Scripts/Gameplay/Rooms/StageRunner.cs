@@ -1,3 +1,4 @@
+using Game.Gameplay.Run;
 using System;
 using UnityEngine;
 
@@ -17,6 +18,8 @@ namespace Game.Gameplay.Rooms
         private CameraFollow cameraFollow;
 
         private Transform player;
+        private Health playerHealth;
+        private WeaponHolder playerWeapons;
         private RunState run;
         private Room currentRoom;
         private IRoomHandler handler;
@@ -38,6 +41,13 @@ namespace Game.Gameplay.Rooms
                 return;
             }
             player = found.transform;
+            playerHealth = found.GetComponent<Health>();
+            playerWeapons = found.GetComponent<WeaponHolder>();
+
+            if (playerHealth == null)
+                Debug.LogWarning($"{gameObject.name}: 플레이어에 Health 가 없다 — 런 결과에 HP 가 안 남는다", this);
+            if (playerWeapons == null)
+                Debug.LogWarning($"{gameObject.name}: 플레이어에 WeaponHolder 가 없다 — 런 결과에 무기가 안 남는다", this);
 
             int actualSeed = seed < 0 ? Environment.TickCount : seed;
             run = new RunState(actualSeed, roomPool, bossRoom, roomCount);
@@ -48,6 +58,8 @@ namespace Game.Gameplay.Rooms
                 enabled = false;
                 return;
             }
+
+            CaptureFromPlayer();
 
             Debug.Log($"런 시작 — 시드 {actualSeed}, 방 {run.RoomCount}개");
 
@@ -103,7 +115,32 @@ namespace Game.Gameplay.Rooms
 
             handler = RoomHandlerFactory.Create(data);
             handler.Cleared += OnCleared;
-            handler.Enter(next, data);
+            handler.Enter(next, data, run);
+        }
+
+        // 런에 걸치는 값을 경계에서만 RunState 로 넘긴다.
+        // 전투 중 주인은 Health · WeaponHolder 이고, 여기서는 회수만 한다.
+        private void CaptureFromPlayer()
+        {
+            if (playerHealth != null)
+                run.RecordHealth(playerHealth.CurrentHealth);
+            if (playerWeapons != null)
+                run.RecordWeapons(playerWeapons.SnapshotWeapons());
+        }
+
+        // #101 의 RunResult 가 이 로그를 대체한다.
+        private string DescribeWeapons()
+        {
+            if (run.WeaponCount == 0)
+                return "없음";
+
+            var names = new string[run.WeaponCount];
+            for (int i = 0; i < run.WeaponCount; i++)
+            {
+                var w = run.GetWeapon(i);
+                names[i] = w != null ? w.name : "빈 칸";
+            }
+            return string.Join(" · ", names);
         }
 
         private void OnCleared()
@@ -117,9 +154,13 @@ namespace Game.Gameplay.Rooms
             handler.Cleared -= OnCleared;
             handler.Exit();
 
+            CaptureFromPlayer();
+
             if (!run.HasNext)
             {
-                Debug.Log("런 종료 — 마지막 방을 통과했다");
+                Debug.Log($"런 종료 — 마지막 방을 통과했다. " +
+                          $"{run.CurrentIndex + 1}층 · {run.KillCount}킬 · HP {run.CurrentHealth} · " +
+                          $"무기 {DescribeWeapons()}");
                 return;
             }
 

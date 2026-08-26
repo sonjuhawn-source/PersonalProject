@@ -1,4 +1,5 @@
 using Game.Gameplay.Enemies;
+using Game.Gameplay.Run;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,11 +11,13 @@ namespace Game.Gameplay.Rooms
     internal class CombatRoomHandler : IRoomHandler
     {
         private int remaining;
+        private RunState run;
         private readonly List<Health> subscribed = new List<Health>();
         public event Action Cleared;
 
-        public void Enter(Room room, RoomData data)
+        public void Enter(Room room, RoomData data, RunState run)
         {
+            this.run = run;
             remaining = 0;
 
             if (data.EnemyPoolCount == 0)
@@ -60,6 +63,7 @@ namespace Game.Gameplay.Rooms
 
         private void OnEnemyDied()
         {
+            run?.AddKills(1);
             remaining -= 1;
             if (remaining <= 0)
                 Cleared?.Invoke();
