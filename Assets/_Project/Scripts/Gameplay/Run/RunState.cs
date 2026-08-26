@@ -1,6 +1,7 @@
 using UnityEngine;
+using Game.Gameplay.Rooms;
 
-namespace Game.Gameplay.Rooms
+namespace Game.Gameplay.Run
 {
     internal class RunState
     {
