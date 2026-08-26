@@ -32,7 +32,8 @@ namespace Game.Gameplay
             if (currentHealth <= 0)
                 return;
 
-            currentHealth -= amount;
+            // 음수 체력은 어디서도 의미가 없다. 소비자마다 가리면 다음 소비자가 또 물린다.
+            currentHealth = Mathf.Max(0, currentHealth - amount);
 
             if (currentHealth <= 0)
                 Die();

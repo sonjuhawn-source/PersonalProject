@@ -1,6 +1,8 @@
 using Game.Gameplay.Run;
 using System;
 using UnityEngine;
+using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 namespace Game.Gameplay.Rooms
 {
@@ -23,6 +25,7 @@ namespace Game.Gameplay.Rooms
         private RunState run;
         private Room currentRoom;
         private IRoomHandler handler;
+        private bool runEnded;
 
         private void Start()
         {
@@ -45,7 +48,9 @@ namespace Game.Gameplay.Rooms
             playerWeapons = found.GetComponent<WeaponHolder>();
 
             if (playerHealth == null)
-                Debug.LogWarning($"{gameObject.name}: 플레이어에 Health 가 없다 — 런 결과에 HP 가 안 남는다", this);
+                Debug.LogWarning($"{gameObject.name}: 플레이어에 Health 가 없다 — 죽어도 런이 끝나지 않는다", this);
+            else
+                playerHealth.Died += OnPlayerDied;
             if (playerWeapons == null)
                 Debug.LogWarning($"{gameObject.name}: 플레이어에 WeaponHolder 가 없다 — 런 결과에 무기가 안 남는다", this);
 
@@ -128,7 +133,51 @@ namespace Game.Gameplay.Rooms
                 run.RecordWeapons(playerWeapons.SnapshotWeapons());
         }
 
-        // #101 의 RunResult 가 이 로그를 대체한다.
+        private void OnPlayerDied() => EndRun(RunOutcome.Died);
+
+        // 끝나는 길이 둘이지만 결과를 만드는 곳은 하나다.
+        // 각자 만들면 "클리어와 사망이 같은 화면, 결과만 다르다" 가 안 지켜진다.
+        private void EndRun(RunOutcome outcome)
+        {
+            if (runEnded)
+                return;
+            runEnded = true;
+
+            CaptureFromPlayer();
+            RunResult result = run.BuildResult(outcome);
+
+            // #103 이 이 로그를 결과 화면으로 대체한다.
+            Debug.Log($"런 종료 — {(outcome == RunOutcome.Cleared ? "클리어" : "사망")} · " +
+                      $"{result.Floor}층 · {result.Kills}킬 · HP {result.Health} · " +
+                      $"무기 {DescribeWeapons()}", this);
+            Debug.Log("R 을 누르면 다시 시작한다", this);
+        }
+
+        // #103 이 재시작 버튼을 붙이면 이 폴링은 사라진다.
+        // .inputactions 를 건드리지 않는 이유는 자산 저장과 생성 클래스 재생성이 따라오기 때문이다.
+        private void Update()
+        {
+            if (!runEnded)
+                return;
+            if (Keyboard.current != null && Keyboard.current.rKey.wasPressedThisFrame)
+                Restart();
+        }
+
+        private void Restart()
+        {
+            // 빌드에는 도메인 리로드가 없어 static 이 살아남는다.
+            // HitStop 이 timeScale 0 인 중에 끝났다면 씬만 다시 로드해서는 안 풀린다.
+            Time.timeScale = 1f;
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        }
+
+        private void OnDestroy()
+        {
+            if (playerHealth != null)
+                playerHealth.Died -= OnPlayerDied;
+        }
+
+        // #103 이 이 로그를 결과 화면으로 대체한다.
         private string DescribeWeapons()
         {
             if (run.WeaponCount == 0)
@@ -154,15 +203,13 @@ namespace Game.Gameplay.Rooms
             handler.Cleared -= OnCleared;
             handler.Exit();
 
-            CaptureFromPlayer();
-
             if (!run.HasNext)
             {
-                Debug.Log($"런 종료 — 마지막 방을 통과했다. " +
-                          $"{run.CurrentIndex + 1}층 · {run.KillCount}킬 · HP {run.CurrentHealth} · " +
-                          $"무기 {DescribeWeapons()}");
+                EndRun(RunOutcome.Cleared);
                 return;
             }
+
+            CaptureFromPlayer();
 
             Vector3 seam = currentRoom.Exit.position;
             run.Advance();
