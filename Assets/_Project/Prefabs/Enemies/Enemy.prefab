@@ -210,9 +210,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Game.Gameplay::Game.Gameplay.Health
   maxHealth: 30
-  animator: {fileID: 380907404826858087}
-  deathClip: Death
-  deathDelay: 0.35
   hurtBox: {fileID: 4711672920899121238}
 --- !u!114 &8097071262524283621
 MonoBehaviour:
@@ -244,8 +241,10 @@ MonoBehaviour:
   hitBox: {fileID: 1731764188587242640}
   animator: {fileID: 380907404826858087}
   moveSpeed: 2
-  detectRange: 8
+  detectRange: 4.5
   staggerTime: 0.15
+  deathDelay: 0.35
+  facingDeadzone: 0.1
   sprite: {fileID: 1673677383554036109}
   telegraphColor: {r: 1, g: 0.78, b: 0.78, a: 1}
   muzzle: {fileID: 6760826243675726534}

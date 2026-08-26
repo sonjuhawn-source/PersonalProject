@@ -9,6 +9,7 @@ namespace Game.Gameplay
         protected const string clipIdle = "Idle";
         protected const string clipMove = "Run";
         protected const string clipJump = "Jump";
+        protected const string clipDeath = "Death";
 
         public virtual bool AllowsHorizontalControl => true;
         public virtual bool UsesGravity => true;

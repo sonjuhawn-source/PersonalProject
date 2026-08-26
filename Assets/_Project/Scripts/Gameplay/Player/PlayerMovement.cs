@@ -52,6 +52,7 @@ namespace Game.Gameplay
         private GroundChecker ground;
         private VelocityImpulse impulse;
         private Invincibility invincibility;
+        private Health health;
 
         private StateMachine<PlayerMovement> machine;
         private WeaponHolder weapons;
@@ -64,6 +65,7 @@ namespace Game.Gameplay
         internal FallState Fall { get; private set; }
         internal AttackState Attack { get; private set; }
         internal SwapState Swap { get; private set; }
+        internal DeadState Dead { get; private set; }
         internal HitBox HitBox => hitBox;
 
         internal int ComboCount => weapons.Current.Data.ComboCount;
@@ -91,6 +93,7 @@ namespace Game.Gameplay
             impulse = GetComponent<VelocityImpulse>();
             weapons = GetComponent<WeaponHolder>();
             invincibility = GetComponent<Invincibility>();
+            health = GetComponent<Health>();
 
             machine = new StateMachine<PlayerMovement>(this);
 
@@ -100,12 +103,17 @@ namespace Game.Gameplay
             Fall = new FallState(machine);
             Attack = new AttackState(machine);
             Swap = new SwapState(machine);
+            Dead = new DeadState(machine);
 
             if (animator == null)
             {
                 animator = GetComponentInChildren<Animator>();
                 Debug.LogWarning($"{gameObject.name}: Animator가 배선되지 않았습니다", this);
             }
+            if (health != null)
+                health.Died += OnDied;
+            else
+                Debug.LogWarning($"{gameObject.name}: Health 가 없다 — 죽어도 Dead 로 못 간다", this);
 
             machine.Change(Idle);
         }
@@ -233,6 +241,12 @@ namespace Game.Gameplay
             arrow.Init(BuildDamageInfo(data), facing);
         }
 
+        internal void Stop()
+        {
+            body.linearVelocityX = 0;
+            hitBox?.HitBoxDeactivate();
+        }
+
         private void ApplyGravity()
         {
             if (!CurrentState.UsesGravity)
@@ -254,6 +268,17 @@ namespace Game.Gameplay
         {
             if (body.linearVelocityY < -maxFallSpeed)
                 body.linearVelocityY = -maxFallSpeed;
+        }
+
+        private void OnDied()
+        {
+            machine.Change(Dead);
+        }
+
+        private void OnDestroy()
+        {
+            if (health != null)
+                health.Died -= OnDied;
         }
     }
 }

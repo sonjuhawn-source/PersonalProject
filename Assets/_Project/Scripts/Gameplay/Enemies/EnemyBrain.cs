@@ -19,6 +19,8 @@ namespace Game.Gameplay.Enemies
         [SerializeField]
         private float staggerTime = 0.15f;
         [SerializeField]
+        private float deathDelay = 0.35f;
+        [SerializeField]
         private float facingDeadzone = 0.1f;
         [SerializeField]
         private SpriteRenderer sprite;
@@ -53,6 +55,7 @@ namespace Game.Gameplay.Enemies
         internal float DirectionToTarget => Mathf.Sign(target.position.x - transform.position.x);
         internal float DetectRange => detectRange;
         internal float StaggerTime => staggerTime;
+        internal float DeathDelay => deathDelay;
         internal EnemyState CurrentState => (EnemyState)machine.Current;
         internal HitBox HitBox => hitBox;
 
@@ -236,6 +239,11 @@ namespace Game.Gameplay.Enemies
         {
             body.linearVelocityX = 0;
             hitBox?.HitBoxDeactivate();
+        }
+
+        internal void Despawn()
+        {
+            Destroy(gameObject);
         }
 
         internal bool TrySelectPattern()
