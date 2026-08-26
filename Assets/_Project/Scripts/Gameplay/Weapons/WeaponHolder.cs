@@ -16,6 +16,17 @@ namespace Game.Gameplay
 
         internal WeaponInstance Current => slots[activeIndex];
 
+        internal WeaponData[] SnapshotWeapons()
+        {
+            if (slots == null)
+                return System.Array.Empty<WeaponData>();
+
+            var result = new WeaponData[slots.Length];
+            for (int i = 0; i < slots.Length; i++)
+                result[i] = slots[i].Data;
+            return result;
+        }
+
         private void Awake()
         {
             if (startingWeapons == null || startingWeapons.Length < 2)
