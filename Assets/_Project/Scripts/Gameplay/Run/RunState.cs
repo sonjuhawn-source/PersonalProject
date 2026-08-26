@@ -33,6 +33,12 @@ namespace Game.Gameplay.Run
             weapons = value ?? System.Array.Empty<WeaponData>();
         }
 
+        // 재료를 다 갖고 있는 쪽이 만든다. 밖에서 조립하면 필드가 늘 때마다 조립부를 고친다.
+        internal RunResult BuildResult(RunOutcome outcome)
+        {
+            return new RunResult(outcome, CurrentIndex + 1, KillCount, CurrentHealth);
+        }
+
         public RunState(int seed, RoomData[] pool, RoomData bossRoom, int roomCount)
         {
             Seed = seed;
