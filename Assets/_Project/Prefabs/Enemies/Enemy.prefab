@@ -241,8 +241,11 @@ MonoBehaviour:
   patterns: []
   hitBox: {fileID: 1731764188587242640}
   animator: {fileID: 380907404826858087}
+  patrols: 1
   moveSpeed: 2
   detectRange: 4.5
+  detectHeight: 2
+  loseMult: 1.5
   staggerTime: 0.15
   deathDelay: 0.35
   facingDeadzone: 0.1

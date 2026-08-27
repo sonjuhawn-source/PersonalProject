@@ -13,12 +13,16 @@ namespace Game.Gameplay.Rooms
         [SerializeField]
         private RoomData bossRoom;
         [SerializeField]
+        private RoomData rewardRoom;
+        [SerializeField]
         private int roomCount = 10;
+        [SerializeField]
+        private int rewardEvery = 2;
         [SerializeField]
         private int seed = -1;
         [SerializeField]
         private CameraFollow cameraFollow;
-        [SerializeField] 
+        [SerializeField]
         private float fallMargin = 3f;
 
         private Transform player;
@@ -72,7 +76,7 @@ namespace Game.Gameplay.Rooms
                 Debug.LogWarning($"{gameObject.name}: 플레이어에 WeaponHolder 가 없다 — 런 결과에 무기가 안 남는다", this);
 
             int actualSeed = seed < 0 ? Environment.TickCount : seed;
-            run = new RunState(actualSeed, roomPool, bossRoom, roomCount);
+            run = new RunState(actualSeed, roomPool, bossRoom: bossRoom, roomCount: roomCount, rewardRoom: rewardRoom, rewardEvery: rewardEvery);
 
             if (run.RoomCount == 0)
             {
@@ -190,9 +194,9 @@ namespace Game.Gameplay.Rooms
                 return;
             if (playerGround == null || playerBody == null)
                 return;
-            if (!currentRoom.TryGetBounds(out Bounds b)) 
+            if (!currentRoom.TryGetBounds(out Bounds b))
                 return;
-            if (player.position.y >= b.min.y - fallMargin) 
+            if (player.position.y >= b.min.y - fallMargin)
                 return;
 
             player.position = playerGround.LastGroundedPosition;
