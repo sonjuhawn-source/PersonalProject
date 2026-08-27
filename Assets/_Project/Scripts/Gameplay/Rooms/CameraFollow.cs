@@ -27,17 +27,13 @@ namespace Game.Gameplay.Rooms
                 enabled = false;
                 return;
             }
-            if (currentRoom == null)
-            {
-                Debug.LogWarning($"{gameObject.name}: currentRoom 미지정 - 방 경계를 몰라 추적을 멈춘다", this);
-            }
         }
 
         private void LateUpdate()
         {
             if (currentRoom == null)
                 return;
-            if (!currentRoom.TryGetCameraBounds(out Bounds b))
+            if (!currentRoom.TryGetBounds(out Bounds b))
                 return;
 
             float halfH = cam.orthographicSize;

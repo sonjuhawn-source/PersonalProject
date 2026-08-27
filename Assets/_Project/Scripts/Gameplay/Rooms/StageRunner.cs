@@ -18,6 +18,8 @@ namespace Game.Gameplay.Rooms
         private int seed = -1;
         [SerializeField]
         private CameraFollow cameraFollow;
+        [SerializeField] 
+        private float fallMargin = 3f;
 
         private Transform player;
         private Health playerHealth;
@@ -26,6 +28,8 @@ namespace Game.Gameplay.Rooms
         private Room currentRoom;
         private IRoomHandler handler;
         private bool runEnded;
+        private GroundChecker playerGround;
+        private Rigidbody2D playerBody;
 
         public event Action<string> RunEnded;
 
@@ -45,6 +49,17 @@ namespace Game.Gameplay.Rooms
                 enabled = false;
                 return;
             }
+            playerGround = found.GetComponent<GroundChecker>();
+            playerBody = found.GetComponent<Rigidbody2D>();
+            if (playerGround == null)
+            {
+                Debug.LogWarning($"{gameObject.name}: GroundChecker 가 없다 — 떨어져도 돌아올 지점을 모른다", this);
+            }
+            if (playerBody == null)
+            {
+                Debug.LogWarning($"{gameObject.name}: Rigidbody2D 가 없다 — 되돌려도 낙하 속도가 남는다", this);
+            }
+
             player = found.transform;
             playerHealth = found.GetComponent<Health>();
             playerWeapons = found.GetComponent<WeaponHolder>();
@@ -99,6 +114,8 @@ namespace Game.Gameplay.Rooms
             Room next = Instantiate(data.RoomPrefab, pos, Quaternion.identity);
 
             player.position = next.Entry.position;
+            playerGround?.ResetLastGrounded();
+
             cameraFollow.SetRoom(next);
 
             if (next.ExitTrigger == null)
@@ -165,6 +182,21 @@ namespace Game.Gameplay.Rooms
                 return;
             if (Keyboard.current != null && Keyboard.current.rKey.wasPressedThisFrame)
                 Restart();
+        }
+
+        private void FixedUpdate()
+        {
+            if (runEnded || currentRoom == null || player == null)
+                return;
+            if (playerGround == null || playerBody == null)
+                return;
+            if (!currentRoom.TryGetBounds(out Bounds b)) 
+                return;
+            if (player.position.y >= b.min.y - fallMargin) 
+                return;
+
+            player.position = playerGround.LastGroundedPosition;
+            playerBody.linearVelocity = Vector2.zero;
         }
 
         private void Restart()

@@ -932,6 +932,7 @@ MonoBehaviour:
   roomCount: 5
   seed: -1
   cameraFollow: {fileID: 1957209188}
+  fallMargin: 3
 --- !u!4 &1349538043
 Transform:
   m_ObjectHideFlags: 0
@@ -1077,6 +1078,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 8
   bodyCollider: {fileID: 1483818005}
+  centerProbeWidth: 0.05
 --- !u!70 &1483818005
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
