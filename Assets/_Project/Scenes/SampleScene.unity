@@ -928,7 +928,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 14179a36c39fe384e8090123c96d35e6, type: 2}
   - {fileID: 11400000, guid: fa193dfa738d397469d055bb541acf53, type: 2}
   - {fileID: 11400000, guid: f32efe2d3c89e3e4d938a2b9c34e2bf1, type: 2}
-  bossRoom: {fileID: 0}
+  bossRoom: {fileID: 11400000, guid: d1a4eaed322c46a478f9e1d3fbb9054b, type: 2}
   roomCount: 5
   seed: -1
   cameraFollow: {fileID: 1957209188}

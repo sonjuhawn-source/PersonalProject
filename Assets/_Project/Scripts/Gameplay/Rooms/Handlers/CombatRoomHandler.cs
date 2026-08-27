@@ -13,7 +13,9 @@ namespace Game.Gameplay.Rooms
         private int remaining;
         private RunState run;
         private readonly List<Health> subscribed = new List<Health>();
+
         public event Action Cleared;
+        public bool EndsRun => false;
 
         public void Enter(Room room, RoomData data, RunState run)
         {

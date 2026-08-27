@@ -5,6 +5,8 @@ namespace Game.Gameplay.Rooms
 {
     internal interface IRoomHandler
     {
+        bool EndsRun { get; }
+
         event Action Cleared;
         void Enter(Room room, RoomData data, RunState run);
         void Exit();
