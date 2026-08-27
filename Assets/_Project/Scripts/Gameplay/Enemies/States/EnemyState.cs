@@ -11,7 +11,7 @@ namespace Game.Gameplay.Enemies
         protected const string clipHit = "Hit";
         protected const string clipDeath = "Death";
 
-        public virtual bool AllowsMovement => true;
+        public virtual float MoveDirection => 0f;
         public virtual bool AllowsFacing => true;
         public virtual bool CanBeInterrupted => true;
     }

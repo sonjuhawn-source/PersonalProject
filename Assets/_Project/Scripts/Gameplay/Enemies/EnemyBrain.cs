@@ -12,10 +12,16 @@ namespace Game.Gameplay.Enemies
         private HitBox hitBox;
         [SerializeField]
         private Animator animator;
+        [SerializeField] 
+        private bool patrols = true;
         [SerializeField]
         private float moveSpeed;
         [SerializeField]
         private float detectRange;
+        [SerializeField]
+        private float detectHeight = 2;
+        [SerializeField]
+        private float loseMult = 1.5f;
         [SerializeField]
         private float staggerTime = 0.15f;
         [SerializeField]
@@ -51,9 +57,21 @@ namespace Game.Gameplay.Enemies
 
         internal AttackPattern Current { get; private set; }
         internal bool IsAdvancing { get; private set; }
+        internal bool Patrols => patrols;
         internal float DistanceToTarget => Mathf.Abs(target.position.x - transform.position.x);
-        internal float DirectionToTarget => Mathf.Sign(target.position.x - transform.position.x);
+        internal float DirectionToTarget
+        {
+            get
+            {
+                float dx = target.position.x - transform.position.x;
+                return Mathf.Abs(dx) < facingDeadzone ? 0f : Mathf.Sign(dx);
+            }
+        }
+        internal float DetectHeight => detectHeight;
+        internal float HeightToTarget => Mathf.Abs(target.position.y - transform.position.y);
         internal float DetectRange => detectRange;
+        internal float LoseRange => detectRange * loseMult;
+        internal float LoseHeight => detectHeight * loseMult;
         internal float StaggerTime => staggerTime;
         internal float DeathDelay => deathDelay;
         internal EnemyState CurrentState => (EnemyState)machine.Current;
@@ -170,28 +188,23 @@ namespace Game.Gameplay.Enemies
             if (impulse.IsActive)
                 return;
 
-            float dx = target.position.x - transform.position.x;
-            float dir = Mathf.Abs(dx) < facingDeadzone ? 0f : Mathf.Sign(dx);
+            float dir = CurrentState.MoveDirection;
 
             if (CurrentState.AllowsFacing)
                 SetFacing(dir);
-            if (!CurrentState.AllowsMovement)
-            {
-                body.linearVelocityX = 0;
-                IsAdvancing = false;
-                return;
-            }
 
-            if (probe != null && !probe.CanAdvance(dir))
+            if (dir == 0f || !CanAdvance(dir))
             {
-                IsAdvancing = false;
                 body.linearVelocityX = 0;
+                IsAdvancing = false;
                 return;
             }
 
             body.linearVelocityX = dir * moveSpeed;
             IsAdvancing = dir != 0f;
         }
+
+        internal bool CanAdvance(float dir) => probe == null || probe.CanAdvance(dir);
 
         internal void SetFacing(float dir)
         {
@@ -253,8 +266,7 @@ namespace Game.Gameplay.Enemies
             if (picked == null)
                 return false;
 
-            float yDistance = Mathf.Abs(target.position.y - transform.position.y);
-            if (yDistance > picked.MaxHeightDiff)
+            if (HeightToTarget > picked.MaxHeightDiff)
                 return false;
 
             if (picked.ForwardSpeed > 0)

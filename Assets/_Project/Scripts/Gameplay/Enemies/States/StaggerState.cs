@@ -7,7 +7,6 @@ namespace Game.Gameplay.Enemies
     {
         public StaggerState(StateMachine<EnemyBrain> machine) : base(machine) { }
 
-        public override bool AllowsMovement => false;
         public override bool AllowsFacing => false;
         public override bool CanBeInterrupted => false;
 

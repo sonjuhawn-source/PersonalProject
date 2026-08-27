@@ -7,7 +7,6 @@ namespace Game.Gameplay.Enemies
     {
         public TelegraphState(StateMachine<EnemyBrain> machine) : base(machine) { }
 
-        public override bool AllowsMovement => false;
         public override bool AllowsFacing => false;
         public override bool CanBeInterrupted => Owner.Current == null || Owner.Current.Interruptible;
 
