@@ -10,11 +10,15 @@ namespace Game.Gameplay
         float offsetY = 0.02f;     // 콜라이더 발밑까지의 거리
         [SerializeField]
         LayerMask groundMask;  // 인스펙터에서 Ground 선택
-
         [SerializeField]
         Collider2D bodyCollider;   // 접지 기준이 될 몸통 콜라이더. 비우면 GetComponent 로 폴백
+        [SerializeField] 
+        float centerProbeWidth = 0.05f;
+
+        private bool IsCenteredOnGround => Physics2D.OverlapBox(FootCenter, new Vector2(centerProbeWidth, boxSize.y), 0f, groundMask);
 
         public bool IsGrounded { get; private set; }
+        public Vector2 LastGroundedPosition { get; private set; }
 
         private void Awake()
         {
@@ -24,11 +28,20 @@ namespace Game.Gameplay
             if(groundMask.value == 0)
                 Debug.LogWarning($"{name}: groundMask 미지정 - IsGround가 항상 false",this);
 
+            LastGroundedPosition = transform.position;
         }
 
         void FixedUpdate()
         {
             IsGrounded = Physics2D.OverlapBox(FootCenter, boxSize, 0f, groundMask);
+
+            if (IsGrounded && IsCenteredOnGround)
+                LastGroundedPosition = transform.position;
+        }
+
+        internal void ResetLastGrounded()
+        {
+            LastGroundedPosition = transform.position;
         }
 
         void OnDrawGizmosSelected()

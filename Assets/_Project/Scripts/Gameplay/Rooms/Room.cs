@@ -1,4 +1,3 @@
-using Codice.Client.BaseCommands;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
@@ -46,7 +45,7 @@ namespace Game.Gameplay.Rooms
             }
         }
 
-        internal bool TryGetCameraBounds(out Bounds bounds)
+        internal bool TryGetBounds(out Bounds bounds)
         {
             if (boundsSource == null)
             {
