@@ -198,6 +198,11 @@ namespace Game.Gameplay.Rooms
 
         private void OnCleared()
         {
+            if (handler.EndsRun)
+            {
+                EndRun(RunOutcome.Cleared);
+                return;
+            }
             currentRoom.ExitTrigger.SetOpen(true);
         }
 

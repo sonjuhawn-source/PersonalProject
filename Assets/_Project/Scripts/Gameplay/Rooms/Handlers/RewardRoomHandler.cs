@@ -7,6 +7,7 @@ namespace Game.Gameplay.Rooms
     internal class RewardRoomHandler : IRoomHandler
     {
         public event Action Cleared;
+        public bool EndsRun => false;
 
         public void Enter(Room room, RoomData data, RunState run)
         {
