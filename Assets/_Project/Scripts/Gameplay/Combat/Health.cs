@@ -15,6 +15,8 @@ namespace Game.Gameplay
         public event Action Died;
         public event Action Damaged;
 
+        public int MaxHealth => maxHealth;
+        public event Action Changed;
         public int CurrentHealth => currentHealth;
 
         private void Awake()
@@ -32,13 +34,26 @@ namespace Game.Gameplay
             if (currentHealth <= 0)
                 return;
 
-            // 음수 체력은 어디서도 의미가 없다. 소비자마다 가리면 다음 소비자가 또 물린다.
-            currentHealth = Mathf.Max(0, currentHealth - amount);
-
+            SetHealth(currentHealth - amount);   
+            
             if (currentHealth <= 0)
                 Die();
             else
                 Damaged?.Invoke();
+        }
+
+        public void Heal(int amount)
+        {
+            if(currentHealth <= 0) 
+                return;
+            SetHealth(currentHealth + amount);
+        }
+
+        // 음수 체력은 어디서도 의미가 없다. 소비자마다 가리면 다음 소비자가 또 물린다.
+        private void SetHealth(int value)
+        {
+            currentHealth = Mathf.Clamp(value, 0, maxHealth);
+            Changed?.Invoke();
         }
 
         private void Die()
