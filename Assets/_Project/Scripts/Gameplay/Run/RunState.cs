@@ -1,5 +1,6 @@
-using UnityEngine;
 using Game.Gameplay.Rooms;
+using System.Collections.Generic;
+using UnityEngine;
 
 namespace Game.Gameplay.Run
 {
@@ -39,11 +40,12 @@ namespace Game.Gameplay.Run
             return new RunResult(outcome, CurrentIndex + 1, KillCount, CurrentHealth);
         }
 
-        public RunState(int seed, RoomData[] pool, RoomData bossRoom, int roomCount)
+        public RunState(int seed, RoomData[] pool, RoomData bossRoom, int roomCount, RoomData rewardRoom, int rewardEvery)
         {
             Seed = seed;
             rng = new System.Random(seed);
             int pickIndex;
+            int prevIndex = -1;
 
             if (pool == null || pool.Length == 0)
             {
@@ -54,26 +56,31 @@ namespace Game.Gameplay.Run
             if (bossRoom == null)
                 Debug.LogWarning("RunState: 보스방이 없다 — 런이 보스 없이 끝난다");
 
-            int total = roomCount + (bossRoom != null ? 1 : 0);
-            rooms = new RoomData[total];
-            int prevIndex = -1;
+            var list = new List<RoomData>();
 
             for (int i = 0; i < roomCount; i++)
             {
                 if (prevIndex < 0 || pool.Length == 1)
-                     pickIndex = rng.Next(0, pool.Length);
+                    pickIndex = rng.Next(0, pool.Length);
                 else
                 {
                     pickIndex = rng.Next(0, pool.Length - 1);
                     if (pickIndex >= prevIndex)
                         pickIndex += 1;
                 }
-
-                rooms[i] = pool[pickIndex];
+                list.Add(pool[pickIndex]);
                 prevIndex = pickIndex;
+
+                bool lastCombat = (i == roomCount - 1);
+
+                if (rewardRoom != null && rewardEvery > 0 && (i + 1) % rewardEvery == 0 && !lastCombat)
+                    list.Add(rewardRoom);
             }
+
             if (bossRoom != null)
-                rooms[total - 1] = bossRoom;
+                list.Add(bossRoom);
+
+            rooms = list.ToArray();
         }
     }
 }

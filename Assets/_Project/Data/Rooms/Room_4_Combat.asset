@@ -19,3 +19,4 @@ MonoBehaviour:
   - {fileID: 4689506569261366689, guid: ba1cafaa1cf499e42a03114a54162f52, type: 3}
   - {fileID: 274970527716688132, guid: 4df9ab28e909ad649a93163b762e31e6, type: 3}
   spawnCount: 12
+  healAmount: 0
