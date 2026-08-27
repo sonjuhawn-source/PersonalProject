@@ -931,6 +931,7 @@ MonoBehaviour:
   bossRoom: {fileID: 11400000, guid: d1a4eaed322c46a478f9e1d3fbb9054b, type: 2}
   rewardRoom: {fileID: 11400000, guid: fad10d97e0673614084edaa92f52306a, type: 2}
   roomCount: 5
+  rewardEvery: 2
   seed: -1
   cameraFollow: {fileID: 1957209188}
   fallMargin: 3
