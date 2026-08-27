@@ -24,6 +24,8 @@ namespace Game.Gameplay.Enemies
         private Vector2 hitboxSize;
         [SerializeField]
         private float forwardSpeed;
+        [SerializeField] 
+        private bool interruptible = true;
 
         [Header("선택 조건")]
         [SerializeField]
@@ -51,6 +53,7 @@ namespace Game.Gameplay.Enemies
         internal float MaxHeightDiff => maxHeightDiff;
         internal float Weight => weight;
         internal float Cooldown => cooldown;
+        internal bool Interruptible => interruptible;
 
     }
 }
