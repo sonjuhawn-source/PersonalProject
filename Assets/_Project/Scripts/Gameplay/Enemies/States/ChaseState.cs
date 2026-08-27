@@ -5,6 +5,8 @@ namespace Game.Gameplay.Enemies
     public class ChaseState : EnemyState
     {
         public ChaseState(StateMachine<EnemyBrain> machine) : base(machine) { }
+        
+        public override float MoveDirection => Owner.DirectionToTarget;
 
         private bool wasMoving;
 
@@ -16,11 +18,19 @@ namespace Game.Gameplay.Enemies
 
         public override void FixedTick()
         {
+            if (Owner.DistanceToTarget > Owner.LoseRange
+                || Owner.HeightToTarget > Owner.LoseHeight)
+            {
+                Machine.Change(Owner.Idle);
+                return;
+            }
+
             if (Owner.TrySelectPattern())
             {
                 Machine.Change(Owner.Telegraph);
                 return;
             }
+
             if (Owner.IsAdvancing != wasMoving)
             {
                 wasMoving = Owner.IsAdvancing;
