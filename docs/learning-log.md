@@ -1,7 +1,7 @@
 # 학습 로그
 
 > W1 작업 중 막혔던 지점과 그때 이해한 것들. 복습용.
-> 최종 수정 2026-08-27 (#90 까지 반영)
+> 최종 수정 2026-08-27 (#93 까지 반영)
 
 관련: [GDD](GDD.md) · [개발 로드맵](roadmap.md) · [W1 빌드 노트](builds/1주차%20빌드%20노트.md)
 
@@ -2140,6 +2140,48 @@ _8    8×6       ← 시트에 떨어진 입자 하나를 스프라이트로 잡
 `Samples` 칸은 Unity 2019 부터 Animation 창에서 **기본으로 숨겨져 있다** — 창 오른쪽 위
 ⋮ → `Show Sample Rate`. 없는 줄 알고 찾게 되는 자리다. 인스펙터를 `Debug` 모드로 바꿔
 `Sample Rate` 를 직접 고치는 쪽이 더 빠르다.
+
+### `Mathf.Sign(0f)` 은 0 이 아니라 1 이다
+
+`HandleMovement` 가 데드존을 직접 계산하고 있었다.
+
+```csharp
+float dx = target.position.x - transform.position.x;
+float dir = Mathf.Abs(dx) < facingDeadzone ? 0f : Mathf.Sign(dx);
+```
+
+이 줄이 왜 필요한지 몰랐는데, 방향 계산을 `DirectionToTarget` 안으로 옮기려다 알았다.
+**`Mathf.Sign` 은 0 을 받으면 1 을 돌려준다.** 데드존이 없으면 적이 플레이어와 정확히
+겹쳤을 때 방향이 오른쪽으로 튀고, 매 프레임 부호가 흔들려 떨린다.
+
+`Mathf.Sign` 은 **양수/음수만 답하는 함수가 아니라 "0 이면 양수"라고 답하는 함수**다.
+`#7` 에서 `MoveInput > 0` 으로 왼쪽 이동을 놓친 것과 짝이다 — 원점을 어느 쪽에 넣을지를
+함수가 이미 정해놓고 있다.
+
+계산을 옮길 때 **딸린 조건까지 옮겨야 한다.** 옮기지 않으면 컴파일도 되고 대부분의
+상황에서 동작도 같다.
+
+### 판정을 한 방향만 물으면 진동한다
+
+순찰의 돌아서는 조건을 이렇게 쓰면 안 된다.
+
+```csharp
+if (!Owner.CanAdvance(patrolDir))
+    patrolDir = -patrolDir;
+```
+
+**양쪽이 다 막힌 좁은 발판에서 매 프레임 방향이 뒤집힌다.** 뒤집은 쪽도 막혀 있으니 다음
+프레임에 또 뒤집고, 적이 제자리에서 좌우로 떠는 그림이 된다.
+
+```csharp
+if (!Owner.CanAdvance(patrolDir) && Owner.CanAdvance(-patrolDir))
+```
+
+반대쪽을 같이 물으면 **막다른 곳에서는 아무것도 안 한다.** 그러면 `HandleMovement` 의
+게이트가 속도를 0 으로 만들어 제자리에 서고, 한쪽이 열리면 다음 프레임에 뒤집힌다.
+"갇혔다" 상태를 따로 만들지 않아도 된다.
+
+**상태를 뒤집는 조건에는 뒤집은 뒤가 나은지까지 넣어야 한다.**
 
 ## 5. 설계 판단
 
@@ -4307,6 +4349,69 @@ Variant(`Room_Boss` 는 x 8, `Room_5` 는 x 74)에서도 포탈이 따라간다.
 직접 하던 것을 `SetOpen(false)` 로 돌렸다 — 초기 상태를 두 군데에서 맞추면 표현을 하나 더
 붙일 때 또 빠뜨린다.
 
+### `bool` 이 답할 수 있는 질문은 하나뿐이다
+
+`EnemyState.AllowsMovement` 가 bool 이었고, `HandleMovement` 는 이걸 보고 목표 방향으로
+속도를 넣었다.
+
+```csharp
+public virtual bool AllowsMovement => true;
+```
+
+**이 bool 이 답하는 것은 "목표를 향해 갈까"뿐이다.** 순찰은 목표와 무관한 방향이라 이
+구조로는 표현할 자리가 없었다. bool 을 하나 더 얹는 것(`IsPatrolling`)도 가능하지만,
+그러면 두 bool 의 조합 네 가지 중 의미 있는 것이 셋뿐인 상태가 된다.
+
+`MoveDirection`(float) 으로 바꾸니 **기본값이 뒤집혔다.**
+
+```
+AllowsMovement => true     기본이 "움직인다" — 안 움직이는 상태가 자기를 말해야 한다
+MoveDirection  => 0f       기본이 "안 움직인다" — 움직이는 상태만 말한다
+```
+
+재정의가 **여섯 개 사라지고 두 개 생겼다** (`Idle`·`Telegraph`·`Attack`·`Recover`·
+`Stagger`·`Dead` 에서 삭제, `Chase`·`Idle` 에 추가). 상태 일곱 중 움직이는 것이 둘이니
+기본값이 "안 움직인다"인 쪽이 맞았다.
+
+**bool 을 값으로 넓히면 조건이 늘지 않고 줄어든다.** `AllowsFacing` 은 그대로 뒀다 —
+`Telegraph` 가 진입 시 한 번 고정하고 그 뒤엔 안 바꾸는 동작이 `MoveDirection` 과 달라서
+같은 축이 아니다.
+
+### 질의처럼 보이는 함수가 상태를 바꾸면 호출 순서가 의미를 갖는다
+
+`Chase` 에 추격 포기를 넣을 때 순서를 잘못 잡을 수 있었다.
+
+```csharp
+if (Owner.TrySelectPattern()) { ... }        // 이걸 먼저 부르면
+if (거리 > LoseRange) { Idle 로 }            // 나갈 판에 쿨다운을 태운다
+```
+
+```csharp
+// WeightedPatternSelector
+private AttackPattern Use(int i)
+{
+    cooldowns[i] = patterns[i].Cooldown;     // Select 가 성공하면 여기를 지난다
+    return patterns[i];
+}
+```
+
+`TrySelectPattern` 은 이름이 질의(`Try...`)인데 **성공하면 쿨다운을 소비한다.** 포기
+검사보다 먼저 부르면 플레이어가 다시 들어왔을 때 그 패턴이 안 나오고, **로그도 안 나고
+"가끔 공격을 안 한다"로만 보인다.**
+
+`Try` 접두사가 "실패하면 아무 일도 없다"까지 약속하는 것으로 읽히는 게 함정이다. 실제로
+약속하는 것은 반환값이 성공 여부라는 것뿐이다.
+
+### 같은 값으로 들어가고 나가면 경계에서 떨린다
+
+`Idle → Chase` 를 `detectRange` 로 판단하는데 `Chase → Idle` 도 같은 값으로 하면, 경계에
+서 있는 것만으로 두 상태를 매 프레임 왕복한다. 클립이 계속 처음부터 재생되고
+(`animator.Play(name, -1, 0f)`) 적이 굳은 것처럼 보인다.
+
+나갈 때를 더 멀게 잡는다. **배수 하나로 거리와 높이를 같이 덮었다** — 필드를 둘로 나누면
+"왜 하나는 1.5고 하나는 2인가"를 나중에 설명해야 하는데, 지금 근거는 "떨리지 않게" 하나뿐이다.
+근거가 하나면 값도 하나여야 한다.
+
 ## 6. 반복한 실수 패턴
 
 ### 에디터·IDE 저장 누락
@@ -4463,6 +4568,21 @@ if (health != null || room == null)      // == null || == null 이어야 한다
 `Room` 은 방 프리팹 루트에 있고 적은 그 자식이라 **항상 null** 이다. 의사코드에 `InParent`
 가 적혀 있었는데 옮기면서 한 토큰이 빠졌다 — 문자열을 안 바꾼 것(위)과 같은 성질이다.
 **메서드 이름의 접미사는 문자열만큼이나 조용히 사라진다.**
+
+`#93` 에서 또 나왔다. `HandleMovement` 를 `MoveDirection` 기반으로 고치면서 **새 게이트를
+넣고 옛 게이트를 남겼다.**
+
+```csharp
+if (dir == 0f || !CanAdvance(dir)) { ... return; }        // 새로 넣은 것
+if (probe != null && !probe.CanAdvance(dir)) { ... return; }   // 옛것 — 도달 불가
+```
+
+`CanAdvance` 가 `probe == null || probe.CanAdvance(dir)` 이라 두 번째 블록은 절대 실행되지
+않는다. 동작이 같아서 플레이로는 안 드러난다.
+
+`#87` 에서 `body.linearVelocityX = DirectionToTarget * moveSpeed` 옛 줄을 남긴 것과 같은
+자리다. **한 함수 안에서 계산을 옮길 때, 옮긴 쪽만 보고 원래 자리를 안 본다.** 옮기는
+작업은 "쓰기"와 "지우기" 둘인데 쓰기만 하고 끝내는 것 같다.
 
 ### 어긋난 기록 중 틀린 쪽을 인용했다
 
@@ -4747,6 +4867,23 @@ if (이동 입력)    Change(Move);      // 위에서 Fall 로 갔어도 이 줄
 
 **원칙: `Change` 는 그 함수의 마지막 행동이어야 한다.** `else if` 로 묶거나 직후에
 `return` 한다.
+
+`#93` 에서는 전환 뒤에 `return` 을 빼먹었다.
+
+```csharp
+if (감지)
+    Machine.Change(Owner.Chase);
+                                  // return 이 없다
+if (!Owner.CanAdvance(patrolDir) && ...)
+    patrolDir = -patrolDir;        // Chase 로 넘어간 뒤에 Idle 이 순찰 방향을 뒤집는다
+```
+
+`Machine.Change` 가 `Chase.Enter()` 를 이미 부른 뒤인데 `Idle.FixedTick` 이 계속 돈다.
+증상은 작다 — 다음에 `Idle` 로 돌아올 때 방향이 반대일 뿐이다.
+
+**작은 증상이 문제다.** 같은 파일의 `ChaseState` 는 두 분기 모두 `return` 으로 나가는데
+여기만 다르면, 나중에 아래에 코드가 붙을 때 조용히 어긋난다. "전환했으면 그 프레임은
+끝"이 이 상태머신의 규칙인데 예외를 하나 만들어둔 셈이다.
 
 ### 배선 누락이 조용히 넘어갔다
 
