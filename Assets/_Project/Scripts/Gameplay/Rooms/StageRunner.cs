@@ -27,6 +27,8 @@ namespace Game.Gameplay.Rooms
         private IRoomHandler handler;
         private bool runEnded;
 
+        public event Action<string> RunEnded;
+
         private void Start()
         {
             if (cameraFollow == null)
@@ -146,11 +148,13 @@ namespace Game.Gameplay.Rooms
             CaptureFromPlayer();
             RunResult result = run.BuildResult(outcome);
 
-            // #103 이 이 로그를 결과 화면으로 대체한다.
-            Debug.Log($"런 종료 — {(outcome == RunOutcome.Cleared ? "클리어" : "사망")} · " +
-                      $"{result.Floor}층 · {result.Kills}킬 · HP {result.Health} · " +
-                      $"무기 {DescribeWeapons()}", this);
-            Debug.Log("R 을 누르면 다시 시작한다", this);
+            string text = $"런 종료 ... {(outcome == RunOutcome.Cleared ? "클리어" : "사망")} · " +
+              $"{result.Floor}층 · {result.Kills}킬 · HP {result.Health} · " +
+              $"무기 {DescribeWeapons()}\n" +
+              "R 을 누르면 다시 시작한다";
+
+            Debug.Log(text);
+            RunEnded?.Invoke(text);
         }
 
         // #103 이 재시작 버튼을 붙이면 이 폴링은 사라진다.
