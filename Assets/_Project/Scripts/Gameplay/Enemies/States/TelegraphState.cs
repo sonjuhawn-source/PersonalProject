@@ -9,6 +9,7 @@ namespace Game.Gameplay.Enemies
 
         public override bool AllowsMovement => false;
         public override bool AllowsFacing => false;
+        public override bool CanBeInterrupted => Owner.Current == null || Owner.Current.Interruptible;
 
         private float elapsed;
 
