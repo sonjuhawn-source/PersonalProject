@@ -16,8 +16,10 @@ namespace Game.Gameplay.Rooms
         private EnemyBrain[] enemyPool;
         [SerializeField]
         private int spawnCount = 1;
-        [SerializeField] 
+        [SerializeField]
         private int healAmount = 10;
+        [SerializeField]
+        private WeaponData[] rewardWeapons;
 
         internal RoomType Type => type;
         internal int Difficulty => difficulty;
@@ -26,6 +28,8 @@ namespace Game.Gameplay.Rooms
         internal EnemyBrain GetEnemy(int i) => enemyPool[i];
         internal int SpawnCount => spawnCount;
         internal int HealAmount => healAmount;
+        internal int RewardWeaponCount => rewardWeapons == null ? 0 : rewardWeapons.Length;
+        internal WeaponData GetRewardWeapon(int i) => rewardWeapons[i];
 
     }
 }
