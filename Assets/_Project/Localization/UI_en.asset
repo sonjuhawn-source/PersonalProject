@@ -17,7 +17,19 @@ MonoBehaviour:
   m_SharedData: {fileID: 11400000, guid: 449703ec5333bb24b8991f64158b612e, type: 2}
   m_Metadata:
     m_Items: []
-  m_TableData: []
+  m_TableData:
+  - m_Id: 12276377473269760
+    m_Localized: "Gain {0} +{1} \xB7 Discard {2}"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12276458297507840
+    m_Localized: Heal +{0}
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12276524601065472
+    m_Localized: Upgrade +{0}
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

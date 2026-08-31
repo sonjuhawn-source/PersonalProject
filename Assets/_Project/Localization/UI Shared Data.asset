@@ -14,7 +14,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: Unity.Localization::UnityEngine.Localization.Tables.SharedTableData
   m_TableCollectionName: UI
   m_TableCollectionNameGuidString: 449703ec5333bb24b8991f64158b612e
-  m_Entries: []
+  m_Entries:
+  - m_Id: 12276377473269760
+    m_Key: Reward_Weapon
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12276458297507840
+    m_Key: Reward_Heal
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12276524601065472
+    m_Key: Reward_Upgrade
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:
