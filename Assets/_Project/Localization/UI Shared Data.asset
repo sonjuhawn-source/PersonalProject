@@ -51,6 +51,34 @@ MonoBehaviour:
     m_Key: Result_Hint
     m_Metadata:
       m_Items: []
+  - m_Id: 12328283302281216
+    m_Key: Title_Start
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12328363728060416
+    m_Key: Title_Quit
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12328411404713984
+    m_Key: Title_Controls
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12328860061024256
+    m_Key: Title_Rules
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12338448042835968
+    m_Key: Title_Help
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12338520277139456
+    m_Key: Title_Close
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12358249452683264
+    m_Key: Result_ToTitle
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

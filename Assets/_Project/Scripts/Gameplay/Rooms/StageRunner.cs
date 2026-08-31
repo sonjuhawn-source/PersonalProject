@@ -311,5 +311,11 @@ namespace Game.Gameplay.Rooms
             run.Advance();
             EnterRoom(seam);
         }
+
+        public void ToTitle()
+        {
+            Time.timeScale = 1f;
+            SceneManager.LoadScene(0);
+        }
     }
 }

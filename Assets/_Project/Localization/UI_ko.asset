@@ -55,6 +55,40 @@ MonoBehaviour:
       \uC7AC\uC2DC\uC791 \uBC84\uD2BC\uC744 \uB204\uB978\uB2E4"
     m_Metadata:
       m_Items: []
+  - m_Id: 12328283302281216
+    m_Localized: "\uAC8C\uC784 \uC2DC\uC791"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12328363728060416
+    m_Localized: "\uC885\uB8CC"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12328411404713984
+    m_Localized: "\u2190 \u2192     \uC774\uB3D9\r\nSpace   \uC810\uD504 \r\nF   
+      \uBB34\uAE30 \uC0AC\uC6A9\r\nA    \uBB34\uAE30 \uAD50\uCCB4"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12328860061024256
+    m_Localized: "\uBC29\uC744 \uC9C0\uB098 \uBCF4\uC2A4\uB97C \uC7A1\uC73C\uBA74
+      \uD074\uB9AC\uC5B4\n\uC8FD\uC73C\uBA74 \uCC98\uC74C\uBD80\uD130 \xB7 \uAC15\uD654\uC640
+      \uBB34\uAE30\uB294 \uC548 \uB0A8\uB294\uB2E4\n\uBCF4\uC0C1\uBC29\uC5D0\uC11C
+      \uC14B \uC911 \uD558\uB098\uB97C \uACE0\uB978\uB2E4\n\uBCF4\uC0C1\uBC29\uC5D0\uC11C
+      A \uB97C \uB204\uB974\uBA74 \uAC15\uD654 \uB300\uC0C1\uACFC \n\uBC84\uB9B4
+      \uBB34\uAE30\uAC00 \uBC14\uB010\uB2E4"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12338448042835968
+    m_Localized: "\uB3C4\uC6C0\uB9D0"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12338520277139456
+    m_Localized: "\uB098\uAC00\uAE30"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12358249452683264
+    m_Localized: "\uCC98\uC74C \uD654\uBA74"
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []
