@@ -38,10 +38,7 @@ namespace Game.Gameplay.Rooms
         private RewardRoomHandler pendingReward;
 
         public event Action<string> RunEnded;
-
-        // RewardOption 이 internal 이라 Game.UI 로 못 넘긴다.
-        // 지금은 읽을 문자열만 넘기고, UI 가 더 필요해지면 public DTO 를 만든다.
-        public event Action<string[]> RewardOffered;
+        public event Action<RewardOptionInfo[]> RewardOffered;
 
         private void Start()
         {
@@ -160,13 +157,17 @@ namespace Game.Gameplay.Rooms
 
         private void OnRewardOffered(RewardOption[] offered)
         {
+            var info = new RewardOptionInfo[offered.Length];
             var text = new string[offered.Length];
             for (int i = 0; i < offered.Length; i++)
+            {
+                info[i] = offered[i].ToInfo();
                 text[i] = offered[i].Describe();
+            }
 
-            // #103 이 이 로그를 선택 화면으로 대체한다.
-            Debug.Log($"보상방 — {string.Join(" / ", text)}  (1 · 2 · 3 으로 고른다)", this);
-            RewardOffered?.Invoke(text);
+            Debug.Log($"보상방 — {string.Join(" / ", text)}  (1 ~ {offered.Length} 중 하나)", this);
+
+            RewardOffered?.Invoke(info);
         }
 
         // #103 이 버튼을 붙이면 Update 의 폴링만 사라지고 이 메서드는 남는다.
