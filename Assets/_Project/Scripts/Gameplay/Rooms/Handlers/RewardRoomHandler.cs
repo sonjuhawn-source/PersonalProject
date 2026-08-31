@@ -1,15 +1,17 @@
 using Game.Gameplay.Run;
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Game.Gameplay.Rooms
 {
     internal class RewardRoomHandler : IRoomHandler
     {
-        private const int OptionCount = 3;
+        private const int UpgradeLevelsPerReward = 1;
 
         private RewardOption[] options;
         private Health playerHealth;
+        private WeaponHolder playerWeapons;
         private bool resolved;
 
         public event Action Cleared;
@@ -25,6 +27,7 @@ namespace Game.Gameplay.Rooms
 
             GameObject found = GameObject.FindWithTag("Player");
             playerHealth = found != null ? found.GetComponent<Health>() : null;
+            playerWeapons = found != null ? found.GetComponent<WeaponHolder>() : null;
 
             if (playerHealth == null)
             {
@@ -33,11 +36,15 @@ namespace Game.Gameplay.Rooms
                 return;
             }
 
+            // 치명적이지 않다. 무기·강화만 빠지고 회복은 그대로 준다.
+            if (playerWeapons == null)
+                Debug.LogWarning($"{room.name}: 플레이어 WeaponHolder 가 없다 — 무기와 강화 선택지가 안 나온다", room);
+
             options = Build(data, run);
 
             if (options.Length == 0)
             {
-                Debug.LogWarning($"{room.name}: 뽑을 보상이 없다 — healAmount 와 rewardWeapons 가 둘 다 비었다", room);
+                Debug.LogWarning($"{room.name}: 뽑을 보상이 없다 — 회복도 무기도 강화도 줄 게 없다", room);
                 Resolve();
                 return;
             }
@@ -69,43 +76,105 @@ namespace Game.Gameplay.Rooms
                     break;
 
                 case RewardKind.Weapon:
-                    // B 에서 채운다 — 슬롯 교체가 필요하다.
-                    Debug.Log($"보상 — 무기 {option.Weapon?.name} (아직 적용 안 됨)");
+                    ApplyWeapon(option.Weapon);
+                    break;
+
+                case RewardKind.Upgrade:
+                    ApplyUpgrade(option.Amount);
                     break;
             }
         }
 
-        private RewardOption[] Build(RoomData data, RunState run)
+        private void ApplyWeapon(WeaponData weapon)
         {
-            bool canHeal = data.HealAmount > 0;
-            int weaponCount = data.RewardWeaponCount;
-
-            if (!canHeal && weaponCount == 0)
-                return Array.Empty<RewardOption>();
-
-            var picked = new RewardOption[OptionCount];
-            int healCount = 0;
-
-            for (int i = 0; i < OptionCount; i++)
+            if (playerWeapons == null || weapon == null)
             {
-                bool takeHeal = canHeal && (weaponCount == 0 || run.NextInt(0, 2) == 0);
-
-                if (takeHeal)
-                {
-                    picked[i] = RewardOption.OfHeal(data.HealAmount);
-                    healCount += 1;
-                }
-                else
-                {
-                    picked[i] = RewardOption.OfWeapon(data.GetRewardWeapon(run.NextInt(0, weaponCount)));
-                }
+                Debug.LogWarning("보상 — 무기를 줄 대상이 없다");
+                return;
             }
 
-            // 회복은 포기가 없다 (GDD 6장). 셋 다 회복이면 고르는 행위가 사라진다.
-            if (healCount == OptionCount && weaponCount > 0)
-                picked[0] = RewardOption.OfWeapon(data.GetRewardWeapon(run.NextInt(0, weaponCount)));
+            int slot = playerWeapons.InactiveIndex;
 
-            return picked;
+            // 인계 기준은 활성 슬롯이다. 버리는 쪽(비활성)은 강화를 받은 적이 없어
+            // 거의 항상 0 이고, 그걸 기준으로 하면 규칙이 한 번도 안 돈다.
+            int inherited = Mathf.Max(0, playerWeapons.ActiveLevel - 1);
+            WeaponData dropped = playerWeapons.GetSlot(slot);
+
+            if (!playerWeapons.Replace(slot, weapon, inherited))
+            {
+                Debug.LogWarning($"보상 — {weapon.name} 을 슬롯 {slot} 에 넣지 못했다");
+                return;
+            }
+
+            // 무엇을 버렸는지가 이 선택의 값이다. #103 이 이 문구를 그대로 화면에 쓴다.
+            Debug.Log($"보상 — 무기 {weapon.name} +{inherited} 획득 · {(dropped != null ? dropped.name : "빈 칸")} 버림");
+        }
+
+        private void ApplyUpgrade(int levels)
+        {
+            if (playerWeapons == null || !playerWeapons.UpgradeActive(levels))
+            {
+                Debug.LogWarning("보상 — 강화할 무기가 없다");
+                return;
+            }
+
+            WeaponData active = playerWeapons.GetSlot(playerWeapons.ActiveIndex);
+            Debug.Log($"보상 — 강화 · {(active != null ? active.name : "빈 칸")} +{playerWeapons.ActiveLevel}");
+        }
+
+        // 종류가 겹치지 않게 하나씩 뽑는다. 확률로 뽑으면 셋 다 회복이 나올 수 있고
+        // 그러면 고르는 행위가 사라진다 (GDD 6장 — 회복은 포기가 없다).
+        private RewardOption[] Build(RoomData data, RunState run)
+        {
+            var list = new List<RewardOption>(3);
+
+            // 이미 든 무기를 빼면 중복 장착을 허용할지 정할 필요가 없어진다 (GDD 12.6).
+            WeaponData weapon = PickUnheldWeapon(data, run);
+            if (weapon != null)
+                list.Add(RewardOption.OfWeapon(weapon));
+
+            // 만피면 죽은 선택지다. 넣으면 3택이 사실상 2택이 된다.
+            if (data.HealAmount > 0 && playerHealth.CurrentHealth < playerHealth.MaxHealth)
+                list.Add(RewardOption.OfHeal(data.HealAmount));
+
+            if (playerWeapons != null && playerWeapons.SlotCount > 0)
+                list.Add(RewardOption.OfUpgrade(UpgradeLevelsPerReward));
+
+            return list.ToArray();
+        }
+
+        private WeaponData PickUnheldWeapon(RoomData data, RunState run)
+        {
+            int count = data.RewardWeaponCount;
+            if (count == 0)
+                return null;
+
+            var pool = new List<WeaponData>(count);
+            for (int i = 0; i < count; i++)
+            {
+                WeaponData w = data.GetRewardWeapon(i);
+                if (w == null || Holds(w))
+                    continue;
+                pool.Add(w);
+            }
+
+            if (pool.Count == 0)
+                return null;
+
+            return pool[run.NextInt(0, pool.Count)];
+        }
+
+        private bool Holds(WeaponData weapon)
+        {
+            if (playerWeapons == null)
+                return false;
+
+            for (int i = 0; i < playerWeapons.SlotCount; i++)
+            {
+                if (playerWeapons.GetSlot(i) == weapon)
+                    return true;
+            }
+            return false;
         }
 
         private void Resolve()
@@ -119,6 +188,7 @@ namespace Game.Gameplay.Rooms
             Offered = null;
             options = null;
             playerHealth = null;
+            playerWeapons = null;
         }
     }
 }

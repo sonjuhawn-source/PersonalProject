@@ -16,6 +16,45 @@ namespace Game.Gameplay
 
         internal WeaponInstance Current => slots[activeIndex];
 
+        internal int SlotCount => slots == null ? 0 : slots.Length;
+        internal int ActiveIndex => activeIndex;
+
+        // 보상은 안 쓰던 무기를 버린다. 지키고 싶으면 미리 스왑해서 활성으로 두면 된다.
+        internal int InactiveIndex => slots == null ? -1 : (activeIndex + 1) % slots.Length;
+        internal int ActiveLevel => slots == null ? 0 : slots[activeIndex].UpgradeLevel;
+
+        internal WeaponData GetSlot(int index)
+        {
+            if (slots == null || index < 0 || index >= slots.Length)
+                return null;
+            return slots[index].Data;
+        }
+
+        // 새 무기는 인계받은 레벨로 들어온다. 0 으로 들어오면 후반에 무기 보상이 죽는다.
+        internal bool Replace(int index, WeaponData data, int upgradeLevel)
+        {
+            if (slots == null || data == null || index < 0 || index >= slots.Length)
+                return false;
+
+            slots[index] = new WeaponInstance(data, upgradeLevel);
+
+            // 지금 보상 경로는 비활성 슬롯만 바꾸므로 안 탄다.
+            // #98 적 무기 드랍이 활성 슬롯을 바꿀 때 이게 없으면 외형·모션·리치가 옛 무기로 남는다.
+            if (index == activeIndex)
+                Equip(activeIndex);
+
+            return true;
+        }
+
+        internal bool UpgradeActive(int levels)
+        {
+            if (slots == null)
+                return false;
+
+            slots[activeIndex].Upgrade(levels);
+            return true;
+        }
+
         internal WeaponData[] SnapshotWeapons()
         {
             if (slots == null)

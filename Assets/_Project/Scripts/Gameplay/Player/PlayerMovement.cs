@@ -68,9 +68,10 @@ namespace Game.Gameplay
         internal DeadState Dead { get; private set; }
         internal HitBox HitBox => hitBox;
 
-        internal int ComboCount => weapons.Current.Data.ComboCount;
+        internal int ComboCount => weapons.Current.ComboCount;
         internal float ComboResetTime => comboResetTime;
-        internal AttackData GetAttack(int index) => weapons.Current.Data.GetAttack(index);
+        // Data 가 아니라 인스턴스를 거친다 — 강화 배율이 여기서 붙는다.
+        internal AttackData GetAttack(int index) => weapons.Current.GetAttack(index);
         internal AttackKind Kind => weapons.Current.Data.Kind;
         internal WeaponData CurrentWeapon => weapons.Current.Data;
         internal float DashTime => dashTime;
