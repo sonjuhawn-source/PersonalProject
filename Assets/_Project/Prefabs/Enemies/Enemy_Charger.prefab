@@ -24,6 +24,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy_Charger
       objectReference: {fileID: 0}
+    - target: {fileID: 6568416106829634190, guid: 68480ca6c6c6e4d418212708ed6c1296, type: 3}
+      propertyPath: maxHealth
+      value: 30
+      objectReference: {fileID: 0}
     - target: {fileID: 8548734330975374796, guid: 68480ca6c6c6e4d418212708ed6c1296, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

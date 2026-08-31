@@ -79,6 +79,10 @@ MonoBehaviour:
     m_Key: Result_ToTitle
     m_Metadata:
       m_Items: []
+  - m_Id: 12375276473040896
+    m_Key: Reward_Hint
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

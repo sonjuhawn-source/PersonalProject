@@ -12,6 +12,8 @@ namespace Game.Gameplay.Rooms
         private RewardOption[] options;
         private Health playerHealth;
         private WeaponHolder playerWeapons;
+        private WeaponData offeredWeapon;
+        private int offeredHeal;
         private bool resolved;
 
         public event Action Cleared;
@@ -28,6 +30,7 @@ namespace Game.Gameplay.Rooms
             GameObject found = GameObject.FindWithTag("Player");
             playerHealth = found != null ? found.GetComponent<Health>() : null;
             playerWeapons = found != null ? found.GetComponent<WeaponHolder>() : null;
+            offeredWeapon = PickUnheldWeapon(data, run);
 
             if (playerHealth == null)
             {
@@ -40,14 +43,31 @@ namespace Game.Gameplay.Rooms
             if (playerWeapons == null)
                 Debug.LogWarning($"{room.name}: 플레이어 WeaponHolder 가 없다 — 무기와 강화 선택지가 안 나온다", room);
 
-            options = Build(data, run);
+            offeredHeal = data.HealAmount;
 
+            options = Compose();
+            
             if (options.Length == 0)
             {
                 Debug.LogWarning($"{room.name}: 뽑을 보상이 없다 — 회복도 무기도 강화도 줄 게 없다", room);
                 Resolve();
                 return;
             }
+
+            if (playerWeapons != null)
+                playerWeapons.FreeSwap = true;
+
+            Offered?.Invoke(options);
+        }
+
+        internal void Refresh()
+        {
+            if (resolved || playerHealth == null)
+                return;
+
+            options = Compose();
+            if (options.Length == 0)
+                return;
 
             Offered?.Invoke(options);
         }
@@ -80,7 +100,7 @@ namespace Game.Gameplay.Rooms
                     break;
 
                 case RewardKind.Upgrade:
-                    ApplyUpgrade(option.Amount);
+                    ApplyUpgrade(option);
                     break;
             }
         }
@@ -103,46 +123,18 @@ namespace Game.Gameplay.Rooms
                       $" · {(option.Dropped != null ? option.Dropped.name : "빈 칸")} 버림");
         }
 
-        private void ApplyUpgrade(int levels)
+        private void ApplyUpgrade(RewardOption option)
         {
-            if (playerWeapons == null || !playerWeapons.UpgradeActive(levels))
+            if (playerWeapons == null || !playerWeapons.UpgradeActive(option.Amount))
             {
                 Debug.LogWarning("보상 — 강화할 무기가 없다");
                 return;
             }
 
-            WeaponData active = playerWeapons.GetSlot(playerWeapons.ActiveIndex);
-            Debug.Log($"보상 — 강화 · {(active != null ? active.name : "빈 칸")} +{playerWeapons.ActiveLevel}");
-        }
-
-        // 종류가 겹치지 않게 하나씩 뽑는다. 확률로 뽑으면 셋 다 회복이 나올 수 있고
-        // 그러면 고르는 행위가 사라진다 (GDD 6장 — 회복은 포기가 없다).
-        private RewardOption[] Build(RoomData data, RunState run)
-        {
-            var list = new List<RewardOption>(3);
-
-            if (playerWeapons != null)
-            {
-                WeaponData weapon = PickUnheldWeapon(data, run);
-                if (weapon != null)
-                {
-                    int slot = playerWeapons.InactiveIndex;
-                    // 그대로 계승한다. 한 단계 깎으면 레벨 1 에서 전부 사라져
-                    // "바꿀 가치가 없다" 가 그대로 남는다 — 한 런에 보상방이 2~3개라
-                    // 레벨 2 를 넘기는 경우가 드물어서 규칙이 거의 안 돌았다.
-                    int inherited = playerWeapons.ActiveLevel;
-                    WeaponData dropped = playerWeapons.GetSlot(slot);
-                    list.Add(RewardOption.OfWeapon(weapon, slot, inherited, dropped));
-                }
-            }
-
-            if (data.HealAmount > 0 && playerHealth.CurrentHealth < playerHealth.MaxHealth)
-                list.Add(RewardOption.OfHeal(data.HealAmount));
-
-            if (playerWeapons != null && playerWeapons.SlotCount > 0)
-                list.Add(RewardOption.OfUpgrade(UpgradeLevelsPerReward));
-
-            return list.ToArray();
+            // 화면에 뜬 대상(option.Weapon)을 찍는다. 지금 활성을 다시 읽으면
+            // 둘이 갈릴 수 있고, 그러면 로그가 화면을 검증해주지 못한다.
+            Debug.Log($"보상 — 강화 · {(option.Weapon != null ? option.Weapon.name : "빈 칸")}" +
+                      $" +{playerWeapons.ActiveLevel}");
         }
 
         private WeaponData PickUnheldWeapon(RoomData data, RunState run)
@@ -166,6 +158,29 @@ namespace Game.Gameplay.Rooms
             return pool[run.NextInt(0, pool.Count)];
         }
 
+        private RewardOption[] Compose()
+        {
+            var list = new List<RewardOption>(3);
+
+            if (offeredWeapon != null && playerWeapons != null)
+            {
+                int slot = playerWeapons.InactiveIndex;
+
+                int inherited = playerWeapons.ActiveLevel;
+                WeaponData dropped = playerWeapons.GetSlot(slot);
+                list.Add(RewardOption.OfWeapon(offeredWeapon, slot, inherited, dropped));
+            }
+
+            if (offeredHeal > 0 && playerHealth.CurrentHealth < playerHealth.MaxHealth)
+                list.Add(RewardOption.OfHeal(offeredHeal));
+
+            if (playerWeapons != null && playerWeapons.SlotCount > 0)
+                list.Add(RewardOption.OfUpgrade(UpgradeLevelsPerReward,
+                                                playerWeapons.GetSlot(playerWeapons.ActiveIndex)));
+
+            return list.ToArray();
+        }
+
         private bool Holds(WeaponData weapon)
         {
             if (playerWeapons == null)
@@ -182,13 +197,19 @@ namespace Game.Gameplay.Rooms
         private void Resolve()
         {
             resolved = true;
+            if (playerWeapons != null)
+                playerWeapons.FreeSwap = false;
             Cleared?.Invoke();
         }
 
         public void Exit()
         {
+            if (playerWeapons != null)
+                playerWeapons.FreeSwap = false;
+
             Offered = null;
             options = null;
+            offeredWeapon = null;
             playerHealth = null;
             playerWeapons = null;
         }

@@ -116,7 +116,8 @@ namespace Game.UI
                     return healFormat.GetLocalizedString(info.Amount);
 
                 case RewardKind.Upgrade:
-                    return upgradeFormat.GetLocalizedString(info.Amount);
+                    string target = info.WeaponName != null ? info.WeaponName.GetLocalizedString() : "?";
+                    return upgradeFormat.GetLocalizedString(target, info.Amount);
 
                 default:
                     return info.Kind.ToString();

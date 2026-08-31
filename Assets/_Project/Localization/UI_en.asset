@@ -27,7 +27,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 12276524601065472
-    m_Localized: Upgrade +{0}
+    m_Localized: Upgrade {0} +{1}
     m_Metadata:
       m_Items: []
   - m_Id: 12306669676281856
@@ -63,13 +63,15 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 12328411404713984
-    m_Localized: "\u2190 \u2192\t Move\nSpace  Jump\nF    Attack\nA    Swap"
+    m_Localized: "\u2190 \u2192\t Move\nSpace  Jump\nF    Attack\nA Swap weapon \xB7
+      Dash"
     m_Metadata:
       m_Items: []
   - m_Id: 12328860061024256
     m_Localized: "Clear the rooms and beat the boss\nDeath restarts the run \xB7
-      upgrades are lost\nPick one of three in reward rooms\nIn reward rooms, A changes
-      which weapon gets upgraded and which gets discarded"
+      upgrades are lost\nA also dodges \u2014 brief invulnerability while dashing\nPick
+      one of three in reward rooms\nIn reward rooms, A changes which weapon gets
+      upgraded and which gets discarded"
     m_Metadata:
       m_Items: []
   - m_Id: 12338448042835968
@@ -82,6 +84,11 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 12358249452683264
     m_Localized: Main Menu
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12375276473040896
+    m_Localized: "A swaps weapons \u2014 changes what \ngets upgraded and what gets
+      discarded"
     m_Metadata:
       m_Items: []
   references:
