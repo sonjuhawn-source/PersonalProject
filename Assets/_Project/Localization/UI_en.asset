@@ -54,6 +54,36 @@ MonoBehaviour:
     m_Localized: Press R or the Restart button for play again
     m_Metadata:
       m_Items: []
+  - m_Id: 12328283302281216
+    m_Localized: Start
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12328363728060416
+    m_Localized: Exit
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12328411404713984
+    m_Localized: "\u2190 \u2192\t Move\nSpace  Jump\nF    Attack\nA    Swap"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12328860061024256
+    m_Localized: "Clear the rooms and beat the boss\nDeath restarts the run \xB7
+      upgrades are lost\nPick one of three in reward rooms\nIn reward rooms, A changes
+      which weapon gets upgraded and which gets discarded"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12338448042835968
+    m_Localized: Help
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12338520277139456
+    m_Localized: Close
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12358249452683264
+    m_Localized: Main Menu
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []
