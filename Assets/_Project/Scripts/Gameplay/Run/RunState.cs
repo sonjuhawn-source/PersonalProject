@@ -34,6 +34,11 @@ namespace Game.Gameplay.Run
             weapons = value ?? System.Array.Empty<WeaponData>();
         }
 
+        // 보상 뽑기도 시드를 타야 같은 시드가 같은 런이 된다.
+        // rng 자체를 넘기면 밖에서 순서를 흐트러뜨릴 수 있으므로 호출만 연다.
+        internal int NextInt(int minInclusive, int maxExclusive)
+            => rng.Next(minInclusive, maxExclusive);
+
         // 재료를 다 갖고 있는 쪽이 만든다. 밖에서 조립하면 필드가 늘 때마다 조립부를 고친다.
         internal RunResult BuildResult(RunOutcome outcome)
         {

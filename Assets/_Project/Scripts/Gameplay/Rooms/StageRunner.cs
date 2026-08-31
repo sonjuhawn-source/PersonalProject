@@ -35,7 +35,13 @@ namespace Game.Gameplay.Rooms
         private GroundChecker playerGround;
         private Rigidbody2D playerBody;
 
+        private RewardRoomHandler pendingReward;
+
         public event Action<string> RunEnded;
+
+        // RewardOption 이 internal 이라 Game.UI 로 못 넘긴다.
+        // 지금은 읽을 문자열만 넘기고, UI 가 더 필요해지면 public DTO 를 만든다.
+        public event Action<string[]> RewardOffered;
 
         private void Start()
         {
@@ -143,7 +149,30 @@ namespace Game.Gameplay.Rooms
 
             handler = RoomHandlerFactory.Create(data);
             handler.Cleared += OnCleared;
+
+            // 보상방만 답을 되돌려줘야 한다. 인터페이스를 넓히는 대신 여기서 갈랐다.
+            pendingReward = handler as RewardRoomHandler;
+            if (pendingReward != null)
+                pendingReward.Offered += OnRewardOffered;
+
             handler.Enter(next, data, run);
+        }
+
+        private void OnRewardOffered(RewardOption[] offered)
+        {
+            var text = new string[offered.Length];
+            for (int i = 0; i < offered.Length; i++)
+                text[i] = offered[i].Describe();
+
+            // #103 이 이 로그를 선택 화면으로 대체한다.
+            Debug.Log($"보상방 — {string.Join(" / ", text)}  (1 · 2 · 3 으로 고른다)", this);
+            RewardOffered?.Invoke(text);
+        }
+
+        // #103 이 버튼을 붙이면 Update 의 폴링만 사라지고 이 메서드는 남는다.
+        public void ChooseReward(int index)
+        {
+            pendingReward?.Choose(index);
         }
 
         // 런에 걸치는 값을 경계에서만 RunState 로 넘긴다.
@@ -182,10 +211,22 @@ namespace Game.Gameplay.Rooms
         // .inputactions 를 건드리지 않는 이유는 자산 저장과 생성 클래스 재생성이 따라오기 때문이다.
         private void Update()
         {
-            if (!runEnded)
+            if (Keyboard.current == null)
                 return;
-            if (Keyboard.current != null && Keyboard.current.rKey.wasPressedThisFrame)
-                Restart();
+
+            if (runEnded)
+            {
+                if (Keyboard.current.rKey.wasPressedThisFrame)
+                    Restart();
+                return;
+            }
+
+            if (Keyboard.current.digit1Key.wasPressedThisFrame)
+                ChooseReward(0);
+            else if (Keyboard.current.digit2Key.wasPressedThisFrame)
+                ChooseReward(1);
+            else if (Keyboard.current.digit3Key.wasPressedThisFrame)
+                ChooseReward(2);
         }
 
         private void FixedUpdate()
@@ -246,6 +287,13 @@ namespace Game.Gameplay.Rooms
         {
             currentRoom.ExitTrigger.Reached -= OnExitReached;
             handler.Cleared -= OnCleared;
+
+            if (pendingReward != null)
+            {
+                pendingReward.Offered -= OnRewardOffered;
+                pendingReward = null;
+            }
+
             handler.Exit();
 
             if (!run.HasNext)
