@@ -27,7 +27,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 12276524601065472
-    m_Localized: Upgrade +{0}
+    m_Localized: Upgrade {0} +{1}
     m_Metadata:
       m_Items: []
   - m_Id: 12306669676281856

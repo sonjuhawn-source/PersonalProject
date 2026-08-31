@@ -27,7 +27,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 12276524601065472
-    m_Localized: "\uBB34\uAE30 \uAC15\uD654 +{0}"
+    m_Localized: "{0} \uAC15\uD654 +{1}"
     m_Metadata:
       m_Items: []
   - m_Id: 12306669676281856

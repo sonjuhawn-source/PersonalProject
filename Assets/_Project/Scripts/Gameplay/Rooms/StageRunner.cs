@@ -34,6 +34,7 @@ namespace Game.Gameplay.Rooms
         private bool runEnded;
         private GroundChecker playerGround;
         private Rigidbody2D playerBody;
+        private int lastActiveIndex;
 
         private RewardRoomHandler pendingReward;
 
@@ -152,6 +153,8 @@ namespace Game.Gameplay.Rooms
             if (pendingReward != null)
                 pendingReward.Offered += OnRewardOffered;
 
+            lastActiveIndex = playerWeapons != null ? playerWeapons.ActiveIndex : -1;
+
             handler.Enter(next, data, run);
         }
 
@@ -222,6 +225,13 @@ namespace Game.Gameplay.Rooms
                 if (Keyboard.current.rKey.wasPressedThisFrame)
                     Restart();
                 return;
+            }
+
+            if (pendingReward != null && playerWeapons != null
+                && playerWeapons.ActiveIndex != lastActiveIndex)
+            {
+                lastActiveIndex = playerWeapons.ActiveIndex;
+                pendingReward.Refresh();
             }
 
             if (Keyboard.current.digit1Key.wasPressedThisFrame)

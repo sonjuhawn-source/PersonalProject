@@ -19,9 +19,9 @@ namespace Game.Gameplay
         internal int SlotCount => slots == null ? 0 : slots.Length;
         internal int ActiveIndex => activeIndex;
 
-        // 보상은 안 쓰던 무기를 버린다. 지키고 싶으면 미리 스왑해서 활성으로 두면 된다.
         internal int InactiveIndex => slots == null ? -1 : (activeIndex + 1) % slots.Length;
         internal int ActiveLevel => slots == null ? 0 : slots[activeIndex].UpgradeLevel;
+        internal bool FreeSwap { get; set; }
 
         internal WeaponData GetSlot(int index)
         {
@@ -134,10 +134,11 @@ namespace Game.Gameplay
                 return false;
 
             var next = (activeIndex + 1) % slots.Length;
-            if (!slots[next].IsSwapReady)
+            if (!FreeSwap &&!slots[next].IsSwapReady)
                 return false;
 
-            slots[activeIndex].StartSwapCooldown();
+            if (!FreeSwap)
+                slots[activeIndex].StartSwapCooldown();
 
             activeIndex = next;
             Equip(activeIndex);
