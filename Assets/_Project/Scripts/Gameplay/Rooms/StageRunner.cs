@@ -37,7 +37,7 @@ namespace Game.Gameplay.Rooms
 
         private RewardRoomHandler pendingReward;
 
-        public event Action<string> RunEnded;
+        public event Action<RunResultInfo> RunEnded;
         public event Action<RewardOptionInfo[]> RewardOffered;
 
         private void Start()
@@ -204,8 +204,10 @@ namespace Game.Gameplay.Rooms
               $"무기 {DescribeWeapons()}\n" +
               "R 을 누르면 다시 시작한다";
 
+            RunResultInfo info = result.ToInfo();
+
             Debug.Log(text);
-            RunEnded?.Invoke(text);
+            RunEnded?.Invoke(info);
         }
 
         // #103 이 재시작 버튼을 붙이면 이 폴링은 사라진다.
@@ -245,7 +247,7 @@ namespace Game.Gameplay.Rooms
             playerBody.linearVelocity = Vector2.zero;
         }
 
-        private void Restart()
+        public void Restart()
         {
             // 빌드에는 도메인 리로드가 없어 static 이 살아남는다.
             // HitStop 이 timeScale 0 인 중에 끝났다면 씬만 다시 로드해서는 안 풀린다.
@@ -269,7 +271,7 @@ namespace Game.Gameplay.Rooms
             for (int i = 0; i < run.WeaponCount; i++)
             {
                 var w = run.GetWeapon(i);
-                names[i] = w != null ? w.name : "빈 칸";
+                names[i] = w.Data != null ? $"{w.Data.name} +{w.Level}" : "빈 칸";
             }
             return string.Join(" · ", names);
         }

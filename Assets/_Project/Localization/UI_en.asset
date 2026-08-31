@@ -30,6 +30,30 @@ MonoBehaviour:
     m_Localized: Upgrade +{0}
     m_Metadata:
       m_Items: []
+  - m_Id: 12306669676281856
+    m_Localized: Cleared
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12306793110454272
+    m_Localized: Died
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12306855723024384
+    m_Localized: "Floor {0} \xB7 {1} kills \xB7 HP {2}"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12306946554871808
+    m_Localized: '{0} +{1}'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12306998765568000
+    m_Localized: Restart
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12313486510800896
+    m_Localized: Press R or the Restart button for play again
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

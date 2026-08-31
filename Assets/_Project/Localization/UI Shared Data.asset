@@ -27,6 +27,30 @@ MonoBehaviour:
     m_Key: Reward_Upgrade
     m_Metadata:
       m_Items: []
+  - m_Id: 12306669676281856
+    m_Key: Result_Cleared
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12306793110454272
+    m_Key: Result_Died
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12306855723024384
+    m_Key: Result_Body
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12306946554871808
+    m_Key: Result_Weapon
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12306998765568000
+    m_Key: Result_Restart
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12313486510800896
+    m_Key: Result_Hint
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:
