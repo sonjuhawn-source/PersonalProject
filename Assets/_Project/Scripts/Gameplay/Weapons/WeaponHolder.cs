@@ -55,14 +55,14 @@ namespace Game.Gameplay
             return true;
         }
 
-        internal WeaponData[] SnapshotWeapons()
+        internal WeaponSnapshot[] SnapshotWeapons()
         {
             if (slots == null)
-                return System.Array.Empty<WeaponData>();
+                return System.Array.Empty<WeaponSnapshot>();
 
-            var result = new WeaponData[slots.Length];
+            var result = new WeaponSnapshot[slots.Length];
             for (int i = 0; i < slots.Length; i++)
-                result[i] = slots[i].Data;
+                result[i] = new WeaponSnapshot(slots[i].Data, slots[i].UpgradeLevel);
             return result;
         }
 

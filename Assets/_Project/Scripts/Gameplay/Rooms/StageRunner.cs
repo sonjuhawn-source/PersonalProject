@@ -37,11 +37,8 @@ namespace Game.Gameplay.Rooms
 
         private RewardRoomHandler pendingReward;
 
-        public event Action<string> RunEnded;
-
-        // RewardOption 이 internal 이라 Game.UI 로 못 넘긴다.
-        // 지금은 읽을 문자열만 넘기고, UI 가 더 필요해지면 public DTO 를 만든다.
-        public event Action<string[]> RewardOffered;
+        public event Action<RunResultInfo> RunEnded;
+        public event Action<RewardOptionInfo[]> RewardOffered;
 
         private void Start()
         {
@@ -160,13 +157,17 @@ namespace Game.Gameplay.Rooms
 
         private void OnRewardOffered(RewardOption[] offered)
         {
+            var info = new RewardOptionInfo[offered.Length];
             var text = new string[offered.Length];
             for (int i = 0; i < offered.Length; i++)
+            {
+                info[i] = offered[i].ToInfo();
                 text[i] = offered[i].Describe();
+            }
 
-            // #103 이 이 로그를 선택 화면으로 대체한다.
-            Debug.Log($"보상방 — {string.Join(" / ", text)}  (1 · 2 · 3 으로 고른다)", this);
-            RewardOffered?.Invoke(text);
+            Debug.Log($"보상방 — {string.Join(" / ", text)}  (1 ~ {offered.Length} 중 하나)", this);
+
+            RewardOffered?.Invoke(info);
         }
 
         // #103 이 버튼을 붙이면 Update 의 폴링만 사라지고 이 메서드는 남는다.
@@ -203,8 +204,10 @@ namespace Game.Gameplay.Rooms
               $"무기 {DescribeWeapons()}\n" +
               "R 을 누르면 다시 시작한다";
 
+            RunResultInfo info = result.ToInfo();
+
             Debug.Log(text);
-            RunEnded?.Invoke(text);
+            RunEnded?.Invoke(info);
         }
 
         // #103 이 재시작 버튼을 붙이면 이 폴링은 사라진다.
@@ -244,7 +247,7 @@ namespace Game.Gameplay.Rooms
             playerBody.linearVelocity = Vector2.zero;
         }
 
-        private void Restart()
+        public void Restart()
         {
             // 빌드에는 도메인 리로드가 없어 static 이 살아남는다.
             // HitStop 이 timeScale 0 인 중에 끝났다면 씬만 다시 로드해서는 안 풀린다.
@@ -268,7 +271,7 @@ namespace Game.Gameplay.Rooms
             for (int i = 0; i < run.WeaponCount; i++)
             {
                 var w = run.GetWeapon(i);
-                names[i] = w != null ? w.name : "빈 칸";
+                names[i] = w.Data != null ? $"{w.Data.name} +{w.Level}" : "빈 칸";
             }
             return string.Join(" · ", names);
         }

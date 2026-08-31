@@ -1,4 +1,5 @@
 using Game.Gameplay.Rooms;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -9,7 +10,7 @@ namespace Game.Gameplay.Run
         private readonly System.Random rng;
         private readonly RoomData[] rooms;
 
-        private WeaponData[] weapons = System.Array.Empty<WeaponData>();
+        private WeaponSnapshot[] weapons = Array.Empty<WeaponSnapshot>();
 
         internal int Seed { get; }
         internal int CurrentIndex { get; private set; }
@@ -24,14 +25,14 @@ namespace Game.Gameplay.Run
         internal int KillCount { get; private set; }
 
         internal int WeaponCount => weapons.Length;
-        internal WeaponData GetWeapon(int i) => weapons[i];
+        internal WeaponSnapshot GetWeapon(int i) => weapons[i];
 
         internal void RecordHealth(int value) => CurrentHealth = value;
         internal void AddKills(int count) => KillCount += count;
 
-        internal void RecordWeapons(WeaponData[] value)
+        internal void RecordWeapons(WeaponSnapshot[] value)
         {
-            weapons = value ?? System.Array.Empty<WeaponData>();
+            weapons = value ?? System.Array.Empty<WeaponSnapshot>();
         }
 
         // 보상 뽑기도 시드를 타야 같은 시드가 같은 런이 된다.
@@ -42,7 +43,7 @@ namespace Game.Gameplay.Run
         // 재료를 다 갖고 있는 쪽이 만든다. 밖에서 조립하면 필드가 늘 때마다 조립부를 고친다.
         internal RunResult BuildResult(RunOutcome outcome)
         {
-            return new RunResult(outcome, CurrentIndex + 1, KillCount, CurrentHealth);
+            return new RunResult(outcome, CurrentIndex + 1, KillCount, CurrentHealth, weapons);
         }
 
         public RunState(int seed, RoomData[] pool, RoomData bossRoom, int roomCount, RoomData rewardRoom, int rewardEvery)

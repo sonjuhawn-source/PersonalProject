@@ -76,7 +76,7 @@ namespace Game.Gameplay.Rooms
                     break;
 
                 case RewardKind.Weapon:
-                    ApplyWeapon(option.Weapon);
+                    ApplyWeapon(option);
                     break;
 
                 case RewardKind.Upgrade:
@@ -85,29 +85,22 @@ namespace Game.Gameplay.Rooms
             }
         }
 
-        private void ApplyWeapon(WeaponData weapon)
+        private void ApplyWeapon(RewardOption option)
         {
-            if (playerWeapons == null || weapon == null)
+            if (playerWeapons == null || option.Weapon == null)
             {
                 Debug.LogWarning("보상 — 무기를 줄 대상이 없다");
                 return;
             }
 
-            int slot = playerWeapons.InactiveIndex;
-
-            // 인계 기준은 활성 슬롯이다. 버리는 쪽(비활성)은 강화를 받은 적이 없어
-            // 거의 항상 0 이고, 그걸 기준으로 하면 규칙이 한 번도 안 돈다.
-            int inherited = Mathf.Max(0, playerWeapons.ActiveLevel - 1);
-            WeaponData dropped = playerWeapons.GetSlot(slot);
-
-            if (!playerWeapons.Replace(slot, weapon, inherited))
+            if (!playerWeapons.Replace(option.TargetSlot, option.Weapon, option.Amount))
             {
-                Debug.LogWarning($"보상 — {weapon.name} 을 슬롯 {slot} 에 넣지 못했다");
+                Debug.LogWarning($"보상 — {option.Weapon.name} 을 슬롯 {option.TargetSlot} 에 넣지 못했다");
                 return;
             }
 
-            // 무엇을 버렸는지가 이 선택의 값이다. #103 이 이 문구를 그대로 화면에 쓴다.
-            Debug.Log($"보상 — 무기 {weapon.name} +{inherited} 획득 · {(dropped != null ? dropped.name : "빈 칸")} 버림");
+            Debug.Log($"보상 — 무기 {option.Weapon.name} +{option.Amount} 획득" +
+                      $" · {(option.Dropped != null ? option.Dropped.name : "빈 칸")} 버림");
         }
 
         private void ApplyUpgrade(int levels)
@@ -128,12 +121,21 @@ namespace Game.Gameplay.Rooms
         {
             var list = new List<RewardOption>(3);
 
-            // 이미 든 무기를 빼면 중복 장착을 허용할지 정할 필요가 없어진다 (GDD 12.6).
-            WeaponData weapon = PickUnheldWeapon(data, run);
-            if (weapon != null)
-                list.Add(RewardOption.OfWeapon(weapon));
+            if (playerWeapons != null)
+            {
+                WeaponData weapon = PickUnheldWeapon(data, run);
+                if (weapon != null)
+                {
+                    int slot = playerWeapons.InactiveIndex;
+                    // 그대로 계승한다. 한 단계 깎으면 레벨 1 에서 전부 사라져
+                    // "바꿀 가치가 없다" 가 그대로 남는다 — 한 런에 보상방이 2~3개라
+                    // 레벨 2 를 넘기는 경우가 드물어서 규칙이 거의 안 돌았다.
+                    int inherited = playerWeapons.ActiveLevel;
+                    WeaponData dropped = playerWeapons.GetSlot(slot);
+                    list.Add(RewardOption.OfWeapon(weapon, slot, inherited, dropped));
+                }
+            }
 
-            // 만피면 죽은 선택지다. 넣으면 3택이 사실상 2택이 된다.
             if (data.HealAmount > 0 && playerHealth.CurrentHealth < playerHealth.MaxHealth)
                 list.Add(RewardOption.OfHeal(data.HealAmount));
 
