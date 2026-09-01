@@ -230,6 +230,14 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: 8.35
       objectReference: {fileID: 0}
+    - target: {fileID: 1022731151201522752, guid: 57c0e85a2c8c5e040b858b1a4bc4c4c8, type: 3}
+      propertyPath: m_Size.x
+      value: 78
+      objectReference: {fileID: 0}
+    - target: {fileID: 1022731151201522752, guid: 57c0e85a2c8c5e040b858b1a4bc4c4c8, type: 3}
+      propertyPath: m_Size.y
+      value: 12
+      objectReference: {fileID: 0}
     - target: {fileID: 1124379647039172560, guid: 57c0e85a2c8c5e040b858b1a4bc4c4c8, type: 3}
       propertyPath: m_Size.x
       value: 101
@@ -4485,6 +4493,14 @@ PrefabInstance:
     - target: {fileID: 1124379647039172560, guid: 57c0e85a2c8c5e040b858b1a4bc4c4c8, type: 3}
       propertyPath: m_Tiles.Array.data[169].second.m_TileObjectToInstantiateIndex
       value: 65535
+      objectReference: {fileID: 0}
+    - target: {fileID: 1455344324724820356, guid: 57c0e85a2c8c5e040b858b1a4bc4c4c8, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 38
+      objectReference: {fileID: 0}
+    - target: {fileID: 1455344324724820356, guid: 57c0e85a2c8c5e040b858b1a4bc4c4c8, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 2370402275245577344, guid: 57c0e85a2c8c5e040b858b1a4bc4c4c8, type: 3}
       propertyPath: m_LocalPosition.x
