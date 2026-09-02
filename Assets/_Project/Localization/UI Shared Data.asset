@@ -83,6 +83,46 @@ MonoBehaviour:
     m_Key: Reward_Hint
     m_Metadata:
       m_Items: []
+  - m_Id: 13080799451299840
+    m_Key: Title_Settings
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13080845185990656
+    m_Key: Settings_Title
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13080875816992768
+    m_Key: Settings_Resolution
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13080920410832896
+    m_Key: Settings_Window
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13080964501356544
+    m_Key: Settings_Full
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13081010336710656
+    m_Key: Settings_Audio
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13081043354271744
+    m_Key: Settings_Master
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13081074056577024
+    m_Key: Settings_Bgm
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13081102615592960
+    m_Key: Settings_Sfx
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13081132680364032
+    m_Key: Settings_Language
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:
