@@ -96,7 +96,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 13080845185990656
-    m_Localized: Settings
+    m_Localized: Option
     m_Metadata:
       m_Items: []
   - m_Id: 13080875816992768
@@ -129,6 +129,14 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 13081132680364032
     m_Localized: Language
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13093630523490304
+    m_Localized: Screen
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13093666921660416
+    m_Localized: Screen Mode
     m_Metadata:
       m_Items: []
   references:
