@@ -29,6 +29,8 @@ namespace Game.Gameplay.Enemies
         [SerializeField]
         private float facingDeadzone = 0.1f;
         [SerializeField]
+        private float keepDistance = 0;
+        [SerializeField]
         private SpriteRenderer sprite;
         [SerializeField]
         private Color telegraphColor = new Color(1f, 0.78f, 0.78f, 1f);
@@ -46,6 +48,7 @@ namespace Game.Gameplay.Enemies
         private TerrainProbe probe;
 
         private float facing = 1;
+        private const float standMult = 1.5f;
 
         internal IdleState Idle { get; private set; }
         internal ChaseState Chase { get; private set; }
@@ -74,6 +77,8 @@ namespace Game.Gameplay.Enemies
         internal float LoseHeight => detectHeight * loseMult;
         internal float StaggerTime => staggerTime;
         internal float DeathDelay => deathDelay;
+        internal float KeepDistance => keepDistance;
+        internal float StandRange => keepDistance * standMult;
         internal EnemyState CurrentState => (EnemyState)machine.Current;
         internal HitBox HitBox => hitBox;
 

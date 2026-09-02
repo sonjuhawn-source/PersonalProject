@@ -13,6 +13,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2707969194611069236, guid: 68480ca6c6c6e4d418212708ed6c1296, type: 3}
+      propertyPath: keepDistance
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2707969194611069236, guid: 68480ca6c6c6e4d418212708ed6c1296, type: 3}
       propertyPath: patterns.Array.size
       value: 1
       objectReference: {fileID: 0}
