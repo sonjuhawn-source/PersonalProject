@@ -16,7 +16,7 @@ MonoBehaviour:
     startup: 0.2
     activeTime: 0.08
     recovery: 0.6
-    damage: 8
+    damage: 5
     knockbackForce: 3
     hitStopTime: 0.05
     shakeStrength: 0.3
