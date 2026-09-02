@@ -40,6 +40,8 @@ namespace Game.Gameplay
         private Vector2 hitboxOffset;
         [SerializeField]
         private Vector2 hitboxSize;
+        [SerializeField]
+        AudioClip[] attackClips;
 
         [SerializeField]
         private int rarity;
@@ -56,6 +58,7 @@ namespace Game.Gameplay
         internal Vector2 HitboxOffset => hitboxOffset;
         internal Vector2 HitboxSize => hitboxSize;
         internal LocalizedString DisplayName => displayName;
+        internal AudioClip[] AttackClips => attackClips;
 
     }
 }

@@ -56,6 +56,7 @@ namespace Game.Gameplay
                 {
                     AttackData data = Owner.GetAttack(comboIndex);
                     Owner.PlayClip(Owner.AttackStateName, speed: (Owner.ClipWindup / data.startup));
+                    SfxPlayer.Play(Owner.CurrentWeapon.AttackClips);
                     if(startedGrounded)
                         Owner.ApplyForward(data.startup);
 

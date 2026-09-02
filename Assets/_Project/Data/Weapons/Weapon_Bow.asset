@@ -47,6 +47,10 @@ MonoBehaviour:
   swapCooldown: 3.3
   hitboxOffset: {x: 0.4, y: 0}
   hitboxSize: {x: 0.7, y: 0.5}
+  attackClips:
+  - {fileID: 8300000, guid: af083b84cc987c84fbb13449aa51820b, type: 3}
+  - {fileID: 8300000, guid: 52c97d5f3dd19e24a8df0dde56043975, type: 3}
+  - {fileID: 8300000, guid: 6bd4cf0bb90de9b4f8aec8c17d186b5c, type: 3}
   rarity: 0
   references:
     version: 2

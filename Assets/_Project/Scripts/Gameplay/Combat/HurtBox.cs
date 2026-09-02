@@ -14,6 +14,8 @@ namespace Game.Gameplay
         Collider2D hurtBoxCollider;
         [SerializeField]
         Invincibility invincibility;
+        [SerializeField]
+        AudioClip[] hitClips;
 
 
         public GameObject Owner => owner;
@@ -53,6 +55,7 @@ namespace Game.Gameplay
             if (invincibility != null && invincibility.IsActive)
                 return false;
 
+            SfxPlayer.Play(hitClips);
             Debug.Log($"{Owner.name} 이(가) {info.Damage}맞음, 출처 {info.Source.name}");
             impulse?.Apply(info.Knockback);
             health?.TakeDamage(info.Damage);
