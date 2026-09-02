@@ -3440,6 +3440,8 @@ MonoBehaviour:
   dashSpeed: 12
   dashTime: 0.2
   iframeTime: 0.3
+  swapClips:
+  - {fileID: 8300000, guid: 469670fcd2383174e8f5db3060431b9b, type: 3}
   muzzle: {fileID: 2104605014}
 --- !u!114 &1483818004
 MonoBehaviour:

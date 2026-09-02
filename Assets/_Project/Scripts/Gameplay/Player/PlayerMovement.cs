@@ -40,6 +40,8 @@ namespace Game.Gameplay
         private float dashTime = 0.2f;
         [SerializeField]
         private float iframeTime = 0.3f;
+        [SerializeField]
+        private AudioClip[] swapClips;
 
         [SerializeField]
         private Transform muzzle;
@@ -75,6 +77,7 @@ namespace Game.Gameplay
         internal AttackKind Kind => weapons.Current.Data.Kind;
         internal WeaponData CurrentWeapon => weapons.Current.Data;
         internal float DashTime => dashTime;
+        internal AudioClip[] SwapClips => swapClips;
         internal float ForwardSpeed => weapons.Current.Data.ForwardSpeed;
 
         internal bool IsGrounded => ground.IsGrounded;
