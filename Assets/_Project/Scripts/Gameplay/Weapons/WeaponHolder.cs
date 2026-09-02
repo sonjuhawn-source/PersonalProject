@@ -1,4 +1,6 @@
+using System;
 using UnityEngine;
+using UnityEngine.Localization;
 
 namespace Game.Gameplay
 {
@@ -20,8 +22,14 @@ namespace Game.Gameplay
         internal int ActiveIndex => activeIndex;
 
         internal int InactiveIndex => slots == null ? -1 : (activeIndex + 1) % slots.Length;
-        internal int ActiveLevel => slots == null ? 0 : slots[activeIndex].UpgradeLevel;
         internal bool FreeSwap { get; set; }
+
+        public event Action SlotsChanged;
+        public LocalizedString ActiveName => slots == null ? null : slots[activeIndex].Data.DisplayName;
+        public LocalizedString StandbyName => slots == null ? null : slots[InactiveIndex].Data.DisplayName;
+        public int ActiveUpgradeLevel => slots == null ? 0 : slots[activeIndex].UpgradeLevel;
+        public int StandbyUpgradeLevel => slots == null ? 0 : slots[InactiveIndex].UpgradeLevel;
+        public float StandbyReadyRatio => slots == null ? 0f : slots[InactiveIndex].SwapReadyRatio;
 
         internal WeaponData GetSlot(int index)
         {
@@ -43,6 +51,7 @@ namespace Game.Gameplay
             if (index == activeIndex)
                 Equip(activeIndex);
 
+            SlotsChanged?.Invoke();
             return true;
         }
 
@@ -52,6 +61,7 @@ namespace Game.Gameplay
                 return false;
 
             slots[activeIndex].Upgrade(levels);
+            SlotsChanged?.Invoke();
             return true;
         }
 
@@ -141,6 +151,8 @@ namespace Game.Gameplay
                 slots[activeIndex].StartSwapCooldown();
 
             activeIndex = next;
+            SlotsChanged?.Invoke();
+
             Equip(activeIndex);
             return true;
         }
