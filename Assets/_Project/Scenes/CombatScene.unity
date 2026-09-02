@@ -3559,6 +3559,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Game.Gameplay::Game.Gameplay.Health
   maxHealth: 30
   hurtBox: {fileID: 1709002349}
+  deathClips:
+  - {fileID: 8300000, guid: 0b837821f9752a94aa04f0b810005fc5, type: 3}
 --- !u!1 &1562106778
 GameObject:
   m_ObjectHideFlags: 0

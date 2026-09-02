@@ -7,8 +7,10 @@ namespace Game.Gameplay
     {
         [SerializeField]
         private int maxHealth =30;
-
-        [SerializeField] private HurtBox hurtBox;
+        [SerializeField] 
+        private HurtBox hurtBox;
+        [SerializeField]
+        private AudioClip[] deathClips;
 
         private int currentHealth;
 
@@ -59,6 +61,7 @@ namespace Game.Gameplay
         private void Die()
         {
             Debug.Log($"{name} 사망", this);
+            SfxPlayer.Play(deathClips);
             hurtBox?.SetEnable(false);
             Died?.Invoke();
         }
