@@ -134,7 +134,7 @@ namespace Game.Gameplay.Rooms
             // 화면에 뜬 대상(option.Weapon)을 찍는다. 지금 활성을 다시 읽으면
             // 둘이 갈릴 수 있고, 그러면 로그가 화면을 검증해주지 못한다.
             Debug.Log($"보상 — 강화 · {(option.Weapon != null ? option.Weapon.name : "빈 칸")}" +
-                      $" +{playerWeapons.ActiveLevel}");
+                      $" +{playerWeapons.ActiveUpgradeLevel}");
         }
 
         private WeaponData PickUnheldWeapon(RoomData data, RunState run)
@@ -166,7 +166,7 @@ namespace Game.Gameplay.Rooms
             {
                 int slot = playerWeapons.InactiveIndex;
 
-                int inherited = playerWeapons.ActiveLevel;
+                int inherited = playerWeapons.ActiveUpgradeLevel;
                 WeaponData dropped = playerWeapons.GetSlot(slot);
                 list.Add(RewardOption.OfWeapon(offeredWeapon, slot, inherited, dropped));
             }

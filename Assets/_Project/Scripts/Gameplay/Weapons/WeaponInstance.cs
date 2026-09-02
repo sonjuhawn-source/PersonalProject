@@ -16,6 +16,17 @@ namespace Game.Gameplay
 
         private float swapCooldownRemaining;
 
+        internal float SwapReadyRatio
+        {
+            get
+            {
+                if (Data.SwapCooldown <= 0)
+                    return 1f;
+
+                return Mathf.Clamp01(1f - swapCooldownRemaining / Data.SwapCooldown);
+            }
+        }
+
         internal WeaponInstance(WeaponData data, int upgradeLevel = 0)
         {
             Data = data;
@@ -57,7 +68,7 @@ namespace Game.Gameplay
 
         internal void Tick(float dt)
         {
-            if(swapCooldownRemaining >0)
+            if (swapCooldownRemaining > 0)
                 swapCooldownRemaining -= dt;
         }
 

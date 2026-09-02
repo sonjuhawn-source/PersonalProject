@@ -51,10 +51,11 @@ namespace Game.Gameplay
         internal float SwapCooldown => swapCooldown;
         internal string AttackStateName => attackStateName;
         internal AnimatorOverrideController OverrideController => overrideController;
-        internal LocalizedString DisplayName  => displayName;
         internal AttackKind Kind => kind;
         internal Projectile ProjectilePrefab => projectilePrefab;
         internal Vector2 HitboxOffset => hitboxOffset;
         internal Vector2 HitboxSize => hitboxSize;
+        internal LocalizedString DisplayName => displayName;
+
     }
 }
