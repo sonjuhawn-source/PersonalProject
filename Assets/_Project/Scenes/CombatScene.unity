@@ -2688,7 +2688,7 @@ MonoBehaviour:
   bossRoom: {fileID: 11400000, guid: d1a4eaed322c46a478f9e1d3fbb9054b, type: 2}
   rewardRoom: {fileID: 11400000, guid: fad10d97e0673614084edaa92f52306a, type: 2}
   roomCount: 5
-  rewardEvery: 2
+  rewardEvery: 1
   seed: -1
   cameraFollow: {fileID: 1957209188}
   fallMargin: 3
@@ -3268,7 +3268,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Game.Gameplay::Game.Gameplay.WeaponHolder
   startingWeapons:
   - {fileID: 11400000, guid: c9969b4e51e9cb64e8072a86e49ecf70, type: 2}
-  - {fileID: 11400000, guid: c5555737decc2654dafe34c997bc9f74, type: 2}
+  - {fileID: 11400000, guid: acc55c8d0a1b1784ca65a3377b643a31, type: 2}
   animator: {fileID: 1711130538}
   hitBox: {fileID: 683188934}
 --- !u!114 &1483818009

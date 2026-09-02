@@ -210,7 +210,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b87cf3b561bb87744a649380e0951356, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Game.Gameplay::Game.Gameplay.Health
-  maxHealth: 30
+  maxHealth: 26
   hurtBox: {fileID: 4711672920899121238}
 --- !u!114 &8097071262524283621
 MonoBehaviour:
