@@ -1,7 +1,7 @@
 # 학습 로그
 
 > W1 작업 중 막혔던 지점과 그때 이해한 것들. 복습용.
-> 최종 수정 2026-09-02 (#108 완료 — 원거리 적 후퇴)
+> 최종 수정 2026-09-02 (최종 빌드 전 전체 검증)
 
 관련: [GDD](GDD.md) · [개발 로드맵](roadmap.md) · [W1 빌드 노트](builds/1주차%20빌드%20노트.md)
 
@@ -5718,6 +5718,34 @@ PlasticGui.WorkspaceWindow.Merge.MergeInProgress;`. 조용히 통과하는 세 �
 목록의 이득이 처음 눈에 보인 사례다.
 
 패턴 자체는 안 줄어든다. **파일을 저장하기 전에 using 줄을 보는 것**밖에 방법이 없다.
+
+**최종 빌드 전 검증에서 `using log4net.Core;` 가 나왔다.** `log4net` 은 에디터에만 있는
+어셈블리라 `UnityEditor`·`Codice` 와 같은 부류인데, **위 표에 없는 이름**이었다.
+
+그래서 검사가 한 번 실패했다.
+
+```
+찾은 것    UnityEditor · Codice · PlasticGui · VisualScripting · Android
+있던 것    log4net
+```
+
+**아는 이름만 찾고 있었다.** 이 표에 쌓인 이름들을 그대로 grep 했는데, 다음에 나올 것은
+정의상 이 표에 없다. IDE 가 무엇을 넣을지는 자동완성이 정하지 내가 정하지 않는다.
+
+정상 `using` 을 빼고 **남는 것을 보는 방식**으로 바꾸니 바로 나왔다.
+
+```
+UnityEngine · UnityEngine.UI · UnityEngine.InputSystem · UnityEngine.Localization
+UnityEngine.SceneManagement · System · System.Collections.Generic · System.Threading
+TMPro · Cysharp · Game.*
+```
+
+**블록리스트가 아니라 화이트리스트로 봐야 한다.** 이 프로젝트가 쓰는 정상 `using` 은
+열 몇 개로 고정이고 거의 안 늘어난다 — 목록을 유지하는 비용이 블록리스트보다 싸고,
+**빠뜨림이 "못 잡음"이 아니라 "가짜 경보"로 나타난다.**
+
+`asmdef` 가 잡아주는 것은 **참조 목록에 없는 어셈블리**뿐이다. `log4net` 은 에디터 컴파일에서
+자동 참조돼 통과했다 — 좁은 참조 목록도 만능이 아니다.
 
 ### 어느 프리팹을 편집 중인지 착각했다 — 두 번 연속
 
