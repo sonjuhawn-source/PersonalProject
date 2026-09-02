@@ -176,6 +176,14 @@ PrefabInstance:
       value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 2707969194611069236, guid: 68480ca6c6c6e4d418212708ed6c1296, type: 3}
+      propertyPath: telegraphColor.b
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2707969194611069236, guid: 68480ca6c6c6e4d418212708ed6c1296, type: 3}
+      propertyPath: telegraphColor.g
+      value: 0.3019608
+      objectReference: {fileID: 0}
+    - target: {fileID: 2707969194611069236, guid: 68480ca6c6c6e4d418212708ed6c1296, type: 3}
       propertyPath: patterns.Array.size
       value: 3
       objectReference: {fileID: 0}
