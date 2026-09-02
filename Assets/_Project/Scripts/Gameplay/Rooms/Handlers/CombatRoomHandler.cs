@@ -10,8 +10,10 @@ namespace Game.Gameplay.Rooms
 {
     internal class CombatRoomHandler : IRoomHandler
     {
+        private const int HealPerKill = 1;
         private int remaining;
         private RunState run;
+        private Health playerHealth;
         private readonly List<Health> subscribed = new List<Health>();
 
         public event Action Cleared;
@@ -41,6 +43,9 @@ namespace Game.Gameplay.Rooms
                 count = room.SpawnPointCount;
             }
 
+            GameObject found = GameObject.FindWithTag("Player");
+            playerHealth = found != null ? found.GetComponent<Health>() : null;
+
             for (int i = 0; i < count; i++)
             {
                 var prefab = data.GetEnemy(Random.Range(0, data.EnemyPoolCount));
@@ -66,16 +71,18 @@ namespace Game.Gameplay.Rooms
         private void OnEnemyDied()
         {
             run?.AddKills(1);
+            playerHealth?.Heal(HealPerKill);
             remaining -= 1;
+
             if (remaining <= 0)
                 Cleared?.Invoke();
-
         }
 
         public void Exit()
         {
             foreach(var h in subscribed)
                 h.Died -= OnEnemyDied;
+            playerHealth = null;
             subscribed.Clear();
         }
     }
