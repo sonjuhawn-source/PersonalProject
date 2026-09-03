@@ -64,7 +64,7 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 12328411404713984
     m_Localized: "\u2190 \u2192\t Move\nSpace  Jump\nF    Attack\nA Swap weapon \xB7
-      Dash"
+      Dash\nESC\tSettings"
     m_Metadata:
       m_Items: []
   - m_Id: 12328860061024256
@@ -89,6 +89,54 @@ MonoBehaviour:
   - m_Id: 12375276473040896
     m_Localized: "A swaps weapons \u2014 changes what \ngets upgraded and what gets
       discarded"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13080799451299840
+    m_Localized: Settings
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13080845185990656
+    m_Localized: Option
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13080875816992768
+    m_Localized: Resolution
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13080920410832896
+    m_Localized: Windowed
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13080964501356544
+    m_Localized: Fullscreen
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13081010336710656
+    m_Localized: Audio
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13081043354271744
+    m_Localized: Master
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13081074056577024
+    m_Localized: Music
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13081102615592960
+    m_Localized: Effects
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13081132680364032
+    m_Localized: Language
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13093630523490304
+    m_Localized: Screen
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13093666921660416
+    m_Localized: Screen Mode
     m_Metadata:
       m_Items: []
   references:
