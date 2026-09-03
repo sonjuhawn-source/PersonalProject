@@ -20,6 +20,8 @@ namespace Game.Gameplay.Rooms
         private int healAmount = 10;
         [SerializeField]
         private WeaponData[] rewardWeapons;
+        [SerializeField]
+        private AudioClip[] rewardClips;
 
         internal RoomType Type => type;
         internal int Difficulty => difficulty;
@@ -30,6 +32,7 @@ namespace Game.Gameplay.Rooms
         internal int HealAmount => healAmount;
         internal int RewardWeaponCount => rewardWeapons == null ? 0 : rewardWeapons.Length;
         internal WeaponData GetRewardWeapon(int i) => rewardWeapons[i];
+        internal AudioClip[] RewardClips => rewardClips;
 
     }
 }

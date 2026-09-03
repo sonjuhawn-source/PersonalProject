@@ -22,3 +22,5 @@ MonoBehaviour:
   - {fileID: 11400000, guid: c5555737decc2654dafe34c997bc9f74, type: 2}
   - {fileID: 11400000, guid: acc55c8d0a1b1784ca65a3377b643a31, type: 2}
   - {fileID: 11400000, guid: c9969b4e51e9cb64e8072a86e49ecf70, type: 2}
+  rewardClips:
+  - {fileID: 8300000, guid: 3de418a5b7f97f943892a895e3fee2b7, type: 3}

@@ -695,6 +695,53 @@ W2 에서 이 값(`clipWindup`)은 무기 SO 로 옮긴다. 클립에 종속된 
 
 ---
 
+### 10.3 사운드 에셋 — 유료 팩 둘 ([#137](../../issues/137))
+
+| 종류 | 패키지 | 퍼블리셔 | 가격 |
+|---|---|---|---|
+| 효과음 | [Retro Games - Sound Effects](https://assetstore.unity.com/packages/audio/sound-fx/retro-games-sound-effects-213390) | AD Sounds | $9.99 |
+| BGM | [Casual Music - 031422](https://assetstore.unity.com/packages/audio/music/casual-music-031422-216222) | GWriterStudio | $4.99 |
+
+둘 다 Unity Asset Store 의 **Extension Asset · Standard EULA** 다. 위치는 `Assets/Imported/`
+— 아트와 같은 이유다. **EULA 가 원본 파일의 재배포를 금지하므로 공개 저장소에 두면 안 된다.**
+빌드에 포함해 배포하는 것은 허용된다. 폴더별 출처는 그 저장소의 `SOURCES.md` 에 있다.
+
+#### BGM 은 톤이 어긋난다 — 알고 쓴다
+
+트랙 이름이 `Welcome To Town` · `Green Park` · `Farming Plain` 이다. **캐주얼 마을 음악**이고
+스컬을 레퍼런스로 한 액션 로그라이크의 전투 배경으로는 맞지 않는다. 밤·상점 계열
+(`Central City Night` · `Mysterious Shop`)이 그중 덜 밝아서 그쪽을 쓴다.
+
+그래도 넣는 이유는 **없는 것보다 낫기 때문**이다. 마감이 이틀 남은 시점에 액션 트랙을
+다시 찾는 것은 `#137` 견적을 넘긴다. 대신 전투 BGM 볼륨 기본값을 낮게 잡아 배경으로만
+둔다 — [#138](../../issues/138) 의 BGM 슬라이더가 그 조절 수단이다.
+
+**후속에서 갈아끼우는 비용은 낮다.** 클립을 코드가 아니라 씬의 `AudioSource` 가 들고 있고,
+교체는 파일 하나를 바꾸는 일이다. 아트에서 세운 원칙(참조를 데이터에 둔다)이 여기도 적용된다.
+
+#### 효과음 팩이 범위를 넓혀준다
+
+`#137` 은 공격·피격·BGM 셋으로 잡았는데 팩에 그보다 많다.
+
+```
+공격      SwordAttackv1 · SmallShotv1 (활)
+피격      Hurtv1 (플레이어) · GetHitv1~v7 (적)      ← 갈라 줄 수 있다
+사망      EnemyDiev1 · EnemyScreamv1/v2
+보상      PowerUpv1~v3 · CollectCoinv1/v2
+방 클리어  StageClearv1
+UI        UIOptionChangev1~v3                       ← #138 슬라이더
+점프      마땅한 것이 없다
+```
+
+**피격을 플레이어와 적이 다르게 낼 수 있다는 점이 설계를 바꾼다.** `HurtBox.TakeHit` 이
+공통 문이라 코드는 한 벌인데, 클립을 `HurtBox` 의 직렬화 필드로 두면 **프리팹마다 다르게
+꽂힌다.** 상수로 박거나 재생기 안에 두면 이게 안 된다.
+
+소리마다 `variation01` · `02` 가 딸려 있다. 배열로 받아 랜덤으로 고르면 **콤보 3타가 같은
+소리를 세 번 내는 피로**가 줄어든다.
+
+---
+
 ## 11. 설정 / 언어 / 저장
 
 "세이브"를 한 덩어리로 다루면 판단이 꼬인다. **성격이 완전히 다른 세 가지**로 나눈다.

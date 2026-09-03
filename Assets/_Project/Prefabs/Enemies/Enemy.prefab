@@ -212,6 +212,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: Game.Gameplay::Game.Gameplay.Health
   maxHealth: 26
   hurtBox: {fileID: 4711672920899121238}
+  deathClips:
+  - {fileID: 8300000, guid: b2db344c980024f49b4c2847bd65dee2, type: 3}
+  - {fileID: 8300000, guid: 6e50f875f3bea3141bebe03385413282, type: 3}
+  - {fileID: 8300000, guid: 87864f98c6d78f14bab0cb51d6f4d88b, type: 3}
+  - {fileID: 8300000, guid: 36824f238559559479b71a2a8dc8929b, type: 3}
 --- !u!114 &8097071262524283621
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -249,6 +254,7 @@ MonoBehaviour:
   staggerTime: 0.15
   deathDelay: 0.35
   facingDeadzone: 0.1
+  keepDistance: 0
   sprite: {fileID: 1673677383554036109}
   telegraphColor: {r: 1, g: 0.78, b: 0.78, a: 1}
   muzzle: {fileID: 6760826243675726534}
@@ -410,6 +416,10 @@ MonoBehaviour:
   health: {fileID: 6568416106829634190}
   hurtBoxCollider: {fileID: 1305035249503164525}
   invincibility: {fileID: 0}
+  hitClips:
+  - {fileID: 8300000, guid: 7a1273fd443e5c8468c740aeceadd9aa, type: 3}
+  - {fileID: 8300000, guid: e840d7c8143dcdc4a8b3568c7dc0ea1c, type: 3}
+  - {fileID: 8300000, guid: e3219b5bf0dec764a9c2669d82ab1350, type: 3}
 --- !u!1001 &3259726733294664011
 PrefabInstance:
   m_ObjectHideFlags: 0

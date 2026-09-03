@@ -14,6 +14,7 @@ namespace Game.Gameplay.Rooms
         private WeaponHolder playerWeapons;
         private WeaponData offeredWeapon;
         private int offeredHeal;
+        private AudioClip[] rewardClips;
         private bool resolved;
 
         public event Action Cleared;
@@ -44,6 +45,7 @@ namespace Game.Gameplay.Rooms
                 Debug.LogWarning($"{room.name}: 플레이어 WeaponHolder 가 없다 — 무기와 강화 선택지가 안 나온다", room);
 
             offeredHeal = data.HealAmount;
+            rewardClips = data.RewardClips;
 
             options = Compose();
             
@@ -80,6 +82,9 @@ namespace Game.Gameplay.Rooms
             if (options == null || index < 0 || index >= options.Length)
                 return;
 
+            // Resolve 가 아니라 여기다. Resolve 는 Enter 의 빈 방 조기 반환도 부르므로
+            // 거기 두면 아무것도 안 받은 방이 보상 소리를 낸다.
+            SfxPlayer.Play(rewardClips);
             Apply(options[index]);
             Resolve();
         }
@@ -212,6 +217,7 @@ namespace Game.Gameplay.Rooms
             offeredWeapon = null;
             playerHealth = null;
             playerWeapons = null;
+            rewardClips = null;
         }
     }
 }

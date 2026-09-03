@@ -18,6 +18,7 @@ namespace Game.Gameplay
         public override void Enter()
         {
             Owner.PlayClip(clipJump, normalizedTime: 1);
+            SfxPlayer.Play(Owner.SwapClips);
             remaining = Owner.DashTime;
             Owner.ApplyDash();
             Owner.BeginIFrame();
