@@ -64,7 +64,7 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 12328411404713984
     m_Localized: "\u2190 \u2192\t Move\nSpace  Jump\nF    Attack\nA Swap weapon \xB7
-      Dash"
+      Dash\nESC\tSettings"
     m_Metadata:
       m_Items: []
   - m_Id: 12328860061024256
