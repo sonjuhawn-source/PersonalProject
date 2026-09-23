@@ -30,7 +30,7 @@ WeaponHero(1차 완료 · 2026-09-03 제출)를 QA 포트폴리오로 다시 구
 | **1회전 수행 기록** | 세션별 결과와 발견 | [test-run-log.md](test-run-log.md) |
 | **결과 보고서** | 판정 근거 서술 | [test-report.md](test-report.md) |
 | **제출용 엑셀** | 시트 6개 · 집계와 그래프는 수식 | [WeaponHero_TC.xlsx](WeaponHero_TC.xlsx) |
-| 스크린샷 | 11장 | [../Screenshots/](../Screenshots/) |
+| 스크린샷 | 11장 | [../Screenshots/](../../Screenshots/) |
 | 자동 테스트 | EditMode 21개 (런 구성 4 · 전투 수치 8 · 에셋 데이터 9) | `Assets/Tests/` |
 
 ### 1회전 결과 요약

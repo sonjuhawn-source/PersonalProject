@@ -9,7 +9,7 @@
 |---|---|
 | 무엇을 만들었나 | [README](../README.md) → [GDD](GDD.md) |
 | 어떻게 판단했나 | [학습 로그](learning-log.md) 의 "여기부터 읽는다" 8개 |
-| 어떻게 검증했나 | [테스트 결과 보고서](test-report.md) → [TC](test-cases.md) |
+| 어떻게 검증했나 | [테스트 결과 보고서](qa/test-report.md) → [TC](qa/test-cases.md) |
 
 ---
 
@@ -43,11 +43,11 @@ W1 부터 최종까지 다섯 번. **아래 테스트 케이스 109항목이 전
 
 | 파일 | 무엇인가 |
 |---|---|
-| [test-plan.md](test-plan.md) | **테스트 계획서** — 목적 · 범위 · 환경 · 종료 기준 · 위험 요소 |
-| [test-cases.md](test-cases.md) | **테스트 케이스 109항목.** 모든 파생물의 원본 |
-| [test-run-log.md](test-run-log.md) | **1회전 수행 기록** — 세션 8회의 결과와 발견, 결함 리포트 |
-| [test-report.md](test-report.md) | **결과 보고서** — 집계와 판정 근거 |
-| [WeaponHero_TC.xlsx](WeaponHero_TC.xlsx) | **제출용 엑셀** (파생물) — 시트 6개 |
+| [test-plan.md](qa/test-plan.md) | **테스트 계획서** — 목적 · 범위 · 환경 · 종료 기준 · 위험 요소 |
+| [test-cases.md](qa/test-cases.md) | **테스트 케이스 109항목.** 모든 파생물의 원본 |
+| [test-run-log.md](qa/test-run-log.md) | **1회전 수행 기록** — 세션 8회의 결과와 발견, 결함 리포트 |
+| [test-report.md](qa/test-report.md) | **결과 보고서** — 집계와 판정 근거 |
+| [WeaponHero_TC.xlsx](qa/WeaponHero_TC.xlsx) | **제출용 엑셀** (파생물) — 시트 6개 |
 
 **엑셀만 파생물이다.** 내용을 고칠 일이 생기면 `test-cases.md` 를 고치고 엑셀을 다시
 뽑는다. 엑셀을 직접 고치기 시작하면 둘이 갈라진다.
@@ -56,9 +56,9 @@ W1 부터 최종까지 다섯 번. **아래 테스트 케이스 109항목이 전
 
 | 파일 | 무엇인가 |
 |---|---|
-| [test-run-checklist.md](test-run-checklist.md) | 수행 순서 — 세션 9회로 나눈 동선 |
-| [bug-report-form.md](bug-report-form.md) | 결함 리포트 양식과 예시 |
-| [qa-portfolio-plan.md](qa-portfolio-plan.md) | **진행 상황.** 다른 기기에서 이어갈 때 여기부터 |
+| [test-run-checklist.md](qa/test-run-checklist.md) | 수행 순서 — 세션 9회로 나눈 동선 |
+| [bug-report-form.md](qa/bug-report-form.md) | 결함 리포트 양식과 예시 |
+| [qa-portfolio-plan.md](qa/qa-portfolio-plan.md) | **진행 상황.** 다른 기기에서 이어갈 때 여기부터 |
 
 ### 1회전 결과
 
