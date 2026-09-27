@@ -115,3 +115,6 @@ InitTestScene*.unity*
 # and Unity deletes the orphan meta, which would show up as a spurious deletion.
 /Assets/Imported/
 /Assets/Imported.meta
+
+# Excel 임시 잠금 파일 — 문서를 연 채로 커밋하면 딸려온다
+~$*
