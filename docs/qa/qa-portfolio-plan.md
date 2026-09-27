@@ -24,7 +24,7 @@ WeaponHero(1차 완료 · 2026-09-03 제출)를 QA 포트폴리오로 다시 구
 | | 산출물 | 위치 |
 |---|---|---|
 | 테스트 계획서 | 목적 · 범위 · 환경 · 종료 기준 · 위험 요소 | [test-plan.md](test-plan.md) |
-| 테스트 케이스 | **109항목** · 기능 9영역 + 경계 27 + 빌드 전 정적 10 | [test-cases.md](test-cases.md) |
+| 테스트 케이스 | **109항목** · 기능 71 + 경계 28 + 빌드 전 정적 10 | [test-cases.md](test-cases.md) |
 | 수행용 체크리스트 | 세션 9회 순서 · 스크린샷 목록 | [test-run-checklist.md](test-run-checklist.md) |
 | 결함 리포트 양식 | 양식 + 실제 결함으로 채운 예시 | [bug-report-form.md](bug-report-form.md) |
 | **UI 설명서** | 화면 10개의 영역 분할과 설명 · 번호 캡처 12장 — **보스전 캡처만 없음** | [ui-guide.md](ui-guide.md) |
