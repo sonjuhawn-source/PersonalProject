@@ -133,7 +133,7 @@ def main(argv):
     summary = wb["요약"]
     summary["B9"] = ("docs/qa/test-cases.md · docs/qa/test-run-log.md · "
                      "docs/qa/test-plan.md · docs/qa/test-steps-draft.md")
-    summary["A11"] = ("테스트 스텝은 2026-09-28 초안이다 — 2회전에서 수행하며 확정한다"
+    summary["A11"] = ("테스트 스텝과 사전 조건은 2026-09-28 초안이다 — 2회전에서 수행하며 확정한다"
                       if note else None)
 
     wb.save(BOOK)
