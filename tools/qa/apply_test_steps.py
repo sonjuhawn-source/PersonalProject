@@ -53,7 +53,7 @@ def parse_draft(text):
             continue
 
         if s.startswith("공통 사전 조건"):
-            common = clean(s.split("—", 1)[1]) if "—" in s else ""
+            common = for_sheet(s.split("—", 1)[1]) if "—" in s else ""
             continue
 
         if s.startswith("#### "):
@@ -63,7 +63,7 @@ def parse_draft(text):
             continue
 
         if tc and s.startswith("사전 조건") and "—" in s:
-            pre = clean(s.split("—", 1)[1])
+            pre = for_sheet(s.split("—", 1)[1])
             continue
 
         if s.startswith("```"):
@@ -71,16 +71,28 @@ def parse_draft(text):
             continue
 
         if in_block and tc and s:
-            steps.append(s)
+            steps.append(clean(s))
 
     flush()
     return out
 
 
 def clean(s):
-    """마크다운 강조와 표시 꼬리를 벗긴다."""
-    s = s.replace("**", "").replace("`", "")
-    return s.strip()
+    """마크다운 강조를 벗긴다."""
+    return s.replace("**", "").replace("`", "").strip()
+
+
+def for_sheet(s):
+    """작업용 표시를 제출용 문장으로 바꾼다.
+
+    [에디터] · [확인] · [자동] 은 이 문서를 읽는 나를 위한 표시다. 제출용
+    엑셀에 그대로 들어가면 대괄호가 오타처럼 읽힌다. 에디터 표시만 뜻이
+    남아야 하므로 문장으로 풀고 나머지는 지운다.
+    """
+    s = clean(s)                       # 마커가 백틱에 싸인 곳이 있어 먼저 벗긴다
+    s = s.replace("[에디터] ", "에디터 수행 · ").replace("[에디터]", "에디터 수행")
+    s = s.replace("[확인] ", "").replace("[자동] ", "")
+    return s.strip(" ·")
 
 
 def main(argv):

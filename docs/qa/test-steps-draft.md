@@ -231,7 +231,7 @@ QA 의 핵심 역량이라 이 칸이 비면 산출물이 절반만 있는 셈�
 ```
 
 #### TC-WPN-03 · 화면 밖 화살이 안 쌓인다
-사전 조건 — **활을 활성 무기로 · [에디터] 또는 빌드 · 프레임 표시 수단 준비**
+사전 조건 — **활을 활성 무기로 · 에디터 또는 빌드 · 프레임 표시 수단 준비**
 ```
 1. 적이 없는 방향으로 F 를 3분 이상 연타한다
 2. 프레임을 관찰한다
@@ -603,10 +603,9 @@ QA 의 핵심 역량이라 이 칸이 비면 산출물이 절반만 있는 셈�
 ```
 
 #### TC-UI-10 · 첫 실행 기본값
-사전 조건 — **저장된 설정이 없는 상태 · [확인] 레지스트리 정리 필요**
+사전 조건 — **저장된 설정이 없는 상태**
 ```
-1. 레지스트리에서 이 게임의 저장 키를 지운다
-   (HKCU\Software\<companyName>\WeaponHero)
+1. 레지스트리에서 HKCU\Software\WeaponHero\WeaponHero 키를 지운다
 2. 게임을 실행하고 설정 화면을 연다
 3. 전체 1 · 배경음 0.8 · 효과음 1 인지 읽는다
 ```
@@ -1004,7 +1003,7 @@ QA 의 핵심 역량이라 이 칸이 비면 산출물이 절반만 있는 셈�
 사전 조건 — **빌드 실행 후 · Player.log 생성됨**
 ```
 1. 빌드를 실행해 한 런을 완주하고 종료한다
-2. %USERPROFILE%\AppData\LocalLow\<companyName>\WeaponHero\Player.log 를 연다
+2. %USERPROFILE%\AppData\LocalLow\WeaponHero\WeaponHero\Player.log 를 연다
 3. Exception 이나 Error 가 있는지 찾는다
 ```
 
