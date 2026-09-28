@@ -118,3 +118,4 @@ InitTestScene*.unity*
 
 # Excel 임시 잠금 파일 — 문서를 연 채로 커밋하면 딸려온다
 ~$*
+tools/qa/__pycache__/
