@@ -147,6 +147,10 @@ def main(argv):
                      "docs/qa/test-plan.md · docs/qa/test-steps-draft.md")
     summary["A11"] = ("테스트 스텝과 사전 조건은 2026-09-28 초안이다 — 2회전에서 수행하며 확정한다"
                       if note else None)
+    # 실패 내역이 결과 보고서와 어긋나 있었다. 4 + 7 = 11 인데 실제 Fail 은 12 다 —
+    # 이연 1건(TC-CMB-08)이 빠져 있었다.
+    summary["A36"] = ("실패 12건 = 과거 빌드에서 잡아 수정한 4건 · 이번 회전 신규 7건 · "
+                      "이연 1건. 상세는 [결과 보고서] 시트")
 
     wb.save(BOOK)
     print("스텝을 넣은 행 %d · 비워 둔 행 %d · 초안 누락 %d" % (wrote, skipped, missing))
