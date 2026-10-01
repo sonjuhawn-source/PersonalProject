@@ -46,6 +46,7 @@ namespace Game.Gameplay.Enemies
         private IPatternSelector selector;
         private Color baseColor;
         private TerrainProbe probe;
+        private bool tinted = false;
 
         private float facing = 1;
         private const float standMult = 1.5f;
@@ -188,6 +189,12 @@ namespace Game.Gameplay.Enemies
             HandleMovement();
         }
 
+        private void LateUpdate()
+        {
+            if (tinted)
+                ApplyTint();
+        }
+
         private void HandleMovement()
         {
             if (impulse.IsActive)
@@ -285,11 +292,17 @@ namespace Game.Gameplay.Enemies
             return true;
         }
 
-        internal void SetTint(bool on)
+        internal void SetTint(bool tint)
+        {
+            tinted = tint;
+            ApplyTint();
+        }
+
+        private void ApplyTint()
         {
             if (sprite == null)
                 return;
-            sprite.color = on ? telegraphColor : baseColor;
+            sprite.color = tinted ? telegraphColor : baseColor;
         }
 
         private void OnDamaged()
