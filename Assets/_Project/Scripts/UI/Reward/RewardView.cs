@@ -74,6 +74,7 @@ namespace Game.UI
             if (source == null)
                 return;
             source.RewardOffered += Show;
+            source.RewardResolved += Hide;
         }
 
         private void Show(RewardOptionInfo[] offered)
@@ -135,10 +136,16 @@ namespace Game.UI
             }
         }
 
+        // 닫는 것은 입력이 아니라 결과에 건다. 여기서 끄면 숫자키처럼 뷰를 안 거치는
+        // 경로가 안 닫히고, 경로가 늘 때마다 같은 실수가 난다 (#149).
         private void Choose(int index)
         {
-            panel.SetActive (false);
             source.ChooseReward(index);
+        }
+
+        private void Hide()
+        {
+            panel.SetActive(false);
         }
 
         private void OnDisable()
@@ -146,6 +153,7 @@ namespace Game.UI
             if (source == null)
                 return;
             source.RewardOffered -= Show;
+            source.RewardResolved -= Hide;
         }
     }
 }
