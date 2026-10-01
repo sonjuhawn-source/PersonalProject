@@ -41,6 +41,10 @@ namespace Game.Gameplay.Rooms
         public event Action<RunResultInfo> RunEnded;
         public event Action<RewardOptionInfo[]> RewardOffered;
 
+        // 보상이 정해진 시점. 핸들러의 Cleared 를 그대로 중계한다.
+        // 모든 방이 Cleared 를 쏘므로(출구 열기) 보상방일 때만 올린다.
+        public event Action RewardResolved;
+
         private void Start()
         {
             if (cameraFollow == null)
@@ -151,7 +155,10 @@ namespace Game.Gameplay.Rooms
             // 보상방만 답을 되돌려줘야 한다. 인터페이스를 넓히는 대신 여기서 갈랐다.
             pendingReward = handler as RewardRoomHandler;
             if (pendingReward != null)
+            {
                 pendingReward.Offered += OnRewardOffered;
+                pendingReward.Cleared += OnRewardResolved;
+            }
 
             lastActiveIndex = playerWeapons != null ? playerWeapons.ActiveIndex : -1;
 
@@ -171,6 +178,11 @@ namespace Game.Gameplay.Rooms
             Debug.Log($"보상방 — {string.Join(" / ", text)}  (1 ~ {offered.Length} 중 하나)", this);
 
             RewardOffered?.Invoke(info);
+        }
+
+        private void OnRewardResolved()
+        {
+            RewardResolved?.Invoke();
         }
 
         // #103 이 버튼을 붙이면 Update 의 폴링만 사라지고 이 메서드는 남는다.
@@ -304,6 +316,7 @@ namespace Game.Gameplay.Rooms
             if (pendingReward != null)
             {
                 pendingReward.Offered -= OnRewardOffered;
+                pendingReward.Cleared -= OnRewardResolved;
                 pendingReward = null;
             }
 
