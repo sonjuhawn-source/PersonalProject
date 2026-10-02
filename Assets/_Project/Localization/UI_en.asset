@@ -51,7 +51,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 12313486510800896
-    m_Localized: Press R or the Restart button for play again
+    m_Localized: Press R or the Restart button to play again
     m_Metadata:
       m_Items: []
   - m_Id: 12328283302281216
@@ -64,14 +64,14 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 12328411404713984
     m_Localized: "\u2190 \u2192\t Move\nSpace  Jump\nF    Attack\nA Swap weapon \xB7
-      Dash\nESC\tSettings"
+      Dash\n1 2 3   Pick reward\nR       Restart\nESC\tSettings"
     m_Metadata:
       m_Items: []
   - m_Id: 12328860061024256
     m_Localized: "Clear the rooms and beat the boss\nDeath restarts the run \xB7
       upgrades are lost\nA also dodges \u2014 brief invulnerability while dashing\nPick
-      one of three in reward rooms\nIn reward rooms, A changes which weapon gets
-      upgraded and which gets discarded"
+      one of three with 1\xB72\xB73 or click in reward rooms\nIn reward rooms, A
+      changes which weapon gets upgraded and which gets discarded"
     m_Metadata:
       m_Items: []
   - m_Id: 12338448042835968
