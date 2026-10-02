@@ -97,8 +97,16 @@ namespace Game.UI
             if (masterSlider == null || bgmSlider == null || sfxSlider == null)
                 Debug.LogWarning($"{gameObject.name}: 볼륨 슬라이더가 비어 있다 — 그 항목은 안 보이고 안 바뀐다", this);
 
-            if (resolutionDropdown == null || screenModeDropdown == null || languageDropdown == null)
-                Debug.LogWarning($"{gameObject.name}: 드롭다운이 비어 있다 — 그 항목은 안 보이고 안 바뀐다", this);
+            // 셋을 묶어 검사하면 어느 것이 빠졌는지 경고가 말해주지 못한다.
+            if (resolutionDropdown == null)
+                Debug.LogWarning($"{gameObject.name}: 해상도 드롭다운이 비어 있다 — 그 항목은 안 보이고 안 바뀐다", this);
+
+            if (screenModeDropdown == null)
+                Debug.LogWarning($"{gameObject.name}: 화면 모드 드롭다운이 비어 있다 — 그 항목은 안 보이고 안 바뀐다", this);
+
+            // 언어는 전투 씬이 일부러 비운다 (5578ebc · TC-UI-06). 없는 것이 정상이므로 경고하지 않는다.
+            // 대가로 시작 화면에서 진짜 빠뜨린 경우를 여기서는 못 잡는다 — 그쪽은 TC-UI-04 가 본다.
+            // 매 실행마다 뜨는 경고를 두면 나중에 진짜 누락이 같은 줄에 섞여 안 보인다.
 
             // 개수가 같아도 순서가 어긋날 수 있다. 그건 코드로 못 잡으니 절반만 막는다.
             if (resolutionDropdown != null && resolutionDropdown.options.Count != Resolutions.Length)
