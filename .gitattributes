@@ -10,7 +10,13 @@
 #
 # -diff 는 615KB 를 diff 로 펼치지 않게 하는 것이라 남긴다.
 #
-# 다시 구울 일이 생기면 Galmuri11.ttf 를 받아야 한다 — 저장소에 없다.
-#     https://github.com/quiple/galmuri  dist/Galmuri11.ttf  (OFL 1.1)
-# 구울 글자 목록은 charset.txt 에 있다.
+# 원본 ttf 를 저장소에 둔다 (2026-10-02). 전에는 빼뒀는데, 문구를 고칠 때마다
+# 다시 구워야 하고 그때 원본이 없으면 받는 것부터 해야 한다 — #159 에서 실제로 겪었다.
+# Galmuri11 은 SIL OFL 1.1 이라 재배포할 수 있고 라이선스 전문이 같은 폴더에 있다.
+#     https://github.com/quiple/galmuri  dist/Galmuri11.ttf
+# 구울 글자 목록은 charset.txt 에 있다 — 새 글자를 쓰면 여기 넣고 다시 굽는다.
 Assets/_Project/Art/Font/*.asset -diff
+
+# 폰트 원본은 LFS 로 둔다. LFS 없이 커밋하면 히스토리에 남아 나중에 걸어도 안 줄어든다.
+*.ttf filter=lfs diff=lfs merge=lfs -text
+*.otf filter=lfs diff=lfs merge=lfs -text
