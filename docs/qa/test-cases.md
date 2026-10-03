@@ -278,14 +278,14 @@ W2 는 검+활로 맞바꿔 냈고 창은 W3 에서 들어왔다.
 
 | ID | 확인 항목 | 기대 결과 | 출처 | 1회전 | 2회전 |
 |---|---|---|---|---|---|
-| TC-BLD-01 | 컴파일 에러 0 | 콘솔이 비어 있다 | W4·최종 계획 | ✔ |  |
-| TC-BLD-02 | Pixem `using UnityEditor` 가드 | 세 파일 전부 `#if UNITY_EDITOR` 안에 있다 | W1 결과 | ✘ |  |
+| TC-BLD-01 | 컴파일 에러 0 | 콘솔이 비어 있다 | W4·최종 계획 | ✔ | ✔ |
+| TC-BLD-02 | Pixem `using UnityEditor` 가드 | 세 파일 전부 `#if UNITY_EDITOR` 안에 있다 | W1 결과 | ✘ | ✔ |
 | TC-BLD-03 | SO 참조 사슬 | 무기·방·패턴 SO 가 전부 누군가에게 참조된다 | W2 결과 | ✘ → ⚙ |  |
-| TC-BLD-04 | 빌드 씬 목록 | 시작 씬이 index 0 · 씬 2개 | 최종 계획 | ✔ |  |
-| TC-BLD-05 | 테스트 값 잔류 | `roomCount` · `seed` · `maxHealth` · `healAmount` 가 실서비스 값 | 최종 계획 | ✔ |  |
-| TC-BLD-06 | 씬 저장 | `git status` 에 미저장 씬이 없다 | 최종 계획 | ✔ |  |
+| TC-BLD-04 | 빌드 씬 목록 | 시작 씬이 index 0 · 씬 2개 | 최종 계획 | ✔ | ✔ |
+| TC-BLD-05 | 테스트 값 잔류 | `roomCount` · `seed` · `maxHealth` · `healAmount` 가 실서비스 값 | 최종 계획 | ✔ | ✔ |
+| TC-BLD-06 | 씬 저장 | `git status` 에 미저장 씬이 없다 | 최종 계획 | ✔ | ✔ |
 | TC-BLD-07 | UI 배선 | HealthBar · 결과 · 보상 · 시작 화면 참조가 안 비었다 | 최종 계획 | ✔ |  |
-| TC-BLD-08 | `bundleVersion` | 이번 빌드 번호와 일치한다 | 최종 계획 | ✔ |  |
+| TC-BLD-08 | `bundleVersion` | 이번 빌드 번호와 일치한다 | 최종 계획 | ✔ | ✘ |
 | TC-BLD-09 | 실행 후 `Player.log` | 예외가 없다 | 최종 확인 범위 | ✔ |  |
 | TC-BLD-10 | `Player.log` 에 오탐 경고가 없다 | 의도한 구성이 경고로 남지 않는다 | 1회전 세션 8 | ✘ |  |
 
