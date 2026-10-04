@@ -100,6 +100,7 @@ charset.txt 와 로컬라이즈 테이블을 대조 → 없는 글자가 있으�
 □ TC-BLD-06  씬 저장 (git status)
 □ TC-BLD-07  UI 배선
 □ TC-BLD-08  bundleVersion — 문서가 부르는 빌드 이름(vN.N)과 나란히 본다
+             **빌드를 만들기 전에 올린다.** 빌드 뒤에 올리면 그 빌드에는 옛 값이 찍힌다
 ```
 
 빌드 후 실행하면 곧바로 `□ TC-BLD-09 Player.log 예외 없음` 을 함께 본다
