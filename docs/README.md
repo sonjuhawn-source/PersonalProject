@@ -59,7 +59,7 @@ W1 부터 최종까지 다섯 번. **아래 테스트 케이스 109항목이 전
 | 파일 | 무엇인가 |
 |---|---|
 | [test-run-checklist.md](qa/test-run-checklist.md) | 수행 순서 — 세션 9회로 나눈 동선 |
-| [test-steps-draft.md](qa/test-steps-draft.md) | **테스트 스텝 초안 109개** — 2회전에서 확정한다 |
+| [test-steps.md](qa/test-steps.md) | **테스트 스텝 109개** — 2회전에서 확정했다 |
 | [test-run-2nd.md](qa/test-run-2nd.md) | **2회전 수행 계획** — 회귀 대상 7건과 새 절차 셋 |
 | [test-run-log-2nd.md](qa/test-run-log-2nd.md) | **2회전 수행 기록** — 세션별 결과 |
 | [bug-report-form.md](qa/bug-report-form.md) | 결함 리포트 양식과 예시 |

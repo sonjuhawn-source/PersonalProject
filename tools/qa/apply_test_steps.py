@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""docs/qa/test-steps-draft.md 의 테스트 스텝을 WeaponHero_TC.xlsx 로 옮긴다.
+"""docs/qa/test-steps.md 의 테스트 스텝을 WeaponHero_TC.xlsx 로 옮긴다.
 
 원본은 md 이고 엑셀은 파생물이다. 엑셀을 손으로 고치면 둘이 갈라지므로,
 스텝이 바뀌면 md 를 고치고 이 스크립트를 다시 돌린다.
@@ -17,7 +17,7 @@ from pathlib import Path
 import openpyxl
 
 ROOT = Path(__file__).resolve().parents[2]
-DRAFT = ROOT / "docs" / "qa" / "test-steps-draft.md"
+DRAFT = ROOT / "docs" / "qa" / "test-steps.md"
 BOOK = ROOT / "docs" / "qa" / "WeaponHero_TC.xlsx"
 
 COL_DETAIL = 4   # D 소분류(확인 항목) — 앞에 TC ID 가 붙어 있다
@@ -144,17 +144,18 @@ def main(argv):
     # 요약 시트 — 출처에 초안 문서를 더하고, 초안임을 한 줄로 밝힌다.
     summary = wb["요약"]
     summary["B9"] = ("docs/qa/test-cases.md · docs/qa/test-run-log.md · "
-                     "docs/qa/test-plan.md · docs/qa/test-steps-draft.md")
+                     "docs/qa/test-plan.md · docs/qa/test-steps.md")
     summary["A11"] = ("테스트 스텝과 사전 조건은 2026-09-28 초안이다 — 2회전에서 수행하며 확정한다"
                       if note else None)
     # 2회전부터 결과 열이 둘이다. H 가 최신이고 I 가 1회전 이력이다 — H 를 그대로 둔 것은
     # 집계 수식 59곳과 조건부 서식이 전부 H 를 보기 때문이다. 앞에 끼우면 전부 어긋난다.
     summary["A12"] = ("[결과] 는 최신 회차다. 1회전 결과는 [1회전 결과] 열에 남겨 같은 줄에서 "
                       "수정 전후가 보이게 했다 — 집계와 그래프는 [결과] 를 센다")
-    # 실패 내역이 결과 보고서와 어긋나 있었다. 4 + 7 = 11 인데 실제 Fail 은 12 다 —
-    # 이연 1건(TC-CMB-08)이 빠져 있었다.
-    summary["A36"] = ("실패 12건 = 과거 빌드에서 잡아 수정한 4건 · 이번 회전 신규 7건 · "
-                      "이연 1건. 상세는 [결과 보고서] 시트")
+    # [결과] 가 2회전이므로 실패 내역도 2회전 기준이다. 1회전 12건은 [1회전 결과] 열에 있다.
+    # 숫자를 손으로 적지 않는다 — 전에 4 + 7 = 11 로 적어 두고 실제 12 와 어긋났다.
+    summary["A36"] = ("실패 5건 = 미수정 결함 3건(#165 #166 #164) · 안 고치기로 판단한 1건(#151) · "
+                      "이연 1건(#143). 1회전 12건은 [1회전 결과] 열에 있다. "
+                      "상세는 [결과 보고서] 시트")
 
     wb.save(BOOK)
     print("스텝을 넣은 행 %d · 비워 둔 행 %d · 초안 누락 %d" % (wrote, skipped, missing))

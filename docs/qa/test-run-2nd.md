@@ -2,7 +2,7 @@
 
 > 작성 2026-10-03 · 대상 빌드 **v1.1** (결함 7건 수정 반영)
 >
-> 관련: [1회전 체크리스트](test-run-checklist.md) · [스텝 초안](test-steps-draft.md) ·
+> 관련: [1회전 체크리스트](test-run-checklist.md) · [스텝](test-steps.md) ·
 > [1회전 기록](test-run-log.md) · [결함 수정 순서](../defect-fix-plan.md)
 
 ---
@@ -50,7 +50,7 @@
 
 ### 1. 스텝을 밟으며 확정한다
 
-[스텝 초안](test-steps-draft.md)을 띄워 놓고 **그대로 따라간다.** 틀린 줄만 고친다.
+[스텝](test-steps.md)을 띄워 놓고 **그대로 따라간다.** 틀린 줄만 고친다.
 
 **`[확인]` 이 남은 네 곳**이 특히 그렇다. 나머지는 파일에서 확정했다.
 
@@ -101,7 +101,7 @@ charset.txt 와 로컬라이즈 테이블 대조 → 없는 글자가 있으면 
 ## 끝나고 할 일
 
 1. `test-cases.md` 의 결과 열 갱신 — 수정분이 통과로 바뀐다
-2. **스텝 확정분을 `test-steps-draft.md` 에 반영**하고 파일 이름에서 `draft` 를 뗀다
+2. **스텝 확정분을 `test-steps.md` 에 반영**하고 파일 이름에서 `draft` 를 뗀다
 3. 엑셀 재생성 — `tools/qa/apply_test_steps.py --pre --no-note`
 4. **결과 보고서 2회전판** — 1회전과 나란히 두면 "찾았다 → 고쳤다 → 확인했다"가 한 장에 들어간다
 5. 덱 8쪽 대표 결함을 **고치기 전/후**로 교체 (`Screenshots/telegraph_compare.png`)

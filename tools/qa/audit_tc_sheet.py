@@ -9,8 +9,8 @@ apply_test_steps.py 를 돌린 뒤 이것으로 확인한다. 보는 것은 여�
 
     uv run --python 3.12 --with openpyxl python tools/qa/audit_tc_sheet.py
 
-알려진 오탐 둘. TC-EDGE-27 의 1280x720 은 "숫자 붙음"으로 잡히고,
-TC-EDGE-22 는 N/A 라 빈 칸이 "빈 줄"로 잡힌다. 둘 다 정상이다.
+알려진 오탐 둘. TC-EDGE-27 의 1600x900 은 "숫자 붙음"으로 잡히고,
+N/A 둘(TC-EDGE-22 · TC-EDGE-17)은 빈 칸이 "빈 줄"로 잡힌다. 전부 정상이다.
 """
 import io, sys, os, re, importlib.util
 sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8', errors='replace')
@@ -39,7 +39,9 @@ for r in range(2, ws.max_row + 1):
     exp = ws.cell(r, 7).value or ""
     res = ws.cell(r, 8).value or ""
 
-    if tc == "TC-EDGE-22":
+    # N/A 는 절차가 없는 것이 정상이다. TC-EDGE-17 은 2회전에서 내려왔다 —
+    # 선행 조건(적 생존 · 출구 열림)이 동시에 성립하지 않아 절차를 쓸 수 없다.
+    if tc in ("TC-EDGE-22", "TC-EDGE-17"):
         if pre or st: bad(tc, "N/A 인데 칸이 차 있다", repr(pre)+repr(st))
         continue
 
