@@ -1,6 +1,6 @@
 # 문서 안내
 
-> 최종 수정 2026-09-24
+> 최종 수정 2026-10-04
 >
 > 이 저장소의 문서가 무엇이고 어떤 순서로 읽는지. **처음 여는 사람은 아래 세 줄만
 > 보면 된다.**
@@ -9,7 +9,7 @@
 |---|---|
 | 무엇을 만들었나 | [README](../README.md) → [GDD](GDD.md) |
 | 어떻게 판단했나 | [학습 로그](learning-log.md) 의 "여기부터 읽는다" 8개 |
-| 어떻게 검증했나 | [테스트 결과 보고서](qa/test-report.md) → [TC](qa/test-cases.md) |
+| 어떻게 검증했나 | [2회전 결과 보고서](qa/test-report-2nd.md) → [TC](qa/test-cases.md) |
 
 ---
 
@@ -47,9 +47,12 @@ W1 부터 최종까지 다섯 번. **아래 테스트 케이스 109항목이 전
 |---|---|
 | [test-plan.md](qa/test-plan.md) | **테스트 계획서** — 목적 · 범위 · 환경 · 종료 기준 · 위험 요소 |
 | [test-cases.md](qa/test-cases.md) | **테스트 케이스 109항목.** 모든 파생물의 원본 |
+| [test-steps.md](qa/test-steps.md) | **테스트 스텝 109개.** 2회전에서 확정했다 |
 | [test-run-log.md](qa/test-run-log.md) | **1회전 수행 기록** — 세션 8회의 결과와 발견, 결함 리포트 |
-| [test-report.md](qa/test-report.md) | **결과 보고서** — 집계와 판정 근거 |
-| [WeaponHero_TC.xlsx](qa/WeaponHero_TC.xlsx) | **제출용 엑셀** (파생물) — 시트 6개 |
+| [test-run-log-2nd.md](qa/test-run-log-2nd.md) | **2회전 수행 기록** — 세션 9회 · 회귀와 스텝 확정 |
+| [test-report.md](qa/test-report.md) | **1회전 결과 보고서** — 집계와 판정 근거 |
+| [test-report-2nd.md](qa/test-report-2nd.md) | **2회전 결과 보고서** — 회귀 판정과 **1회전이 뒤집힌 셋** |
+| [WeaponHero_TC.xlsx](qa/WeaponHero_TC.xlsx) | **제출용 엑셀** (파생물) — 시트 6개 · 결과 열 둘 |
 
 **엑셀만 파생물이다.** 내용을 고칠 일이 생기면 `test-cases.md` 를 고치고 엑셀을 다시
 뽑는다. 엑셀을 직접 고치기 시작하면 둘이 갈라진다.
@@ -59,19 +62,24 @@ W1 부터 최종까지 다섯 번. **아래 테스트 케이스 109항목이 전
 | 파일 | 무엇인가 |
 |---|---|
 | [test-run-checklist.md](qa/test-run-checklist.md) | 수행 순서 — 세션 9회로 나눈 동선 |
-| [test-steps.md](qa/test-steps.md) | **테스트 스텝 109개** — 2회전에서 확정했다 |
 | [test-run-2nd.md](qa/test-run-2nd.md) | **2회전 수행 계획** — 회귀 대상 7건과 새 절차 셋 |
-| [test-run-log-2nd.md](qa/test-run-log-2nd.md) | **2회전 수행 기록** — 세션별 결과 |
 | [bug-report-form.md](qa/bug-report-form.md) | 결함 리포트 양식과 예시 |
 | [ui-guide.md](qa/ui-guide.md) | UI 설명서 — 화면 10개의 영역 분할과 설명 |
 | [qa-portfolio-plan.md](qa/qa-portfolio-plan.md) | **진행 상황.** 다른 기기에서 이어갈 때 여기부터 |
 
-### 1회전 결과
+### 결과 — 두 회전
 
 ```
-TC 109 · Pass 96(자동 9 포함) · Fail 12 · N/A 1 · 미확인 0
-신규 결함 7건 — #148 #149 #150 #151 #152 #153 #154
+1회전   TC 109 · Pass 96(자동 9) · Fail 12 · N/A 1 · 미확인 0
+        신규 결함 7건 — #148 #149 #150 #151 #152 #153 #154
+
+2회전   TC 109 · Pass 102(자동 8) · Fail 4 · 이연 1 · N/A 2 · 미확인 0
+        회귀 7건 전부 통과 · 신규 결함 3건 — #165 #166 #167
+        1회전 판정 셋이 뒤집혔다 — TC-EDGE-27 · TC-BLD-08 · TC-EDGE-17
 ```
+
+**두 회차 모두 미확인 0 이다.** 그리고 2회전이 **1회전 자체를 검증하는 회차**가 됐다 —
+값을 안 보고 통과로 넘긴 둘과, 만들 수 없는 선행 조건 하나가 거기서 나왔다.
 
 ## 4. 코드 쪽 산출물
 
