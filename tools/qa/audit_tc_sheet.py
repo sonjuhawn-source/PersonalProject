@@ -19,6 +19,7 @@ import openpyxl
 spec = importlib.util.spec_from_file_location("m", r"tools\qa\apply_test_steps.py")
 m = importlib.util.module_from_spec(spec); spec.loader.exec_module(m)
 draft = m.parse_draft(m.DRAFT.read_text(encoding="utf-8"))
+expects = m.parse_expects(m.CASES.read_text(encoding="utf-8"))
 
 wb = openpyxl.load_workbook(r"docs\qa\WeaponHero_TC.xlsx")
 ws = wb["TC 목록"]
@@ -44,6 +45,11 @@ for r in range(2, ws.max_row + 1):
     if tc in ("TC-EDGE-22", "TC-EDGE-17"):
         if pre or st: bad(tc, "N/A 인데 칸이 차 있다", repr(pre)+repr(st))
         continue
+
+    # 0) 기대 결과가 TC 문서와 같은가 — 엑셀은 파생물이다
+    want = expects.get(tc)
+    if want and exp.strip() != want:
+        bad(tc, "기대 결과가 TC 문서와 다르다", "%r vs %r" % (exp, want))
 
     # 1) 초안과 글자까지 같은가
     dpre, dsteps = draft.get(tc, ("", []))

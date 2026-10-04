@@ -20,9 +20,12 @@ ROOT = Path(__file__).resolve().parents[2]
 DRAFT = ROOT / "docs" / "qa" / "test-steps.md"
 BOOK = ROOT / "docs" / "qa" / "WeaponHero_TC.xlsx"
 
+CASES = ROOT / "docs" / "qa" / "test-cases.md"
+
 COL_DETAIL = 4   # D 소분류(확인 항목) — 앞에 TC ID 가 붙어 있다
 COL_PRE = 5      # E 사전 조건
 COL_STEPS = 6    # F 테스트 스텝
+COL_EXPECT = 7   # G 기대 결과 — 원본은 test-cases.md 다
 
 ID = re.compile(r"TC-[A-Z]+-\d+")
 
@@ -82,6 +85,24 @@ def clean(s):
     return s.replace("**", "").replace("`", "").strip()
 
 
+def parse_expects(text):
+    """test-cases.md 의 표에서 {TC ID: 기대 결과} 를 뽑는다.
+
+    기대 결과는 스텝 문서가 아니라 TC 문서가 원본이다. 표가 5열인 절과
+    6열(선행 조건이 있는 절)이 섞여 있어 열 수로 자리를 고른다.
+    """
+    out = {}
+    for line in text.split(chr(10)):
+        if not line.startswith("| TC-"):
+            continue
+        c = [x.strip() for x in line.split("|")]
+        m = ID.search(c[1])
+        if not m:
+            continue
+        out[m.group(0)] = clean(c[4] if len(c) == 9 else c[3])
+    return out
+
+
 def for_sheet(s):
     """작업용 표시를 제출용 문장으로 바꾼다.
 
@@ -100,6 +121,7 @@ def main(argv):
     note = "--no-note" not in argv
 
     steps_by_tc = parse_draft(DRAFT.read_text(encoding="utf-8"))
+    expects = parse_expects(CASES.read_text(encoding="utf-8"))
     wb = openpyxl.load_workbook(BOOK)
     ws = wb["TC 목록"]
 
@@ -122,6 +144,13 @@ def main(argv):
             continue
 
         pre, steps = steps_by_tc[tc]
+
+        # 기대 결과는 항상 맞춘다. 2회전에서 TC 문구를 넓혔는데 엑셀이 따라오지
+        # 않아 넷이 갈라져 있었다 — 파생물은 손으로 고치지 않고 다시 뽑는다.
+        want = expects.get(tc)
+        if want and (ws.cell(row, COL_EXPECT).value or "").strip() != want:
+            print("  기대 결과 갱신:", tc)
+            ws.cell(row, COL_EXPECT).value = want
 
         if not steps:                       # N/A 항목은 비운다
             ws.cell(row, COL_STEPS).value = None
