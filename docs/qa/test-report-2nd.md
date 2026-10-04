@@ -1,6 +1,6 @@
 # 2회전 테스트 결과 보고서
 
-> 대상 빌드 v1.1 (결함 7건 수정 반영) · 수행 2026-10-03 ~ 10-04 · 세션 9회
+> 대상 빌드 v1.1 (수정 7건 반영) · 수행 2026-10-03 ~ 10-04 · 세션 9회
 >
 > 1회전 보고서 [test-report.md](test-report.md) · 수행 계획 [test-run-2nd.md](test-run-2nd.md) ·
 > 수행 기록 [test-run-log-2nd.md](test-run-log-2nd.md) · 케이스 [test-cases.md](test-cases.md) ·
