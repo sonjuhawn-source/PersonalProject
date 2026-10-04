@@ -66,7 +66,7 @@ W1 부터 최종까지 다섯 번. **아래 테스트 케이스 109항목이 전
 | [bug-report-form.md](qa/bug-report-form.md) | 결함 리포트 양식과 예시 |
 | [ui-guide.md](qa/ui-guide.md) | UI 설명서 — 화면 10개의 영역 분할과 설명 |
 | [qa-portfolio-plan.md](qa/qa-portfolio-plan.md) | **진행 상황.** 다른 기기에서 이어갈 때 여기부터 |
-| [deck-2nd-round-edits.md](qa/deck-2nd-round-edits.md) | **발표 덱 2회전판 — 쪽별 수정 목록** |
+| [portfolio-revision.md](qa/portfolio-revision.md) | **QA 포트폴리오 수정 계획** — 2차 반영 + 2026-10-04 피드백 |
 
 ### 결과 — 두 회전
 
