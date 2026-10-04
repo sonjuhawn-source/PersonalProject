@@ -10,8 +10,10 @@
 
 엑셀이 Excel 에서 열려 있으면 쓰기가 막힌다. 닫고 돌린다.
 """
+import math
 import re
 import sys
+import unicodedata
 from pathlib import Path
 
 import openpyxl
@@ -78,6 +80,20 @@ def parse_draft(text):
 
     flush()
     return out
+
+
+def wrapped_lines(text, width):
+    """엑셀 열 너비에 맞춰 줄바꿈된 줄 수를 센다.
+
+    너비 단위는 기본 글꼴의 '0' 폭이다. 한글·전각은 그 두 배로 본다.
+    """
+    if not text:
+        return 1
+    n = 0
+    for line in str(text).split(chr(10)):
+        w = sum(2 if unicodedata.east_asian_width(ch) in "WF" else 1 for ch in line)
+        n += max(1, math.ceil(w / max(width - 1, 1)))
+    return n
 
 
 def clean(s):
@@ -160,8 +176,15 @@ def main(argv):
 
         cell = ws.cell(row, COL_STEPS)
         cell.value = "\n".join(steps)
-        # 줄 수만큼 행을 높인다. 높이를 안 주면 한 줄만 보이는 뷰어가 있다.
-        ws.row_dimensions[row].height = max(15, 13.5 * len(steps))
+        # 행을 높인다. 높이를 안 주면 한 줄만 보이는 뷰어가 있다.
+        # 스텝 수로만 세면 모자란다 — 한 스텝이 열 너비를 넘으면 두 줄이 되기 때문이다.
+        # 실제로 모자라서 제출용 캡처에서 스텝이 세로로 잘렸다. 열 너비로 줄 수를 센다.
+        # 여기 값은 넉넉한 추정이다. 다 돌린 뒤 엑셀에서 행 '자동 맞춤' 을 주면 정확한
+        # 높이로 좁혀진다 — 모자라 잘리는 쪽보다 남는 쪽이 낫다.
+        need = max(wrapped_lines(pre, 18.0),
+                   wrapped_lines(cell.value, 26.0),
+                   wrapped_lines(ws.cell(row, COL_EXPECT).value, 40.0))
+        ws.row_dimensions[row].height = max(15, 13.5 * need)
 
         if write_pre and pre:
             ws.cell(row, COL_PRE).value = pre
