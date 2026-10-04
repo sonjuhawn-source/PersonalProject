@@ -40,12 +40,31 @@ namespace Game.UI
                 Toggle();
         }
 
-        // 설정 패널의 닫기 버튼도 이것을 부르면 상태가 한 곳에서만 바뀐다.
+        // 여는 버튼(시작 화면)과 닫는 버튼(설정 패널)이 각각 Open · Close 를 부른다.
+        // 토글을 걸면 안 되는 이유는 버튼이 토글이 아니기 때문이다 — 닫기 버튼은
+        // 눌렀을 때 항상 닫혀야 하는데, Toggle 은 "열려 있는데 paused 가 false" 인
+        // 상태에서 오히려 연다. 시작 화면이 실제로 그 상태를 만들고 있었다 (#165).
+        public void Open()
+        {
+            paused = true;
+            panel.SetActive(true);
+            Time.timeScale = 0f;
+        }
+
+        public void Close()
+        {
+            paused = false;
+            panel.SetActive(false);
+            Time.timeScale = 1f;
+        }
+
+        // ESC 는 둘 중 무엇인지 모르므로 여기서만 뒤집는다.
         public void Toggle()
         {
-            paused = !paused;
-            panel.SetActive(paused);
-            Time.timeScale = paused ? 0f : 1f;
+            if (paused)
+                Close();
+            else
+                Open();
         }
 
         // 빌드에는 도메인 리로드가 없어 timeScale 이 씬을 넘어 살아남는다 (#101).
