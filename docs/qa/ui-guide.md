@@ -39,7 +39,7 @@
 | 2 | 규칙 설명 | 클리어 조건 · 사망 시 손실 · 스왑의 회피 기능 · 보상 선택 |
 | 3 | 나가기 | 시작 화면으로 |
 
-> **결함 [#148](../../../issues/148)** — 2번에 *"보상방에서 셋 중 하나를 고른다"* 가 있지만
+> **결함 [#148](https://github.com/sonjuhawn-source/WeaponHero/issues/148)** — 2번에 *"보상방에서 셋 중 하나를 고른다"* 가 있지만
 > **어떤 키인지가 없다.** 실제로는 클릭과 숫자키 1·2·3 이 둘 다 동작한다. 한국어·영어 동일.
 
 ## 3. 설정 — `settings.png` · `settings_en.png`
@@ -105,10 +105,10 @@
 | 3 | 안내 | `A` 로 무기를 바꾸면 **강화 대상과 버릴 무기가 함께 바뀐다** |
 | 4 | 빈 자리 | 체력이 가득해 회복 카드가 빠진 상태 |
 
-> **결함 [#151](../../../issues/151)** — 4번이 그 결함이다. 카드가 둘이면 오른쪽 3분의 1이
+> **결함 [#151](https://github.com/sonjuhawn-source/WeaponHero/issues/151)** — 4번이 그 결함이다. 카드가 둘이면 오른쪽 3분의 1이
 > 빈 채로 남아 "뭔가 못 받았나"로 읽힌다.
 >
-> **결함 [#149](../../../issues/149)** — 숫자키로 고르면 보상은 적용되는데 **패널이 안 닫힌다.**
+> **결함 [#149](https://github.com/sonjuhawn-source/WeaponHero/issues/149)** — 숫자키로 고르면 보상은 적용되는데 **패널이 안 닫힌다.**
 
 ## 8. 보스전 — `boss.png`
 
@@ -126,7 +126,7 @@
 > **2026-09-27 에 다시 찍었다.** 1회전의 `boss.png` 는 보상 화면이 같은 내용으로 한 번 더
 > 저장된 파일이었다 (`reward.png` 와 해시가 같았다).
 
-> **결함 [#150](../../../issues/150)** — 보스는 **공격 예고 색이 보이지 않는다.** 패턴 셋이 전부
+> **결함 [#150](https://github.com/sonjuhawn-source/WeaponHero/issues/150)** — 보스는 **공격 예고 색이 보이지 않는다.** 패턴 셋이 전부
 > 중단 불가(`interruptible: 0`)라 예고가 유일한 회피 신호인데 그것이 안 읽힌다.
 
 ## 9. 일시정지 — `pause.png`
@@ -139,7 +139,7 @@
 | 2 | 나가기 | 게임으로 돌아간다 |
 | 3 | 멈춘 전투 화면 | 이동 · 점프 · 공격 입력이 전부 막힌다 (`TC-EDGE-21`) |
 
-> **결함 [#152](../../../issues/152)** — 여기서 해상도를 바꾸면 **1번의 위치가 어긋난다.**
+> **결함 [#152](https://github.com/sonjuhawn-source/WeaponHero/issues/152)** — 여기서 해상도를 바꾸면 **1번의 위치가 어긋난다.**
 > HUD 는 멀쩡하다.
 
 ## 10. 결과 — `result.png` · `result_en.png`
@@ -154,7 +154,7 @@
 | 3 | 안내 | `R` 키 또는 재시작 버튼 |
 | 4 | 버튼 | 다시 시작 · 처음 화면 |
 
-> **결함 [#153](../../../issues/153)** — 영어에서 2번이 넘쳐 3번과 겹친다. 번역은 되어 있고
+> **결함 [#153](https://github.com/sonjuhawn-source/WeaponHero/issues/153)** — 영어에서 2번이 넘쳐 3번과 겹친다. 번역은 되어 있고
 > 배치만 깨진다. 한국어는 3번의 줄바꿈이 단어 중간에서 끊기고 맞춤법 오류(`할려면`)가 있다.
 
 ---
@@ -166,8 +166,8 @@
 
 | 화면 | 결함 |
 |---|---|
-| 도움말 | [#148](../../../issues/148) |
-| 보상 | [#149](../../../issues/149) · [#151](../../../issues/151) |
-| 보스전 | [#150](../../../issues/150) |
-| 일시정지 | [#152](../../../issues/152) |
-| 결과 | [#153](../../../issues/153) |
+| 도움말 | [#148](https://github.com/sonjuhawn-source/WeaponHero/issues/148) |
+| 보상 | [#149](https://github.com/sonjuhawn-source/WeaponHero/issues/149) · [#151](https://github.com/sonjuhawn-source/WeaponHero/issues/151) |
+| 보스전 | [#150](https://github.com/sonjuhawn-source/WeaponHero/issues/150) |
+| 일시정지 | [#152](https://github.com/sonjuhawn-source/WeaponHero/issues/152) |
+| 결과 | [#153](https://github.com/sonjuhawn-source/WeaponHero/issues/153) |

@@ -45,13 +45,13 @@
 
 | 이슈 | TC | 확인한 것 | 세션 |
 |---|---|---|---|
-| [#148](../../../issues/148) | `TC-UI-11` | 안내에 `1 2 3` · `R` 이 있다 — 한국어·영어 둘 다 | 1 |
-| [#149](../../../issues/149) | `TC-RUN-10` | **숫자키·클릭 양쪽**에서 패널이 닫힌다 | 4 |
-| [#150](../../../issues/150) | `TC-ENM-11` | 보스 예고 색 — 빌드 캡처에서 측정 확인 | 5 |
-| [#152](../../../issues/152) | `TC-EDGE-28` | 해상도를 바꿔도 설정창이 가운데 | 5 |
-| [#153](../../../issues/153) | `TC-UI-13` | **언어 2 × 결과 2 = 네 경우** 모두 안 겹침 | 6 |
-| [#154](../../../issues/154) | `TC-BLD-10` | 오탐 경고 0 · 진짜 누락은 안 덮였다 | 8 |
-| [#159](../../../issues/159) | — | 글자 깨짐 없음 — 문구를 손댄 모든 화면 | 1 · 6 |
+| [#148](https://github.com/sonjuhawn-source/WeaponHero/issues/148) | `TC-UI-11` | 안내에 `1 2 3` · `R` 이 있다 — 한국어·영어 둘 다 | 1 |
+| [#149](https://github.com/sonjuhawn-source/WeaponHero/issues/149) | `TC-RUN-10` | **숫자키·클릭 양쪽**에서 패널이 닫힌다 | 4 |
+| [#150](https://github.com/sonjuhawn-source/WeaponHero/issues/150) | `TC-ENM-11` | 보스 예고 색 — 빌드 캡처에서 측정 확인 | 5 |
+| [#152](https://github.com/sonjuhawn-source/WeaponHero/issues/152) | `TC-EDGE-28` | 해상도를 바꿔도 설정창이 가운데 | 5 |
+| [#153](https://github.com/sonjuhawn-source/WeaponHero/issues/153) | `TC-UI-13` | **언어 2 × 결과 2 = 네 경우** 모두 안 겹침 | 6 |
+| [#154](https://github.com/sonjuhawn-source/WeaponHero/issues/154) | `TC-BLD-10` | 오탐 경고 0 · 진짜 누락은 안 덮였다 | 8 |
+| [#159](https://github.com/sonjuhawn-source/WeaponHero/issues/159) | — | 글자 깨짐 없음 — 문구를 손댄 모든 화면 | 1 · 6 |
 
 ### `#150` 은 색을 숫자로 쟀다
 
@@ -84,9 +84,9 @@
 
 | 이슈 | 제목 | 중요도 | 우선순위 | 발견 |
 |---|---|---|---|---|
-| [#165](../../../issues/165) | 설정 닫기 버튼으로 나가면 게임이 멈춘 채로 남는다 | Major | High | 세션 5 |
-| [#166](../../../issues/166) | 일시정지 중에 무기 교체가 된다 | Minor | Normal | 세션 5 |
-| [#167](../../../issues/167) | 클리어 결과의 구분자가 플레이어에 가려진다 | Trivial | Low | 세션 6 |
+| [#165](https://github.com/sonjuhawn-source/WeaponHero/issues/165) | 설정 닫기 버튼으로 나가면 게임이 멈춘 채로 남는다 | Major | High | 세션 5 |
+| [#166](https://github.com/sonjuhawn-source/WeaponHero/issues/166) | 일시정지 중에 무기 교체가 된다 | Minor | Normal | 세션 5 |
+| [#167](https://github.com/sonjuhawn-source/WeaponHero/issues/167) | 클리어 결과의 구분자가 플레이어에 가려진다 | Trivial | Low | 세션 6 |
 
 **`#165` 는 주석이 예고한 일이 실행되지 않은 세 번째 사례다.**
 
@@ -104,11 +104,11 @@ public void Toggle()
 
 | TC | 이슈 | 처리 | 지금 |
 |---|---|---|---|
-| `TC-UI-03` | [#165](../../../issues/165) | 고친다 | **수정 · 빌드 확인 (10-04)** |
-| `TC-BLD-08` | [#164](../../../issues/164) | 다음 빌드에서 | **`1.1` 로 올리고 빌드 확인 (10-04)** |
-| `TC-EDGE-21` | [#166](../../../issues/166) | 후속 | 안 고쳤다 |
-| `TC-UI-12` | [#151](../../../issues/151) | 안 고치기로 판단 | 그대로 |
-| `TC-CMB-08` | [#143](../../../issues/143) | 이연 | **열어 두기로 판단 (10-04)** |
+| `TC-UI-03` | [#165](https://github.com/sonjuhawn-source/WeaponHero/issues/165) | 고친다 | **수정 · 빌드 확인 (10-04)** |
+| `TC-BLD-08` | [#164](https://github.com/sonjuhawn-source/WeaponHero/issues/164) | 다음 빌드에서 | **`1.1` 로 올리고 빌드 확인 (10-04)** |
+| `TC-EDGE-21` | [#166](https://github.com/sonjuhawn-source/WeaponHero/issues/166) | 후속 | 안 고쳤다 |
+| `TC-UI-12` | [#151](https://github.com/sonjuhawn-source/WeaponHero/issues/151) | 안 고치기로 판단 | 그대로 |
+| `TC-CMB-08` | [#143](https://github.com/sonjuhawn-source/WeaponHero/issues/143) | 이연 | **열어 두기로 판단 (10-04)** |
 
 **결과 열은 고치지 않았다.** 2회전이 무엇을 찾았는지가 그 표의 내용이고, 뒤에 고쳤다고
 덮으면 찾은 기록이 사라진다. 수정과 확인은 [2회전 기록의 "2회전 이후"
@@ -265,11 +265,11 @@ Game.Gameplay.Tests.dll   21 / 21 통과 · 0.101초
 
 ## 다음에 할 것
 
-1. ~~[#165](../../../issues/165) 를 고친다~~ — **끝났다** (10-04). `PauseMenu` 가 패널의
+1. ~~[#165](https://github.com/sonjuhawn-source/WeaponHero/issues/165) 를 고친다~~ — **끝났다** (10-04). `PauseMenu` 가 패널의
    유일한 주인이 되도록 `Open` / `Close` 로 나눴다. 고치면서 **시작 화면에 같은 결함이
    있는 것**이 드러났다
-2. ~~[#143](../../../issues/143) 을 판단한다~~ — **끝났다** (10-04). 고치지 않고 열어 둔다.
+2. ~~[#143](https://github.com/sonjuhawn-source/WeaponHero/issues/143) 을 판단한다~~ — **끝났다** (10-04). 고치지 않고 열어 둔다.
    밸런스가 바뀌는데 확인할 회차가 없다
-3. ~~[#164](../../../issues/164)~~ — **끝났다** (10-04). `1.1` 로 올리고 빌드에서 확인했다
+3. ~~[#164](https://github.com/sonjuhawn-source/WeaponHero/issues/164)~~ — **끝났다** (10-04). `1.1` 로 올리고 빌드에서 확인했다
 4. **발표 덱을 2회전판으로** — 8쪽 대표 결함을 고치기 전/후로, 15쪽 엑셀 캡처를 결과 열
    둘이 보이게 다시

@@ -210,7 +210,7 @@ uv run --python 3.12 --with openpyxl python tools/qa/audit_tc_sheet.py
 > **판정 기준을 2회전에서 바꿨다.** 원래는 *"한 프레임도 안 보인다"* 였는데 60fps 에서 한
 > 프레임은 16ms 라 **눈으로는 "없었다"를 확인할 수 없다** — 없음의 증명이다.
 >
-> 이 항목은 [#46](../../../issues/46) 에서 *"교체 순간 옛 그림이 번쩍인다"* 는 **체감**으로
+> 이 항목은 [#46](https://github.com/sonjuhawn-source/WeaponHero/issues/46) 에서 *"교체 순간 옛 그림이 번쩍인다"* 는 **체감**으로
 > 들어왔다. 체감으로 들어온 결함은 체감으로 판정하는 것이 맞고, "한 프레임"은 구현
 > 디테일이지 사용자가 겪는 것이 아니다.
 
@@ -1023,7 +1023,7 @@ TC 의 의도는 `TC-EDGE-02` 가 본다. `EndRun` 의 `runEnded` 가드가 먼�
 ```
 > **인스펙터가 아니라 로그로 본다.** 배선 누락은 전부 `Awake`·`Start` 에서
 > `Debug.LogWarning` 으로 나오게 돼 있고 그 자리가 **30곳**이라, 인스펙터에서 넷을
-> 훑는 것보다 넓다. 그리고 [#165](../../../issues/165) 처럼 **배선이 프리팹에만 있는
+> 훑는 것보다 넓다. 그리고 [#165](https://github.com/sonjuhawn-source/WeaponHero/issues/165) 처럼 **배선이 프리팹에만 있는
 > 경우는 인스펙터로 안 보인다.**
 
 #### TC-BLD-08 · `bundleVersion`
@@ -1035,7 +1035,7 @@ TC 의 의도는 `TC-EDGE-02` 가 본다. `EndRun` 의 `runEnded` 가드가 먼�
 ```
 > **비교 대상을 적어야 판정이 된다.** 1회전은 *"이번 빌드 번호와 같은지"* 만 적혀 있어
 > 무엇과 맞춰야 하는지가 없었고, 값이 `0.4` 인 채로 ✔ 가 찍혔다
-> ([#164](../../../issues/164)).
+> ([#164](https://github.com/sonjuhawn-source/WeaponHero/issues/164)).
 
 #### TC-BLD-09 · 실행 후 `Player.log` — 예외
 사전 조건 — **빌드 실행 후 · Player.log 생성됨**

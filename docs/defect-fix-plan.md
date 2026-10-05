@@ -2,7 +2,7 @@
 
 > 작성 2026-09-28 · **끝남 2026-10-04** — 6건 수정 · `#151` 은 안 고침 · `#143` 은 조건을 적고 열어 뒀다
 >
-> 대상 [#143](../../issues/143) · [#148](../../issues/148) ~ [#154](../../issues/154)
+> 대상 [#143](https://github.com/sonjuhawn-source/WeaponHero/issues/143) · [#148](https://github.com/sonjuhawn-source/WeaponHero/issues/148) ~ [#154](https://github.com/sonjuhawn-source/WeaponHero/issues/154)
 >
 > 관련: [QA 진행 상황](qa/qa-portfolio-plan.md) · [결과 보고서](qa/test-report.md) · [학습 로그](learning-log.md)
 
@@ -18,10 +18,10 @@
 
 | | 무엇 |
 |---|---|
-| **판단이 앞선다** | [#149](../../issues/149) 의 A/B 결정이 [#148](../../issues/148) 의 존재 여부를 정한다 |
-| **진단이 앞선다** | [#150](../../issues/150) · [#152](../../issues/152) 는 원인이 후보 단계다 |
-| **파일이 같다** | [#153](../../issues/153) 의 문자열 셋과 [#148](../../issues/148) 의 안내가 같은 로컬라이즈 자리 |
-| **성격이 다르다** | [#143](../../issues/143) 은 1회전 산출물이 아니고 **밸런스를 바꾼다** |
+| **판단이 앞선다** | [#149](https://github.com/sonjuhawn-source/WeaponHero/issues/149) 의 A/B 결정이 [#148](https://github.com/sonjuhawn-source/WeaponHero/issues/148) 의 존재 여부를 정한다 |
+| **진단이 앞선다** | [#150](https://github.com/sonjuhawn-source/WeaponHero/issues/150) · [#152](https://github.com/sonjuhawn-source/WeaponHero/issues/152) 는 원인이 후보 단계다 |
+| **파일이 같다** | [#153](https://github.com/sonjuhawn-source/WeaponHero/issues/153) 의 문자열 셋과 [#148](https://github.com/sonjuhawn-source/WeaponHero/issues/148) 의 안내가 같은 로컬라이즈 자리 |
+| **성격이 다르다** | [#143](https://github.com/sonjuhawn-source/WeaponHero/issues/143) 은 1회전 산출물이 아니고 **밸런스를 바꾼다** |
 
 ---
 
@@ -56,7 +56,7 @@
 | 시작 화면도 어긋난다 | 스케일러(`Match = 1`) · 중앙 앵커 + 고정 오프셋 | 3단계 레이아웃 묶음 |
 | 일시정지에서만 | 열린 창이 바뀐 캔버스를 다시 계산 안 함 | 따로 — 코드 |
 
-같은 프리팹을 두 씬에 놓은 구조([#140](../../issues/140))라 이 한 번으로 원인이 반으로 준다.
+같은 프리팹을 두 씬에 놓은 구조([#140](https://github.com/sonjuhawn-source/WeaponHero/issues/140))라 이 한 번으로 원인이 반으로 준다.
 
 ---
 
@@ -99,13 +99,13 @@ B. 정식 기능으로 남긴다  RewardRoomHandler.Cleared 를 RewardView 가 �
 
 | 출처 | 고칠 것 |
 |---|---|
-| [#153](../../issues/153) 3번 | `for play again` → `to play again` |
-| [#153](../../issues/153) 5번 | `할려면` → `하려면` (맞춤법) |
-| [#153](../../issues/153) 4번 | 한국어 안내가 단어 중간에서 끊긴다 (`할려/면` · `재시/작`) |
-| [#148](../../issues/148) | **1단계에서 B 를 골랐을 때만** — 안내에 숫자키 추가. 한국어·영어 둘 다 |
+| [#153](https://github.com/sonjuhawn-source/WeaponHero/issues/153) 3번 | `for play again` → `to play again` |
+| [#153](https://github.com/sonjuhawn-source/WeaponHero/issues/153) 5번 | `할려면` → `하려면` (맞춤법) |
+| [#153](https://github.com/sonjuhawn-source/WeaponHero/issues/153) 4번 | 한국어 안내가 단어 중간에서 끊긴다 (`할려/면` · `재시/작`) |
+| [#148](https://github.com/sonjuhawn-source/WeaponHero/issues/148) | **1단계에서 B 를 골랐을 때만** — 안내에 숫자키 추가. 한국어·영어 둘 다 |
 
 **`R` 키가 조작표에 없는 것도 여기서 같이 본다.** 결과 화면에 버튼이 있어 막히지는 않지만,
-안내와 실제 조작을 맞추는 것이 [#148](../../issues/148) 의 취지다.
+안내와 실제 조작을 맞추는 것이 [#148](https://github.com/sonjuhawn-source/WeaponHero/issues/148) 의 취지다.
 
 ---
 
@@ -115,11 +115,11 @@ B. 정식 기능으로 남긴다  RewardRoomHandler.Cleared 를 RewardView 가 �
 
 | | 무엇 | 크기 |
 |---|---|---|
-| [#153](../../issues/153) 1·2번 | 영어 요약이 넘쳐 안내와 겹친다 · `Main Menu` 가 쪼개진다 | Major · High |
-| [#151](../../issues/151) | 카드 둘일 때 오른쪽 3분의 1이 빈다 | Trivial · Low |
-| [#152](../../issues/152) | 0단계에서 **앵커 문제로 나왔을 때만** | Minor · Normal |
+| [#153](https://github.com/sonjuhawn-source/WeaponHero/issues/153) 1·2번 | 영어 요약이 넘쳐 안내와 겹친다 · `Main Menu` 가 쪼개진다 | Major · High |
+| [#151](https://github.com/sonjuhawn-source/WeaponHero/issues/151) | 카드 둘일 때 오른쪽 3분의 1이 빈다 | Trivial · Low |
+| [#152](https://github.com/sonjuhawn-source/WeaponHero/issues/152) | 0단계에서 **앵커 문제로 나왔을 때만** | Minor · Normal |
 
-**[#153](../../issues/153) 1·2 번은 이미 한 번 푼 문제다.** 최종 빌드에서 `TC-UI-07`(영어 안내 문단
+**[#153](https://github.com/sonjuhawn-source/WeaponHero/issues/153) 1·2 번은 이미 한 번 푼 문제다.** 최종 빌드에서 `TC-UI-07`(영어 안내 문단
 넘침)을 Auto Size 로 잡았다. 그때 **고친 화면이 하나뿐이었고 같은 축의 다른 화면을 훑지
 않은 것**이 이번에 드러났다.
 

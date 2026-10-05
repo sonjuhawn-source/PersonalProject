@@ -302,7 +302,7 @@ W2 는 검+활로 맞바꿔 냈고 창은 W3 에서 들어왔다.
 
 `Assets/Tests/` · EditMode · **테스트 21개.** Test Runner 의 EditMode 탭에서 돌린다.
 
-**런 구성** — `RunStateTests` 4개 ([#141](../../../issues/141))
+**런 구성** — `RunStateTests` 4개 ([#141](https://github.com/sonjuhawn-source/WeaponHero/issues/141))
 
 | 테스트 | 대응 TC |
 |---|---|
@@ -311,7 +311,7 @@ W2 는 검+활로 맞바꿔 냈고 창은 W3 에서 들어왔다.
 | 덱 경계에서 같은 방이 연속되지 않는다 | TC-ROOM-07 |
 | 시드가 다르면 순서도 달라진다 | TC-ROOM-08 |
 
-**전투 수치** — `WeaponInstanceTests` 8개 ([#144](../../../issues/144))
+**전투 수치** — `WeaponInstanceTests` 8개 ([#144](https://github.com/sonjuhawn-source/WeaponHero/issues/144))
 
 | 테스트 | 대응 TC |
 |---|---|
@@ -324,7 +324,7 @@ W2 는 검+활로 맞바꿔 냈고 창은 W3 에서 들어왔다.
 | 생성자에 음수 레벨을 주면 0 이 된다 | TC-WPN-07 |
 | `Upgrade` 는 0 이하를 무시한다 | TC-WPN-07 |
 
-**에셋 데이터** — `AssetDataTests` 9개 ([#146](../../../issues/146))
+**에셋 데이터** — `AssetDataTests` 9개 ([#146](https://github.com/sonjuhawn-source/WeaponHero/issues/146))
 
 | 테스트 | 대응 TC |
 |---|---|
@@ -377,7 +377,7 @@ W2 는 검+활로 맞바꿔 냈고 창은 W3 에서 들어왔다.
 패턴 선택기는 **판단이 났다** (2026-10-04). 높이 조건이 선택기가 아니라
 `EnemyBrain.TrySelectPattern` 에 있고 그 전에 `Select()` 가 쿨다운을 이미 소모한다.
 거절된 패턴이 한 번도 안 나가고 쿨다운만 도는 것은 **의도가 아니라 결함**이다
-([#143](../../../issues/143)).
+([#143](https://github.com/sonjuhawn-source/WeaponHero/issues/143)).
 
 **다만 고치지 않고 열어 둔다.** 고치면 점프 회피에 딸려 있던 착지 후 안전 시간이
 사라지는데, 1·2회전이 끝나 그 밸런스 변화를 확인할 회차가 없다. 그래서 여기 테스트
@@ -393,7 +393,7 @@ W2 는 검+활로 맞바꿔 냈고 창은 W3 에서 들어왔다.
 | | 왜 비어 있나 |
 |---|---|
 | ~~TC-SWAP-06 스왑 중 조작 차단~~ | **1회전 세션 2 에서 확인** — 다섯이 전부 막힌다 |
-| ~~TC-ROOM-05 같은 시드는 같은 런~~ | **자동 테스트로 채웠다** ([#141](../../../issues/141)) |
+| ~~TC-ROOM-05 같은 시드는 같은 런~~ | **자동 테스트로 채웠다** ([#141](https://github.com/sonjuhawn-source/WeaponHero/issues/141)) |
 | ~~TC-UI-05 설정 저장~~ | **1회전 세션 1 에서 확인** |
 | ~~TC-SND-03 볼륨 반영~~ | **1회전 세션 1 에서 확인** |
 | ~~TC-ENM-09 보스 패턴 비중단~~ | **1회전 세션 3 에서 확인** — 보스를 때려도 패턴이 진행된다 |

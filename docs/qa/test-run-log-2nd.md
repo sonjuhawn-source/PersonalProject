@@ -40,7 +40,7 @@
 
 **`TC-BLD-08` ✔ → ✘.** 아래 발견 참조.
 
-### 발견 1 — bundleVersion 이 1차 완성 이후 안 올라갔다 · [#164](../../../issues/164)
+### 발견 1 — bundleVersion 이 1차 완성 이후 안 올라갔다 · [#164](https://github.com/sonjuhawn-source/WeaponHero/issues/164)
 
 ```
 ProjectSettings   bundleVersion: 0.4      2026-08-30 이후 그대로
@@ -174,7 +174,7 @@ AllowsHorizontalControl => !startedGrounded     // 래치는 Enter 에서 한 �
 후   교체 직후 옛 무기 잔상이 눈에 띄지 않는다
 ```
 
-이 항목은 [#46](../../../issues/46) 에서 *"교체 순간 옛 그림이 번쩍인다"* 는 **체감**으로
+이 항목은 [#46](https://github.com/sonjuhawn-source/WeaponHero/issues/46) 에서 *"교체 순간 옛 그림이 번쩍인다"* 는 **체감**으로
 들어왔다. **체감으로 들어온 결함은 체감으로 판정하는 것이 맞고**, "한 프레임"은 구현
 디테일이지 사용자가 겪는 것이 아니다.
 
@@ -248,7 +248,7 @@ TC-RUN-10    고르면 패널이 닫힌다 — 숫자키 · 클릭 둘 다  ✔
 ### `TC-UI-12` 는 실패로 남는다 — 판단해서 안 고쳤다
 
 체력을 가득 채우고 들어가면 회복 카드가 빠져 2택이 되고, **카드 둘이 왼쪽에 쏠려 오른쪽
-3분의 1이 빈다.** [#151](../../../issues/151) 이고 중요도 Trivial · 우선순위 Low 다.
+3분의 1이 빈다.** [#151](https://github.com/sonjuhawn-source/WeaponHero/issues/151) 이고 중요도 Trivial · 우선순위 Low 다.
 
 ```
 1회전   ✘
@@ -281,7 +281,7 @@ TC-RUN-10    고르면 패널이 닫힌다 — 숫자키 · 클릭 둘 다  ✔
 
 세 패턴(Smash · Charge · Throw)의 예고가 전부 보였고 `TC-ENM-08` · `TC-ENM-09` 도 통과다.
 
-### 발견 5 — 설정 닫기 버튼으로 나가면 게임이 멈춘 채로 남는다 · [#165](../../../issues/165)
+### 발견 5 — 설정 닫기 버튼으로 나가면 게임이 멈춘 채로 남는다 · [#165](https://github.com/sonjuhawn-source/WeaponHero/issues/165)
 
 `ESC` 로 일시정지하고 **닫기 버튼**을 누르면 패널은 닫히는데 **게임이 멈춘 채로 남는다.**
 
@@ -300,11 +300,11 @@ public void Toggle()
 없다.**
 
 > 주석이 예고한 것이 실행되지 않은 **세 번째**다. `#103` 의 폴링 제거가 안 돼
-> [#148](../../../issues/148) · [#149](../../../issues/149) 를 낳았고, 여기도 같은 모양이다.
+> [#148](https://github.com/sonjuhawn-source/WeaponHero/issues/148) · [#149](https://github.com/sonjuhawn-source/WeaponHero/issues/149) 를 낳았고, 여기도 같은 모양이다.
 > **주석은 계획을 적을 뿐 아무것도 강제하지 않는다.** 게다가 배선은 프리팹에 있어
 > 코드 리뷰로는 안 보인다.
 
-### 발견 6 — 일시정지 중에 무기 교체가 된다 · [#166](../../../issues/166)
+### 발견 6 — 일시정지 중에 무기 교체가 된다 · [#166](https://github.com/sonjuhawn-source/WeaponHero/issues/166)
 
 `A` 가 먹힌다. 원인은 **일시정지가 입력을 막지 않는 것**이다.
 
@@ -433,7 +433,7 @@ TC 의 의도("방 전환과 결과 화면이 겹치지 않는다")는 **이미 
 > **처치하면 1 회복한다**(`HealPerKill = 1`). 체력을 깎은 뒤에는 죽이지 말고 유인해야
 > 한다. 초안이 이걸 안 적어서 "왜 안 줄어드나"로 한 번 돌아갔다.
 
-### 발견 7 — 클리어 결과의 구분자가 플레이어에 가려진다 · [#167](../../../issues/167)
+### 발견 7 — 클리어 결과의 구분자가 플레이어에 가려진다 · [#167](https://github.com/sonjuhawn-source/WeaponHero/issues/167)
 
 결과 패널이 **반투명**이라 뒤의 게임 화면이 비친다.
 
@@ -447,7 +447,7 @@ TC 의 의도("방 전환과 결과 화면이 겹치지 않는다")는 **이미 
 항상 이 자리다.**
 
 글자 자체는 전부 읽히고 사라지는 것은 구분자 하나라 `Trivial` 이다. 고치려면 패널
-불투명도를 올려야 하는데 그건 연출 결정이므로 **[#151](../../../issues/151) 과 같이
+불투명도를 올려야 하는데 그건 연출 결정이므로 **[#151](https://github.com/sonjuhawn-source/WeaponHero/issues/151) 과 같이
 안 고친다.**
 
 ### 또 정지된 화면에서 나왔다
@@ -537,7 +537,7 @@ TC-ROOM-05   자동    시드 0~99 를 본다
 보상방은 **적이 없어 죽지 않고, 카드를 안 고르면 출구가 안 열려 런이 끝나지 않는다.**
 보상 패널과 HUD 가 켜진 채로 돈다.
 
-**다만 방치만으로는 부족하다.** [#150](../../../issues/150) 이 넣은 `EnemyBrain.LateUpdate`
+**다만 방치만으로는 부족하다.** [#150](https://github.com/sonjuhawn-source/WeaponHero/issues/150) 이 넣은 `EnemyBrain.LateUpdate`
 는 적이 살아 있어야 도는 코드다. 그래서 마지막 5분을 조작 구간으로 뒀다 — 1회전 판정도
 *"조작 정상 · 프레임 유지"* 였다.
 
@@ -562,7 +562,7 @@ Loaded Objects now:  4465   전투 씬 진입
 진짜가 가려졌나      코드로 본다
 ```
 
-[#154](../../../issues/154) 수정이 **묶여 있던 조건을 쪼갠 것**이라, 오탐만 없앤 게 아니라
+[#154](https://github.com/sonjuhawn-source/WeaponHero/issues/154) 수정이 **묶여 있던 조건을 쪼갠 것**이라, 오탐만 없앤 게 아니라
 진짜 누락까지 덮었을 수 있었다. `Verify()` 를 읽어 확인했다.
 
 ```csharp
@@ -588,7 +588,7 @@ if (슬라이더 셋 중 하나라도 null)    경고        살아 있다
 로그       경고 자리 30곳을 받는다   한 번 돌면 전부 지난다
 ```
 
-그리고 [#165](../../../issues/165) 가 **배선이 프리팹에만 있어 코드 리뷰로 안 보인
+그리고 [#165](https://github.com/sonjuhawn-source/WeaponHero/issues/165) 가 **배선이 프리팹에만 있어 코드 리뷰로 안 보인
 결함**이었다. 인스펙터도 같은 한계를 갖는다 — 열어 본 것만 보인다. 반면 초기화 경고는
 그 오브젝트가 **실제로 깨어날 때** 나온다.
 
@@ -621,13 +621,13 @@ TC 109 · Pass 102(자동 8 포함) · Fail 4 · 이연 1 · N/A 2 · 미확인 
 
 | 이슈 | TC | |
 |---|---|---|
-| [#148](../../../issues/148) | `TC-UI-11` | 안내에 `1 2 3` · `R` 이 있다 |
-| [#149](../../../issues/149) | `TC-RUN-10` | 숫자키·클릭 양쪽에서 닫힌다 |
-| [#150](../../../issues/150) | `TC-ENM-11` | 보스 예고 색 — 빌드에서 측정 확인 |
-| [#152](../../../issues/152) | `TC-EDGE-28` | 해상도 바꿔도 설정창이 가운데 |
-| [#153](../../../issues/153) | `TC-UI-13` | 네 경우 모두 안 겹침 |
-| [#154](../../../issues/154) | `TC-BLD-10` | 오탐 경고 0 · 진짜는 안 덮였다 |
-| [#159](../../../issues/159) | — | 글자 깨짐 없음 |
+| [#148](https://github.com/sonjuhawn-source/WeaponHero/issues/148) | `TC-UI-11` | 안내에 `1 2 3` · `R` 이 있다 |
+| [#149](https://github.com/sonjuhawn-source/WeaponHero/issues/149) | `TC-RUN-10` | 숫자키·클릭 양쪽에서 닫힌다 |
+| [#150](https://github.com/sonjuhawn-source/WeaponHero/issues/150) | `TC-ENM-11` | 보스 예고 색 — 빌드에서 측정 확인 |
+| [#152](https://github.com/sonjuhawn-source/WeaponHero/issues/152) | `TC-EDGE-28` | 해상도 바꿔도 설정창이 가운데 |
+| [#153](https://github.com/sonjuhawn-source/WeaponHero/issues/153) | `TC-UI-13` | 네 경우 모두 안 겹침 |
+| [#154](https://github.com/sonjuhawn-source/WeaponHero/issues/154) | `TC-BLD-10` | 오탐 경고 0 · 진짜는 안 덮였다 |
+| [#159](https://github.com/sonjuhawn-source/WeaponHero/issues/159) | — | 글자 깨짐 없음 |
 
 ### 남은 실패 4건 + 이연 1건
 
@@ -693,11 +693,11 @@ TC-BLD-07    인스펙터 → Player.log                    열어 본 것만 �
 
 | TC | 2회전 | 지금 | |
 |---|---|---|---|
-| `TC-UI-03` | ✘ | **통과** | [#165](../../../issues/165) 수정 · 빌드 확인 |
-| `TC-BLD-08` | ✘ | **통과** | [#164](../../../issues/164) `bundleVersion` `0.4` → `1.1` · 빌드 확인 |
-| `TC-EDGE-21` | ✘ | ✘ | [#166](../../../issues/166) 후속 — 안 고쳤다 |
-| `TC-UI-12` | ✘ | ✘ | [#151](../../../issues/151) 안 고치기로 판단 |
-| `TC-CMB-08` | ⏸ | ⏸ | [#143](../../../issues/143) 열어 둔다 — 아래 |
+| `TC-UI-03` | ✘ | **통과** | [#165](https://github.com/sonjuhawn-source/WeaponHero/issues/165) 수정 · 빌드 확인 |
+| `TC-BLD-08` | ✘ | **통과** | [#164](https://github.com/sonjuhawn-source/WeaponHero/issues/164) `bundleVersion` `0.4` → `1.1` · 빌드 확인 |
+| `TC-EDGE-21` | ✘ | ✘ | [#166](https://github.com/sonjuhawn-source/WeaponHero/issues/166) 후속 — 안 고쳤다 |
+| `TC-UI-12` | ✘ | ✘ | [#151](https://github.com/sonjuhawn-source/WeaponHero/issues/151) 안 고치기로 판단 |
+| `TC-CMB-08` | ⏸ | ⏸ | [#143](https://github.com/sonjuhawn-source/WeaponHero/issues/143) 열어 둔다 — 아래 |
 
 ```
 미수정 결함   4건  →  2건 (#166 · #143)
@@ -716,7 +716,7 @@ TC-BLD-07    인스펙터 → Player.log                    열어 본 것만 �
 ```
 
 **타이틀에 움직이는 것이 없어 눈에 안 띄었을 뿐**이고, `TC-UI-04`(시작 화면 설정)가 이걸
-못 잡았다. 1회전의 [#153](../../../issues/153) 이 같은 모양이었다 — 한 화면만 고치고 같은
+못 잡았다. 1회전의 [#153](https://github.com/sonjuhawn-source/WeaponHero/issues/153) 이 같은 모양이었다 — 한 화면만 고치고 같은
 축의 다른 화면을 안 훑었다.
 
 `Toggle` 을 `Open` · `Close` 로 나누고 여는 버튼과 닫는 버튼이 각각을 부르게 했다.
@@ -731,7 +731,7 @@ TC-BLD-07    인스펙터 → Player.log                    열어 본 것만 �
 > `runEnded` 가 안 된다. `처음 화면` 버튼은 설정 패널이 아니라 **결과 화면**에 있다.
 > 게다가 `Restart()` 와 `ToTitle()` 이 각자 `Time.timeScale = 1f` 를 먼저 한다.
 >
-> **`PauseMenu.OnDestroy` 는 지금 닿을 수 없는 방어 코드다.** [#101](../../../issues/101)
+> **`PauseMenu.OnDestroy` 는 지금 닿을 수 없는 방어 코드다.** [#101](https://github.com/sonjuhawn-source/WeaponHero/issues/101)
 > 때 넣은 것이고, 그 뒤 `Restart`·`ToTitle` 에 같은 복원이 생기면서 겹쳤다. 지우지는
 > 않는다 — 셋 중 하나라도 경로가 늘면 다시 필요해지는 자리고, 비용이 `if` 하나다.
 

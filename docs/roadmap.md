@@ -29,10 +29,10 @@
 - ~~`Assets/Imported/` 에 Git LFS 먼저 설정한 뒤 커밋~~ **완료** — LFS 213개 추적 중
 - ~~폴더 구조 / 어셈블리 정의 잡기~~ **완료** — `Assets/_Project/`, asmdef 3개 (Core ← Gameplay ← UI)
 - ~~Unity Localization 설치 + 로케일(ko/en) + `UI` String Table~~ **완료**
-- ~~`Content` String Table 은 SO 정의를 쓸 때 만든다~~ → [#45](../../issues/45) 로 착수
+- ~~`Content` String Table 은 SO 정의를 쓸 때 만든다~~ → [#45](https://github.com/sonjuhawn-source/WeaponHero/issues/45) 로 착수
   (GDD 11.2). W0 에서 미뤄둔 항목이고, 무기 SO 를 쓰는 시점이 곧 그 시점이다
 
-~~**잔여 — 타일셋.**~~ **완료** ([#44](../../issues/44)) — GandalfHardcore 사이드스크롤러 팩.
+~~**잔여 — 타일셋.**~~ **완료** ([#44](https://github.com/sonjuhawn-source/WeaponHero/issues/44)) — GandalfHardcore 사이드스크롤러 팩.
 슬라이스 격자 32px 이고 캐릭터 2유닛 / 타일 1유닛이라 키가 정확히 두 칸이다. 타일 에셋과
 팔레트는 `Assets/_Project/Art/Tiles/` 에 뒀다 — `Assets/Imported/` 는 중첩 저장소라 원본과
 우리 산출물을 섞지 않는다.
@@ -68,15 +68,15 @@
 > 깨져 있었다** — 에디터에서는 증상이 없어 W6 까지 몰랐을 문제다 (GDD 10.1).
 >
 > **주차가 끝날 때마다 한 번 누른다.** 깨지면 그 주 안에서 고치고, 안 깨지면 10분이 든다.
-**결정:** ~~2단 점프 유무~~ **완료 — 넣지 않는다** ([#8](../../issues/8), [GDD 12.1](GDD.md))
+**결정:** ~~2단 점프 유무~~ **완료 — 넣지 않는다** ([#8](https://github.com/sonjuhawn-source/WeaponHero/issues/8), [GDD 12.1](GDD.md))
 
-> ~~캐릭터 스프라이트 적용과 스케일 재튜닝~~ **완료** ([#35](../../issues/35)) — 무기별
+> ~~캐릭터 스프라이트 적용과 스케일 재튜닝~~ **완료** ([#35](https://github.com/sonjuhawn-source/WeaponHero/issues/35)) — 무기별
 > 캐릭터 6종을 굽고 검을 기본으로 적용. 스케일 의존 값(`maxSpeed` 5 · `jumpHeight` 1.4 ·
 > 콜라이더 · 히트박스 · 카메라 size 2.5)을 실물 기준으로 다시 잡았다. 애니메이션은
 > 상태 `Enter()` → `Animator.Play(상태이름)` 으로 연결. #13~#15 를 이제 실물 기준으로
 > 판단할 수 있다.
 
-> ~~**지상 공격 중 전진**은 [#17](../../issues/17) 뒤로 미룬다~~ **결정 — 넣는다(조금).**
+> ~~**지상 공격 중 전진**은 [#17](https://github.com/sonjuhawn-source/WeaponHero/issues/17) 뒤로 미룬다~~ **결정 — 넣는다(조금).**
 > 구현은 W2 ([GDD 12.3](GDD.md)). `AttackData` 가 어차피 무기 SO 로 옮겨가므로 지금
 > 넣으면 필드를 다시 옮기게 된다.
 
@@ -88,16 +88,16 @@
 
 | 이슈 | 작업 | 시간 |
 |---|---|---|
-| ~~[#45](../../issues/45)~~ | ~~무기 SO 정의 + 런타임 래퍼 (+ `Content` 테이블)~~ **완료** | 6h |
-| ~~[#46](../../issues/46)~~ | ~~무기 장착 + 애니메이터 교체~~ **완료** | 1h |
-| ~~[#47](../../issues/47)~~ | ~~슬롯 2개 + 스왑 (대시 · i-frame · 쿨타임)~~ **완료** | 5h |
-| ~~[#48](../../issues/48)~~ | ~~투사체 기반~~ **완료** | 3h |
-| ~~[#49](../../issues/49)~~ | ~~무기 평타 3종 (검 / 창 / 활)~~ **완료** | 3h |
-| ~~[#50](../../issues/50)~~ | ~~지상 공격 전진 + `Knockback` 일반화~~ **완료** | 2h |
-| ~~[#59](../../issues/59)~~ | ~~무기별 히트박스 리치 — #49 에서 분리~~ **완료** | 1h |
-| ~~[#62](../../issues/62)~~ | ~~무기 3종 상대 차이 (공속 · 데미지 · 넉백)~~ **완료** | 1h |
-| ~~[#51](../../issues/51)~~ | ~~무기 스킬 3종~~ **1차 범위 밖** (W2 이연 → 확정) | 5h |
-| ~~[#52](../../issues/52)~~ | ~~대기 무기 쿨타임 회복~~ **1차 범위 밖** (W2 이연 → 확정) | 2h |
+| ~~[#45](https://github.com/sonjuhawn-source/WeaponHero/issues/45)~~ | ~~무기 SO 정의 + 런타임 래퍼 (+ `Content` 테이블)~~ **완료** | 6h |
+| ~~[#46](https://github.com/sonjuhawn-source/WeaponHero/issues/46)~~ | ~~무기 장착 + 애니메이터 교체~~ **완료** | 1h |
+| ~~[#47](https://github.com/sonjuhawn-source/WeaponHero/issues/47)~~ | ~~슬롯 2개 + 스왑 (대시 · i-frame · 쿨타임)~~ **완료** | 5h |
+| ~~[#48](https://github.com/sonjuhawn-source/WeaponHero/issues/48)~~ | ~~투사체 기반~~ **완료** | 3h |
+| ~~[#49](https://github.com/sonjuhawn-source/WeaponHero/issues/49)~~ | ~~무기 평타 3종 (검 / 창 / 활)~~ **완료** | 3h |
+| ~~[#50](https://github.com/sonjuhawn-source/WeaponHero/issues/50)~~ | ~~지상 공격 전진 + `Knockback` 일반화~~ **완료** | 2h |
+| ~~[#59](https://github.com/sonjuhawn-source/WeaponHero/issues/59)~~ | ~~무기별 히트박스 리치 — #49 에서 분리~~ **완료** | 1h |
+| ~~[#62](https://github.com/sonjuhawn-source/WeaponHero/issues/62)~~ | ~~무기 3종 상대 차이 (공속 · 데미지 · 넉백)~~ **완료** | 1h |
+| ~~[#51](https://github.com/sonjuhawn-source/WeaponHero/issues/51)~~ | ~~무기 스킬 3종~~ **1차 범위 밖** (W2 이연 → 확정) | 5h |
+| ~~[#52](https://github.com/sonjuhawn-source/WeaponHero/issues/52)~~ | ~~대기 무기 쿨타임 회복~~ **1차 범위 밖** (W2 이연 → 확정) | 2h |
 
 **합 29h → 이연 후 22h.** 절단 순서 1번을 실제로 발동했다. 필수분만으로 이미 2h 초과라
 둘을 넣으면 9h 초과이고, 원칙 3번대로 **다음 주를 당겨 쓰지 않는다.**
@@ -109,7 +109,7 @@
 > 넣으려면 다른 것을 빼야 했고, 절단 순서 4번(적 3종 → 2종)이 유일하게 시간이 맞는데
 > **무기 스킬을 넣으려고 무기를 검증할 적을 줄이는 건 앞뒤가 안 맞는다.**
 
-> **잃는 것을 작게 보지 않는다.** [#52](../../issues/52) 는 [GDD 4장](GDD.md)이 "기본
+> **잃는 것을 작게 보지 않는다.** [#52](https://github.com/sonjuhawn-source/WeaponHero/issues/52) 는 [GDD 4장](GDD.md)이 "기본
 > 리듬"이라 부른 순환이다. 이게 빠지면 스왑이 "리치 다른 평타 둘 + 회피 대시"가 된다.
 >
 > 그래도 이연이 맞는 이유는 **보여줄 것이 이미 서 있기 때문**이다. 무기 SO + 런타임 래퍼
@@ -123,7 +123,7 @@
 > 스킬은 못 받았다.
 >
 > 붙이려면 `WeaponData` 구조부터 다시 설계해야 하므로 **이연의 전제가 안 선다.** 그래서
-> 마감 확정 후 [#51](../../issues/51)·[#52](../../issues/52) 를 `not planned` 로 닫고
+> 마감 확정 후 [#51](https://github.com/sonjuhawn-source/WeaponHero/issues/51)·[#52](https://github.com/sonjuhawn-source/WeaponHero/issues/52) 를 `not planned` 로 닫고
 > **1차 범위 밖**으로 확정했다.
 >
 > **이연 판단 자체는 맞았다.** W2 에서 뺀 이유(필수분만으로 2h 초과, 넣으려면 무기를 검증할
@@ -144,7 +144,7 @@
 **결정:** ~~스왑 공격 판정~~ **완료 — 주지 않는다** ([GDD 12.4](GDD.md)) ·
 ~~동일 무기 2개 허용~~ **완료 — 허용한다** ([GDD 12.6](GDD.md))
 **빌드:** [노트](builds/2주차%20빌드%20노트.md) · [결과](builds/2주차%20빌드%20결과.md) — **v0.2, 두 번 눌러 둘 다 통과.**
-[#45](../../issues/45) 직후 빌드에서 `Content` String Table 이 빌드에 들어가는 것을 확인했고,
+[#45](https://github.com/sonjuhawn-source/WeaponHero/issues/45) 직후 빌드에서 `Content` String Table 이 빌드에 들어가는 것을 확인했고,
 종료 빌드에서 **활이 참조 없어 빠질 뻔한 것**을 잡았다.
 
 > **투사체(#48)는 이슈 분해 때 뒤늦게 드러났다.** 활 평타가 원거리인데 `HitBox` 는 몸에
@@ -167,45 +167,45 @@
 
 | 이슈 | 작업 | 시간 |
 |---|---|---|
-| ~~[#69](../../issues/69)~~ | ~~방 데이터 + 프리팹 구조~~ **완료** | 3h |
-| ~~[#70](../../issues/70)~~ | ~~방 타입 **핸들러 매핑** (전투/보상/보스)~~ **완료** | 3h |
-| ~~[#71](../../issues/71)~~ | ~~스테이지 진행 + 방 전환~~ **완료** | 3h |
-| ~~[#72](../../issues/72)~~ | ~~카메라 방 추적 + 경계~~ **완료** | 2h |
-| ~~[#73](../../issues/73)~~ | ~~`EnemyBrain` 골격 — 판단·실행 분리 (+ [#55](../../issues/55))~~ **완료** | 4h |
-| ~~[#76](../../issues/76)~~ | ~~적 프리팹화~~ **완료** — [#74](../../issues/74)·[#75](../../issues/75) 앞으로 당김 | 1h |
-| ~~[#79](../../issues/79)~~ | ~~`Stagger` 상태 — 피격이 적 행동을 끊는다~~ **완료** — 절단 후보였으나 먼저 처리 | 1.5h |
-| ~~[#75](../../issues/75)~~ | ~~방 프리팹 **5개** 제작~~ **완료** | 5h |
-| ~~[#77](../../issues/77)~~ | ~~벽에 붙어 있으면 점프가 안 되는 경우~~ **완료** — 원인은 접지가 아니라 마찰 | 1h |
-| ~~[#86](../../issues/86)~~ | ~~화살이 지형을 통과한다~~ **완료** — [#75](../../issues/75) 에서 흡수 | — |
-| ~~[#87](../../issues/87)~~ | ~~적이 층을 벗어나지 않는다~~ **완료** — `TerrainProbe` | — |
-| ~~[#74](../../issues/74)~~ | ~~적 3종 (돌진 / 원거리 / 방패)~~ **완료 — 2종.** 절단 순서 4번 발동 | 4h |
+| ~~[#69](https://github.com/sonjuhawn-source/WeaponHero/issues/69)~~ | ~~방 데이터 + 프리팹 구조~~ **완료** | 3h |
+| ~~[#70](https://github.com/sonjuhawn-source/WeaponHero/issues/70)~~ | ~~방 타입 **핸들러 매핑** (전투/보상/보스)~~ **완료** | 3h |
+| ~~[#71](https://github.com/sonjuhawn-source/WeaponHero/issues/71)~~ | ~~스테이지 진행 + 방 전환~~ **완료** | 3h |
+| ~~[#72](https://github.com/sonjuhawn-source/WeaponHero/issues/72)~~ | ~~카메라 방 추적 + 경계~~ **완료** | 2h |
+| ~~[#73](https://github.com/sonjuhawn-source/WeaponHero/issues/73)~~ | ~~`EnemyBrain` 골격 — 판단·실행 분리 (+ [#55](https://github.com/sonjuhawn-source/WeaponHero/issues/55))~~ **완료** | 4h |
+| ~~[#76](https://github.com/sonjuhawn-source/WeaponHero/issues/76)~~ | ~~적 프리팹화~~ **완료** — [#74](https://github.com/sonjuhawn-source/WeaponHero/issues/74)·[#75](https://github.com/sonjuhawn-source/WeaponHero/issues/75) 앞으로 당김 | 1h |
+| ~~[#79](https://github.com/sonjuhawn-source/WeaponHero/issues/79)~~ | ~~`Stagger` 상태 — 피격이 적 행동을 끊는다~~ **완료** — 절단 후보였으나 먼저 처리 | 1.5h |
+| ~~[#75](https://github.com/sonjuhawn-source/WeaponHero/issues/75)~~ | ~~방 프리팹 **5개** 제작~~ **완료** | 5h |
+| ~~[#77](https://github.com/sonjuhawn-source/WeaponHero/issues/77)~~ | ~~벽에 붙어 있으면 점프가 안 되는 경우~~ **완료** — 원인은 접지가 아니라 마찰 | 1h |
+| ~~[#86](https://github.com/sonjuhawn-source/WeaponHero/issues/86)~~ | ~~화살이 지형을 통과한다~~ **완료** — [#75](https://github.com/sonjuhawn-source/WeaponHero/issues/75) 에서 흡수 | — |
+| ~~[#87](https://github.com/sonjuhawn-source/WeaponHero/issues/87)~~ | ~~적이 층을 벗어나지 않는다~~ **완료** — `TerrainProbe` | — |
+| ~~[#74](https://github.com/sonjuhawn-source/WeaponHero/issues/74)~~ | ~~적 3종 (돌진 / 원거리 / 방패)~~ **완료 — 2종.** 절단 순서 4번 발동 | 4h |
 
 **견적 합 27.5h — 완료.** 절단 순서 3번(방 6~8 → 5~6)과 4번(적 3종 → 2종)을 발동해
 20h 안에 맞췄다.
 
-> **[#74](../../issues/74) 에서 `.cs` 를 하나도 안 만들었다.** 이 이슈의 완료 조건이 그것이었고
-> — "`.cs` 를 3개 만들면 [#73](../../issues/73) 이 틀린 것" — 역할이 `AttackPattern` SO 와
+> **[#74](https://github.com/sonjuhawn-source/WeaponHero/issues/74) 에서 `.cs` 를 하나도 안 만들었다.** 이 이슈의 완료 조건이 그것이었고
+> — "`.cs` 를 3개 만들면 [#73](https://github.com/sonjuhawn-source/WeaponHero/issues/73) 이 틀린 것" — 역할이 `AttackPattern` SO 와
 > 프리팹 변종만으로 갈렸다. **확장 지점 2(적·보스 공용 상태머신)가 실증됐다.**
 >
 > **역할을 가르는 것은 사거리가 아니라 `maxHeightDiff` 였다.** 근접 둘은 0.5 라 같은 층에서만
-> 성립하고 활은 100 이라 층을 안 가린다. [#87](../../issues/87) 이 다른 목적으로 넣은 값이
+> 성립하고 활은 100 이라 층을 안 가린다. [#87](https://github.com/sonjuhawn-source/WeaponHero/issues/87) 이 다른 목적으로 넣은 값이
 > 역할 구분으로 쓰인다.
 >
 > **방패형을 뺀 대가가 구조가 아니라 분량이다.** 셋 중 방패만 새 구조(`DamageInfo` 또는 프리팹
 > 계층)를 요구하고, 돌진·원거리는 SO 를 찍어내는 작업이다. 절단 1순위로 잡아둔 이유가 이것이고
 > 그 판단이 맞았다.
 
-> **W3 에서 원래 표에 없던 것이 넷이다** — [#77](../../issues/77)·[#79](../../issues/79)·
-> [#86](../../issues/86)·[#87](../../issues/87). 셋이 **지형이 생기면서 드러난 것**이다
+> **W3 에서 원래 표에 없던 것이 넷이다** — [#77](https://github.com/sonjuhawn-source/WeaponHero/issues/77)·[#79](https://github.com/sonjuhawn-source/WeaponHero/issues/79)·
+> [#86](https://github.com/sonjuhawn-source/WeaponHero/issues/86)·[#87](https://github.com/sonjuhawn-source/WeaponHero/issues/87). 셋이 **지형이 생기면서 드러난 것**이다
 > (벽 점프 · 화살 관통 · 적이 발판에서 걸어 나감). 평지 하나일 때는 존재하지 않던 문제라
 > 견적에 잡힐 수 없었다.
 >
-> W2 의 투사체([#48](../../issues/48))와 카메라([#72](../../issues/72))가 "견적 안에 숨어 있던
+> W2 의 투사체([#48](https://github.com/sonjuhawn-source/WeaponHero/issues/48))와 카메라([#72](https://github.com/sonjuhawn-source/WeaponHero/issues/72))가 "견적 안에 숨어 있던
 > 항목"이었다면, 이쪽은 **"환경이 바뀌어야 생기는 항목"** 이다. 다음 주에 새 환경(런 루프)이
 > 들어오므로 같은 일이 반복될 것으로 본다.
 
-> **[#74](../../issues/74) 에서 후속으로 뺀 것 셋.** [#96](../../issues/96) 두 역할이 똑같이
-> 생겼다(W6, 컨트롤러 한 필드) · [#93](../../issues/93) 못 닿는 대상을 계속 쫓는다 ·
+> **[#74](https://github.com/sonjuhawn-source/WeaponHero/issues/74) 에서 후속으로 뺀 것 셋.** [#96](https://github.com/sonjuhawn-source/WeaponHero/issues/96) 두 역할이 똑같이
+> 생겼다(W6, 컨트롤러 한 필드) · [#93](https://github.com/sonjuhawn-source/WeaponHero/issues/93) 못 닿는 대상을 계속 쫓는다 ·
 > `WeightedPatternSelector` 가 선택 시점에 쿨다운을 소비하는데 `TrySelectPattern` 이 그 뒤에
 > 거부할 수 있다 (`22d247d` 의 "선택이 곧 사용" 전제가 깨졌다).
 
@@ -216,37 +216,37 @@
 > -6.65, `Room_5` 가 8.35 라 그 높이에 발판이 없으면 출구가 열려도 못 닿아 런이 거기서 멈춘다.
 > 완주가 그것을 증명한다.
 >
-> **[#86](../../issues/86)·[#87](../../issues/87) 은 방이 생기면서 드러났다.** 화살이 지형을
+> **[#86](https://github.com/sonjuhawn-source/WeaponHero/issues/86)·[#87](https://github.com/sonjuhawn-source/WeaponHero/issues/87) 은 방이 생기면서 드러났다.** 화살이 지형을
 > 통과하는 것도, 적이 발판에서 걸어 나가는 것도 **평지 하나일 때는 존재하지 않던 문제**다.
-> [#77](../../issues/77) 도 같은 자리 — 이슈가 "지형이 늘어나면 재현이 쉬워지는 종류"라고
+> [#77](https://github.com/sonjuhawn-source/WeaponHero/issues/77) 도 같은 자리 — 이슈가 "지형이 늘어나면 재현이 쉬워지는 종류"라고
 > 적어두고 W3 로 미룬 판단이 맞았다.
 
-> **[#75](../../issues/75) 에서 후속으로 뺀 것 셋.** [#90](../../issues/90) 문 연출(포탈 시트를
-> 쓰면 스프라이트 임포트·애니메이터·정렬이 따라오는 별개 작업) · [#94](../../issues/94)
+> **[#75](https://github.com/sonjuhawn-source/WeaponHero/issues/75) 에서 후속으로 뺀 것 셋.** [#90](https://github.com/sonjuhawn-source/WeaponHero/issues/90) 문 연출(포탈 시트를
+> 쓰면 스프라이트 임포트·애니메이터·정렬이 따라오는 별개 작업) · [#94](https://github.com/sonjuhawn-source/WeaponHero/issues/94)
 > 배경(`SpriteRenderer` 의 `Draw Mode: Tiled` 로 숫자 둘만 바꾸는 형태) ·
-> [#89](../../issues/89) 튜토리얼 방 여지.
+> [#89](https://github.com/sonjuhawn-source/WeaponHero/issues/89) 튜토리얼 방 여지.
 >
 > 셋 다 **"방 5개가 연달아 돈다"는 완료 조건과 독립**이라 뺐다. 섞으면 그 조건이 흐려진다.
 
-> **[#75](../../issues/75) 를 [#74](../../issues/74) 보다 먼저 한다** (`ca07731`). 스테이지가
+> **[#75](https://github.com/sonjuhawn-source/WeaponHero/issues/75) 를 [#74](https://github.com/sonjuhawn-source/WeaponHero/issues/74) 보다 먼저 한다** (`ca07731`). 스테이지가
 > 방 3개를 돌아도 **같은 방을 세 번 보는 상태**라, 적이 3종이 되는 것보다 방이 늘어나는 쪽이
 > 체감이 크다. 방 개수도 6~8 에서 **5~6 으로** 깎았다.
 >
-> 절단 순서 4번(적 3종 → 2종)이 여기서 발동한다. **[#73](../../issues/73) 이 이미 통과했으므로
+> 절단 순서 4번(적 3종 → 2종)이 여기서 발동한다. **[#73](https://github.com/sonjuhawn-source/WeaponHero/issues/73) 이 이미 통과했으므로
 > 잃는 것이 구조가 아니라 분량**이다 — 역할 하나가 빠져도 "패턴 SO 로 역할이 갈린다"는 증명은
 > 남는다.
 
-> **[#79](../../issues/79)·[#77](../../issues/77) 은 원래 표에 없었다.** [#79](../../issues/79) 는
-> [#73](../../issues/73) 이 [GDD 9.1](GDD.md) 의 상태 일곱 중 여섯까지만 채우면서 드러났고,
-> [#77](../../issues/77) 은 플레이 중에 나왔다. **견적 안에 숨어 있던 항목**이라는 점에서
-> [#72](../../issues/72) 카메라와 같은 자리다.
+> **[#79](https://github.com/sonjuhawn-source/WeaponHero/issues/79)·[#77](https://github.com/sonjuhawn-source/WeaponHero/issues/77) 은 원래 표에 없었다.** [#79](https://github.com/sonjuhawn-source/WeaponHero/issues/79) 는
+> [#73](https://github.com/sonjuhawn-source/WeaponHero/issues/73) 이 [GDD 9.1](GDD.md) 의 상태 일곱 중 여섯까지만 채우면서 드러났고,
+> [#77](https://github.com/sonjuhawn-source/WeaponHero/issues/77) 은 플레이 중에 나왔다. **견적 안에 숨어 있던 항목**이라는 점에서
+> [#72](https://github.com/sonjuhawn-source/WeaponHero/issues/72) 카메라와 같은 자리다.
 >
-> [#79](../../issues/79) 를 절단 후보로 놓는 근거는 **확장 지점이 거기 없다**는 것이다.
+> [#79](https://github.com/sonjuhawn-source/WeaponHero/issues/79) 를 절단 후보로 놓는 근거는 **확장 지점이 거기 없다**는 것이다.
 > `CanBeInterrupted` 는 이미 선언돼 있어서 나중에 붙여도 재작성이 아니라 추가다. 잘리면 전투
 > 손맛이 빠지지 다음 작업이 막히지는 않는다.
 >
-> **그런데도 표시를 뗀 게 아니라 순서를 먼저로 당겼다.** 이유가 둘이다. [#73](../../issues/73)
-> 직후라 상태머신 맥락이 남아 있었고, 무엇보다 **[#76](../../issues/76) 이 [#79](../../issues/79)
+> **그런데도 표시를 뗀 게 아니라 순서를 먼저로 당겼다.** 이유가 둘이다. [#73](https://github.com/sonjuhawn-source/WeaponHero/issues/73)
+> 직후라 상태머신 맥락이 남아 있었고, 무엇보다 **[#76](https://github.com/sonjuhawn-source/WeaponHero/issues/76) 이 [#79](https://github.com/sonjuhawn-source/WeaponHero/issues/79)
 > 를 기다려야 했다** — `Health.hitClip` 이 빠지고 `EnemyBrain.staggerTime` 이 붙는 것이 예정된
 > 직렬화 변경이라, 먼저 프리팹으로 굳히면 그 뒤에 다시 배선한다. 구조 확정 → 굳히기 → 복제
 > 순서다.
@@ -254,40 +254,40 @@
 > 절단 표시를 유지한 채로 먼저 한 것도 의도다. **먼저 한다고 완주가 보장되지는 않으므로**,
 > 시간이 넘치면 그 자리에서 접을 수 있게 남겨뒀다.
 
-> **자를 수 없는 것은 [#69](../../issues/69)·[#70](../../issues/70)·[#73](../../issues/73) 이었고
+> **자를 수 없는 것은 [#69](https://github.com/sonjuhawn-source/WeaponHero/issues/69)·[#70](https://github.com/sonjuhawn-source/WeaponHero/issues/70)·[#73](https://github.com/sonjuhawn-source/WeaponHero/issues/73) 이었고
 > 셋 다 통과했다.** 확장 지점 둘(방 핸들러 매핑 · 적 판단/실행 분리)이 거기 있었다. 건너뛰었다면
 > 상점방 추가가 분기문 지옥이 되고 W5 보스를 통째로 다시 짰다 (GDD 9장).
 >
-> **초과분이 [#74](../../issues/74) 로 몰린 것은 그 결과다.** 자를 수 없는 것을 먼저 끝냈으므로
+> **초과분이 [#74](https://github.com/sonjuhawn-source/WeaponHero/issues/74) 로 몰린 것은 그 결과다.** 자를 수 없는 것을 먼저 끝냈으므로
 > 남은 것이 전부 분량 조절 가능한 항목이다 — W2 처럼 "빼려면 검증 수단을 빼야 하는" 상황이
 > 아니다.
 
-> **[#72](../../issues/72) 카메라는 분해 때 드러났다.** 원래 표에 없었다. 방을 월드 좌표로 나란히
-> 놓기로 정하니([GDD 12.7](GDD.md)) 필연적으로 따라온다. W2 의 투사체([#48](../../issues/48))와
+> **[#72](https://github.com/sonjuhawn-source/WeaponHero/issues/72) 카메라는 분해 때 드러났다.** 원래 표에 없었다. 방을 월드 좌표로 나란히
+> 놓기로 정하니([GDD 12.7](GDD.md)) 필연적으로 따라온다. W2 의 투사체([#48](https://github.com/sonjuhawn-source/WeaponHero/issues/48))와
 > 같은 자리 — **견적 안에 숨어 있던 항목**이다.
 >
 > `Shake` 가 `Main Camera` 의 `localPosition` 을 흔들므로 **추적은 `CameraRoot` 가 맡는다.**
 > 지금의 2단 구조가 이미 답이고, 한 오브젝트에 두 관심사를 넣으면 서로 값을 지운다.
 
 > **적 AI는 GDD 9.1 구조로 잡는다.** `IPatternSelector` 분리를 여기서 해두면 W5 보스가 데이터
-> 작업이 되고, 후속 BT 전환도 판단 층 교체로 끝난다. [#74](../../issues/74) 에서 `.cs` 를 3개
-> 만들게 되면 [#73](../../issues/73) 이 틀린 것이다 — [#49](../../issues/49) 의 완료 조건과 같은 형태다.
+> 작업이 되고, 후속 BT 전환도 판단 층 교체로 끝난다. [#74](https://github.com/sonjuhawn-source/WeaponHero/issues/74) 에서 `.cs` 를 3개
+> 만들게 되면 [#73](https://github.com/sonjuhawn-source/WeaponHero/issues/73) 이 틀린 것이다 — [#49](https://github.com/sonjuhawn-source/WeaponHero/issues/49) 의 완료 조건과 같은 형태다.
 
-> **[#55](../../issues/55)(시체가 때린다)는 [#73](../../issues/73) 이 흡수한다.** `EnemyDummy` 가
+> **[#55](https://github.com/sonjuhawn-source/WeaponHero/issues/55)(시체가 때린다)는 [#73](https://github.com/sonjuhawn-source/WeaponHero/issues/73) 이 흡수한다.** `EnemyDummy` 가
 > 클래스째 사라지고 `Dead` 상태가 생기면 자연히 풀린다. W2 에서 고쳤다면 그대로 버려졌다.
 
-> **[#76](../../issues/76) 에서 `target` 이 프리팹에 안 담긴다는 것이 드러났다.** 씬 오브젝트
+> **[#76](https://github.com/sonjuhawn-source/WeaponHero/issues/76) 에서 `target` 이 프리팹에 안 담긴다는 것이 드러났다.** 씬 오브젝트
 > 참조라 굳히는 순간 `None` 이 되고 `Awake` 가 `fatal` 로 판정해 적이 자기를 끈다. `Player`
-> 태그를 `Awake` 에서 찾는 것으로 풀었고, 그래서 **[#70](../../issues/70) 에서 target 주입은
+> 태그를 `Awake` 에서 찾는 것으로 풀었고, 그래서 **[#70](https://github.com/sonjuhawn-source/WeaponHero/issues/70) 에서 target 주입은
 > 필요 없다.** 대신 **생성 순서가 계약이 된다** — 한 번 찾고 못 찾으면 영구히 꺼지므로
-> [#71](../../issues/71) 에서 방을 런타임 생성할 때 플레이어가 먼저 존재해야 한다.
+> [#71](https://github.com/sonjuhawn-source/WeaponHero/issues/71) 에서 방을 런타임 생성할 때 플레이어가 먼저 존재해야 한다.
 >
-> `muzzle` 은 비운 채로 뒀다. [#74](../../issues/74) 의 원거리형에서 필요해지는데 위치가 그
+> `muzzle` 은 비운 채로 뒀다. [#74](https://github.com/sonjuhawn-source/WeaponHero/issues/74) 의 원거리형에서 필요해지는데 위치가 그
 > 스프라이트에 달려 있어 역할을 정하기 전에 만들면 다시 옮긴다. `FireProjectile` 에 가드가
 > 없으므로 거기서 `Awake` 검증도 같이 메운다.
 
-> **적 프리팹화([#76](../../issues/76))는 [#73](../../issues/73) 뒤다.** W2 에서 이름을 바꿀 때마다
-> 적 수만큼 재배선이 붙는 게 실제로 드러났고([#50](../../issues/50) 의 `impulse` 3곳, 그 과정에서
+> **적 프리팹화([#76](https://github.com/sonjuhawn-source/WeaponHero/issues/76))는 [#73](https://github.com/sonjuhawn-source/WeaponHero/issues/73) 뒤다.** W2 에서 이름을 바꿀 때마다
+> 적 수만큼 재배선이 붙는 게 실제로 드러났고([#50](https://github.com/sonjuhawn-source/WeaponHero/issues/50) 의 `impulse` 3곳, 그 과정에서
 > 생긴 무적 공유), 적이 3종이 되면 3배가 된다. 그런데도 미룬 이유는 **구조가 바뀌는 것이 예정돼
 > 있으면 굳히지 않기** 때문이다. 캐릭터 자식의 `localPosition.y = -0.35` 도 그때 프리팹 안으로 굳힌다.
 
@@ -300,7 +300,7 @@
 **빌드:** [노트](builds/3주차%20빌드%20노트.md) · [결과](builds/3주차%20빌드%20결과.md)
 
 > **접촉 피해는 예상과 다른 재료로 결정됐다.** 미룰 때 적어둔 근거는 "적 3종이 서로 다른 거리를
-> 두고 싸울 때 드러난다"였는데, [#79](../../issues/79) 의 **경직 락다운**이 먼저 나와서 3종을
+> 두고 싸울 때 드러난다"였는데, [#79](https://github.com/sonjuhawn-source/WeaponHero/issues/79) 의 **경직 락다운**이 먼저 나와서 3종을
 > 기다릴 필요가 없었다. 연타 중 적이 공격을 시작하지 못하므로 붙어서 때리는 것이 무조건
 > 최적이고 간격이라는 개념이 사라진다 — 접촉 피해에 **찬성**하는 논거였다.
 >
@@ -315,13 +315,13 @@
 
 | 이슈 | 작업 | 시간 |
 |---|---|---|
-| [#99](../../issues/99) | [I1] 플레이어가 죽을 수 있게 한다 | 2h |
-| [#100](../../issues/100) | [I2] 런 상태를 `RunState` 로 모은다 | 2h |
-| [#101](../../issues/101) | [I3] 런 종료와 재시작 + `RunResult` | 3h |
-| [#102](../../issues/102) | [K1] 보상방 3택 1 — 무기와 회복 | 3h |
-| [#103](../../issues/103) | [K2] 보상 · 결과 UI | 2h |
-| [#104](../../issues/104) | [J1] 체력 UI — 플레이어와 보스 | 2h |
-| [#88](../../issues/88) | [G5] 방 밖으로 떨어지면 되돌린다 | 1h |
+| [#99](https://github.com/sonjuhawn-source/WeaponHero/issues/99) | [I1] 플레이어가 죽을 수 있게 한다 | 2h |
+| [#100](https://github.com/sonjuhawn-source/WeaponHero/issues/100) | [I2] 런 상태를 `RunState` 로 모은다 | 2h |
+| [#101](https://github.com/sonjuhawn-source/WeaponHero/issues/101) | [I3] 런 종료와 재시작 + `RunResult` | 3h |
+| [#102](https://github.com/sonjuhawn-source/WeaponHero/issues/102) | [K1] 보상방 3택 1 — 무기와 회복 | 3h |
+| [#103](https://github.com/sonjuhawn-source/WeaponHero/issues/103) | [K2] 보상 · 결과 UI | 2h |
+| [#104](https://github.com/sonjuhawn-source/WeaponHero/issues/104) | [J1] 체력 UI — 플레이어와 보스 | 2h |
+| [#88](https://github.com/sonjuhawn-source/WeaponHero/issues/88) | [G5] 방 밖으로 떨어지면 되돌린다 | 1h |
 
 **주말 산출물:** 런 한 판이 처음부터 끝까지(보스 제외) 돌아간다.
 
@@ -333,11 +333,11 @@
 | 유물 시스템 — 이벤트 훅 구조 | 5h | **절단** — 절단 순서 2번 |
 | 유물 6종 | 4h | **절단** — 위와 같이 |
 | 런 시작 / 사망 / 재시작 + `RunState`/`RunResult` | 6h | **7h** — 셋으로 갈랐다 |
-| — | — | **[#104](../../issues/104) 체력 UI 2h · [#88](../../issues/88) 낙하 복귀 1h 가 들어왔다** |
+| — | — | **[#104](https://github.com/sonjuhawn-source/WeaponHero/issues/104) 체력 UI 2h · [#88](https://github.com/sonjuhawn-source/WeaponHero/issues/88) 낙하 복귀 1h 가 들어왔다** |
 
 **유물 절단이 가장 아프다.** [GDD 9장](GDD.md) 확장 지점 넷 중 하나고, 학습 로그 5절에
 "선언만 있는 확장 지점은 소비자가 생겨야 산다"고 이미 적혀 있다. **허브만 만들면 소비자
-없는 죽은 코드**라서 훅 선언조차 남기지 않았다 — [#102](../../issues/102) 가 선택지 종류를
+없는 죽은 코드**라서 훅 선언조차 남기지 않았다 — [#102](https://github.com/sonjuhawn-source/WeaponHero/issues/102) 가 선택지 종류를
 열거형으로 고정하지 않는 것으로 자리만 지킨다.
 
 > `RunState` 를 **순수 데이터 한 덩어리 + RNG 시드**로 잡는 게 이 주의 핵심이다 (GDD 11.3).
@@ -351,9 +351,9 @@
 
 | 이슈 | 작업 | 시간 |
 |---|---|---|
-| [#105](../../issues/105) | [L1] 보스 프리팹 + 패턴 3개 | 3h |
-| [#106](../../issues/106) | [L2] 페이즈 2 — 패턴 풀 런타임 교체 | 2h |
-| [#107](../../issues/107) | [L3] 보스방 핸들러 + 런 클리어 | 1.5h |
+| [#105](https://github.com/sonjuhawn-source/WeaponHero/issues/105) | [L1] 보스 프리팹 + 패턴 3개 | 3h |
+| [#106](https://github.com/sonjuhawn-source/WeaponHero/issues/106) | [L2] 페이즈 2 — 패턴 풀 런타임 교체 | 2h |
+| [#107](https://github.com/sonjuhawn-source/WeaponHero/issues/107) | [L3] 보스방 핸들러 + 런 클리어 | 1.5h |
 
 **주말 산출물:** 시작 → 전투 → 보상 → 보스 → 결과. **루프 완성.**
 
@@ -362,13 +362,13 @@
 | 원안 항목 | 원안 | 실제 |
 |---|---|---|
 | 보스 1종 (패턴 3~4, 페이즈 2) | 10h | **6.5h** — 아래 |
-| UI — 보상 선택 · 결과 화면 | (7h 중) | **[#103](../../issues/103) 이 이미 가져갔다 (W4)** — 표가 갱신 안 된 것 |
-| UI — 체력 | (7h 중) | **[#104](../../issues/104) 로 W4 에 올렸다** — [#99](../../issues/99) 가 들어가면 즉시 필요해진다 |
-| UI — 무기 슬롯·**쿨타임** | (7h 중) | **소멸** — [#51](../../issues/51)·[#52](../../issues/52) 가 닫히면서 쿨타임 자체가 없어졌다 |
+| UI — 보상 선택 · 결과 화면 | (7h 중) | **[#103](https://github.com/sonjuhawn-source/WeaponHero/issues/103) 이 이미 가져갔다 (W4)** — 표가 갱신 안 된 것 |
+| UI — 체력 | (7h 중) | **[#104](https://github.com/sonjuhawn-source/WeaponHero/issues/104) 로 W4 에 올렸다** — [#99](https://github.com/sonjuhawn-source/WeaponHero/issues/99) 가 들어가면 즉시 필요해진다 |
+| UI — 무기 슬롯·**쿨타임** | (7h 중) | **소멸** — [#51](https://github.com/sonjuhawn-source/WeaponHero/issues/51)·[#52](https://github.com/sonjuhawn-source/WeaponHero/issues/52) 가 닫히면서 쿨타임 자체가 없어졌다 |
 | UI — 무기 슬롯 표시 | (7h 중) | **절단** — 현재 무기는 캐릭터 외형이 이미 말한다 (오버라이드 컨트롤러 교체) |
 | 일시정지 + 설정 + JSON 저장 | 3h | **절단** — 초안대로. 종료는 `Alt+F4`, W1~W3 빌드와 같다 |
 
-**보스 10h → 6.5h 는 [#74](../../issues/74) 가 증명한 것을 반영한 값이다.** `.cs` 를 0개
+**보스 10h → 6.5h 는 [#74](https://github.com/sonjuhawn-source/WeaponHero/issues/74) 가 증명한 것을 반영한 값이다.** `.cs` 를 0개
 만들고 적 2종을 갈랐으므로 [GDD 9.1](GDD.md) 의 "보스는 패턴 데이터 추가 작업" 이 한 번
 실증됐다. **10h 는 그게 증명되기 전에 쓴 숫자다.**
 
@@ -376,13 +376,13 @@
 
 분해하면서 코드를 읽고 나온 것이고, **견적을 흔드는 것은 절단이 아니라 이 둘이다.**
 
-**1. 경직 락다운** ([#105](../../issues/105)). `TelegraphState` 가 `CanBeInterrupted` 를
+**1. 경직 락다운** ([#105](https://github.com/sonjuhawn-source/WeaponHero/issues/105)). `TelegraphState` 가 `CanBeInterrupted` 를
 재정의하지 않아 기본값 `true` 다. 예고 0.4~0.5초 중 한 대라도 맞으면 끊긴다. 잡몹은
 체력이 낮아 안 드러났지만 **보스는 전투 전체가 "붙어서 연타"가 된다** — 패턴을 세 개
-만들어도 한 번도 안 나온다. 학습 로그 7절이 [#79](../../issues/79) 에서 이미 관측한 것이고,
+만들어도 한 번도 안 나온다. 학습 로그 7절이 [#79](https://github.com/sonjuhawn-source/WeaponHero/issues/79) 에서 이미 관측한 것이고,
 [GDD 12.8](GDD.md) 이 접촉 피해를 논할 때 근거로 쓴 것이기도 하다.
 
-**2. 패턴 풀 교체 통로 없음** ([#106](../../issues/106)). `selector` 가 `Awake` 에서 한 번
+**2. 패턴 풀 교체 통로 없음** ([#106](https://github.com/sonjuhawn-source/WeaponHero/issues/106)). `selector` 가 `Awake` 에서 한 번
 만들어지고 `cooldowns` 가 그 길이에 묶여 있다. 페이즈 2 가 절단 순서 5번에 있던 이유다.
 
 둘 다 **`.cs` 가 필요한 자리**다. 보스가 순수 데이터 작업이 아닌 부분이 정확히 여기까지고,
@@ -391,11 +391,11 @@
 ### 페이즈 2 를 지킨 대가
 
 절단 순서 5번을 **발동시키지 않기로 했다** (2026-08-26). 대신 W6 폴리시가 재원을 잃었다 —
-[#93](../../issues/93)·[#94](../../issues/94)·[#96](../../issues/96) 을 후속으로 내렸다.
+[#93](https://github.com/sonjuhawn-source/WeaponHero/issues/93)·[#94](https://github.com/sonjuhawn-source/WeaponHero/issues/94)·[#96](https://github.com/sonjuhawn-source/WeaponHero/issues/96) 을 후속으로 내렸다.
 
 근거는 로드맵이 W5 에 대해 이미 적어둔 것과 같다. **보스 존재 자체가 못 자르는 둘 중
 하나**인데, 페이즈가 없는 보스는 패턴이 몇 개든 "체력 큰 잡몹"으로 읽힌다. 반대로
-[#94](../../issues/94) 배경과 [#96](../../issues/96) 외형은 없어도 런이 돈다.
+[#94](https://github.com/sonjuhawn-source/WeaponHero/issues/94) 배경과 [#96](https://github.com/sonjuhawn-source/WeaponHero/issues/96) 외형은 없어도 런이 돈다.
 
 > 보스는 일반 적과 **같은 상태머신 틀**로 만든다 (GDD 9.1). 보스 2 추가 시 재작성을 피한다.
 > UI 문자열은 처음부터 **String Table 키로 참조**한다 — 하드코딩하면 나중에 전부 찾아 고쳐야 한다.
@@ -419,8 +419,8 @@
 | 사운드·이펙트 | 3h | **절단** — 초안대로 |
 | String Table (한/영) | 3h | **한국어만** — 초안대로. 설정 화면이 잘려 **언어를 바꿀 수단 자체가 없다** |
 | 빌드 + README / 시연 영상 | 2h | **3h — 늘렸다.** 아래 |
-| [#90](../../issues/90) 출구 연출 | (1.5h) | **재원 없음** — 여유가 생기면 첫 복구 후보 |
-| [#93](../../issues/93)·[#94](../../issues/94)·[#96](../../issues/96) | — | **후속으로 내렸다** |
+| [#90](https://github.com/sonjuhawn-source/WeaponHero/issues/90) 출구 연출 | (1.5h) | **재원 없음** — 여유가 생기면 첫 복구 후보 |
+| [#93](https://github.com/sonjuhawn-source/WeaponHero/issues/93)·[#94](https://github.com/sonjuhawn-source/WeaponHero/issues/94)·[#96](https://github.com/sonjuhawn-source/WeaponHero/issues/96) | — | **후속으로 내렸다** |
 
 **빌드·README·시연 영상만 늘렸다.** 이것이 유일하게 양보 불가한 항목이다 — 못 넘기면
 120시간이 0점이 된다. W1 빌드에서 유료 에셋의 `using UnityEditor;` 때문에 컴파일이 깨져
@@ -461,9 +461,9 @@
 **34h 대 70h.** W6 마감 버퍼가 통째로 사라지고 W4·W5 를 40h 가 아니라 34h 에 해야 한다.
 
 진행 속도 자체가 문제는 아니다. W3 견적 27.5h 중 17.5h 를 끝내면서 **원래 표에 없던 항목
-다섯 개**([#72](../../issues/72) 카메라 · [#79](../../issues/79) 경직 · [#77](../../issues/77) ·
-[#86](../../issues/86) · [#87](../../issues/87))를 흡수했다. 견적을 넘긴 것이 아니라 견적에
-없던 것을 한 것이고, 그건 W2 의 [#48](../../issues/48) 과 같은 자리다. **마감이 앞으로 온 것이
+다섯 개**([#72](https://github.com/sonjuhawn-source/WeaponHero/issues/72) 카메라 · [#79](https://github.com/sonjuhawn-source/WeaponHero/issues/79) 경직 · [#77](https://github.com/sonjuhawn-source/WeaponHero/issues/77) ·
+[#86](https://github.com/sonjuhawn-source/WeaponHero/issues/86) · [#87](https://github.com/sonjuhawn-source/WeaponHero/issues/87))를 흡수했다. 견적을 넘긴 것이 아니라 견적에
+없던 것을 한 것이고, 그건 W2 의 [#48](https://github.com/sonjuhawn-source/WeaponHero/issues/48) 과 같은 자리다. **마감이 앞으로 온 것이
 원인이다.**
 
 ### 임계 경로는 보스가 아니라 플레이어 사망이다
@@ -489,18 +489,18 @@ Health.Die()           Destroy(gameObject) — 플레이어에 그대로 못 붙
 
 | 자를 것 | 근거 |
 |---|---|
-| [#74](../../issues/74) 적 3종 → **완전 절단** | 4번이 이미 발동해 2종이 됐고, 여기서 1종까지 내린다. [#73](../../issues/73) 이 통과했으므로 잃는 것은 구조가 아니라 분량이다 |
+| [#74](https://github.com/sonjuhawn-source/WeaponHero/issues/74) 적 3종 → **완전 절단** | 4번이 이미 발동해 2종이 됐고, 여기서 1종까지 내린다. [#73](https://github.com/sonjuhawn-source/WeaponHero/issues/73) 이 통과했으므로 잃는 것은 구조가 아니라 분량이다 |
 | 유물 시스템 → **이벤트 훅 선언만, 0종** | 절단 순서 2번 발동. **가장 아픈 절단**이다 — GDD 9장 확장 지점 넷 중 하나고, 학습 로그 5절에 "선언만 있는 확장 지점은 소비자가 생겨야 산다"고 이미 적혀 있다. 여유가 생기면 **유물 1종(2h)이 첫 추가 항목** |
 | 보스 페이즈 2 → **1** | 절단 순서 5번 발동 |
 | 일시정지 · 설정 · JSON 저장 | 종료는 `Alt+F4`. W1~W3 빌드와 같다 |
 | String Table 영어 | 한국어만. GDD 11.2 의 "한+영"을 1차에서 반으로 줄인다 |
 | 사운드 · 이펙트 | 절단 |
-| [#93](../../issues/93) 순찰 · 복귀 · 감지 높이 | 후속 |
+| [#93](https://github.com/sonjuhawn-source/WeaponHero/issues/93) 순찰 · 복귀 · 감지 높이 | 후속 |
 
 **지키는 것** — 로드맵이 못 자른다고 명시한 둘, **무기 교체(W2)와 보스 존재 자체(W5)**.
 그래서 유물이 보스보다 먼저 잘린다.
 
-[#88](../../issues/88)(낙하 복귀 1h) · [#90](../../issues/90)(출구 연출 1.5h)은 절단 후보였지만
+[#88](https://github.com/sonjuhawn-source/WeaponHero/issues/88)(낙하 복귀 1h) · [#90](https://github.com/sonjuhawn-source/WeaponHero/issues/90)(출구 연출 1.5h)은 절단 후보였지만
 **넣는 쪽으로 초안을 잡았다.** 낙하 소프트락과 "출구를 못 찾는 빌드"는 남이 플레이할 때 바로
 드러난다 — 제출물 품질 대비 가장 싼 두 항목이다.
 
@@ -552,9 +552,9 @@ W5         6.5h    #105 #106 #107
 
 | | 초안 (08-24) | 확정 (08-26) | 왜 |
 |---|---|---|---|
-| [#74](../../issues/74) 적 | 2종 → **1종 완전 절단** | **2종 유지 — 이미 끝냈다** | 08-25 에 `.cs` 0개로 완료. 자를 대상이 아니라 완료 항목이 됐다 |
+| [#74](https://github.com/sonjuhawn-source/WeaponHero/issues/74) 적 | 2종 → **1종 완전 절단** | **2종 유지 — 이미 끝냈다** | 08-25 에 `.cs` 0개로 완료. 자를 대상이 아니라 완료 항목이 됐다 |
 | 보스 페이즈 2 | **1 로 절단** | **2 유지** | 아래 |
-| W6 폴리시 | [#93](../../issues/93) 만 후속 | [#93](../../issues/93)·[#94](../../issues/94)·[#96](../../issues/96) **전부 후속**, [#90](../../issues/90) 재원 없음 | 페이즈 2 의 재원 |
+| W6 폴리시 | [#93](https://github.com/sonjuhawn-source/WeaponHero/issues/93) 만 후속 | [#93](https://github.com/sonjuhawn-source/WeaponHero/issues/93)·[#94](https://github.com/sonjuhawn-source/WeaponHero/issues/94)·[#96](https://github.com/sonjuhawn-source/WeaponHero/issues/96) **전부 후속**, [#90](https://github.com/sonjuhawn-source/WeaponHero/issues/90) 재원 없음 | 페이즈 2 의 재원 |
 
 **페이즈 2 를 지키기로 한 것이 이번 조정의 유일한 실질 판단이다.** 절단 순서 5번을
 발동시키지 않았다.
@@ -563,7 +563,7 @@ W5         6.5h    #105 #106 #107
 자체**인데, 페이즈가 없으면 패턴이 몇 개든 "체력 큰 잡몹"으로 읽힌다. 반대로 배경과
 적 외형은 없어도 런이 돈다. **런을 막는 것과 보기 나쁜 것을 갈랐다.**
 
-교환한 것은 정직하게 적어둔다. [#90](../../issues/90) 출구 연출은 초안이 *"제출물 품질
+교환한 것은 정직하게 적어둔다. [#90](https://github.com/sonjuhawn-source/WeaponHero/issues/90) 출구 연출은 초안이 *"제출물 품질
 대비 가장 싼 두 항목"* 이라 부른 것인데 지금 재원이 없다. **여유가 생기면 첫 복구 후보다.**
 
 ### 여유 0 이 무슨 뜻인가
@@ -571,7 +571,7 @@ W5         6.5h    #105 #106 #107
 W3 이 견적 27.5h 중 **표에 없던 항목 다섯 개**를 흡수했다. 같은 일이 W4·W5 에서 한 번이라도
 일어나면 **먹을 데가 밸런스 1.5h 밖에 없고, 그 다음은 빌드 시간이다.**
 
-그때는 기능을 자르는 게 아니라 **[#106](../../issues/106) 페이즈 2 를 되돌린다.** 이번 판단을
+그때는 기능을 자르는 게 아니라 **[#106](https://github.com/sonjuhawn-source/WeaponHero/issues/106) 페이즈 2 를 되돌린다.** 이번 판단을
 뒤집는 순서를 미리 정해두는 것이고, 그래야 마지막 날에 빌드 시간을 먹는 선택을 안 한다.
 
 ### 미리 적어두는 위험 둘
@@ -585,7 +585,7 @@ Play 진입마다 리로드가 돌아 안 드러난다 — `HitStop` 의 `ResetS
 **패턴 3개로 시작해서 남으면 늘린다** — 4개로 시작하면 3개도 안 끝난다.
 
 > **08-26 보강.** 분해하며 코드를 읽고 나서, 넘칠 자리가 패턴 개수가 아니라는 게 드러났다.
-> 위험한 곳은 **[#105](../../issues/105) 경직 처리**와 **[#106](../../issues/106) 패턴 풀
+> 위험한 곳은 **[#105](https://github.com/sonjuhawn-source/WeaponHero/issues/105) 경직 처리**와 **[#106](https://github.com/sonjuhawn-source/WeaponHero/issues/106) 패턴 풀
 > 교체** 둘이다. 나머지는 SO 값 채우기라 시간이 예측되지만 이 둘은 `.cs` 를 건드린다.
 > **먼저 이 둘을 끝내고 패턴 값은 나중에 채운다** — 순서가 반대면 넘쳤을 때 자를 게 없다.
 
@@ -685,13 +685,13 @@ W5 6.5h   #105 ✔  #106 → 후속  #107 ✔
 
 **추가 시간을 만들지 말고 아래 순서로 범위를 줄인다.** (GDD 8장과 동일)
 
-1. ~~**무기 스킬 + 대기 쿨타임 회복** ([#51](../../issues/51) · [#52](../../issues/52)) 통째로 이연~~
+1. ~~**무기 스킬 + 대기 쿨타임 회복** ([#51](https://github.com/sonjuhawn-source/WeaponHero/issues/51) · [#52](https://github.com/sonjuhawn-source/WeaponHero/issues/52)) 통째로 이연~~
    **발동함 (W2)** → 마감 확정 후 **1차 범위 밖으로 확정** (`not planned`)
 2. ~~유물 8종 → 5종~~ **발동함 (W4, 2026-08-26)** — 5종이 아니라 **0종**까지 갔다.
-   훅 선언조차 남기지 않았고, [#102](../../issues/102) 가 선택지 종류를 열거형으로 고정하지
+   훅 선언조차 남기지 않았고, [#102](https://github.com/sonjuhawn-source/WeaponHero/issues/102) 가 선택지 종류를 열거형으로 고정하지
    않는 것으로 자리만 지킨다
-3. ~~방 프리팹 6~8개 → 5~6개~~ **발동함 (W3)** — [#75](../../issues/75) 기준선을 내렸다
-4. ~~적 3종 → 2종~~ **발동함 (W3)** — [#74](../../issues/74) 가 W3 초과분을 받는다
+3. ~~방 프리팹 6~8개 → 5~6개~~ **발동함 (W3)** — [#75](https://github.com/sonjuhawn-source/WeaponHero/issues/75) 기준선을 내렸다
+4. ~~적 3종 → 2종~~ **발동함 (W3)** — [#74](https://github.com/sonjuhawn-source/WeaponHero/issues/74) 가 W3 초과분을 받는다
 5. 보스 페이즈 2 → 1 — **발동시키지 않았다 (2026-08-26).** 대신 W6 폴리시를 후속으로
    내렸다. **여유 0 이 깨지면 여기가 첫 되돌림 지점이다**
 
@@ -724,7 +724,7 @@ W5 6.5h   #105 ✔  #106 → 후속  #107 ✔
 | 6 | 상점 / 휴식 / 이벤트방 | 방 타입 핸들러 추가 |
 | 7 | 무기 등급제 · 강화 | `rarity` 필드 활성화 |
 | 8 | AI 판단 층을 BT로 전환 (조건부) | `IPatternSelector` 교체 — GDD 9.1의 도입 신호 확인 후 |
-| ~~**0**~~ | ~~**무기 스킬 3종 + 대기 쿨타임 회복**~~ ([#51](../../issues/51) · [#52](../../issues/52)) | **1차 범위 밖으로 확정 — 후속 목록에서도 뺀다.** 이연의 전제였던 `SkillData` 자리가 실제로 없었고, 붙이려면 `WeaponData` 구조부터 다시 설계해야 한다 |
+| ~~**0**~~ | ~~**무기 스킬 3종 + 대기 쿨타임 회복**~~ ([#51](https://github.com/sonjuhawn-source/WeaponHero/issues/51) · [#52](https://github.com/sonjuhawn-source/WeaponHero/issues/52)) | **1차 범위 밖으로 확정 — 후속 목록에서도 뺀다.** 이연의 전제였던 `SkillData` 자리가 실제로 없었고, 붙이려면 `WeaponData` 구조부터 다시 설계해야 한다 |
 | — | 업적 | 유물 이벤트 버스의 두 번째 구독자. 5번(메타 성장)의 저장에 얹으므로 그 뒤 |
 | — | 2인 코옵 (UGS) | **조건부.** 1~2번을 마친 시점에 여유를 보고 판단 — GDD 8.1 |
 
@@ -760,7 +760,7 @@ git config merge.ours.driver true     # 이 기기에서 한 번만
 
 TMP Dynamic 폰트가 플레이할 때마다 아틀라스를 다시 굽고, 폰트 에셋은 `ScriptableObject` 라
 **Play 중 바뀐 값이 씬과 달리 되돌아가지 않는다.** 집과 학원에서 각자 플레이하면 충돌한다.
-Static 으로 굽는 것은 [#124](../../issues/124) 로 남겼다 — String Table 이 확정되기 전에
+Static 으로 굽는 것은 [#124](https://github.com/sonjuhawn-source/WeaponHero/issues/124) 로 남겼다 — String Table 이 확정되기 전에
 구우면 그 뒤에 추가된 글자가 전부 빠진다.
 
 #### 들어간 것
@@ -822,7 +822,7 @@ Static 으로 굽는 것은 [#124](../../issues/124) 로 남겼다 — String Ta
 게다가 `IRoomHandler` 와 `RewardRoomHandler` 가 **`internal`** 이라 `Game.UI` 에서 아예 안
 보인다. 답을 돌려줄 창구를 `StageRunner`(`public`) 에 내야 한다.
 
-**여기서 한 번 뚫으면 [#112](../../issues/112) 무기 슬롯 UI 도 싸진다** — `WeaponHolder.Current`
+**여기서 한 번 뚫으면 [#112](https://github.com/sonjuhawn-source/WeaponHero/issues/112) 무기 슬롯 UI 도 싸진다** — `WeaponHolder.Current`
 가 `internal` 이라 같은 벽에 막혀 있다. 탄약 게이지를 후속에서 볼 때도 같은 자리다.
 
 #### `#102` 를 쪼개는 쪽을 권한다
@@ -906,7 +906,7 @@ RunState 가 인스턴스로 모여 있다        #100
 
 ### 보스 다양화는 계획에 안 넣되, 빠질 수 있는 형태로만 시도한다
 
-[#115](../../issues/115) 보스 다종화를 넣고 싶었지만 **계획에는 안 넣는다.** 보스 하나에
+[#115](https://github.com/sonjuhawn-source/WeaponHero/issues/115) 보스 다종화를 넣고 싶었지만 **계획에는 안 넣는다.** 보스 하나에
 프리팹·애니메이터·패턴 SO 셋이 붙는데 `#105` 에서 그게 하루였다. 나흘 안에 확실히 들어갈
 크기가 아니다.
 
@@ -949,7 +949,7 @@ StageRunner 의 bossRoom 에 꽂는다        인스펙터 한 칸
 **2번이 요점이다.** `#120` 에서 한 글자씩 세 번 고쳤고 그때마다 새 구멍이 나왔다.
 `#127` 에서는 문구 셋을 모아 한 번에 구워서 끝났다.
 
-### 밸런스 — [#135](../../issues/135) 에서 잡은 것
+### 밸런스 — [#135](https://github.com/sonjuhawn-source/WeaponHero/issues/135) 에서 잡은 것
 
 ```
 적 체력      30 → 26          검·창 3타 · 활 4발
@@ -1010,9 +1010,9 @@ difficulty     여전히 아무도 안 읽는 죽은 필드다
 | `#108` 원거리 적 근접 무력화 | 완료 — `keepDistance` |
 | `#96` 적 외형 구분 | 완료 — Pixem 으로 둘을 새로 구웠다 |
 | 사운드 핵심 5종 | **완료 — 다섯인데 목록이 달라졌다** |
-| 밸런스 1h | 완료 — [#135](../../issues/135). 범위가 바뀌었다 |
+| 밸런스 1h | 완료 — [#135](https://github.com/sonjuhawn-source/WeaponHero/issues/135). 범위가 바뀌었다 |
 | 최종 빌드 3h | 완료 — 세 번 돌렸다 |
-| 설정창 (마지막 3h 후보) | **완료** — [#138](../../issues/138) |
+| 설정창 (마지막 3h 후보) | **완료** — [#138](https://github.com/sonjuhawn-source/WeaponHero/issues/138) |
 
 ### 계획과 달라진 것 셋
 

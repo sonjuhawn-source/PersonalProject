@@ -31,13 +31,13 @@
 
 | 이슈 | TC | 확인할 것 | 같이 볼 회귀 |
 |---|---|---|---|
-| [#150](../../../issues/150) | `TC-ENM-11` | 보스 예고에 색이 뜬다 | 잡몹 예고 · Idle 피격 빨강 |
-| [#149](../../../issues/149) | `TC-RUN-10` | 숫자키로 골라도 패널이 닫힌다 | 클릭 경로 · `TC-EDGE-14` 재선택 불가 |
-| [#148](../../../issues/148) | `TC-UI-11` | 안내에 `1 2 3` · `R` 이 있다 | 한국어·영어 둘 다 |
-| [#152](../../../issues/152) | `TC-EDGE-28` | 해상도 바꿔도 설정창이 가운데 | 시작 화면 설정 |
-| [#153](../../../issues/153) | `TC-UI-13` | 결과 화면 글자가 안 겹친다 | **언어 2 × 결과 2 = 네 경우** |
-| [#154](../../../issues/154) | `TC-BLD-10` | 오탐 경고가 없다 | 진짜 누락이 가려지지 않았나 |
-| [#159](../../../issues/159) | — | 안내 글자가 공백이 아니다 | **글자가 나오는 모든 화면** |
+| [#150](https://github.com/sonjuhawn-source/WeaponHero/issues/150) | `TC-ENM-11` | 보스 예고에 색이 뜬다 | 잡몹 예고 · Idle 피격 빨강 |
+| [#149](https://github.com/sonjuhawn-source/WeaponHero/issues/149) | `TC-RUN-10` | 숫자키로 골라도 패널이 닫힌다 | 클릭 경로 · `TC-EDGE-14` 재선택 불가 |
+| [#148](https://github.com/sonjuhawn-source/WeaponHero/issues/148) | `TC-UI-11` | 안내에 `1 2 3` · `R` 이 있다 | 한국어·영어 둘 다 |
+| [#152](https://github.com/sonjuhawn-source/WeaponHero/issues/152) | `TC-EDGE-28` | 해상도 바꿔도 설정창이 가운데 | 시작 화면 설정 |
+| [#153](https://github.com/sonjuhawn-source/WeaponHero/issues/153) | `TC-UI-13` | 결과 화면 글자가 안 겹친다 | **언어 2 × 결과 2 = 네 경우** |
+| [#154](https://github.com/sonjuhawn-source/WeaponHero/issues/154) | `TC-BLD-10` | 오탐 경고가 없다 | 진짜 누락이 가려지지 않았나 |
+| [#159](https://github.com/sonjuhawn-source/WeaponHero/issues/159) | — | 안내 글자가 공백이 아니다 | **글자가 나오는 모든 화면** |
 
 ### 안 고친 것 둘 — 결과가 그대로여야 한다
 
@@ -66,7 +66,7 @@
 
 ### 2. 문자열을 고쳤으면 글리프를 대조한다
 
-폰트가 정적 아틀라스라 **구운 글자만 있다.** [#159](../../../issues/159) 가 그렇게 났고
+폰트가 정적 아틀라스라 **구운 글자만 있다.** [#159](https://github.com/sonjuhawn-source/WeaponHero/issues/159) 가 그렇게 났고
 **네 번째**였다. 이번 회전에서 문구를 손대면 반드시 본다.
 
 ```
