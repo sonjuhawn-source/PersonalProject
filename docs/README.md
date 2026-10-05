@@ -1,6 +1,6 @@
 # 문서 안내
 
-> 최종 수정 2026-10-04
+> 최종 수정 2026-10-06
 >
 > 이 저장소의 문서가 무엇이고 어떤 순서로 읽는지. **처음 여는 사람은 아래 세 줄만
 > 보면 된다.**
@@ -19,9 +19,9 @@
 |---|---|
 | [GDD.md](GDD.md) | 기획서. 확장 지점 4개 · 미결정 표와 결정 완료 표 |
 | [roadmap.md](roadmap.md) | 주차별 계획과 **절단 판단.** 마감이 당겨져 원안 120h 가 약 100h 로 줄어든 기록 |
-| [learning-log.md](learning-log.md) | 막혔던 지점과 판단 근거. 주제별 7절 · 항목 330개 이상 |
+| [learning-log.md](learning-log.md) | 막혔던 지점과 판단 근거. 주제별 7절 · 항목 354개 |
 | [client-portfolio-plan.md](client-portfolio-plan.md) | 클라이언트용 발표 덱의 보완 목록 — 링크 · 코드 · 트러블슈팅 |
-| [defect-fix-plan.md](defect-fix-plan.md) | **결함 8건 수정 순서** — 무엇이 무엇에 걸려 있는지와 정할 것 둘 |
+| [defect-fix-plan.md](defect-fix-plan.md) | **끝남.** 결함 8건 수정 순서 — 무엇이 무엇에 걸려 있는지와 정할 것 둘 |
 
 **학습 로그가 이 저장소에서 가장 큰 문서다.** 전부 읽는 문서가 아니라 작업 중에 찾아
 쓰려고 쌓은 것이고, 앞에 `여기부터 읽는다` 여덟 개가 진입점으로 놓여 있다.
@@ -62,11 +62,11 @@ W1 부터 최종까지 다섯 번. **아래 테스트 케이스 109항목이 전
 | 파일 | 무엇인가 |
 |---|---|
 | [test-run-checklist.md](qa/test-run-checklist.md) | 수행 순서 — 세션 9회로 나눈 동선 |
-| [test-run-2nd.md](qa/test-run-2nd.md) | **2회전 수행 계획** — 회귀 대상 7건과 새 절차 셋 |
+| [test-run-2nd.md](qa/test-run-2nd.md) | **끝남.** 2회전 수행 계획 — 회귀 대상 7건과 새 절차 셋 |
 | [bug-report-form.md](qa/bug-report-form.md) | 결함 리포트 양식과 예시 |
 | [ui-guide.md](qa/ui-guide.md) | UI 설명서 — 화면 10개의 영역 분할과 설명 |
 | [qa-portfolio-plan.md](qa/qa-portfolio-plan.md) | **진행 상황.** 다른 기기에서 이어갈 때 여기부터 |
-| [portfolio-revision.md](qa/portfolio-revision.md) | **QA 포트폴리오 수정 계획** — 2차 반영 + 2026-10-04 피드백 |
+| [portfolio-revision.md](qa/portfolio-revision.md) | **끝남.** QA 포트폴리오 수정 계획 — 2차 반영 + 2026-10-04 피드백 |
 
 ### 결과 — 두 회전
 
@@ -87,7 +87,7 @@ W1 부터 최종까지 다섯 번. **아래 테스트 케이스 109항목이 전
 | | |
 |---|---|
 | `Assets/Tests/` | EditMode 테스트 21개 — 런 구성 4 · 전투 수치 8 · 에셋 데이터 9 |
-| `Screenshots/` | 화면 캡처 11장. UI 설명서 · README · 발표 자료가 함께 쓴다 |
+| `Screenshots/` | 화면 캡처 27장 (번호 입힌 것 14장은 `numbered/`). UI 설명서 · README · 발표 자료가 함께 쓴다 |
 | [CLAUDE.md](../CLAUDE.md) | AI 작업 규칙. **코드는 직접 작성한다**는 선언이 여기 있다 |
 
 ## 문서를 쓰는 규칙
