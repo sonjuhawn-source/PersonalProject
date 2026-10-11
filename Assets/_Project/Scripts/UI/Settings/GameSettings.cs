@@ -24,9 +24,7 @@ namespace Game.UI
         [SerializeField]
         private TMP_Dropdown languageDropdown;
 
-        // 배열은 const 가 안 된다 — 컴파일 시점 상수가 아니다.
-        // 드롭다운 항목 순서와 반드시 일치해야 하고, 어긋나도 컴파일은 된다.
-        // 그래서 Verify 에서 개수라도 비교한다.
+        // 드롭다운 항목 순서와 일치해야 하는데 어긋나도 컴파일은 된다. Verify 에서 개수만 비교한다.
         private static readonly Vector2Int[] Resolutions =
         {
             new Vector2Int(1920, 1080),
@@ -49,8 +47,7 @@ namespace Game.UI
         private const float MinDb = -80f;
         private const float MinVolume = 0.0001f;
 
-        // 저장은 0~1 선형으로 한다. dB 를 저장하면 슬라이더 위치를 역산해야 한다 —
-        // WeaponInstance 가 배율 대신 레벨을 저장한 것과 같은 이유다.
+        // 0~1 선형으로 저장한다. dB 로 저장하면 슬라이더 위치를 역산해야 한다.
         private float master = 1f;
         private float bgm = 0.8f;
         private float sfx = 1f;
@@ -62,8 +59,7 @@ namespace Game.UI
             Verify();
             Load();
 
-            // 화면과 소리는 기다릴 것이 없다. 전부 Start 로 미루면
-            // 첫 프레임에 기본 해상도로 떴다가 바뀌는 것이 보인다.
+            // 전부 Start 로 미루면 첫 프레임에 기본 해상도로 떴다가 바뀌는 것이 보인다.
             ApplyScreen();
             ApplyAudio();
             PushScreenToUI();
@@ -71,10 +67,7 @@ namespace Game.UI
             RegisterScreenAndAudio();
         }
 
-        // 언어만 로케일 초기화를 기다린다. AvailableLocales 가 그 전에는 비어 있어
-        // 드롭다운이 엉뚱한 값을 보여준다.
-        // UniTask 가 아니라 코루틴인 이유는 오브젝트가 죽으면 알아서 멈추기 때문이다 —
-        // #101 에서 UniTask.Delay 가 파괴된 오브젝트를 건드려 터진 적이 있다.
+        // 언어만 로케일 초기화를 기다린다. 코루틴인 건 오브젝트가 죽으면 멈추기 때문. #101
         private IEnumerator Start()
         {
             yield return LocalizationSettings.InitializationOperation;
@@ -87,8 +80,6 @@ namespace Game.UI
         }
 
         // 항목마다 독립이라 하나가 없다고 컴포넌트를 끄지 않는다.
-        // RewardView 는 panel 이 없으면 화면 전체가 안 뜨므로 껐지만,
-        // 여기는 믹서가 없어도 해상도는 동작한다.
         private void Verify()
         {
             if (mixer == null)
@@ -104,9 +95,7 @@ namespace Game.UI
             if (screenModeDropdown == null)
                 Debug.LogWarning($"{gameObject.name}: 화면 모드 드롭다운이 비어 있다 — 그 항목은 안 보이고 안 바뀐다", this);
 
-            // 언어는 전투 씬이 일부러 비운다 (5578ebc · TC-UI-06). 없는 것이 정상이므로 경고하지 않는다.
-            // 대가로 시작 화면에서 진짜 빠뜨린 경우를 여기서는 못 잡는다 — 그쪽은 TC-UI-04 가 본다.
-            // 매 실행마다 뜨는 경고를 두면 나중에 진짜 누락이 같은 줄에 섞여 안 보인다.
+            // 전투 씬은 언어를 일부러 비운다 — 누락은 TC-UI-04 가 본다. TC-UI-06
 
             // 개수가 같아도 순서가 어긋날 수 있다. 그건 코드로 못 잡으니 절반만 막는다.
             if (resolutionDropdown != null && resolutionDropdown.options.Count != Resolutions.Length)
@@ -116,9 +105,7 @@ namespace Game.UI
                 Debug.LogWarning($"{gameObject.name}: 언어 항목 {languageDropdown.options.Count}개, 코드 표 {LocaleCodes.Length}개 — 고른 것과 적용되는 것이 다를 수 있다", this);
         }
 
-        // 기본값은 코드가 갖는다. 첫 실행에는 키가 없다.
-        // 클램프하는 이유는 PlayerPrefs 에 무엇이든 들어갈 수 있고,
-        // 나중에 해상도를 지우면 저장된 인덱스가 범위를 넘기 때문이다.
+        // 기본값은 코드가 갖는다. 클램프는 PlayerPrefs 에 무엇이든 들어갈 수 있어서다.
         private void Load()
         {
             master = Mathf.Clamp01(PlayerPrefs.GetFloat(KeyMaster, 1f));
@@ -139,10 +126,8 @@ namespace Game.UI
             PlayerPrefs.Save();
         }
 
-        // 해상도와 화면 모드를 한 호출로 묶는다. 그러면 전체화면에서 창으로 돌아올 때
-        // 저장된 해상도가 공짜로 따라온다. 따로 두면 그 경우를 위한 코드가 또 생긴다.
-        // ExclusiveFullScreen 이 아니라 FullScreenWindow 를 쓴다 — Alt-Tab 이 부드럽다.
-        // 에디터에서는 Game 뷰 드롭다운이 이겨서 아무 일도 안 일어난다. 빌드로만 검증된다.
+        // 한 호출로 묶어야 창으로 돌아올 때 저장된 해상도가 따라온다.
+        // FullScreenWindow 는 Alt-Tab 때문. 에디터에선 Game 뷰가 이겨서 빌드로만 검증된다.
         private void ApplyScreen()
         {
             Vector2Int r = Resolutions[resolutionIndex];
@@ -159,8 +144,7 @@ namespace Game.UI
             SetDb(ParamSfx, sfx);
         }
 
-        // SetFloat 은 이름이 틀리면 예외가 아니라 false 를 돌려준다.
-        // 반환값을 안 보면 "슬라이더가 안 먹는다" 로 시간을 쓴다.
+        // SetFloat 은 이름이 틀리면 예외가 아니라 false 다. 반환값을 본다.
         private void SetDb(string parameter, float value)
         {
             float db = value <= MinVolume ? MinDb : Mathf.Log10(value) * 20f;
@@ -202,7 +186,6 @@ namespace Game.UI
             languageDropdown.SetValueWithoutNotify(index);
         }
 
-        // 인스펙터가 아니라 코드로 단다. RewardView 가 이미 그렇고,
         // 인스펙터로 하면 배선이 여섯 개 늘어 실수할 자리가 는다.
         private void RegisterScreenAndAudio()
         {
@@ -230,10 +213,7 @@ namespace Game.UI
                 });
         }
 
-        // 인덱스가 아니라 코드로 찾는다. AvailableLocales 의 순서는 보장이 없어서,
-        // 인덱스로 매핑하면 순서가 바뀔 때 조용히 뒤바뀐다.
-        // Save 를 안 부르는 이유는 PlayerPrefLocaleSelector 가
-        // SelectedLocaleChanged 를 구독해 selected-locale 키에 알아서 기록하기 때문이다.
+        // AvailableLocales 순서는 보장이 없어 인덱스 매핑은 조용히 뒤바뀐다. Save 는 PlayerPrefLocaleSelector 가 한다.
         private void SelectLocale(int index)
         {
             if (index < 0 || index >= LocaleCodes.Length)

@@ -8,8 +8,7 @@ namespace Game.Gameplay.Run
         Upgrade,
     }
 
-    // 뽑힌 선택지 하나. 뽑은 뒤에는 안 바뀌므로 읽기 전용이다.
-    // 종류를 늘릴 때 고칠 곳은 이 enum 과 RewardRoomHandler.Apply 의 switch 뿐이다.
+    // 종류를 늘릴 때 고칠 곳은 이 enum 과 RewardRoomHandler.Apply 뿐이다.
     internal readonly struct RewardOption
     {
         internal readonly RewardKind Kind;
@@ -35,9 +34,7 @@ namespace Game.Gameplay.Run
         internal static RewardOption OfUpgrade(int levels, WeaponData target)
             => new RewardOption(RewardKind.Upgrade, target, levels, -1, null);
 
-        // 진단용 로그. 화면이 안 뜰 때 뽑기 문제인지 배선 문제인지 가른다.
-        // ToInfo() 와 달리 로컬라이즈를 안 타므로 테이블이 깨져도 이건 읽힌다.
-        // 화면과 같은 말을 해야 쓸모가 있어서 인계 레벨과 버릴 무기를 같이 찍는다.
+        // 진단용. 로컬라이즈를 안 타므로 테이블이 깨져도 읽힌다.
         internal string Describe()
         {
             switch (Kind)

@@ -46,8 +46,7 @@ namespace Game.Gameplay
 
             slots[index] = new WeaponInstance(data, upgradeLevel);
 
-            // 지금 보상 경로는 비활성 슬롯만 바꾸므로 안 탄다.
-            // #98 적 무기 드랍이 활성 슬롯을 바꿀 때 이게 없으면 외형·모션·리치가 옛 무기로 남는다.
+            // #98 적 무기 드랍이 활성 슬롯을 바꿀 때 없으면 외형·모션·리치가 옛 무기로 남는다.
             if (index == activeIndex)
                 Equip(activeIndex);
 

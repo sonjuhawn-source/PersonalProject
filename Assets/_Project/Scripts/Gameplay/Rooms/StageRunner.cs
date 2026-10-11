@@ -41,7 +41,6 @@ namespace Game.Gameplay.Rooms
         public event Action<RunResultInfo> RunEnded;
         public event Action<RewardOptionInfo[]> RewardOffered;
 
-        // 보상이 정해진 시점. 핸들러의 Cleared 를 그대로 중계한다.
         // 모든 방이 Cleared 를 쏘므로(출구 열기) 보상방일 때만 올린다.
         public event Action RewardResolved;
 
@@ -191,8 +190,7 @@ namespace Game.Gameplay.Rooms
             pendingReward?.Choose(index);
         }
 
-        // 런에 걸치는 값을 경계에서만 RunState 로 넘긴다.
-        // 전투 중 주인은 Health · WeaponHolder 이고, 여기서는 회수만 한다.
+        // 런에 걸치는 값만 경계에서 넘긴다. 전투 중 주인은 Health · WeaponHolder 다.
         private void CaptureFromPlayer()
         {
             if (playerHealth != null)
@@ -203,8 +201,7 @@ namespace Game.Gameplay.Rooms
 
         private void OnPlayerDied() => EndRun(RunOutcome.Died);
 
-        // 끝나는 길이 둘이지만 결과를 만드는 곳은 하나다.
-        // 각자 만들면 "클리어와 사망이 같은 화면, 결과만 다르다" 가 안 지켜진다.
+        // 끝나는 길은 둘이지만 결과를 만드는 곳은 하나다 — 클리어와 사망이 같은 화면이어야 한다.
         private void EndRun(RunOutcome outcome)
         {
             if (runEnded)
@@ -225,8 +222,7 @@ namespace Game.Gameplay.Rooms
             RunEnded?.Invoke(info);
         }
 
-        // #103 이 재시작 버튼을 붙이면 이 폴링은 사라진다.
-        // .inputactions 를 건드리지 않는 이유는 자산 저장과 생성 클래스 재생성이 따라오기 때문이다.
+        // #103 이 버튼을 붙이면 사라진다. .inputactions 를 안 건드리는 건 생성 클래스 재생성이 따라와서다.
         private void Update()
         {
             if (Keyboard.current == null)
@@ -271,8 +267,7 @@ namespace Game.Gameplay.Rooms
 
         public void Restart()
         {
-            // 빌드에는 도메인 리로드가 없어 static 이 살아남는다.
-            // HitStop 이 timeScale 0 인 중에 끝났다면 씬만 다시 로드해서는 안 풀린다.
+            // 빌드엔 도메인 리로드가 없어 static 이 살아남는다 — HitStop 이 0 인 채 끝나면 씬 리로드로 안 풀린다.
             Time.timeScale = 1f;
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }

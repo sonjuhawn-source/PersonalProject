@@ -20,8 +20,7 @@ namespace Game.Gameplay.Rooms
         public event Action Cleared;
         public bool EndsRun => false;
 
-        // StageRunner 가 받아서 public 면으로 다시 쏜다.
-        // Game.UI 는 이 핸들러를 못 본다 — internal 이고 asmdef 가 단방향이다.
+        // Game.UI 는 이 핸들러를 못 본다 (internal · asmdef 단방향). StageRunner 가 중계한다.
         internal event Action<RewardOption[]> Offered;
 
         public void Enter(Room room, RoomData data, RunState run)
@@ -82,8 +81,7 @@ namespace Game.Gameplay.Rooms
             if (options == null || index < 0 || index >= options.Length)
                 return;
 
-            // Resolve 가 아니라 여기다. Resolve 는 Enter 의 빈 방 조기 반환도 부르므로
-            // 거기 두면 아무것도 안 받은 방이 보상 소리를 낸다.
+            // Resolve 에 두면 아무것도 안 받은 빈 방이 보상 소리를 낸다.
             SfxPlayer.Play(rewardClips);
             Apply(options[index]);
             Resolve();
@@ -136,8 +134,7 @@ namespace Game.Gameplay.Rooms
                 return;
             }
 
-            // 화면에 뜬 대상(option.Weapon)을 찍는다. 지금 활성을 다시 읽으면
-            // 둘이 갈릴 수 있고, 그러면 로그가 화면을 검증해주지 못한다.
+            // 화면에 뜬 대상(option.Weapon)을 찍는다. 지금 활성을 읽으면 로그가 화면과 갈린다.
             Debug.Log($"보상 — 강화 · {(option.Weapon != null ? option.Weapon.name : "빈 칸")}" +
                       $" +{playerWeapons.ActiveUpgradeLevel}");
         }

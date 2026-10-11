@@ -6,7 +6,6 @@ namespace Game.Gameplay.Run
         Died,
     }
 
-    // 런이 끝난 시점의 값만 담는다. 끝난 뒤에는 안 바뀌므로 읽기 전용이다.
     internal readonly struct RunResult
     {
         internal readonly RunOutcome Outcome;
